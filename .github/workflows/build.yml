@@ -43,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"Juniorbp20_GBPColmadoNet" /o:"juniorbp20" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          dotnet build "C:\EnelProIV\Proyecto Final ProlV4\Proyecto\Juniorbp20\GBPColmadoNet\GBPColmadoNet.slnx"
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          dotnet build GBPColmadoNet.slnx 
+           ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
