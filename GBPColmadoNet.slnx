@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="GBPColmadoNet.csproj" />
+  <Project Path="../GBPColmadoNet.Data/GBPColmadoNet.Data.csproj" />
+  <Project Path="../GBPColmadoNet.Test/GBPColmadoNet.Test.csproj" />
+  <Project Path="GBPColmadoNet.UI.csproj" />
 </Solution>
