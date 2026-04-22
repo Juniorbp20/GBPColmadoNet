@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="../GBPColmadoNet.Data/GBPColmadoNet.Data.csproj" Id="89494366-8804-4ff9-8dfe-7551822394c1" />
-  <Project Path="../GBPColmadoNet.Tests/GBPColmadoNet.Tests.csproj" Id="91bd6fb2-a8a8-4def-b348-050f6296e616" />
+  <Project Path="GBPColmadoNet.Data/GBPColmadoNet.Data.csproj" Id="89494366-8804-4ff9-8dfe-7551822394c1" />
+  <Project Path="GBPColmadoNet.Tests/GBPColmadoNet.Tests.csproj" Id="91bd6fb2-a8a8-4def-b348-050f6296e616" />
   <Project Path="GBPColmadoNet.UI.csproj" />
 </Solution>
