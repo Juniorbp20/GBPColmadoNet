@@ -36,18 +36,18 @@
             lblRolInfo = new Label();
             lblFechaInfo = new Label();
             lblHoraInfo = new Label();
-            btnInicio = new Button();
-            btnListarProductos = new Button();
-            btnAgregarProductos = new Button();
-            btnNuevaVenta = new Button();
-            btnRegistrarCliente = new Button();
-            btnRegistrarProveedor = new Button();
-            btnHistorialVentas = new Button();
-            btnHistorialProveedor = new Button();
-            btnHistorialCliente = new Button();
-            btnGestionUsuarios = new Button();
             btnConfiguracion = new Button();
             btnCerrarSesion = new Button();
+            btnHistorialVentas = new Button();
+            btnInicio = new Button();
+            btnGestionUsuarios = new Button();
+            btnListarProductos = new Button();
+            btnAgregarProductos = new Button();
+            btnHistorialCliente = new Button();
+            btnNuevaVenta = new Button();
+            btnHistorialProveedor = new Button();
+            btnRegistrarProveedor = new Button();
+            btnRegistrarCliente = new Button();
             panelContent = new Panel();
             lblBienvenido = new Label();
             lblPanelActualizado = new Label();
@@ -83,7 +83,7 @@
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(1024, 56);
+            panelHeader.Size = new Size(1023, 56);
             panelHeader.TabIndex = 2;
             // 
             // lblBrandTitle
@@ -136,11 +136,22 @@
             // 
             panelMenu.BackColor = Color.FromArgb(44, 67, 93);
             panelMenu.Controls.Add(panelSesion);
+            panelMenu.Controls.Add(btnConfiguracion);
             panelMenu.Controls.Add(btnCerrarSesion);
+            panelMenu.Controls.Add(btnHistorialVentas);
+            panelMenu.Controls.Add(btnInicio);
+            panelMenu.Controls.Add(btnGestionUsuarios);
+            panelMenu.Controls.Add(btnListarProductos);
+            panelMenu.Controls.Add(btnAgregarProductos);
+            panelMenu.Controls.Add(btnHistorialCliente);
+            panelMenu.Controls.Add(btnNuevaVenta);
+            panelMenu.Controls.Add(btnHistorialProveedor);
+            panelMenu.Controls.Add(btnRegistrarProveedor);
+            panelMenu.Controls.Add(btnRegistrarCliente);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 56);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(200, 579);
+            panelMenu.Size = new Size(200, 588);
             panelMenu.TabIndex = 1;
             // 
             // panelSesion
@@ -155,7 +166,6 @@
             panelSesion.Name = "panelSesion";
             panelSesion.Size = new Size(186, 100);
             panelSesion.TabIndex = 0;
-            panelSesion.Paint += panelSesion_Paint_1;
             // 
             // lblSesionActiva
             // 
@@ -165,7 +175,7 @@
             lblSesionActiva.Name = "lblSesionActiva";
             lblSesionActiva.Size = new Size(110, 21);
             lblSesionActiva.TabIndex = 0;
-            lblSesionActiva.Text = "Sesion activa";
+            lblSesionActiva.Text = "Sesión activa";
             // 
             // lblUsuarioInfo
             // 
@@ -203,90 +213,24 @@
             lblHoraInfo.TabIndex = 4;
             lblHoraInfo.Text = "00:00";
             // 
-            // btnInicio
-            // 
-            btnInicio.Location = new Point(114, 328);
-            btnInicio.Name = "btnInicio";
-            btnInicio.Size = new Size(75, 23);
-            btnInicio.TabIndex = 1;
-            // 
-            // btnListarProductos
-            // 
-            btnListarProductos.Location = new Point(195, 328);
-            btnListarProductos.Name = "btnListarProductos";
-            btnListarProductos.Size = new Size(75, 23);
-            btnListarProductos.TabIndex = 2;
-            // 
-            // btnAgregarProductos
-            // 
-            btnAgregarProductos.Location = new Point(276, 328);
-            btnAgregarProductos.Name = "btnAgregarProductos";
-            btnAgregarProductos.Size = new Size(75, 23);
-            btnAgregarProductos.TabIndex = 3;
-            // 
-            // btnNuevaVenta
-            // 
-            btnNuevaVenta.Location = new Point(357, 328);
-            btnNuevaVenta.Name = "btnNuevaVenta";
-            btnNuevaVenta.Size = new Size(75, 23);
-            btnNuevaVenta.TabIndex = 4;
-            // 
-            // btnRegistrarCliente
-            // 
-            btnRegistrarCliente.Location = new Point(438, 328);
-            btnRegistrarCliente.Name = "btnRegistrarCliente";
-            btnRegistrarCliente.Size = new Size(75, 23);
-            btnRegistrarCliente.TabIndex = 5;
-            // 
-            // btnRegistrarProveedor
-            // 
-            btnRegistrarProveedor.Location = new Point(519, 328);
-            btnRegistrarProveedor.Name = "btnRegistrarProveedor";
-            btnRegistrarProveedor.Size = new Size(75, 23);
-            btnRegistrarProveedor.TabIndex = 6;
-            // 
-            // btnHistorialVentas
-            // 
-            btnHistorialVentas.Location = new Point(34, 328);
-            btnHistorialVentas.Name = "btnHistorialVentas";
-            btnHistorialVentas.Size = new Size(75, 23);
-            btnHistorialVentas.TabIndex = 7;
-            // 
-            // btnHistorialProveedor
-            // 
-            btnHistorialProveedor.Location = new Point(600, 328);
-            btnHistorialProveedor.Name = "btnHistorialProveedor";
-            btnHistorialProveedor.Size = new Size(75, 23);
-            btnHistorialProveedor.TabIndex = 8;
-            // 
-            // btnHistorialCliente
-            // 
-            btnHistorialCliente.Location = new Point(681, 328);
-            btnHistorialCliente.Name = "btnHistorialCliente";
-            btnHistorialCliente.Size = new Size(75, 23);
-            btnHistorialCliente.TabIndex = 9;
-            // 
-            // btnGestionUsuarios
-            // 
-            btnGestionUsuarios.Location = new Point(34, 367);
-            btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(75, 23);
-            btnGestionUsuarios.TabIndex = 10;
-            // 
             // btnConfiguracion
             // 
-            btnConfiguracion.Location = new Point(115, 367);
+            btnConfiguracion.BackColor = Color.White;
+            btnConfiguracion.Location = new Point(8, 511);
             btnConfiguracion.Name = "btnConfiguracion";
-            btnConfiguracion.Size = new Size(75, 23);
+            btnConfiguracion.Size = new Size(186, 34);
             btnConfiguracion.TabIndex = 11;
+            btnConfiguracion.Text = "Configuración";
+            btnConfiguracion.UseVisualStyleBackColor = false;
             // 
             // btnCerrarSesion
             // 
+            btnCerrarSesion.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             btnCerrarSesion.BackColor = Color.FromArgb(255, 13, 13);
+            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Center;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCerrarSesion.ForeColor = Color.White;
-            btnCerrarSesion.Location = new Point(8, 539);
+            btnCerrarSesion.ForeColor = Color.Transparent;
+            btnCerrarSesion.Location = new Point(8, 551);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(186, 28);
             btnCerrarSesion.TabIndex = 12;
@@ -294,28 +238,117 @@
             btnCerrarSesion.Text = "Cerrar sesión";
             btnCerrarSesion.UseVisualStyleBackColor = false;
             // 
+            // btnHistorialVentas
+            // 
+            btnHistorialVentas.BackColor = Color.FromArgb(192, 255, 255);
+            btnHistorialVentas.Location = new Point(8, 113);
+            btnHistorialVentas.Name = "btnHistorialVentas";
+            btnHistorialVentas.Size = new Size(186, 34);
+            btnHistorialVentas.TabIndex = 7;
+            btnHistorialVentas.Text = "Inicio";
+            btnHistorialVentas.UseVisualStyleBackColor = false;
+            // 
+            // btnInicio
+            // 
+            btnInicio.BackColor = Color.White;
+            btnInicio.Location = new Point(8, 153);
+            btnInicio.Name = "btnInicio";
+            btnInicio.Size = new Size(186, 34);
+            btnInicio.TabIndex = 1;
+            btnInicio.Text = "Listar productos";
+            btnInicio.UseVisualStyleBackColor = false;
+            // 
+            // btnGestionUsuarios
+            // 
+            btnGestionUsuarios.BackColor = Color.White;
+            btnGestionUsuarios.Location = new Point(8, 471);
+            btnGestionUsuarios.Name = "btnGestionUsuarios";
+            btnGestionUsuarios.Size = new Size(186, 34);
+            btnGestionUsuarios.TabIndex = 10;
+            btnGestionUsuarios.Text = "Gestión de usuarios";
+            btnGestionUsuarios.UseVisualStyleBackColor = false;
+            // 
+            // btnListarProductos
+            // 
+            btnListarProductos.BackColor = Color.White;
+            btnListarProductos.Location = new Point(8, 191);
+            btnListarProductos.Name = "btnListarProductos";
+            btnListarProductos.Size = new Size(186, 34);
+            btnListarProductos.TabIndex = 2;
+            btnListarProductos.Text = "Agregar productos";
+            btnListarProductos.UseVisualStyleBackColor = false;
+            // 
+            // btnAgregarProductos
+            // 
+            btnAgregarProductos.BackColor = Color.White;
+            btnAgregarProductos.Location = new Point(8, 231);
+            btnAgregarProductos.Name = "btnAgregarProductos";
+            btnAgregarProductos.Size = new Size(186, 34);
+            btnAgregarProductos.TabIndex = 3;
+            btnAgregarProductos.Text = "Nueva venta";
+            btnAgregarProductos.UseVisualStyleBackColor = false;
+            // 
+            // btnHistorialCliente
+            // 
+            btnHistorialCliente.BackColor = Color.White;
+            btnHistorialCliente.Location = new Point(8, 431);
+            btnHistorialCliente.Name = "btnHistorialCliente";
+            btnHistorialCliente.Size = new Size(186, 34);
+            btnHistorialCliente.TabIndex = 9;
+            btnHistorialCliente.Text = "Historial de cliente";
+            btnHistorialCliente.UseVisualStyleBackColor = false;
+            // 
+            // btnNuevaVenta
+            // 
+            btnNuevaVenta.BackColor = Color.White;
+            btnNuevaVenta.Location = new Point(8, 271);
+            btnNuevaVenta.Name = "btnNuevaVenta";
+            btnNuevaVenta.Size = new Size(186, 34);
+            btnNuevaVenta.TabIndex = 4;
+            btnNuevaVenta.Text = "Registrar cliente";
+            btnNuevaVenta.UseVisualStyleBackColor = false;
+            // 
+            // btnHistorialProveedor
+            // 
+            btnHistorialProveedor.BackColor = Color.White;
+            btnHistorialProveedor.Location = new Point(8, 391);
+            btnHistorialProveedor.Name = "btnHistorialProveedor";
+            btnHistorialProveedor.Size = new Size(186, 34);
+            btnHistorialProveedor.TabIndex = 8;
+            btnHistorialProveedor.Text = "Historial de proveedor";
+            btnHistorialProveedor.UseVisualStyleBackColor = false;
+            // 
+            // btnRegistrarProveedor
+            // 
+            btnRegistrarProveedor.BackColor = Color.White;
+            btnRegistrarProveedor.Location = new Point(8, 351);
+            btnRegistrarProveedor.Name = "btnRegistrarProveedor";
+            btnRegistrarProveedor.Size = new Size(186, 34);
+            btnRegistrarProveedor.TabIndex = 6;
+            btnRegistrarProveedor.Text = "Historial de ventas";
+            btnRegistrarProveedor.UseVisualStyleBackColor = false;
+            // 
+            // btnRegistrarCliente
+            // 
+            btnRegistrarCliente.BackColor = Color.White;
+            btnRegistrarCliente.Location = new Point(8, 311);
+            btnRegistrarCliente.Name = "btnRegistrarCliente";
+            btnRegistrarCliente.Size = new Size(186, 34);
+            btnRegistrarCliente.TabIndex = 5;
+            btnRegistrarCliente.Text = "Registrar proveedor";
+            btnRegistrarCliente.UseVisualStyleBackColor = false;
+            // 
             // panelContent
             // 
             panelContent.BackColor = Color.FromArgb(238, 238, 238);
             panelContent.Controls.Add(lblBienvenido);
-            panelContent.Controls.Add(btnConfiguracion);
-            panelContent.Controls.Add(btnGestionUsuarios);
-            panelContent.Controls.Add(btnHistorialCliente);
-            panelContent.Controls.Add(btnHistorialProveedor);
-            panelContent.Controls.Add(btnHistorialVentas);
-            panelContent.Controls.Add(btnRegistrarProveedor);
-            panelContent.Controls.Add(btnRegistrarCliente);
-            panelContent.Controls.Add(btnNuevaVenta);
-            panelContent.Controls.Add(btnAgregarProductos);
-            panelContent.Controls.Add(btnListarProductos);
-            panelContent.Controls.Add(btnInicio);
             panelContent.Controls.Add(lblPanelActualizado);
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelStatsBottom);
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 56);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(824, 579);
+            panelContent.Size = new Size(824, 588);
             panelContent.TabIndex = 0;
             // 
             // lblBienvenido
@@ -328,7 +361,6 @@
             lblBienvenido.Size = new Size(506, 54);
             lblBienvenido.TabIndex = 0;
             lblBienvenido.Text = "Bienvenido Usuario (ROL)";
-            lblBienvenido.Click += lblBienvenido_Click;
             // 
             // lblPanelActualizado
             // 
@@ -354,7 +386,6 @@
             panelStatsTop.Name = "panelStatsTop";
             panelStatsTop.Size = new Size(790, 108);
             panelStatsTop.TabIndex = 2;
-            panelStatsTop.Paint += panelStatsTop_Paint;
             // 
             // lblProductosActivosTitle
             // 
@@ -446,7 +477,7 @@
             lblGananciaEstimadaTitle.Name = "lblGananciaEstimadaTitle";
             lblGananciaEstimadaTitle.Size = new Size(117, 15);
             lblGananciaEstimadaTitle.TabIndex = 1;
-            lblGananciaEstimadaTitle.Text = "Gananncia Estimada:";
+            lblGananciaEstimadaTitle.Text = "Ganancia estimada:";
             // 
             // lblFiadosPendientesTitle
             // 
@@ -455,7 +486,7 @@
             lblFiadosPendientesTitle.Name = "lblFiadosPendientesTitle";
             lblFiadosPendientesTitle.Size = new Size(108, 15);
             lblFiadosPendientesTitle.TabIndex = 2;
-            lblFiadosPendientesTitle.Text = "Fiadios Pendientes:";
+            lblFiadosPendientesTitle.Text = "Fiados pendientes:";
             // 
             // lblVentaTotalValue
             // 
@@ -495,7 +526,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(238, 238, 238);
-            ClientSize = new Size(1024, 635);
+            ClientSize = new Size(1023, 644);
             Controls.Add(panelContent);
             Controls.Add(panelMenu);
             Controls.Add(panelHeader);
