@@ -1,6 +1,6 @@
 ﻿namespace GBPColmadoNet.Tests
 {
-    public class Class1
+    public class VentaServiceTests
     {
 
     }
