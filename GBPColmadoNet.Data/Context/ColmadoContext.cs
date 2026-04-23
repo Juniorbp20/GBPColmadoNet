@@ -359,4 +359,5 @@ public partial class ColmadoContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
 }
