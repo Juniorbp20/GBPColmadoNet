@@ -1,11 +1,15 @@
+using GBPColmadoNet.Data.Context;
+
 namespace GBPColmadoNet
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private readonly ColmadoContext _context;
+
+        public MainForm(ColmadoContext context)
         {
             InitializeComponent();
+            _context = context;
         }
-
     }
 }
