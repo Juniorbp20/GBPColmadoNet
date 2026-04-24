@@ -29,7 +29,6 @@
             lblBrandSub = new Label();
             lblCajaAbierta = new Label();
             lblSesionRol = new Label();
-            panelMenu = new Panel();
             panelSesion = new Panel();
             lblSesionActiva = new Label();
             lblUsuarioInfo = new Label();
@@ -65,12 +64,13 @@
             lblVentaTotalValue = new Label();
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
+            panelMenu = new Panel();
             panelHeader.SuspendLayout();
-            panelMenu.SuspendLayout();
             panelSesion.SuspendLayout();
             panelContent.SuspendLayout();
             panelStatsTop.SuspendLayout();
             panelStatsBottom.SuspendLayout();
+            panelMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelHeader
@@ -131,28 +131,6 @@
             lblSesionRol.Size = new Size(201, 23);
             lblSesionRol.TabIndex = 3;
             lblSesionRol.Text = "Sesión: Usuario . ROL: rol";
-            // 
-            // panelMenu
-            // 
-            panelMenu.BackColor = Color.FromArgb(44, 67, 93);
-            panelMenu.Controls.Add(panelSesion);
-            panelMenu.Controls.Add(btnConfiguracion);
-            panelMenu.Controls.Add(btnCerrarSesion);
-            panelMenu.Controls.Add(btnHistorialVentas);
-            panelMenu.Controls.Add(btnInicio);
-            panelMenu.Controls.Add(btnGestionUsuarios);
-            panelMenu.Controls.Add(btnListarProductos);
-            panelMenu.Controls.Add(btnAgregarProductos);
-            panelMenu.Controls.Add(btnHistorialCliente);
-            panelMenu.Controls.Add(btnNuevaVenta);
-            panelMenu.Controls.Add(btnHistorialProveedor);
-            panelMenu.Controls.Add(btnRegistrarProveedor);
-            panelMenu.Controls.Add(btnRegistrarCliente);
-            panelMenu.Dock = DockStyle.Left;
-            panelMenu.Location = new Point(0, 56);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(200, 588);
-            panelMenu.TabIndex = 1;
             // 
             // panelSesion
             // 
@@ -216,9 +194,9 @@
             // btnConfiguracion
             // 
             btnConfiguracion.BackColor = Color.White;
-            btnConfiguracion.Location = new Point(8, 511);
+            btnConfiguracion.Location = new Point(8, 410);
             btnConfiguracion.Name = "btnConfiguracion";
-            btnConfiguracion.Size = new Size(186, 34);
+            btnConfiguracion.Size = new Size(186, 23);
             btnConfiguracion.TabIndex = 11;
             btnConfiguracion.Text = "Configuración";
             btnConfiguracion.UseVisualStyleBackColor = false;
@@ -230,7 +208,7 @@
             btnCerrarSesion.BackgroundImageLayout = ImageLayout.Center;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.ForeColor = Color.Transparent;
-            btnCerrarSesion.Location = new Point(8, 551);
+            btnCerrarSesion.Location = new Point(8, 548);
             btnCerrarSesion.Name = "btnCerrarSesion";
             btnCerrarSesion.Size = new Size(186, 28);
             btnCerrarSesion.TabIndex = 12;
@@ -241,9 +219,9 @@
             // btnHistorialVentas
             // 
             btnHistorialVentas.BackColor = Color.FromArgb(192, 255, 255);
-            btnHistorialVentas.Location = new Point(8, 113);
+            btnHistorialVentas.Location = new Point(8, 119);
             btnHistorialVentas.Name = "btnHistorialVentas";
-            btnHistorialVentas.Size = new Size(186, 34);
+            btnHistorialVentas.Size = new Size(186, 23);
             btnHistorialVentas.TabIndex = 7;
             btnHistorialVentas.Text = "Inicio";
             btnHistorialVentas.UseVisualStyleBackColor = false;
@@ -251,9 +229,9 @@
             // btnInicio
             // 
             btnInicio.BackColor = Color.White;
-            btnInicio.Location = new Point(8, 153);
+            btnInicio.Location = new Point(8, 148);
             btnInicio.Name = "btnInicio";
-            btnInicio.Size = new Size(186, 34);
+            btnInicio.Size = new Size(186, 23);
             btnInicio.TabIndex = 1;
             btnInicio.Text = "Listar productos";
             btnInicio.UseVisualStyleBackColor = false;
@@ -261,9 +239,9 @@
             // btnGestionUsuarios
             // 
             btnGestionUsuarios.BackColor = Color.White;
-            btnGestionUsuarios.Location = new Point(8, 471);
+            btnGestionUsuarios.Location = new Point(8, 381);
             btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(186, 34);
+            btnGestionUsuarios.Size = new Size(186, 23);
             btnGestionUsuarios.TabIndex = 10;
             btnGestionUsuarios.Text = "Gestión de usuarios";
             btnGestionUsuarios.UseVisualStyleBackColor = false;
@@ -271,9 +249,9 @@
             // btnListarProductos
             // 
             btnListarProductos.BackColor = Color.White;
-            btnListarProductos.Location = new Point(8, 191);
+            btnListarProductos.Location = new Point(8, 178);
             btnListarProductos.Name = "btnListarProductos";
-            btnListarProductos.Size = new Size(186, 34);
+            btnListarProductos.Size = new Size(186, 23);
             btnListarProductos.TabIndex = 2;
             btnListarProductos.Text = "Agregar productos";
             btnListarProductos.UseVisualStyleBackColor = false;
@@ -281,19 +259,20 @@
             // btnAgregarProductos
             // 
             btnAgregarProductos.BackColor = Color.White;
-            btnAgregarProductos.Location = new Point(8, 231);
+            btnAgregarProductos.Location = new Point(8, 207);
             btnAgregarProductos.Name = "btnAgregarProductos";
-            btnAgregarProductos.Size = new Size(186, 34);
+            btnAgregarProductos.Size = new Size(186, 23);
             btnAgregarProductos.TabIndex = 3;
             btnAgregarProductos.Text = "Nueva venta";
             btnAgregarProductos.UseVisualStyleBackColor = false;
+            btnAgregarProductos.Click += btnAgregarProductos_Click;
             // 
             // btnHistorialCliente
             // 
             btnHistorialCliente.BackColor = Color.White;
-            btnHistorialCliente.Location = new Point(8, 431);
+            btnHistorialCliente.Location = new Point(8, 352);
             btnHistorialCliente.Name = "btnHistorialCliente";
-            btnHistorialCliente.Size = new Size(186, 34);
+            btnHistorialCliente.Size = new Size(186, 23);
             btnHistorialCliente.TabIndex = 9;
             btnHistorialCliente.Text = "Historial de cliente";
             btnHistorialCliente.UseVisualStyleBackColor = false;
@@ -301,9 +280,9 @@
             // btnNuevaVenta
             // 
             btnNuevaVenta.BackColor = Color.White;
-            btnNuevaVenta.Location = new Point(8, 271);
+            btnNuevaVenta.Location = new Point(8, 236);
             btnNuevaVenta.Name = "btnNuevaVenta";
-            btnNuevaVenta.Size = new Size(186, 34);
+            btnNuevaVenta.Size = new Size(186, 23);
             btnNuevaVenta.TabIndex = 4;
             btnNuevaVenta.Text = "Registrar cliente";
             btnNuevaVenta.UseVisualStyleBackColor = false;
@@ -311,9 +290,9 @@
             // btnHistorialProveedor
             // 
             btnHistorialProveedor.BackColor = Color.White;
-            btnHistorialProveedor.Location = new Point(8, 391);
+            btnHistorialProveedor.Location = new Point(8, 323);
             btnHistorialProveedor.Name = "btnHistorialProveedor";
-            btnHistorialProveedor.Size = new Size(186, 34);
+            btnHistorialProveedor.Size = new Size(186, 23);
             btnHistorialProveedor.TabIndex = 8;
             btnHistorialProveedor.Text = "Historial de proveedor";
             btnHistorialProveedor.UseVisualStyleBackColor = false;
@@ -321,9 +300,9 @@
             // btnRegistrarProveedor
             // 
             btnRegistrarProveedor.BackColor = Color.White;
-            btnRegistrarProveedor.Location = new Point(8, 351);
+            btnRegistrarProveedor.Location = new Point(8, 294);
             btnRegistrarProveedor.Name = "btnRegistrarProveedor";
-            btnRegistrarProveedor.Size = new Size(186, 34);
+            btnRegistrarProveedor.Size = new Size(186, 23);
             btnRegistrarProveedor.TabIndex = 6;
             btnRegistrarProveedor.Text = "Historial de ventas";
             btnRegistrarProveedor.UseVisualStyleBackColor = false;
@@ -331,9 +310,9 @@
             // btnRegistrarCliente
             // 
             btnRegistrarCliente.BackColor = Color.White;
-            btnRegistrarCliente.Location = new Point(8, 311);
+            btnRegistrarCliente.Location = new Point(8, 265);
             btnRegistrarCliente.Name = "btnRegistrarCliente";
-            btnRegistrarCliente.Size = new Size(186, 34);
+            btnRegistrarCliente.Size = new Size(186, 23);
             btnRegistrarCliente.TabIndex = 5;
             btnRegistrarCliente.Text = "Registrar proveedor";
             btnRegistrarCliente.UseVisualStyleBackColor = false;
@@ -348,7 +327,7 @@
             panelContent.Dock = DockStyle.Fill;
             panelContent.Location = new Point(200, 56);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(824, 588);
+            panelContent.Size = new Size(823, 588);
             panelContent.TabIndex = 0;
             // 
             // lblBienvenido
@@ -475,7 +454,7 @@
             lblGananciaEstimadaTitle.AutoSize = true;
             lblGananciaEstimadaTitle.Location = new Point(286, 12);
             lblGananciaEstimadaTitle.Name = "lblGananciaEstimadaTitle";
-            lblGananciaEstimadaTitle.Size = new Size(117, 15);
+            lblGananciaEstimadaTitle.Size = new Size(110, 15);
             lblGananciaEstimadaTitle.TabIndex = 1;
             lblGananciaEstimadaTitle.Text = "Ganancia estimada:";
             // 
@@ -484,7 +463,7 @@
             lblFiadosPendientesTitle.AutoSize = true;
             lblFiadosPendientesTitle.Location = new Point(536, 12);
             lblFiadosPendientesTitle.Name = "lblFiadosPendientesTitle";
-            lblFiadosPendientesTitle.Size = new Size(108, 15);
+            lblFiadosPendientesTitle.Size = new Size(105, 15);
             lblFiadosPendientesTitle.TabIndex = 2;
             lblFiadosPendientesTitle.Text = "Fiados pendientes:";
             // 
@@ -521,6 +500,28 @@
             lblFiadosPendientesValue.TabIndex = 5;
             lblFiadosPendientesValue.Text = "0";
             // 
+            // panelMenu
+            // 
+            panelMenu.BackColor = Color.FromArgb(44, 67, 93);
+            panelMenu.Controls.Add(btnConfiguracion);
+            panelMenu.Controls.Add(panelSesion);
+            panelMenu.Controls.Add(btnCerrarSesion);
+            panelMenu.Controls.Add(btnHistorialVentas);
+            panelMenu.Controls.Add(btnGestionUsuarios);
+            panelMenu.Controls.Add(btnInicio);
+            panelMenu.Controls.Add(btnRegistrarCliente);
+            panelMenu.Controls.Add(btnListarProductos);
+            panelMenu.Controls.Add(btnRegistrarProveedor);
+            panelMenu.Controls.Add(btnAgregarProductos);
+            panelMenu.Controls.Add(btnNuevaVenta);
+            panelMenu.Controls.Add(btnHistorialProveedor);
+            panelMenu.Controls.Add(btnHistorialCliente);
+            panelMenu.Dock = DockStyle.Left;
+            panelMenu.Location = new Point(0, 56);
+            panelMenu.Name = "panelMenu";
+            panelMenu.Size = new Size(200, 588);
+            panelMenu.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -537,7 +538,6 @@
             Text = "Sistema de Colmado JB soluciones";
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
-            panelMenu.ResumeLayout(false);
             panelSesion.ResumeLayout(false);
             panelSesion.PerformLayout();
             panelContent.ResumeLayout(false);
@@ -546,6 +546,7 @@
             panelStatsTop.PerformLayout();
             panelStatsBottom.ResumeLayout(false);
             panelStatsBottom.PerformLayout();
+            panelMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -571,8 +572,6 @@
         private Label lblBrandSub;
         private Label lblCajaAbierta;
         private Label lblSesionRol;
-
-        private Panel panelMenu;
         private Button btnCerrarSesion;
 
         private Panel panelContent;
@@ -612,5 +611,6 @@
         private Button btnHistorialCliente;
         private Button btnGestionUsuarios;
         private Button btnConfiguracion;
+        private Panel panelMenu;
     }
 }
