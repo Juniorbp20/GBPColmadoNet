@@ -11,9 +11,15 @@ namespace GBPColmadoNet
             InitializeComponent();
             _context = context;
         }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             var hayConexion = _context.Database.CanConnect();
+        }
+
+        private void btnAgregarProductos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
