@@ -212,6 +212,7 @@ namespace GBPColmadoNet
             btnDevoluciones.TabIndex = 3;
             btnDevoluciones.Text = "Devoluciones";
             btnDevoluciones.UseVisualStyleBackColor = false;
+            btnDevoluciones.Click += btnDevoluciones_Click;
             // 
             // btnEntradaSalida
             // 
@@ -276,6 +277,7 @@ namespace GBPColmadoNet
             btnCuadre.TabIndex = 0;
             btnCuadre.Text = "Cuadre";
             btnCuadre.UseVisualStyleBackColor = false;
+            btnCuadre.Click += btnCuadre_Click;
             // 
             // btnCatClientes
             // 
@@ -314,6 +316,7 @@ namespace GBPColmadoNet
             btnCuentaPorPagar.TabIndex = 5;
             btnCuentaPorPagar.Text = "Cuentas por Cobrar";
             btnCuentaPorPagar.UseVisualStyleBackColor = true;
+            btnCuentaPorPagar.Click += btnCuentaPorPagar_Click;
             // 
             // btnCliente
             // 
@@ -325,6 +328,7 @@ namespace GBPColmadoNet
             btnCliente.TabIndex = 4;
             btnCliente.Text = "Cliente";
             btnCliente.UseVisualStyleBackColor = true;
+            btnCliente.Click += btnCliente_Click;
             // 
             // btnCatProveedores
             // 
@@ -362,6 +366,7 @@ namespace GBPColmadoNet
             btnProveedor.TabIndex = 0;
             btnProveedor.Text = "Proveedor";
             btnProveedor.UseVisualStyleBackColor = true;
+            btnProveedor.Click += btnProveedor_Click;
             // 
             // btnCatHistorial
             // 
@@ -401,6 +406,7 @@ namespace GBPColmadoNet
             btnHProveedor.TabIndex = 6;
             btnHProveedor.Text = "Historial de Clientes";
             btnHProveedor.UseVisualStyleBackColor = true;
+            btnHProveedor.Click += btnHProveedor_Click;
             // 
             // BtnHVentas
             // 
@@ -412,6 +418,7 @@ namespace GBPColmadoNet
             BtnHVentas.TabIndex = 4;
             BtnHVentas.Text = "Historial de Ventas";
             BtnHVentas.UseVisualStyleBackColor = true;
+            BtnHVentas.Click += BtnHVentas_Click;
             // 
             // btnHClientes
             // 
@@ -423,6 +430,7 @@ namespace GBPColmadoNet
             btnHClientes.TabIndex = 5;
             btnHClientes.Text = "Historial de Clientes";
             btnHClientes.UseVisualStyleBackColor = true;
+            btnHClientes.Click += btnHClientes_Click;
             // 
             // btnCatConfig
             // 
@@ -438,6 +446,7 @@ namespace GBPColmadoNet
             btnCatConfig.Text = "  Configuración";
             btnCatConfig.TextAlign = ContentAlignment.MiddleLeft;
             btnCatConfig.UseVisualStyleBackColor = false;
+            btnCatConfig.Click += btnCatConfig_Click;
             // 
             // btnCatCerrarSesion
             // 
@@ -453,6 +462,7 @@ namespace GBPColmadoNet
             btnCatCerrarSesion.Text = "  Cerrar Sesión";
             btnCatCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
             btnCatCerrarSesion.UseVisualStyleBackColor = false;
+            btnCatCerrarSesion.Click += btnCatCerrarSesion_Click;
             // 
             // panelContent
             // 

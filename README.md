@@ -9,22 +9,30 @@ La estructura del proyecto sigue un patrón de Arquitectura Multinivel (N-Tier),
 # **Estructura de la Solución**
 ```Plaintext
 GBPColmadoNet/
-├── GBPColmadoNet.Data/           (Biblioteca de Clases)
-│   ├── Entities/                 (Modelos de Datos)
-│   │   ├── Producto.cs           <-- Definición de stock y precios
-│   │   ├── Cliente.cs            <-- Información y límite de crédito
-│   │   └── Venta.cs              <-- Cabecera y detalle de transacciones
-│   └── ColmadoContext.cs         <-- Configuración de EF Core / SQL Server
-├── GBPColmadoNet.UI/             (Proyecto WinForms)
-│   ├── Services/                 (Lógica de Interfaz y Reglas)
-│   │   ├── IVentaService.cs      <-- Contrato para operaciones de venta
-│   │   └── VentaService.cs       <-- Validación de stock y cálculos
-│   ├── Forms/                    (Vistas del Usuario)
-│   │   ├── MainForm.cs           <-- Panel principal
-│   │   └── InventarioForm.cs     <-- Gestión de mercancía
-│   └── Program.cs                <-- Punto de entrada e Inyección de Dependencias
-└── GBPColmadoNet.Tests/          (Proyecto xUnit)
-    └── VentaServiceTests.cs      <-- Pruebas de validación de negocio
+├── GBPColmadoNet.Data/           (Acceso a Datos / Entidades)
+│   ├── Context/                  <-- Configuración de EF Core
+│   ├── InitialData/              <-- Scripts SQL y Datos Semilla
+│   └── Models/                   <-- Entidades Scaffolding
+├── GBPColmadoNet.UI/             (Capa de Presentación - WinForms)
+│   ├── Services/                 <-- Lógica de Reglas de Negocio
+│   ├── Forms/                    (Módulos Administrativos)
+│   │   ├── Clientes/             
+│   │   │   ├── Cliente/          <-- Gestión de Perfiles
+│   │   │   └── CuentasPorCobrar/ <-- Control de Créditos y Fíaos
+│   │   ├── Configuracion/        <-- Ajustes Globales y Roles
+│   │   ├── Historial/            
+│   │   │   ├── HClienteList/     <-- Auditoría de Clientes
+│   │   │   ├── HProveedorList/   <-- Auditoría de Proveedores
+│   │   │   └── HVentasList/      <-- Registro Histórico de Ventas
+│   │   ├── Inventario/           
+│   │   │   ├── Devoluciones/     <-- Gestión de Mercancía Devuelta
+│   │   │   └── ESForm/           <-- Entradas y Salidas de Almacén
+│   │   ├── Proveedor/            <-- Registro de Suplidores
+│   │   ├── Ventas/               <-- Facturación y Cuadre de Caja
+│   │   └── MainForm.cs           <-- Panel Principal Categorizado
+│   └── Program.cs                <-- Inyección de Dependencias
+└── GBPColmadoNet.Tests/          (Capa de Pruebas Unitarias)
+    └── VentaServiceTests.cs      <-- Pruebas de Integridad de Negocio
 ```
 
 # Tecnologías y Herramientas

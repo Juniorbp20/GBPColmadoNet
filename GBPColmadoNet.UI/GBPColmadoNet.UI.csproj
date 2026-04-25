@@ -30,16 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Forms\Clientes\FiaoForm\" />
-	  <Folder Include="Forms\Clientes\ClienteForm\" />
-	  <Folder Include="Forms\Historial\HVentasForm\" />
-	  <Folder Include="Forms\Historial\HProveedorForm\" />
-	  <Folder Include="Forms\Historial\HClienteForm\" />
-	  <Folder Include="Forms\Inventario\Devoluciones\" />
-	  <Folder Include="Forms\Configuracion\" />
-	  <Folder Include="Forms\Proveedor\ProveedorForm\" />
-	  <Folder Include="Forms\Ventas\CuadreForm\" />
-	  <Folder Include="Forms\Ventas\VentasRapidaForm\" />
 	  <Folder Include="Services\" />
 	</ItemGroup>
 
