@@ -1,6 +1,6 @@
 ﻿namespace GBPColmadoNet.UI.Forms
 {
-    partial class InventarioForm
+    partial class ESForm
     {
         /// <summary>
         /// Required designer variable.

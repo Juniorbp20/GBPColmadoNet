@@ -1,4 +1,6 @@
 using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.UI.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GBPColmadoNet
 {
@@ -17,9 +19,24 @@ namespace GBPColmadoNet
             var hayConexion = _context.Database.CanConnect();
         }
 
-        private void btnAgregarProductos_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panelContent_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnCatInicio_Click(object sender, EventArgs e)
+        {
+            var InicioForm = Program.ServiceProvider.GetRequiredService<MainForm>();
+        }
+
+        private void btnEntradaSalida_Click(object sender, EventArgs e)
+        {
+            var ES = Program.ServiceProvider.GetRequiredService<ESForm>();
         }
     }
 }
