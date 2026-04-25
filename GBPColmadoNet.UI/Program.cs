@@ -8,21 +8,26 @@ namespace GBPColmadoNet;
 
      static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
+    public static ServiceProvider ServiceProvider { get; private set; }
+    /// <summary>
+    ///  The main entry point for the application.
+    /// </summary>
+    [STAThread]
         static void Main()
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            var service = new ServiceCollection();
+            //ConfigureServices(service);
 
             var host = CreateHostBuilder().Build();
 
             using (var scope = host.Services.CreateScope())
+
             {
                 var services = scope.ServiceProvider;
+                
                 try
                 {
                     var mainForm = services.GetRequiredService<MainForm>();

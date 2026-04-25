@@ -1,22 +1,19 @@
-﻿namespace GBPColmadoNet
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace GBPColmadoNet
 {
     partial class MainForm
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
             {
                 components.Dispose();
             }
-
             base.Dispose(disposing);
         }
 
@@ -25,28 +22,34 @@
         private void InitializeComponent()
         {
             panelHeader = new Panel();
+            dateTimePicker1 = new DateTimePicker();
             lblBrandTitle = new Label();
             lblBrandSub = new Label();
-            lblCajaAbierta = new Label();
-            lblSesionRol = new Label();
-            panelSesion = new Panel();
-            lblSesionActiva = new Label();
-            lblUsuarioInfo = new Label();
-            lblRolInfo = new Label();
-            lblFechaInfo = new Label();
-            lblHoraInfo = new Label();
-            btnConfiguracion = new Button();
-            btnCerrarSesion = new Button();
-            btnHistorialVentas = new Button();
-            btnInicio = new Button();
-            btnGestionUsuarios = new Button();
-            btnListarProductos = new Button();
-            btnAgregarProductos = new Button();
-            btnHistorialCliente = new Button();
-            btnNuevaVenta = new Button();
-            btnHistorialProveedor = new Button();
-            btnRegistrarProveedor = new Button();
-            btnRegistrarCliente = new Button();
+            panelMenu = new Panel();
+            flpNavigation = new FlowLayoutPanel();
+            btnCatInicio = new Button();
+            btnCatInventario = new Button();
+            pnlSubInventario = new Panel();
+            btnDevoluciones = new Button();
+            btnEntradaSalida = new Button();
+            btnCatVentas = new Button();
+            pnlSubVentas = new Panel();
+            btnVentaRapida = new Button();
+            btnCuadre = new Button();
+            btnCatClientes = new Button();
+            pnlSubClientes = new Panel();
+            btnCuentaPorPagar = new Button();
+            btnCliente = new Button();
+            btnCatProveedores = new Button();
+            pnlSubProveedores = new Panel();
+            btnProveedor = new Button();
+            btnCatHistorial = new Button();
+            pnlSubHistorial = new Panel();
+            btnHProveedor = new Button();
+            BtnHVentas = new Button();
+            btnHClientes = new Button();
+            btnCatConfig = new Button();
+            btnCatCerrarSesion = new Button();
             panelContent = new Panel();
             lblBienvenido = new Label();
             lblPanelActualizado = new Label();
@@ -64,27 +67,39 @@
             lblVentaTotalValue = new Label();
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
-            panelMenu = new Panel();
             panelHeader.SuspendLayout();
-            panelSesion.SuspendLayout();
+            panelMenu.SuspendLayout();
+            flpNavigation.SuspendLayout();
+            pnlSubInventario.SuspendLayout();
+            pnlSubVentas.SuspendLayout();
+            pnlSubClientes.SuspendLayout();
+            pnlSubProveedores.SuspendLayout();
+            pnlSubHistorial.SuspendLayout();
             panelContent.SuspendLayout();
             panelStatsTop.SuspendLayout();
             panelStatsBottom.SuspendLayout();
-            panelMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelHeader
             // 
             panelHeader.BackColor = Color.FromArgb(209, 209, 209);
+            panelHeader.Controls.Add(dateTimePicker1);
             panelHeader.Controls.Add(lblBrandTitle);
             panelHeader.Controls.Add(lblBrandSub);
-            panelHeader.Controls.Add(lblCajaAbierta);
-            panelHeader.Controls.Add(lblSesionRol);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
             panelHeader.Size = new Size(1023, 56);
-            panelHeader.TabIndex = 2;
+            panelHeader.TabIndex = 0;
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarMonthBackground = Color.FromArgb(205, 234, 236);
+            dateTimePicker1.CausesValidation = false;
+            dateTimePicker1.Location = new Point(790, 12);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(221, 23);
+            dateTimePicker1.TabIndex = 3;
             // 
             // lblBrandTitle
             // 
@@ -108,214 +123,336 @@
             lblBrandSub.TabIndex = 1;
             lblBrandSub.Text = "Gestiona tu inventario, ventas y proveedores desde un solo lugar";
             // 
-            // lblCajaAbierta
+            // panelMenu
             // 
-            lblCajaAbierta.AutoSize = true;
-            lblCajaAbierta.BackColor = Color.FromArgb(210, 248, 250);
-            lblCajaAbierta.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblCajaAbierta.Location = new Point(675, 15);
-            lblCajaAbierta.Name = "lblCajaAbierta";
-            lblCajaAbierta.Padding = new Padding(12, 2, 12, 2);
-            lblCajaAbierta.Size = new Size(118, 23);
-            lblCajaAbierta.TabIndex = 2;
-            lblCajaAbierta.Text = "Caja: abierta";
+            panelMenu.BackColor = Color.FromArgb(15, 32, 50);
+            panelMenu.Controls.Add(flpNavigation);
+            panelMenu.Dock = DockStyle.Left;
+            panelMenu.Location = new Point(0, 56);
+            panelMenu.Name = "panelMenu";
+            panelMenu.Size = new Size(250, 588);
+            panelMenu.TabIndex = 1;
             // 
-            // lblSesionRol
+            // flpNavigation
             // 
-            lblSesionRol.AutoSize = true;
-            lblSesionRol.BackColor = Color.FromArgb(210, 248, 250);
-            lblSesionRol.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            lblSesionRol.Location = new Point(803, 15);
-            lblSesionRol.Name = "lblSesionRol";
-            lblSesionRol.Padding = new Padding(12, 2, 12, 2);
-            lblSesionRol.Size = new Size(201, 23);
-            lblSesionRol.TabIndex = 3;
-            lblSesionRol.Text = "Sesión: Usuario . ROL: rol";
+            flpNavigation.AutoScroll = true;
+            flpNavigation.BackColor = Color.Transparent;
+            flpNavigation.Controls.Add(btnCatInicio);
+            flpNavigation.Controls.Add(btnCatInventario);
+            flpNavigation.Controls.Add(pnlSubInventario);
+            flpNavigation.Controls.Add(btnCatVentas);
+            flpNavigation.Controls.Add(pnlSubVentas);
+            flpNavigation.Controls.Add(btnCatClientes);
+            flpNavigation.Controls.Add(pnlSubClientes);
+            flpNavigation.Controls.Add(btnCatProveedores);
+            flpNavigation.Controls.Add(pnlSubProveedores);
+            flpNavigation.Controls.Add(btnCatHistorial);
+            flpNavigation.Controls.Add(pnlSubHistorial);
+            flpNavigation.Controls.Add(btnCatConfig);
+            flpNavigation.Controls.Add(btnCatCerrarSesion);
+            flpNavigation.Dock = DockStyle.Fill;
+            flpNavigation.FlowDirection = FlowDirection.TopDown;
+            flpNavigation.Location = new Point(0, 0);
+            flpNavigation.Name = "flpNavigation";
+            flpNavigation.Size = new Size(250, 588);
+            flpNavigation.TabIndex = 0;
+            flpNavigation.WrapContents = false;
             // 
-            // panelSesion
+            // btnCatInicio
             // 
-            panelSesion.BackColor = Color.WhiteSmoke;
-            panelSesion.Controls.Add(lblSesionActiva);
-            panelSesion.Controls.Add(lblUsuarioInfo);
-            panelSesion.Controls.Add(lblRolInfo);
-            panelSesion.Controls.Add(lblFechaInfo);
-            panelSesion.Controls.Add(lblHoraInfo);
-            panelSesion.Location = new Point(8, 6);
-            panelSesion.Name = "panelSesion";
-            panelSesion.Size = new Size(186, 100);
-            panelSesion.TabIndex = 0;
+            btnCatInicio.BackColor = Color.FromArgb(15, 32, 50);
+            btnCatInicio.FlatAppearance.BorderSize = 0;
+            btnCatInicio.FlatStyle = FlatStyle.Flat;
+            btnCatInicio.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatInicio.ForeColor = Color.White;
+            btnCatInicio.Location = new Point(3, 3);
+            btnCatInicio.Name = "btnCatInicio";
+            btnCatInicio.Size = new Size(230, 45);
+            btnCatInicio.TabIndex = 0;
+            btnCatInicio.Text = "  Inicio";
+            btnCatInicio.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatInicio.UseVisualStyleBackColor = false;
+            btnCatInicio.Click += btnCatInicio_Click;
             // 
-            // lblSesionActiva
+            // btnCatInventario
             // 
-            lblSesionActiva.AutoSize = true;
-            lblSesionActiva.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            lblSesionActiva.Location = new Point(8, 4);
-            lblSesionActiva.Name = "lblSesionActiva";
-            lblSesionActiva.Size = new Size(110, 21);
-            lblSesionActiva.TabIndex = 0;
-            lblSesionActiva.Text = "Sesión activa";
+            btnCatInventario.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatInventario.FlatAppearance.BorderSize = 0;
+            btnCatInventario.FlatStyle = FlatStyle.Flat;
+            btnCatInventario.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatInventario.ForeColor = Color.White;
+            btnCatInventario.Location = new Point(3, 54);
+            btnCatInventario.Name = "btnCatInventario";
+            btnCatInventario.Size = new Size(230, 45);
+            btnCatInventario.TabIndex = 1;
+            btnCatInventario.Text = "  Inventario";
+            btnCatInventario.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatInventario.UseVisualStyleBackColor = false;
+            btnCatInventario.Click += btnInventario_Click;
             // 
-            // lblUsuarioInfo
+            // pnlSubInventario
             // 
-            lblUsuarioInfo.AutoSize = true;
-            lblUsuarioInfo.Location = new Point(8, 30);
-            lblUsuarioInfo.Name = "lblUsuarioInfo";
-            lblUsuarioInfo.Size = new Size(47, 15);
-            lblUsuarioInfo.TabIndex = 1;
-            lblUsuarioInfo.Text = "Usuario";
+            pnlSubInventario.BackColor = Color.Transparent;
+            pnlSubInventario.Controls.Add(btnDevoluciones);
+            pnlSubInventario.Controls.Add(btnEntradaSalida);
+            pnlSubInventario.Location = new Point(3, 105);
+            pnlSubInventario.Name = "pnlSubInventario";
+            pnlSubInventario.Size = new Size(230, 96);
+            pnlSubInventario.TabIndex = 2;
+            pnlSubInventario.Visible = false;
             // 
-            // lblRolInfo
+            // btnDevoluciones
             // 
-            lblRolInfo.AutoSize = true;
-            lblRolInfo.Location = new Point(8, 48);
-            lblRolInfo.Name = "lblRolInfo";
-            lblRolInfo.Size = new Size(52, 15);
-            lblRolInfo.TabIndex = 2;
-            lblRolInfo.Text = "ROL : rol";
+            btnDevoluciones.BackColor = Color.Transparent;
+            btnDevoluciones.FlatStyle = FlatStyle.Popup;
+            btnDevoluciones.ForeColor = Color.White;
+            btnDevoluciones.Location = new Point(-3, 48);
+            btnDevoluciones.Name = "btnDevoluciones";
+            btnDevoluciones.Size = new Size(233, 39);
+            btnDevoluciones.TabIndex = 3;
+            btnDevoluciones.Text = "Devoluciones";
+            btnDevoluciones.UseVisualStyleBackColor = false;
             // 
-            // lblFechaInfo
+            // btnEntradaSalida
             // 
-            lblFechaInfo.AutoSize = true;
-            lblFechaInfo.Location = new Point(8, 66);
-            lblFechaInfo.Name = "lblFechaInfo";
-            lblFechaInfo.Size = new Size(74, 15);
-            lblFechaInfo.TabIndex = 3;
-            lblFechaInfo.Text = "Fecha y hora";
+            btnEntradaSalida.BackColor = Color.Transparent;
+            btnEntradaSalida.FlatStyle = FlatStyle.Popup;
+            btnEntradaSalida.ForeColor = Color.White;
+            btnEntradaSalida.Location = new Point(-3, 3);
+            btnEntradaSalida.Name = "btnEntradaSalida";
+            btnEntradaSalida.Size = new Size(233, 39);
+            btnEntradaSalida.TabIndex = 0;
+            btnEntradaSalida.Text = "E/S";
+            btnEntradaSalida.UseVisualStyleBackColor = false;
+            btnEntradaSalida.Click += btnEntradaSalida_Click;
             // 
-            // lblHoraInfo
+            // btnCatVentas
             // 
-            lblHoraInfo.AutoSize = true;
-            lblHoraInfo.Location = new Point(8, 84);
-            lblHoraInfo.Name = "lblHoraInfo";
-            lblHoraInfo.Size = new Size(34, 15);
-            lblHoraInfo.TabIndex = 4;
-            lblHoraInfo.Text = "00:00";
+            btnCatVentas.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatVentas.FlatAppearance.BorderSize = 0;
+            btnCatVentas.FlatStyle = FlatStyle.Flat;
+            btnCatVentas.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatVentas.ForeColor = Color.White;
+            btnCatVentas.Location = new Point(3, 207);
+            btnCatVentas.Name = "btnCatVentas";
+            btnCatVentas.Size = new Size(230, 45);
+            btnCatVentas.TabIndex = 3;
+            btnCatVentas.Text = "  Ventas";
+            btnCatVentas.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatVentas.UseVisualStyleBackColor = false;
+            btnCatVentas.Click += btnVentas_Click;
             // 
-            // btnConfiguracion
+            // pnlSubVentas
             // 
-            btnConfiguracion.BackColor = Color.White;
-            btnConfiguracion.Location = new Point(8, 410);
-            btnConfiguracion.Name = "btnConfiguracion";
-            btnConfiguracion.Size = new Size(186, 23);
-            btnConfiguracion.TabIndex = 11;
-            btnConfiguracion.Text = "Configuración";
-            btnConfiguracion.UseVisualStyleBackColor = false;
+            pnlSubVentas.BackColor = Color.Transparent;
+            pnlSubVentas.Controls.Add(btnVentaRapida);
+            pnlSubVentas.Controls.Add(btnCuadre);
+            pnlSubVentas.Location = new Point(3, 258);
+            pnlSubVentas.Name = "pnlSubVentas";
+            pnlSubVentas.Size = new Size(230, 98);
+            pnlSubVentas.TabIndex = 4;
+            pnlSubVentas.Visible = false;
             // 
-            // btnCerrarSesion
+            // btnVentaRapida
             // 
-            btnCerrarSesion.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnCerrarSesion.BackColor = Color.FromArgb(255, 13, 13);
-            btnCerrarSesion.BackgroundImageLayout = ImageLayout.Center;
-            btnCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCerrarSesion.ForeColor = Color.Transparent;
-            btnCerrarSesion.Location = new Point(8, 548);
-            btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Size = new Size(186, 28);
-            btnCerrarSesion.TabIndex = 12;
-            btnCerrarSesion.TabStop = false;
-            btnCerrarSesion.Text = "Cerrar sesión";
-            btnCerrarSesion.UseVisualStyleBackColor = false;
+            btnVentaRapida.FlatStyle = FlatStyle.Popup;
+            btnVentaRapida.ForeColor = Color.White;
+            btnVentaRapida.Location = new Point(-3, 3);
+            btnVentaRapida.Name = "btnVentaRapida";
+            btnVentaRapida.Size = new Size(233, 42);
+            btnVentaRapida.TabIndex = 1;
+            btnVentaRapida.Text = "Venta Rapida";
+            btnVentaRapida.UseVisualStyleBackColor = true;
+            btnVentaRapida.Click += button2_Click;
             // 
-            // btnHistorialVentas
+            // btnCuadre
             // 
-            btnHistorialVentas.BackColor = Color.FromArgb(192, 255, 255);
-            btnHistorialVentas.Location = new Point(8, 119);
-            btnHistorialVentas.Name = "btnHistorialVentas";
-            btnHistorialVentas.Size = new Size(186, 23);
-            btnHistorialVentas.TabIndex = 7;
-            btnHistorialVentas.Text = "Inicio";
-            btnHistorialVentas.UseVisualStyleBackColor = false;
+            btnCuadre.BackColor = Color.Transparent;
+            btnCuadre.FlatStyle = FlatStyle.Popup;
+            btnCuadre.ForeColor = Color.White;
+            btnCuadre.Location = new Point(-3, 51);
+            btnCuadre.Name = "btnCuadre";
+            btnCuadre.Size = new Size(233, 39);
+            btnCuadre.TabIndex = 0;
+            btnCuadre.Text = "Cuadre";
+            btnCuadre.UseVisualStyleBackColor = false;
             // 
-            // btnInicio
+            // btnCatClientes
             // 
-            btnInicio.BackColor = Color.White;
-            btnInicio.Location = new Point(8, 148);
-            btnInicio.Name = "btnInicio";
-            btnInicio.Size = new Size(186, 23);
-            btnInicio.TabIndex = 1;
-            btnInicio.Text = "Listar productos";
-            btnInicio.UseVisualStyleBackColor = false;
+            btnCatClientes.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatClientes.FlatAppearance.BorderSize = 0;
+            btnCatClientes.FlatStyle = FlatStyle.Flat;
+            btnCatClientes.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatClientes.ForeColor = Color.White;
+            btnCatClientes.Location = new Point(3, 362);
+            btnCatClientes.Name = "btnCatClientes";
+            btnCatClientes.Size = new Size(230, 45);
+            btnCatClientes.TabIndex = 5;
+            btnCatClientes.Text = "  Clientes";
+            btnCatClientes.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatClientes.UseVisualStyleBackColor = false;
+            btnCatClientes.Click += btnClientes_Click;
             // 
-            // btnGestionUsuarios
+            // pnlSubClientes
             // 
-            btnGestionUsuarios.BackColor = Color.White;
-            btnGestionUsuarios.Location = new Point(8, 381);
-            btnGestionUsuarios.Name = "btnGestionUsuarios";
-            btnGestionUsuarios.Size = new Size(186, 23);
-            btnGestionUsuarios.TabIndex = 10;
-            btnGestionUsuarios.Text = "Gestión de usuarios";
-            btnGestionUsuarios.UseVisualStyleBackColor = false;
+            pnlSubClientes.BackColor = Color.Transparent;
+            pnlSubClientes.Controls.Add(btnCuentaPorPagar);
+            pnlSubClientes.Controls.Add(btnCliente);
+            pnlSubClientes.Location = new Point(3, 413);
+            pnlSubClientes.Name = "pnlSubClientes";
+            pnlSubClientes.Size = new Size(230, 94);
+            pnlSubClientes.TabIndex = 6;
+            pnlSubClientes.Visible = false;
             // 
-            // btnListarProductos
+            // btnCuentaPorPagar
             // 
-            btnListarProductos.BackColor = Color.White;
-            btnListarProductos.Location = new Point(8, 178);
-            btnListarProductos.Name = "btnListarProductos";
-            btnListarProductos.Size = new Size(186, 23);
-            btnListarProductos.TabIndex = 2;
-            btnListarProductos.Text = "Agregar productos";
-            btnListarProductos.UseVisualStyleBackColor = false;
+            btnCuentaPorPagar.FlatStyle = FlatStyle.Popup;
+            btnCuentaPorPagar.ForeColor = Color.White;
+            btnCuentaPorPagar.Location = new Point(-3, 47);
+            btnCuentaPorPagar.Name = "btnCuentaPorPagar";
+            btnCuentaPorPagar.Size = new Size(233, 39);
+            btnCuentaPorPagar.TabIndex = 5;
+            btnCuentaPorPagar.Text = "Cuentas por Cobrar";
+            btnCuentaPorPagar.UseVisualStyleBackColor = true;
             // 
-            // btnAgregarProductos
+            // btnCliente
             // 
-            btnAgregarProductos.BackColor = Color.White;
-            btnAgregarProductos.Location = new Point(8, 207);
-            btnAgregarProductos.Name = "btnAgregarProductos";
-            btnAgregarProductos.Size = new Size(186, 23);
-            btnAgregarProductos.TabIndex = 3;
-            btnAgregarProductos.Text = "Nueva venta";
-            btnAgregarProductos.UseVisualStyleBackColor = false;
-            btnAgregarProductos.Click += btnAgregarProductos_Click;
+            btnCliente.FlatStyle = FlatStyle.Popup;
+            btnCliente.ForeColor = Color.White;
+            btnCliente.Location = new Point(-3, 3);
+            btnCliente.Name = "btnCliente";
+            btnCliente.Size = new Size(233, 38);
+            btnCliente.TabIndex = 4;
+            btnCliente.Text = "Cliente";
+            btnCliente.UseVisualStyleBackColor = true;
             // 
-            // btnHistorialCliente
+            // btnCatProveedores
             // 
-            btnHistorialCliente.BackColor = Color.White;
-            btnHistorialCliente.Location = new Point(8, 352);
-            btnHistorialCliente.Name = "btnHistorialCliente";
-            btnHistorialCliente.Size = new Size(186, 23);
-            btnHistorialCliente.TabIndex = 9;
-            btnHistorialCliente.Text = "Historial de cliente";
-            btnHistorialCliente.UseVisualStyleBackColor = false;
+            btnCatProveedores.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatProveedores.FlatAppearance.BorderSize = 0;
+            btnCatProveedores.FlatStyle = FlatStyle.Flat;
+            btnCatProveedores.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatProveedores.ForeColor = Color.White;
+            btnCatProveedores.Location = new Point(3, 513);
+            btnCatProveedores.Name = "btnCatProveedores";
+            btnCatProveedores.Size = new Size(230, 45);
+            btnCatProveedores.TabIndex = 7;
+            btnCatProveedores.Text = "  Proveedores";
+            btnCatProveedores.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatProveedores.UseVisualStyleBackColor = false;
+            btnCatProveedores.Click += btnProveedores_Click;
             // 
-            // btnNuevaVenta
+            // pnlSubProveedores
             // 
-            btnNuevaVenta.BackColor = Color.White;
-            btnNuevaVenta.Location = new Point(8, 236);
-            btnNuevaVenta.Name = "btnNuevaVenta";
-            btnNuevaVenta.Size = new Size(186, 23);
-            btnNuevaVenta.TabIndex = 4;
-            btnNuevaVenta.Text = "Registrar cliente";
-            btnNuevaVenta.UseVisualStyleBackColor = false;
+            pnlSubProveedores.BackColor = Color.Transparent;
+            pnlSubProveedores.Controls.Add(btnProveedor);
+            pnlSubProveedores.Location = new Point(3, 564);
+            pnlSubProveedores.Name = "pnlSubProveedores";
+            pnlSubProveedores.Size = new Size(230, 42);
+            pnlSubProveedores.TabIndex = 8;
+            pnlSubProveedores.Visible = false;
             // 
-            // btnHistorialProveedor
+            // btnProveedor
             // 
-            btnHistorialProveedor.BackColor = Color.White;
-            btnHistorialProveedor.Location = new Point(8, 323);
-            btnHistorialProveedor.Name = "btnHistorialProveedor";
-            btnHistorialProveedor.Size = new Size(186, 23);
-            btnHistorialProveedor.TabIndex = 8;
-            btnHistorialProveedor.Text = "Historial de proveedor";
-            btnHistorialProveedor.UseVisualStyleBackColor = false;
+            btnProveedor.FlatStyle = FlatStyle.Popup;
+            btnProveedor.ForeColor = Color.White;
+            btnProveedor.Location = new Point(-3, 3);
+            btnProveedor.Name = "btnProveedor";
+            btnProveedor.Size = new Size(233, 37);
+            btnProveedor.TabIndex = 0;
+            btnProveedor.Text = "Proveedor";
+            btnProveedor.UseVisualStyleBackColor = true;
             // 
-            // btnRegistrarProveedor
+            // btnCatHistorial
             // 
-            btnRegistrarProveedor.BackColor = Color.White;
-            btnRegistrarProveedor.Location = new Point(8, 294);
-            btnRegistrarProveedor.Name = "btnRegistrarProveedor";
-            btnRegistrarProveedor.Size = new Size(186, 23);
-            btnRegistrarProveedor.TabIndex = 6;
-            btnRegistrarProveedor.Text = "Historial de ventas";
-            btnRegistrarProveedor.UseVisualStyleBackColor = false;
+            btnCatHistorial.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatHistorial.FlatAppearance.BorderSize = 0;
+            btnCatHistorial.FlatStyle = FlatStyle.Flat;
+            btnCatHistorial.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatHistorial.ForeColor = Color.White;
+            btnCatHistorial.Location = new Point(3, 612);
+            btnCatHistorial.Name = "btnCatHistorial";
+            btnCatHistorial.Size = new Size(230, 45);
+            btnCatHistorial.TabIndex = 9;
+            btnCatHistorial.Text = "  Historial";
+            btnCatHistorial.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatHistorial.UseVisualStyleBackColor = false;
+            btnCatHistorial.Click += btnHistorial_Click;
             // 
-            // btnRegistrarCliente
+            // pnlSubHistorial
             // 
-            btnRegistrarCliente.BackColor = Color.White;
-            btnRegistrarCliente.Location = new Point(8, 265);
-            btnRegistrarCliente.Name = "btnRegistrarCliente";
-            btnRegistrarCliente.Size = new Size(186, 23);
-            btnRegistrarCliente.TabIndex = 5;
-            btnRegistrarCliente.Text = "Registrar proveedor";
-            btnRegistrarCliente.UseVisualStyleBackColor = false;
+            pnlSubHistorial.BackColor = Color.Transparent;
+            pnlSubHistorial.Controls.Add(btnHProveedor);
+            pnlSubHistorial.Controls.Add(BtnHVentas);
+            pnlSubHistorial.Controls.Add(btnHClientes);
+            pnlSubHistorial.Location = new Point(3, 663);
+            pnlSubHistorial.Name = "pnlSubHistorial";
+            pnlSubHistorial.Size = new Size(233, 145);
+            pnlSubHistorial.TabIndex = 10;
+            pnlSubHistorial.Visible = false;
+            // 
+            // btnHProveedor
+            // 
+            btnHProveedor.FlatStyle = FlatStyle.Popup;
+            btnHProveedor.ForeColor = Color.White;
+            btnHProveedor.Location = new Point(-3, 96);
+            btnHProveedor.Name = "btnHProveedor";
+            btnHProveedor.Size = new Size(233, 42);
+            btnHProveedor.TabIndex = 6;
+            btnHProveedor.Text = "Historial de Clientes";
+            btnHProveedor.UseVisualStyleBackColor = true;
+            // 
+            // BtnHVentas
+            // 
+            BtnHVentas.FlatStyle = FlatStyle.Popup;
+            BtnHVentas.ForeColor = Color.White;
+            BtnHVentas.Location = new Point(-3, 3);
+            BtnHVentas.Name = "BtnHVentas";
+            BtnHVentas.Size = new Size(233, 39);
+            BtnHVentas.TabIndex = 4;
+            BtnHVentas.Text = "Historial de Ventas";
+            BtnHVentas.UseVisualStyleBackColor = true;
+            // 
+            // btnHClientes
+            // 
+            btnHClientes.FlatStyle = FlatStyle.Popup;
+            btnHClientes.ForeColor = Color.White;
+            btnHClientes.Location = new Point(-3, 48);
+            btnHClientes.Name = "btnHClientes";
+            btnHClientes.Size = new Size(233, 42);
+            btnHClientes.TabIndex = 5;
+            btnHClientes.Text = "Historial de Clientes";
+            btnHClientes.UseVisualStyleBackColor = true;
+            // 
+            // btnCatConfig
+            // 
+            btnCatConfig.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatConfig.FlatAppearance.BorderSize = 0;
+            btnCatConfig.FlatStyle = FlatStyle.Flat;
+            btnCatConfig.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatConfig.ForeColor = Color.White;
+            btnCatConfig.Location = new Point(3, 814);
+            btnCatConfig.Name = "btnCatConfig";
+            btnCatConfig.Size = new Size(230, 45);
+            btnCatConfig.TabIndex = 11;
+            btnCatConfig.Text = "  Configuración";
+            btnCatConfig.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatConfig.UseVisualStyleBackColor = false;
+            // 
+            // btnCatCerrarSesion
+            // 
+            btnCatCerrarSesion.BackColor = Color.FromArgb(20, 45, 65);
+            btnCatCerrarSesion.FlatAppearance.BorderSize = 0;
+            btnCatCerrarSesion.FlatStyle = FlatStyle.Flat;
+            btnCatCerrarSesion.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            btnCatCerrarSesion.ForeColor = Color.White;
+            btnCatCerrarSesion.Location = new Point(3, 865);
+            btnCatCerrarSesion.Name = "btnCatCerrarSesion";
+            btnCatCerrarSesion.Size = new Size(230, 45);
+            btnCatCerrarSesion.TabIndex = 13;
+            btnCatCerrarSesion.Text = "  Cerrar Sesión";
+            btnCatCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            btnCatCerrarSesion.UseVisualStyleBackColor = false;
             // 
             // panelContent
             // 
@@ -325,17 +462,18 @@
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelStatsBottom);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(200, 56);
+            panelContent.Location = new Point(250, 56);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(823, 588);
-            panelContent.TabIndex = 0;
+            panelContent.Size = new Size(773, 588);
+            panelContent.TabIndex = 2;
+            panelContent.Paint += panelContent_Paint;
             // 
             // lblBienvenido
             // 
             lblBienvenido.AutoSize = true;
             lblBienvenido.Font = new Font("Segoe UI", 40F, FontStyle.Bold, GraphicsUnit.Pixel);
             lblBienvenido.ForeColor = Color.FromArgb(56, 67, 83);
-            lblBienvenido.Location = new Point(14, 0);
+            lblBienvenido.Location = new Point(6, 0);
             lblBienvenido.Name = "lblBienvenido";
             lblBienvenido.Size = new Size(506, 54);
             lblBienvenido.TabIndex = 0;
@@ -346,7 +484,7 @@
             lblPanelActualizado.AutoSize = true;
             lblPanelActualizado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
             lblPanelActualizado.ForeColor = Color.FromArgb(112, 112, 112);
-            lblPanelActualizado.Location = new Point(648, 30);
+            lblPanelActualizado.Location = new Point(603, 30);
             lblPanelActualizado.Name = "lblPanelActualizado";
             lblPanelActualizado.Size = new Size(156, 15);
             lblPanelActualizado.TabIndex = 1;
@@ -361,9 +499,9 @@
             panelStatsTop.Controls.Add(lblProductosActivosValue);
             panelStatsTop.Controls.Add(lblProveedoresPendientesValue);
             panelStatsTop.Controls.Add(lblStockCriticoValue);
-            panelStatsTop.Location = new Point(14, 56);
+            panelStatsTop.Location = new Point(6, 56);
             panelStatsTop.Name = "panelStatsTop";
-            panelStatsTop.Size = new Size(790, 108);
+            panelStatsTop.Size = new Size(755, 108);
             panelStatsTop.TabIndex = 2;
             // 
             // lblProductosActivosTitle
@@ -435,9 +573,9 @@
             panelStatsBottom.Controls.Add(lblVentaTotalValue);
             panelStatsBottom.Controls.Add(lblGananciaEstimadaValue);
             panelStatsBottom.Controls.Add(lblFiadosPendientesValue);
-            panelStatsBottom.Location = new Point(14, 174);
+            panelStatsBottom.Location = new Point(6, 174);
             panelStatsBottom.Name = "panelStatsBottom";
-            panelStatsBottom.Size = new Size(790, 110);
+            panelStatsBottom.Size = new Size(755, 110);
             panelStatsBottom.TabIndex = 3;
             // 
             // lblVentaTotalTitle
@@ -500,33 +638,10 @@
             lblFiadosPendientesValue.TabIndex = 5;
             lblFiadosPendientesValue.Text = "0";
             // 
-            // panelMenu
-            // 
-            panelMenu.BackColor = Color.FromArgb(44, 67, 93);
-            panelMenu.Controls.Add(btnConfiguracion);
-            panelMenu.Controls.Add(panelSesion);
-            panelMenu.Controls.Add(btnCerrarSesion);
-            panelMenu.Controls.Add(btnHistorialVentas);
-            panelMenu.Controls.Add(btnGestionUsuarios);
-            panelMenu.Controls.Add(btnInicio);
-            panelMenu.Controls.Add(btnRegistrarCliente);
-            panelMenu.Controls.Add(btnListarProductos);
-            panelMenu.Controls.Add(btnRegistrarProveedor);
-            panelMenu.Controls.Add(btnAgregarProductos);
-            panelMenu.Controls.Add(btnNuevaVenta);
-            panelMenu.Controls.Add(btnHistorialProveedor);
-            panelMenu.Controls.Add(btnHistorialCliente);
-            panelMenu.Dock = DockStyle.Left;
-            panelMenu.Location = new Point(0, 56);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(200, 588);
-            panelMenu.TabIndex = 1;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(238, 238, 238);
             ClientSize = new Size(1023, 644);
             Controls.Add(panelContent);
             Controls.Add(panelMenu);
@@ -535,34 +650,40 @@
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sistema de Colmado JB soluciones";
+            Text = "Sistema de Colmado - GBP Colmado.Net";
+            Load += MainForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
-            panelSesion.ResumeLayout(false);
-            panelSesion.PerformLayout();
+            panelMenu.ResumeLayout(false);
+            flpNavigation.ResumeLayout(false);
+            pnlSubInventario.ResumeLayout(false);
+            pnlSubVentas.ResumeLayout(false);
+            pnlSubClientes.ResumeLayout(false);
+            pnlSubProveedores.ResumeLayout(false);
+            pnlSubHistorial.ResumeLayout(false);
             panelContent.ResumeLayout(false);
             panelContent.PerformLayout();
             panelStatsTop.ResumeLayout(false);
             panelStatsTop.PerformLayout();
             panelStatsBottom.ResumeLayout(false);
             panelStatsBottom.PerformLayout();
-            panelMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
-        private void ConfigMenuButton(Button button, string text, int top, bool selected)
+        private void FormatearBotonAccion(Button btn, string texto, int top)
         {
-            button.BackColor = selected ? Color.FromArgb(102, 183, 186) : Color.WhiteSmoke;
-            button.FlatAppearance.BorderSize = 0;
-            button.FlatStyle = FlatStyle.Flat;
-            button.ForeColor = Color.FromArgb(40, 55, 73);
-            button.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
-            button.Location = new Point(2, top);
-            button.Name = $"btn{text.Replace(" ", string.Empty)}";
-            button.Size = new Size(186, 29);
-            button.TabStop = false;
-            button.Text = text;
-            button.UseVisualStyleBackColor = false;
+            btn.BackColor = Color.FromArgb(30, 60, 85);
+            btn.FlatAppearance.BorderSize = 0;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.ForeColor = Color.Gainsboro;
+            btn.Font = new Font("Segoe UI", 10F);
+            btn.Location = new Point(0, top);
+            btn.Size = new Size(230, 40);
+            btn.Text = texto;
+            btn.TextAlign = ContentAlignment.MiddleLeft;
+            btn.Padding = new Padding(35, 0, 0, 0);
+            btn.Name = "btn" + texto.Replace(" ", "").Replace("/", "");
+            btn.UseVisualStyleBackColor = false;
         }
 
         #endregion
@@ -570,9 +691,23 @@
         private Panel panelHeader;
         private Label lblBrandTitle;
         private Label lblBrandSub;
-        private Label lblCajaAbierta;
-        private Label lblSesionRol;
-        private Button btnCerrarSesion;
+
+        private Panel panelMenu;
+        private FlowLayoutPanel flpNavigation;
+        private Button btnCatInicio;
+        private Button btnCatInventario;
+        private Panel pnlSubInventario;
+        private Button btnEntradaSalida;
+        private Button btnCatVentas;
+        private Panel pnlSubVentas;
+        private Button btnCatClientes;
+        private Panel pnlSubClientes;
+        private Button btnCatProveedores;
+        private Panel pnlSubProveedores;
+        private Button btnCatHistorial;
+        private Panel pnlSubHistorial;
+        private Button btnCatConfig;
+        private Button btnCatCerrarSesion;
 
         private Panel panelContent;
         private Label lblBienvenido;
@@ -593,24 +728,22 @@
         private Label lblVentaTotalValue;
         private Label lblGananciaEstimadaValue;
         private Label lblFiadosPendientesValue;
-        private Panel panelSesion;
-        private Label lblSesionActiva;
-        private Label lblUsuarioInfo;
-        private Label lblRolInfo;
-        private Label lblFechaInfo;
-        private Label lblHoraInfo;
+        private void btnInventario_Click(object sender, EventArgs e) => pnlSubInventario.Visible = !pnlSubInventario.Visible;
+        private void btnVentas_Click(object sender, EventArgs e) => pnlSubVentas.Visible = !pnlSubVentas.Visible;
+        private void btnClientes_Click(object sender, EventArgs e) => pnlSubClientes.Visible = !pnlSubClientes.Visible;
+        private void btnProveedores_Click(object sender, EventArgs e) => pnlSubProveedores.Visible = !pnlSubProveedores.Visible;
+        private void btnHistorial_Click(object sender, EventArgs e) => pnlSubHistorial.Visible = !pnlSubHistorial.Visible;
 
-        private Button btnInicio;
-        private Button btnListarProductos;
-        private Button btnAgregarProductos;
-        private Button btnNuevaVenta;
-        private Button btnRegistrarCliente;
-        private Button btnRegistrarProveedor;
-        private Button btnHistorialVentas;
-        private Button btnHistorialProveedor;
-        private Button btnHistorialCliente;
-        private Button btnGestionUsuarios;
-        private Button btnConfiguracion;
-        private Panel panelMenu;
+        private Button btnDevoluciones;
+        private Button btnVentaRapida;
+        private Button btnCuadre;
+        private Button btnCuentaPorPagar;
+        private Button btnCliente;
+        private Button btnProveedor;
+        private Button btnHProveedor;
+        private Button BtnHVentas;
+        private Button btnHClientes;
+        private DateTimePicker dateTimePicker1;
+        
     }
 }
