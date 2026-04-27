@@ -67,6 +67,7 @@ namespace GBPColmadoNet
             lblVentaTotalValue = new Label();
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
+            btnListarProductos = new Button();
             panelHeader.SuspendLayout();
             panelMenu.SuspendLayout();
             flpNavigation.SuspendLayout();
@@ -193,11 +194,12 @@ namespace GBPColmadoNet
             // pnlSubInventario
             // 
             pnlSubInventario.BackColor = Color.Transparent;
+            pnlSubInventario.Controls.Add(btnListarProductos);
             pnlSubInventario.Controls.Add(btnDevoluciones);
             pnlSubInventario.Controls.Add(btnEntradaSalida);
             pnlSubInventario.Location = new Point(3, 105);
             pnlSubInventario.Name = "pnlSubInventario";
-            pnlSubInventario.Size = new Size(230, 96);
+            pnlSubInventario.Size = new Size(230, 135);
             pnlSubInventario.TabIndex = 2;
             pnlSubInventario.Visible = false;
             // 
@@ -234,7 +236,7 @@ namespace GBPColmadoNet
             btnCatVentas.FlatStyle = FlatStyle.Flat;
             btnCatVentas.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatVentas.ForeColor = Color.White;
-            btnCatVentas.Location = new Point(3, 207);
+            btnCatVentas.Location = new Point(3, 246);
             btnCatVentas.Name = "btnCatVentas";
             btnCatVentas.Size = new Size(230, 45);
             btnCatVentas.TabIndex = 3;
@@ -248,7 +250,7 @@ namespace GBPColmadoNet
             pnlSubVentas.BackColor = Color.Transparent;
             pnlSubVentas.Controls.Add(btnVentaRapida);
             pnlSubVentas.Controls.Add(btnCuadre);
-            pnlSubVentas.Location = new Point(3, 258);
+            pnlSubVentas.Location = new Point(3, 297);
             pnlSubVentas.Name = "pnlSubVentas";
             pnlSubVentas.Size = new Size(230, 98);
             pnlSubVentas.TabIndex = 4;
@@ -286,7 +288,7 @@ namespace GBPColmadoNet
             btnCatClientes.FlatStyle = FlatStyle.Flat;
             btnCatClientes.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatClientes.ForeColor = Color.White;
-            btnCatClientes.Location = new Point(3, 362);
+            btnCatClientes.Location = new Point(3, 401);
             btnCatClientes.Name = "btnCatClientes";
             btnCatClientes.Size = new Size(230, 45);
             btnCatClientes.TabIndex = 5;
@@ -300,7 +302,7 @@ namespace GBPColmadoNet
             pnlSubClientes.BackColor = Color.Transparent;
             pnlSubClientes.Controls.Add(btnCuentaPorPagar);
             pnlSubClientes.Controls.Add(btnCliente);
-            pnlSubClientes.Location = new Point(3, 413);
+            pnlSubClientes.Location = new Point(3, 452);
             pnlSubClientes.Name = "pnlSubClientes";
             pnlSubClientes.Size = new Size(230, 94);
             pnlSubClientes.TabIndex = 6;
@@ -337,7 +339,7 @@ namespace GBPColmadoNet
             btnCatProveedores.FlatStyle = FlatStyle.Flat;
             btnCatProveedores.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatProveedores.ForeColor = Color.White;
-            btnCatProveedores.Location = new Point(3, 513);
+            btnCatProveedores.Location = new Point(3, 552);
             btnCatProveedores.Name = "btnCatProveedores";
             btnCatProveedores.Size = new Size(230, 45);
             btnCatProveedores.TabIndex = 7;
@@ -350,7 +352,7 @@ namespace GBPColmadoNet
             // 
             pnlSubProveedores.BackColor = Color.Transparent;
             pnlSubProveedores.Controls.Add(btnProveedor);
-            pnlSubProveedores.Location = new Point(3, 564);
+            pnlSubProveedores.Location = new Point(3, 603);
             pnlSubProveedores.Name = "pnlSubProveedores";
             pnlSubProveedores.Size = new Size(230, 42);
             pnlSubProveedores.TabIndex = 8;
@@ -375,7 +377,7 @@ namespace GBPColmadoNet
             btnCatHistorial.FlatStyle = FlatStyle.Flat;
             btnCatHistorial.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatHistorial.ForeColor = Color.White;
-            btnCatHistorial.Location = new Point(3, 612);
+            btnCatHistorial.Location = new Point(3, 651);
             btnCatHistorial.Name = "btnCatHistorial";
             btnCatHistorial.Size = new Size(230, 45);
             btnCatHistorial.TabIndex = 9;
@@ -390,7 +392,7 @@ namespace GBPColmadoNet
             pnlSubHistorial.Controls.Add(btnHProveedor);
             pnlSubHistorial.Controls.Add(BtnHVentas);
             pnlSubHistorial.Controls.Add(btnHClientes);
-            pnlSubHistorial.Location = new Point(3, 663);
+            pnlSubHistorial.Location = new Point(3, 702);
             pnlSubHistorial.Name = "pnlSubHistorial";
             pnlSubHistorial.Size = new Size(233, 145);
             pnlSubHistorial.TabIndex = 10;
@@ -439,7 +441,7 @@ namespace GBPColmadoNet
             btnCatConfig.FlatStyle = FlatStyle.Flat;
             btnCatConfig.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatConfig.ForeColor = Color.White;
-            btnCatConfig.Location = new Point(3, 814);
+            btnCatConfig.Location = new Point(3, 853);
             btnCatConfig.Name = "btnCatConfig";
             btnCatConfig.Size = new Size(230, 45);
             btnCatConfig.TabIndex = 11;
@@ -455,7 +457,7 @@ namespace GBPColmadoNet
             btnCatCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCatCerrarSesion.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnCatCerrarSesion.ForeColor = Color.White;
-            btnCatCerrarSesion.Location = new Point(3, 865);
+            btnCatCerrarSesion.Location = new Point(3, 904);
             btnCatCerrarSesion.Name = "btnCatCerrarSesion";
             btnCatCerrarSesion.Size = new Size(230, 45);
             btnCatCerrarSesion.TabIndex = 13;
@@ -648,6 +650,19 @@ namespace GBPColmadoNet
             lblFiadosPendientesValue.TabIndex = 5;
             lblFiadosPendientesValue.Text = "0";
             // 
+            // btnListarProductos
+            // 
+            btnListarProductos.BackColor = Color.Transparent;
+            btnListarProductos.FlatStyle = FlatStyle.Popup;
+            btnListarProductos.ForeColor = Color.White;
+            btnListarProductos.Location = new Point(-3, 93);
+            btnListarProductos.Name = "btnListarProductos";
+            btnListarProductos.Size = new Size(233, 39);
+            btnListarProductos.TabIndex = 4;
+            btnListarProductos.Text = "Listar Productos";
+            btnListarProductos.UseVisualStyleBackColor = false;
+            btnListarProductos.Click += btnListarProductos_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -754,6 +769,6 @@ namespace GBPColmadoNet
         private Button BtnHVentas;
         private Button btnHClientes;
         private DateTimePicker dateTimePicker1;
-        
+        private Button btnListarProductos;
     }
 }

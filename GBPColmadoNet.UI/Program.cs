@@ -12,6 +12,7 @@ using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
+using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 
@@ -60,12 +61,13 @@ namespace GBPColmadoNet;
         services.AddTransient<HVentasList>();
         services.AddTransient<DevolucionesForm>();
         services.AddTransient<DevolucionesList>();
-        services.AddTransient<ESList>();
-        services.AddTransient<ESForm>();
+        services.AddTransient<SList>();
+        services.AddTransient<EForm>();
         services.AddTransient<ProveedorForm>();
         services.AddTransient<ProveedorList>();
         services.AddTransient<CuadreForm>();
         services.AddTransient<VentaRapidaForm>();
+        services.AddTransient<ListarProductosList>();
 
 
 
