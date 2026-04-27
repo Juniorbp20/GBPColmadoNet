@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
-    public partial class ESList : Form
+    public partial class SForm : Form
     {
-        public ESList()
+        public SForm()
         {
             InitializeComponent();
         }

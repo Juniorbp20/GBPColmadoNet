@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace GBPColmadoNet.UI.Forms
+namespace GBPColmadoNet.UI.Forms.Inventario.ListarProductos
 {
-    public partial class ESForm : Form
+    public partial class ListarProductosList : Form
     {
-        public ESForm()
+        public ListarProductosList()
         {
             InitializeComponent();
         }

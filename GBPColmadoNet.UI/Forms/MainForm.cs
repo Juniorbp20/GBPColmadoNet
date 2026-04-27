@@ -7,6 +7,8 @@ using GBPColmadoNet.UI.Forms.Configuracion;
 using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
+using GBPColmadoNet.UI.Forms.Inventario.ESForm;
+using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +47,7 @@ namespace GBPColmadoNet
 
         private void btnEntradaSalida_Click(object sender, EventArgs e)
         {
-            var eS = Program.ServiceProvider.GetRequiredService<ESForm>();
+            var eS = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
             eS.Show();
         }
 
@@ -107,6 +109,18 @@ namespace GBPColmadoNet
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void btnListarProductos_Click(object sender, EventArgs e)
+        {
+            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ListarProductos.ListarProductosList>();
+            listarProductos.Show();
+        }
+
+        private void btnListarProductos_Click_1(object sender, EventArgs e)
+        {
+            var listarInventario = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarInventario.ShowDialog();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
-    partial class ESList
+    partial class SForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ESList";
+            this.Text = "SForm";
         }
 
         #endregion
