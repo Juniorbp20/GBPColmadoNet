@@ -1,9 +1,4 @@
 using GBPColmadoNet.Data.Context;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Configuration;
 using GBPColmadoNet.UI.Forms;
 using GBPColmadoNet.UI.Forms.Clientes;
 using GBPColmadoNet.UI.Forms.Clientes.FiaoForm;
@@ -12,10 +7,10 @@ using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
-using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
-
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GBPColmadoNet;
 
@@ -61,13 +56,13 @@ namespace GBPColmadoNet;
         services.AddTransient<HVentasList>();
         services.AddTransient<DevolucionesForm>();
         services.AddTransient<DevolucionesList>();
-        services.AddTransient<SList>();
+        services.AddTransient<ListarProductosList>();
         services.AddTransient<EForm>();
         services.AddTransient<ProveedorForm>();
         services.AddTransient<ProveedorList>();
         services.AddTransient<CuadreForm>();
         services.AddTransient<VentaRapidaForm>();
-        services.AddTransient<ListarProductosList>();
+        services.AddTransient<SForm>();
 
 
 

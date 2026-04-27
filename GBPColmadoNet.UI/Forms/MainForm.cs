@@ -47,7 +47,7 @@ namespace GBPColmadoNet
 
         private void btnEntradaSalida_Click(object sender, EventArgs e)
         {
-            var eS = Program.ServiceProvider.GetRequiredService<SList>();
+            var eS = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
             eS.Show();
         }
 
@@ -113,8 +113,14 @@ namespace GBPColmadoNet
 
         private void btnListarProductos_Click(object sender, EventArgs e)
         {
-            var listarProductos = Program.ServiceProvider.GetRequiredService<ListarProductosList>();
+            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ListarProductos.ListarProductosList>();
             listarProductos.Show();
+        }
+
+        private void btnListarProductos_Click_1(object sender, EventArgs e)
+        {
+            var listarInventario = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarInventario.ShowDialog();
         }
     }
 }

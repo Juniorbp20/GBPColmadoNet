@@ -4,11 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
-    public partial class SList : Form
+    public partial class ListarProductosList : Form
     {
         private readonly ColmadoContext _context;
 
-        public SList(ColmadoContext context)
+        public ListarProductosList(ColmadoContext context)
         {
             InitializeComponent();
             _context = context;
@@ -41,6 +41,12 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         {
             var EForm = Program.ServiceProvider.GetRequiredService<Forms.EForm>();
             EForm.ShowDialog();
+        }
+
+        private void btnSalida_Click(object sender, EventArgs e)
+        {
+            var SForm = Program.ServiceProvider.GetRequiredService<SForm>();
+            SForm.ShowDialog();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
-    partial class SList
+    partial class ListarProductosList
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lbTituloList = new Label();
             productoDataGridView = new DataGridView();
             btnEntrada = new Button();
             btnSalida = new Button();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // lbTituloList
@@ -48,10 +51,21 @@
             // 
             // productoDataGridView
             // 
+            productoDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            productoDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             productoDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            productoDataGridView.Location = new Point(15, 101);
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            productoDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            productoDataGridView.Dock = DockStyle.Bottom;
+            productoDataGridView.Location = new Point(0, 91);
             productoDataGridView.Name = "productoDataGridView";
-            productoDataGridView.Size = new Size(773, 337);
+            productoDataGridView.Size = new Size(800, 359);
             productoDataGridView.TabIndex = 1;
             // 
             // btnEntrada
@@ -73,20 +87,30 @@
             btnSalida.TabIndex = 3;
             btnSalida.Text = "Salida de Productos";
             btnSalida.UseVisualStyleBackColor = true;
+            btnSalida.Click += btnSalida_Click;
             // 
-            // ESList
+            // panel1
+            // 
+            panel1.Controls.Add(productoDataGridView);
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 450);
+            panel1.TabIndex = 4;
+            // 
+            // ListarProductosList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnSalida);
-            Controls.Add(btnEntrada);
-            Controls.Add(productoDataGridView);
             Controls.Add(lbTituloList);
-            Name = "ESList";
-            Text = "ESList";
+            Controls.Add(btnEntrada);
+            Controls.Add(btnSalida);
+            Controls.Add(panel1);
+            Name = "ListarProductosList";
+            Text = "Inventario";
             Load += ESList_Load;
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -97,5 +121,6 @@
         private DataGridView productoDataGridView;
         private Button btnEntrada;
         private Button btnSalida;
+        private Panel panel1;
     }
 }
