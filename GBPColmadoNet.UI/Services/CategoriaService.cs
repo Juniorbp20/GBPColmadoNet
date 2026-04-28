@@ -6,11 +6,12 @@ using System.Linq.Expressions;
 
 namespace GBPColmadoNet.UI.Services
 {
-    public class CategoriaService(ColmadoContext context) : IService<Categoria, int>
+    public class CategoriaService(ColmadoContext context
+    ) : IService<Categoria, int>
     {
-        public Task<Categoria?> Buscar(int id)
+        public async Task<Categoria?> Buscar(int id)
         {
-            return context.Categorias
+            return await context.Categorias
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.CategoriaId == id);
         }
