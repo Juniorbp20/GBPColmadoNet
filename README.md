@@ -36,7 +36,7 @@ GBPColmadoNet/
 ```
 
 # Tecnologías y Herramientas
-**Lenguaje:** C# (.NET 8.0)
+**Lenguaje:** C# (.NET 10.0)
 
 **Interfaz:** Windows Forms para una experiencia de escritorio ágil.
 
