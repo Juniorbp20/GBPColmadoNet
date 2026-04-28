@@ -39,7 +39,7 @@ namespace GBPColmadoNet.UI.Services
         {
             return context.Proveedores
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.ProveedorId == id)
+                .FirstOrDefaultAsync(c => c.ProveedorId == id);
         }
 
         public async Task<bool> Eliminar(int id)
