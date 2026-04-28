@@ -30,6 +30,7 @@ namespace GBPColmadoNet
             btnCatInicio = new Button();
             btnCatInventario = new Button();
             pnlSubInventario = new Panel();
+            btnListarProductos = new Button();
             btnDevoluciones = new Button();
             btnEntradaSalida = new Button();
             btnCatVentas = new Button();
@@ -67,7 +68,6 @@ namespace GBPColmadoNet
             lblVentaTotalValue = new Label();
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
-            btnListarProductos = new Button();
             panelHeader.SuspendLayout();
             panelMenu.SuspendLayout();
             flpNavigation.SuspendLayout();
@@ -109,9 +109,9 @@ namespace GBPColmadoNet
             lblBrandTitle.ForeColor = Color.FromArgb(54, 66, 81);
             lblBrandTitle.Location = new Point(4, 2);
             lblBrandTitle.Name = "lblBrandTitle";
-            lblBrandTitle.Size = new Size(199, 30);
+            lblBrandTitle.Size = new Size(187, 30);
             lblBrandTitle.TabIndex = 0;
-            lblBrandTitle.Text = "GBP Colmado.Net";
+            lblBrandTitle.Text = "GBPColmadoNet";
             // 
             // lblBrandSub
             // 
@@ -202,6 +202,18 @@ namespace GBPColmadoNet
             pnlSubInventario.Size = new Size(230, 136);
             pnlSubInventario.TabIndex = 2;
             pnlSubInventario.Visible = false;
+            // 
+            // btnListarProductos
+            // 
+            btnListarProductos.FlatStyle = FlatStyle.Popup;
+            btnListarProductos.ForeColor = Color.White;
+            btnListarProductos.Location = new Point(-3, 93);
+            btnListarProductos.Name = "btnListarProductos";
+            btnListarProductos.Size = new Size(233, 39);
+            btnListarProductos.TabIndex = 4;
+            btnListarProductos.Text = "Listar Productos";
+            btnListarProductos.UseVisualStyleBackColor = true;
+            btnListarProductos.Click += btnListarProductos_Click_1;
             // 
             // btnDevoluciones
             // 
@@ -650,22 +662,11 @@ namespace GBPColmadoNet
             lblFiadosPendientesValue.TabIndex = 5;
             lblFiadosPendientesValue.Text = "0";
             // 
-            // btnListarProductos
-            // 
-            btnListarProductos.FlatStyle = FlatStyle.Popup;
-            btnListarProductos.ForeColor = Color.White;
-            btnListarProductos.Location = new Point(-3, 93);
-            btnListarProductos.Name = "btnListarProductos";
-            btnListarProductos.Size = new Size(233, 39);
-            btnListarProductos.TabIndex = 4;
-            btnListarProductos.Text = "Listar Productos";
-            btnListarProductos.UseVisualStyleBackColor = true;
-            btnListarProductos.Click += btnListarProductos_Click_1;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             ClientSize = new Size(1023, 644);
             Controls.Add(panelContent);
             Controls.Add(panelMenu);
@@ -674,7 +675,7 @@ namespace GBPColmadoNet
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sistema de Colmado - GBP Colmado.Net";
+            Text = "Sistema Colmado  GBPColmadoNet";
             Load += MainForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
