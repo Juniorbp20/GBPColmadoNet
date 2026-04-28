@@ -35,7 +35,7 @@ namespace GBPColmadoNet.UI.Services
             return await context.Categorias
                 .AsNoTracking()
                 .Where(criterio)
-                .ToListAsync<Categoria>();
+                .ToListAsync();
         }
 
         public async Task<bool> Guardar(Categoria entidad)
