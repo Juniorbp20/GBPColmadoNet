@@ -6,59 +6,59 @@ using System.Linq.Expressions;
 
 namespace GBPColmadoNet.UI.Services
 {
-    public class UsuarioServices(ColmadoContext context
-    ) : IService<Usuario, int>
+    public class ComprasService(ColmadoContext context
+        ) : IService<Compra, int>
     {
-        public async Task<bool> Guardar(Usuario entidad)
+        public async Task<bool> Guardar(Compra entidad)
         {
-            if (!await Existe(entidad.UsuarioId))
+            if (!await Existe(entidad.CompraId))
                 return await Insertar(entidad);
             else
                 return await Modificar(entidad);
         }
 
-        private async Task<bool> Insertar(Usuario entidad)
+        private async Task<bool> Insertar(Compra entidad)
         {
-            context.Usuarios.Add(entidad);
+            context.Compras.Add(entidad);
             return await context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> Existe(int id)
         {
-            return await context.Usuarios.AnyAsync(a => a.UsuarioId == id);
+            return await context.Compras.AnyAsync(a => a.CompraId == id);
         }
 
-        public async Task<bool> Modificar(Data.Models.Usuario entiad)
+        public async Task<bool> Modificar(Data.Models.Compra entiad)
         {
-            context.Usuarios.Update(entiad);
+            context.Compras.Update(entiad);
             return await context.SaveChangesAsync() > 0;
         }
-        
-        public async Task<Usuario?> Buscar(int id)
+
+        public async Task<Compra?> Buscar(int id)
         {
-            return await context.Usuarios
+            return await context.Compras
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.UsuarioId == id);
+                .FirstOrDefaultAsync(c => c.CompraId == id);
         }
 
         public async Task<bool> Eliminar(int id)
         {
-            var usuario = await context
-                .Usuarios
+            var compra = await context
+                .Compras
                 .FindAsync(id);
 
-            if (usuario == null)
+            if (compra == null)
                 return false;
 
-            context.Usuarios.Remove(usuario);
+            context.Compras.Remove(compra);
             var cantidad = await context.SaveChangesAsync();
 
             return cantidad > 0;
         }
 
-        public async Task<List<Usuario>> GetList(Expression<Func<Usuario, bool>> criterio)
+        public async Task<List<Compra>> GetList(Expression<Func<Compra, bool>> criterio)
         {
-            return await context.Usuarios
+            return await context.Compras
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();
