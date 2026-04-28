@@ -31,11 +31,12 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lbTituloList = new Label();
             productoDataGridView = new DataGridView();
-            btnEntrada = new Button();
-            btnSalida = new Button();
-            panel1 = new Panel();
+            this.btnCreaProductos = new Button();
+            btnEntradaProductos = new Button();
+            panelContent = new Panel();
+            PanelHeder = new Panel();
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).BeginInit();
-            panel1.SuspendLayout();
+            panelContent.SuspendLayout();
             SuspendLayout();
             // 
             // lbTituloList
@@ -62,40 +63,49 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             productoDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
-            productoDataGridView.Dock = DockStyle.Bottom;
-            productoDataGridView.Location = new Point(0, 91);
+            productoDataGridView.Dock = DockStyle.Fill;
+            productoDataGridView.Location = new Point(0, 0);
             productoDataGridView.Name = "productoDataGridView";
-            productoDataGridView.Size = new Size(800, 359);
+            productoDataGridView.Size = new Size(800, 350);
             productoDataGridView.TabIndex = 1;
             // 
-            // btnEntrada
+            // btnCreaProducto
             // 
-            btnEntrada.FlatStyle = FlatStyle.System;
-            btnEntrada.Location = new Point(24, 62);
-            btnEntrada.Name = "btnEntrada";
-            btnEntrada.Size = new Size(147, 23);
-            btnEntrada.TabIndex = 2;
-            btnEntrada.Text = "Entrada de Productos";
-            btnEntrada.UseVisualStyleBackColor = true;
-            btnEntrada.Click += btnEntrada_Click;
+            this.btnCreaProductos.FlatStyle = FlatStyle.System;
+            this.btnCreaProductos.Location = new Point(12, 62);
+            this.btnCreaProductos.Name = "btnCreaProducto";
+            this.btnCreaProductos.Size = new Size(147, 23);
+            this.btnCreaProductos.TabIndex = 2;
+            this.btnCreaProductos.Text = "Crear Productos";
+            this.btnCreaProductos.UseVisualStyleBackColor = true;
+            this.btnCreaProductos.Click += this.btnEntrada_Click;
             // 
-            // btnSalida
+            // btnEntradaProductos
             // 
-            btnSalida.Location = new Point(189, 62);
-            btnSalida.Name = "btnSalida";
-            btnSalida.Size = new Size(139, 23);
-            btnSalida.TabIndex = 3;
-            btnSalida.Text = "Salida de Productos";
-            btnSalida.UseVisualStyleBackColor = true;
-            btnSalida.Click += btnSalida_Click;
+            btnEntradaProductos.Location = new Point(165, 62);
+            btnEntradaProductos.Name = "btnEntradaProductos";
+            btnEntradaProductos.Size = new Size(139, 23);
+            btnEntradaProductos.TabIndex = 3;
+            btnEntradaProductos.Text = "Entrada de Productos";
+            btnEntradaProductos.UseVisualStyleBackColor = true;
+            btnEntradaProductos.Click += btnSalida_Click;
             // 
-            // panel1
+            // panelContent
             // 
-            panel1.Controls.Add(productoDataGridView);
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 450);
-            panel1.TabIndex = 4;
+            panelContent.Controls.Add(productoDataGridView);
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(0, 100);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(800, 350);
+            panelContent.TabIndex = 4;
+            // 
+            // PanelHeder
+            // 
+            PanelHeder.Dock = DockStyle.Top;
+            PanelHeder.Location = new Point(0, 0);
+            PanelHeder.Name = "PanelHeder";
+            PanelHeder.Size = new Size(800, 100);
+            PanelHeder.TabIndex = 5;
             // 
             // ListarProductosList
             // 
@@ -103,14 +113,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(lbTituloList);
-            Controls.Add(btnEntrada);
-            Controls.Add(btnSalida);
-            Controls.Add(panel1);
+            Controls.Add(this.btnCreaProductos);
+            Controls.Add(btnEntradaProductos);
+            Controls.Add(panelContent);
+            Controls.Add(PanelHeder);
             Name = "ListarProductosList";
             Text = "Inventario";
             Load += ESList_Load;
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).EndInit();
-            panel1.ResumeLayout(false);
+            panelContent.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -119,8 +130,9 @@
 
         private Label lbTituloList;
         private DataGridView productoDataGridView;
-        private Button btnEntrada;
-        private Button btnSalida;
-        private Panel panel1;
+        private Button btnCreaProductos;
+        private Button btnEntradaProductos;
+        private Panel panelContent;
+        private Panel PanelHeder;
     }
 }

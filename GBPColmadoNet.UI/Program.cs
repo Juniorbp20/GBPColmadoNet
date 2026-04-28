@@ -57,12 +57,12 @@ namespace GBPColmadoNet;
         services.AddTransient<DevolucionesForm>();
         services.AddTransient<DevolucionesList>();
         services.AddTransient<ListarProductosList>();
-        services.AddTransient<EForm>();
+        services.AddTransient<CrearProductoForm>();
         services.AddTransient<ProveedorForm>();
         services.AddTransient<ProveedorList>();
         services.AddTransient<CuadreForm>();
         services.AddTransient<VentaRapidaForm>();
-        services.AddTransient<SForm>();
+        services.AddTransient<EForm>();
 
 
 
