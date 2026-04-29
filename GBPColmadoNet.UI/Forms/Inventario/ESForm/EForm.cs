@@ -1,17 +1,18 @@
 ﻿using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     public partial class EForm : Form
     {
-        private readonly ColmadoContext _context;
+        private readonly ProductoService _service;
         private Data.Models.Producto? _productoActual;
 
-        public EForm(ColmadoContext context)
+        public EForm(ProductoService service)
         {
             InitializeComponent();
-            _context = context;
+            _service = service;
             BloquearCampos(false);
         }
 
@@ -31,16 +32,26 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         {
             try
             {
-                _productoActual = await _context.Productos
-                    .Include(p => p.Categoria)
-                    .Include(p => p.Proveedor)
-                    .FirstOrDefaultAsync(p => p.CodigoBarras == criterio || p.Nombre == criterio);
+                if (string.IsNullOrWhiteSpace(criterio)) return;
+
+                var resultados = await _service.GetList(p =>
+                    p.CodigoBarras == criterio ||
+                    p.Nombre.Contains(criterio));
+
+                _productoActual = resultados.FirstOrDefault();
+
+                if (_productoActual == null && int.TryParse(criterio, out int idBusqueda))
+                {
+                    _productoActual = await _service.Buscar(idBusqueda);
+                }
 
                 if (_productoActual != null)
                 {
                     CargarDatosEnPantalla();
                     BloquearCampos(true);
+
                     numericUpDownStockIngresado.Focus();
+                    numericUpDownStockIngresado.Select(0, numericUpDownStockIngresado.Text.Length);
                 }
                 else
                 {
@@ -118,17 +129,24 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
             try
             {
-                btnGuardar.Enabled = true;
+                btnGuardar.Enabled = false;
 
                 decimal stockActual = _productoActual.Stock ?? 0;
                 _productoActual.Stock = stockActual + numericUpDownStockIngresado.Value;
                 _productoActual.FechaModificacion = DateTime.Now;
 
-                _context.Productos.Update(_productoActual);
-                await _context.SaveChangesAsync();
+                bool exito = await _service.Modificar(_productoActual);
 
-                MessageBox.Show($"Inventario actualizado con éxito. Nuevo Stock: {_productoActual.Stock}",
-                    "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (exito)
+                {
+                    MessageBox.Show($"Inventario actualizado con éxito. Nuevo Stock: {_productoActual.Stock}",
+                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LimpiarFormulario();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo actualizar el producto.", "Error");
+                }
 
                 LimpiarFormulario();
             }
