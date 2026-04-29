@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using Aplicada1.Core;
+﻿using Aplicada1.Core;
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace GBPColmadoNet.UI.Services
 {
@@ -31,9 +28,9 @@ namespace GBPColmadoNet.UI.Services
             return await context.Clientes.AnyAsync(a => a.ClienteId == id);
         }
 
-        public async Task<bool> Modificar(Data.Models.Cliente entiad)
+        public async Task<bool> Modificar(Data.Models.Cliente entidad)
         {
-            context.Clientes.Update(entiad);
+            context.Clientes.Update(entidad);
             return await context.SaveChangesAsync() > 0;
         }
 
