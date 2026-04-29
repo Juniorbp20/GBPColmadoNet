@@ -1,4 +1,5 @@
 ﻿using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,12 +7,12 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     public partial class ListarProductosList : Form
     {
-        private readonly ColmadoContext _context;
+        private readonly ProductoService _service;
 
-        public ListarProductosList(ColmadoContext context)
+        public ListarProductosList(ProductoService service)
         {
             InitializeComponent();
-            _context = context;
+            _service = service;
         }
 
         private void lbTituloList_Click(object sender, EventArgs e)
@@ -28,22 +29,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         {
             try
             {
-                var productosParaMostrar = await _context.Productos
-                    .Include(p => p.Categoria)
-                    .Include(p => p.Proveedor)
-                    .Select(p => new
-                    {
-                        ID = p.ProductoId,
-                        Código = p.CodigoBarras,
-                        Producto = p.Nombre,
-                        Precio = p.PrecioVenta,
-                        Existencia = p.Stock,
-                        Categoría = p.Categoria != null ? p.Categoria.Nombre : "Sin Categoría",
-                        Proveedor = p.Proveedor != null ? p.Proveedor.Nombre : "Sin Proveedor",
-                        Estado = (bool)p.Activo ? "Activo" : "Inactivo"
-                    })
-                    .ToListAsync<object>();
-
+                var productosParaMostrar = await _service.GetList(d => true);
                 productoDataGridView.DataSource = productosParaMostrar;
 
                 ConfigurarDiseñoGrid();

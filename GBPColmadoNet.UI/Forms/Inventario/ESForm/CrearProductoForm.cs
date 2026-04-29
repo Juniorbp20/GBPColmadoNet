@@ -1,6 +1,7 @@
 ﻿using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
+using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,12 +9,18 @@ namespace GBPColmadoNet.UI.Forms
 {
     public partial class CrearProductoForm : Form
     {
-        private readonly ColmadoContext _context;
+        private readonly ProductoService _productoService;
+        private readonly CategoriaService _categoriaService;
+        private readonly ProveedorService _proveedorService;
 
-        public CrearProductoForm(ColmadoContext context)
+        public CrearProductoForm(ProductoService productoService,
+            CategoriaService categoriaService,
+            ProveedorService proveedorService)
         {
             InitializeComponent();
-            _context = context;
+            _productoService = productoService;
+            _categoriaService = categoriaService;
+            _proveedorService = proveedorService;
 
             numericUpDownPrecioCompra.ValueChanged += (s, e) => CalcularValores();
             numericUpDownPrecioVenta.ValueChanged += (s, e) => CalcularValores();
@@ -22,7 +29,7 @@ namespace GBPColmadoNet.UI.Forms
             RbtnItebis28.CheckedChanged += (s, e) => { if (RbtnItebis28.Checked) CalcularValores(); };
 
             CalcularValores();
-            CargarCombos();
+            _ =CargarCombos();
         }
 
         private async void btnGuardar_Click(object sender, EventArgs e)
@@ -31,29 +38,26 @@ namespace GBPColmadoNet.UI.Forms
 
             try
             {
-                int? categoriaId = (int?)CboxCategoria.SelectedValue;
+                btnGuardar.Enabled = false;
 
+                int? categoriaId = (int?)CboxCategoria.SelectedValue;
                 if (categoriaId == null && !string.IsNullOrWhiteSpace(CboxCategoria.Text))
                 {
                     var nuevaCat = new Categoria { Nombre = CboxCategoria.Text.Trim() };
-                    _context.Categorias.Add(nuevaCat);
-                    await _context.SaveChangesAsync();
+                    var resultado = await _categoriaService.Guardar(nuevaCat);
                     categoriaId = nuevaCat.CategoriaId;
                 }
 
                 int? proveedorId = (int?)CboxProveedor.SelectedValue;
-
                 if (proveedorId == null && !string.IsNullOrWhiteSpace(CboxProveedor.Text))
                 {
                     var nuevoProv = new Proveedore { Nombre = CboxProveedor.Text.Trim() };
-                    _context.Proveedores.Add(nuevoProv);
-                    await _context.SaveChangesAsync();
+                    var resultado = await _proveedorService.Guardar(nuevoProv);
                     proveedorId = nuevoProv.ProveedorId;
                 }
 
                 decimal tasa = RbtnItbis18.Checked ? 18 : (RbtnItbis10.Checked ? 10 : (RbtnItebis28.Checked ? 28 : 0));
 
-                btnGuardar.Enabled = false;
                 var producto = new Producto()
                 {
                     CodigoBarras = txCodigoBarras.Text.Trim(),
@@ -67,11 +71,9 @@ namespace GBPColmadoNet.UI.Forms
                     ProveedorId = proveedorId,
                     FechaRegistro = DateTime.Now,
                     FechaModificacion = DateTime.Now
-
                 };
 
-                _context.Productos.Add(producto);
-                await _context.SaveChangesAsync();
+                await _productoService.Guardar(producto);
 
                 MessageBox.Show("Producto creado correctamente.", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -185,22 +187,27 @@ namespace GBPColmadoNet.UI.Forms
 
         private async Task CargarCombos()
         {
-            var categorias = await _context.Categorias.OrderBy(c => c.Nombre).ToListAsync();
-            var proveedor = await _context.Proveedores.OrderBy(c => c.Nombre).ToListAsync();
+            try
+            {
+                var categorias = await _categoriaService.GetList(c => true);
+                var proveedores = await _proveedorService.GetList(p => true);
 
+                CboxCategoria.DataSource = categorias;
+                CboxCategoria.DisplayMember = "Nombre";
+                CboxCategoria.ValueMember = "CategoriaId";
+                CboxCategoria.SelectedIndex = -1;
+                CboxCategoria.Text = "";
 
-            CboxCategoria.DataSource = categorias;
-            CboxCategoria.DisplayMember = "Nombre";
-            CboxCategoria.ValueMember = "CategoriaId";
-            CboxCategoria.SelectedIndex = -1;
-            CboxCategoria.Text = "";
-
-            CboxProveedor.DataSource = proveedor;
-            CboxProveedor.DisplayMember = "Nombre";
-            CboxProveedor.ValueMember = "ProveedorId";
-
-            CboxProveedor.SelectedIndex = -1;
-            CboxProveedor.Text = "";
+                CboxProveedor.DataSource = proveedores;
+                CboxProveedor.DisplayMember = "Nombre";
+                CboxProveedor.ValueMember = "ProveedorId";
+                CboxProveedor.SelectedIndex = -1;
+                CboxProveedor.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar catálogos: {ex.Message}");
+            }
         }
     }
 }

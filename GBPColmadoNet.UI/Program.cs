@@ -9,6 +9,7 @@ using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
+using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -67,6 +68,18 @@ namespace GBPColmadoNet;
 
 
         //Services 
+        services.AddTransient<ProductoService>();
+        services.AddTransient<AbonoService>();
+        services.AddTransient<BitacoraService>();
+        services.AddTransient<CategoriaService>();
+        services.AddTransient<CierreCajaService>();
+        services.AddTransient<ClienteService>();
+        services.AddTransient<ComprasService>();
+        services.AddTransient<CuentasPorCobrarService>();
+        services.AddTransient<ProveedorService>();
+        services.AddTransient<RoleService>();
+        services.AddTransient<UsuarioServices>();
+        services.AddTransient<VentasService>();
 
 
     }

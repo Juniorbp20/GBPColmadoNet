@@ -25,6 +25,11 @@ namespace GBPColmadoNet
             dateTimePicker1 = new DateTimePicker();
             lblBrandTitle = new Label();
             lblBrandSub = new Label();
+            menuStrip1 = new MenuStrip();
+            inventarioToolStripMenuItem = new ToolStripMenuItem();
+            eSToolStripMenuItem = new ToolStripMenuItem();
+            devolucionesToolStripMenuItem = new ToolStripMenuItem();
+            listarProductosToolStripMenuItem = new ToolStripMenuItem();
             panelMenu = new Panel();
             flpNavigation = new FlowLayoutPanel();
             btnCatInicio = new Button();
@@ -69,6 +74,7 @@ namespace GBPColmadoNet
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
             panelHeader.SuspendLayout();
+            menuStrip1.SuspendLayout();
             panelMenu.SuspendLayout();
             flpNavigation.SuspendLayout();
             pnlSubInventario.SuspendLayout();
@@ -87,17 +93,18 @@ namespace GBPColmadoNet
             panelHeader.Controls.Add(dateTimePicker1);
             panelHeader.Controls.Add(lblBrandTitle);
             panelHeader.Controls.Add(lblBrandSub);
+            panelHeader.Controls.Add(menuStrip1);
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(1023, 56);
+            panelHeader.Size = new Size(1023, 101);
             panelHeader.TabIndex = 0;
             // 
             // dateTimePicker1
             // 
             dateTimePicker1.CalendarMonthBackground = Color.FromArgb(205, 234, 236);
             dateTimePicker1.CausesValidation = false;
-            dateTimePicker1.Location = new Point(790, 12);
+            dateTimePicker1.Location = new Point(788, 24);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(221, 23);
             dateTimePicker1.TabIndex = 3;
@@ -107,7 +114,7 @@ namespace GBPColmadoNet
             lblBrandTitle.AutoSize = true;
             lblBrandTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblBrandTitle.ForeColor = Color.FromArgb(54, 66, 81);
-            lblBrandTitle.Location = new Point(4, 2);
+            lblBrandTitle.Location = new Point(3, 24);
             lblBrandTitle.Name = "lblBrandTitle";
             lblBrandTitle.Size = new Size(187, 30);
             lblBrandTitle.TabIndex = 0;
@@ -118,20 +125,61 @@ namespace GBPColmadoNet
             lblBrandSub.AutoSize = true;
             lblBrandSub.Font = new Font("Segoe UI", 10F);
             lblBrandSub.ForeColor = Color.FromArgb(96, 96, 96);
-            lblBrandSub.Location = new Point(4, 30);
+            lblBrandSub.Location = new Point(3, 66);
             lblBrandSub.Name = "lblBrandSub";
             lblBrandSub.Size = new Size(407, 19);
             lblBrandSub.TabIndex = 1;
             lblBrandSub.Text = "Gestiona tu inventario, ventas y proveedores desde un solo lugar";
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.BackColor = Color.FromArgb(205, 234, 236);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(1023, 24);
+            menuStrip1.TabIndex = 4;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // inventarioToolStripMenuItem
+            // 
+            inventarioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { eSToolStripMenuItem, devolucionesToolStripMenuItem, listarProductosToolStripMenuItem });
+            inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
+            inventarioToolStripMenuItem.Size = new Size(72, 20);
+            inventarioToolStripMenuItem.Text = "Inventario";
+            // 
+            // eSToolStripMenuItem
+            // 
+            eSToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            eSToolStripMenuItem.Name = "eSToolStripMenuItem";
+            eSToolStripMenuItem.Size = new Size(180, 22);
+            eSToolStripMenuItem.Text = "E/S";
+            eSToolStripMenuItem.Click += eSToolStripMenuItem_Click;
+            // 
+            // devolucionesToolStripMenuItem
+            // 
+            devolucionesToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
+            devolucionesToolStripMenuItem.Size = new Size(180, 22);
+            devolucionesToolStripMenuItem.Text = "Devoluciones";
+            devolucionesToolStripMenuItem.Click += devolucionesToolStripMenuItem_Click;
+            // 
+            // listarProductosToolStripMenuItem
+            // 
+            listarProductosToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
+            listarProductosToolStripMenuItem.Size = new Size(180, 22);
+            listarProductosToolStripMenuItem.Text = "Listar Productos";
+            listarProductosToolStripMenuItem.Click += listarProductosToolStripMenuItem_Click;
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(15, 32, 50);
             panelMenu.Controls.Add(flpNavigation);
             panelMenu.Dock = DockStyle.Left;
-            panelMenu.Location = new Point(0, 56);
+            panelMenu.Location = new Point(0, 101);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(250, 588);
+            panelMenu.Size = new Size(250, 543);
             panelMenu.TabIndex = 1;
             // 
             // flpNavigation
@@ -155,7 +203,7 @@ namespace GBPColmadoNet
             flpNavigation.FlowDirection = FlowDirection.TopDown;
             flpNavigation.Location = new Point(0, 0);
             flpNavigation.Name = "flpNavigation";
-            flpNavigation.Size = new Size(250, 588);
+            flpNavigation.Size = new Size(250, 543);
             flpNavigation.TabIndex = 0;
             flpNavigation.WrapContents = false;
             // 
@@ -486,9 +534,9 @@ namespace GBPColmadoNet
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelStatsBottom);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(250, 56);
+            panelContent.Location = new Point(250, 101);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(773, 588);
+            panelContent.Size = new Size(773, 543);
             panelContent.TabIndex = 2;
             panelContent.Paint += panelContent_Paint;
             // 
@@ -672,6 +720,7 @@ namespace GBPColmadoNet
             Controls.Add(panelMenu);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
@@ -679,6 +728,8 @@ namespace GBPColmadoNet
             Load += MainForm_Load;
             panelHeader.ResumeLayout(false);
             panelHeader.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             panelMenu.ResumeLayout(false);
             flpNavigation.ResumeLayout(false);
             pnlSubInventario.ResumeLayout(false);
@@ -770,5 +821,10 @@ namespace GBPColmadoNet
         private Button btnHClientes;
         private DateTimePicker dateTimePicker1;
         private Button btnListarProductos;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem inventarioToolStripMenuItem;
+        private ToolStripMenuItem eSToolStripMenuItem;
+        private ToolStripMenuItem devolucionesToolStripMenuItem;
+        private ToolStripMenuItem listarProductosToolStripMenuItem;
     }
 }

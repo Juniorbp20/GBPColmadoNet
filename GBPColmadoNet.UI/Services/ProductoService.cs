@@ -26,8 +26,10 @@ namespace GBPColmadoNet.UI.Services
         public Task<Producto?> Buscar(int id)
         {
             return context.Productos
+                .Include(p => p.Categoria)
+                .Include(p => p.Proveedor)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.ProductoId == id);
+                .FirstOrDefaultAsync(p => p.ProductoId == id);
         }
 
         public async Task<bool> Eliminar(int id)

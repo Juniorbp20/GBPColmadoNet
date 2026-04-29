@@ -12,6 +12,7 @@ using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 using Microsoft.Extensions.DependencyInjection;
+using ListarProductosList = GBPColmadoNet.UI.Forms.Inventario.ListarProductos.ListarProductosList;
 
 namespace GBPColmadoNet
 {
@@ -111,16 +112,29 @@ namespace GBPColmadoNet
             this.Close();
         }
 
-        private void btnListarProductos_Click(object sender, EventArgs e)
-        {
-            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ListarProductos.ListarProductosList>();
-            listarProductos.Show();
-        }
-
         private void btnListarProductos_Click_1(object sender, EventArgs e)
         {
             var listarInventario = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
             listarInventario.ShowDialog();
         }
+
+        private void eSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var es = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            es.Show();
+        }
+
+        private void devolucionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var devoluciones = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
+            devoluciones.Show();
+        }
+
+        private void listarProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos.Show();
+        }
+
     }
 }
