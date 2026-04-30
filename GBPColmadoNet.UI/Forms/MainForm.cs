@@ -22,6 +22,64 @@ namespace GBPColmadoNet
         public MainForm(ColmadoContext context)
         {
             InitializeComponent();
+            ConfigurarMenuAcordeon();
+        }
+
+        private void ConfigurarMenuAcordeon()
+        {
+            // Ocultar sub-botones al inicio
+            toolStripButton1.Visible = false;
+            toolStripButtonDevoluciones.Visible = false;
+            toolStripButtonListarProductos.Visible = false;
+
+            toolStripButtonVentaR.Visible = false;
+            toolStripButtonCuadre.Visible = false;
+
+            toolStripButtonCliente.Visible = false;
+            toolStripButtonCuentasPCobrar.Visible = false;
+
+            toolStripButtonHClientes.Visible = false;
+            toolStripButtonHProveedor.Visible = false;
+            toolStripButtonHVentas.Visible = false;
+
+            tlSConfiguraciones.Visible = false;
+
+            // Manejar clics en los labels para mostrar/ocultar
+            toolStripLabelInventario.Click += (s, e) => 
+            {
+                bool show = !toolStripButton1.Visible;
+                toolStripButton1.Visible = show;
+                toolStripButtonDevoluciones.Visible = show;
+                toolStripButtonListarProductos.Visible = show;
+            };
+
+            toolStripLabelVentas.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonVentaR.Visible;
+                toolStripButtonVentaR.Visible = show;
+                toolStripButtonCuadre.Visible = show;
+            };
+
+            toolStripLabelCliente.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonCliente.Visible;
+                toolStripButtonCliente.Visible = show;
+                toolStripButtonCuentasPCobrar.Visible = show;
+            };
+
+            toolStripLabelHistorial.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonHClientes.Visible;
+                toolStripButtonHClientes.Visible = show;
+                toolStripButtonHProveedor.Visible = show;
+                toolStripButtonHVentas.Visible = show;
+            };
+
+            toolStripButtonConfiguracion.Click += (s, e) => 
+            {
+                bool show = !tlSConfiguraciones.Visible;
+                tlSConfiguraciones.Visible = show;
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
