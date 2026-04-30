@@ -94,38 +94,38 @@ namespace GBPColmadoNet
 
         private void eSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var es = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            es.Show();
+            var es = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            es?.Show();
         }
 
         private void devolucionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var devoluciones = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
-            devoluciones.Show();
+            var devoluciones = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
+            devoluciones?.Show();
         }
 
         private void listarProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            listarProductos.Show();
+            var listarProductos = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos?.Show();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            listarProductos.Show();
+            var listarProductos = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos?.Show();
         }
 
         private void toolStripButtonDevoluciones_Click(object sender, EventArgs e)
         {
-            var devoluciones = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
-            devoluciones.Show();
+            var devoluciones = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
+            devoluciones?.Show();
         }
 
         private void toolStripButtonListarProductos_Click(object sender, EventArgs e)
         {
-            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            listarProductos.Show();
+            var listarProductos = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos?.Show();
         }
     }
 }
