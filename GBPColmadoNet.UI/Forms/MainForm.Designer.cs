@@ -67,6 +67,19 @@ namespace GBPColmadoNet
             lblVentaTotalValue = new Label();
             lblGananciaEstimadaValue = new Label();
             lblFiadosPendientesValue = new Label();
+            ventasToolStripMenuItem = new ToolStripMenuItem();
+            clientresToolStripMenuItem = new ToolStripMenuItem();
+            historialToolStripMenuItem = new ToolStripMenuItem();
+            configuracionToolStripMenuItem = new ToolStripMenuItem();
+            ventaRapidaToolStripMenuItem = new ToolStripMenuItem();
+            cuadreToolStripMenuItem = new ToolStripMenuItem();
+            clienteToolStripMenuItem = new ToolStripMenuItem();
+            cuentasPorCobrarToolStripMenuItem = new ToolStripMenuItem();
+            historialClienteToolStripMenuItem = new ToolStripMenuItem();
+            historialProveedorToolStripMenuItem = new ToolStripMenuItem();
+            historialVentasToolStripMenuItem = new ToolStripMenuItem();
+            configuracionesToolStripMenuItem = new ToolStripMenuItem();
+            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
             panelHeader.SuspendLayout();
             menuStrip1.SuspendLayout();
             panelContent.SuspendLayout();
@@ -122,7 +135,7 @@ namespace GBPColmadoNet
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.FromArgb(205, 234, 236);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, ventasToolStripMenuItem, clientresToolStripMenuItem, historialToolStripMenuItem, configuracionToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1023, 24);
@@ -140,7 +153,7 @@ namespace GBPColmadoNet
             // 
             eSToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             eSToolStripMenuItem.Name = "eSToolStripMenuItem";
-            eSToolStripMenuItem.Size = new Size(159, 22);
+            eSToolStripMenuItem.Size = new Size(180, 22);
             eSToolStripMenuItem.Text = "E/S";
             eSToolStripMenuItem.Click += eSToolStripMenuItem_Click;
             // 
@@ -148,7 +161,7 @@ namespace GBPColmadoNet
             // 
             devolucionesToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
-            devolucionesToolStripMenuItem.Size = new Size(159, 22);
+            devolucionesToolStripMenuItem.Size = new Size(180, 22);
             devolucionesToolStripMenuItem.Text = "Devoluciones";
             devolucionesToolStripMenuItem.Click += devolucionesToolStripMenuItem_Click;
             // 
@@ -156,7 +169,7 @@ namespace GBPColmadoNet
             // 
             listarProductosToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
-            listarProductosToolStripMenuItem.Size = new Size(159, 22);
+            listarProductosToolStripMenuItem.Size = new Size(180, 22);
             listarProductosToolStripMenuItem.Text = "Listar Productos";
             listarProductosToolStripMenuItem.Click += listarProductosToolStripMenuItem_Click;
             // 
@@ -543,6 +556,88 @@ namespace GBPColmadoNet
             lblFiadosPendientesValue.TabIndex = 5;
             lblFiadosPendientesValue.Text = "0";
             // 
+            // ventasToolStripMenuItem
+            // 
+            ventasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ventaRapidaToolStripMenuItem, cuadreToolStripMenuItem });
+            ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
+            ventasToolStripMenuItem.Size = new Size(53, 20);
+            ventasToolStripMenuItem.Text = "Ventas";
+            // 
+            // clientresToolStripMenuItem
+            // 
+            clientresToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, cuentasPorCobrarToolStripMenuItem });
+            clientresToolStripMenuItem.Name = "clientresToolStripMenuItem";
+            clientresToolStripMenuItem.Size = new Size(65, 20);
+            clientresToolStripMenuItem.Text = "Clientres";
+            // 
+            // historialToolStripMenuItem
+            // 
+            historialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { historialClienteToolStripMenuItem, historialProveedorToolStripMenuItem, historialVentasToolStripMenuItem });
+            historialToolStripMenuItem.Name = "historialToolStripMenuItem";
+            historialToolStripMenuItem.Size = new Size(63, 20);
+            historialToolStripMenuItem.Text = "Historial";
+            // 
+            // configuracionToolStripMenuItem
+            // 
+            configuracionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configuracionesToolStripMenuItem, cerrarSesionToolStripMenuItem });
+            configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
+            configuracionToolStripMenuItem.Size = new Size(95, 20);
+            configuracionToolStripMenuItem.Text = "Configuracion";
+            // 
+            // ventaRapidaToolStripMenuItem
+            // 
+            ventaRapidaToolStripMenuItem.Name = "ventaRapidaToolStripMenuItem";
+            ventaRapidaToolStripMenuItem.Size = new Size(180, 22);
+            ventaRapidaToolStripMenuItem.Text = "Venta Rapida";
+            // 
+            // cuadreToolStripMenuItem
+            // 
+            cuadreToolStripMenuItem.Name = "cuadreToolStripMenuItem";
+            cuadreToolStripMenuItem.Size = new Size(180, 22);
+            cuadreToolStripMenuItem.Text = "Cuadre";
+            // 
+            // clienteToolStripMenuItem
+            // 
+            clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            clienteToolStripMenuItem.Size = new Size(180, 22);
+            clienteToolStripMenuItem.Text = "Cliente";
+            // 
+            // cuentasPorCobrarToolStripMenuItem
+            // 
+            cuentasPorCobrarToolStripMenuItem.Name = "cuentasPorCobrarToolStripMenuItem";
+            cuentasPorCobrarToolStripMenuItem.Size = new Size(180, 22);
+            cuentasPorCobrarToolStripMenuItem.Text = "Cuentas por Cobrar";
+            // 
+            // historialClienteToolStripMenuItem
+            // 
+            historialClienteToolStripMenuItem.Name = "historialClienteToolStripMenuItem";
+            historialClienteToolStripMenuItem.Size = new Size(180, 22);
+            historialClienteToolStripMenuItem.Text = "Historial Cliente";
+            // 
+            // historialProveedorToolStripMenuItem
+            // 
+            historialProveedorToolStripMenuItem.Name = "historialProveedorToolStripMenuItem";
+            historialProveedorToolStripMenuItem.Size = new Size(180, 22);
+            historialProveedorToolStripMenuItem.Text = "Historial Proveedor";
+            // 
+            // historialVentasToolStripMenuItem
+            // 
+            historialVentasToolStripMenuItem.Name = "historialVentasToolStripMenuItem";
+            historialVentasToolStripMenuItem.Size = new Size(180, 22);
+            historialVentasToolStripMenuItem.Text = "Historial  Ventas";
+            // 
+            // configuracionesToolStripMenuItem
+            // 
+            configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
+            configuracionesToolStripMenuItem.Size = new Size(180, 22);
+            configuracionesToolStripMenuItem.Text = "Configuraciones";
+            // 
+            // cerrarSesionToolStripMenuItem
+            // 
+            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
+            cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -637,5 +732,18 @@ namespace GBPColmadoNet
         private ToolStripButton toolStripButton2;
         private ToolStripButton toolStripButtonConfiguracion;
         private ToolStripButton toolStripButton3;
+        private ToolStripMenuItem ventasToolStripMenuItem;
+        private ToolStripMenuItem ventaRapidaToolStripMenuItem;
+        private ToolStripMenuItem cuadreToolStripMenuItem;
+        private ToolStripMenuItem clientresToolStripMenuItem;
+        private ToolStripMenuItem clienteToolStripMenuItem;
+        private ToolStripMenuItem historialToolStripMenuItem;
+        private ToolStripMenuItem configuracionToolStripMenuItem;
+        private ToolStripMenuItem cuentasPorCobrarToolStripMenuItem;
+        private ToolStripMenuItem historialClienteToolStripMenuItem;
+        private ToolStripMenuItem historialProveedorToolStripMenuItem;
+        private ToolStripMenuItem historialVentasToolStripMenuItem;
+        private ToolStripMenuItem configuracionesToolStripMenuItem;
+        private ToolStripMenuItem cerrarSesionToolStripMenuItem;
     }
 }
