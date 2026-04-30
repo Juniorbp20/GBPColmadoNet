@@ -55,7 +55,7 @@ namespace GBPColmadoNet.UI.Services
 
         public async Task<bool> Existe(int id)
         {
-            return await context.Productos.AnyAsync(a => a.ProductoId == id);
+            return await context.Categorias.AnyAsync(a => a.CategoriaId == id);
         }
 
         public async Task<bool> Modificar(Data.Models.Categoria entiad)

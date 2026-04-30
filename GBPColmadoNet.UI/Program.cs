@@ -17,7 +17,7 @@ namespace GBPColmadoNet;
 
      static class Program
     {
-    public static ServiceProvider ServiceProvider { get; private set; }
+    public static ServiceProvider ServiceProvider { get; private set; } = null!;
     /// <summary>
     ///  The main entry point for the application.
     /// </summary>
