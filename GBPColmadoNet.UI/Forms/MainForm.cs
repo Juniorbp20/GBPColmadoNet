@@ -22,6 +22,64 @@ namespace GBPColmadoNet
         public MainForm(ColmadoContext context)
         {
             InitializeComponent();
+            ConfigurarMenuAcordeon();
+        }
+
+        private void ConfigurarMenuAcordeon()
+        {
+            // Ocultar sub-botones al inicio
+            toolStripButton1.Visible = false;
+            toolStripButtonDevoluciones.Visible = false;
+            toolStripButtonListarProductos.Visible = false;
+
+            toolStripButtonVentaR.Visible = false;
+            toolStripButtonCuadre.Visible = false;
+
+            toolStripButtonCliente.Visible = false;
+            toolStripButtonCuentasPCobrar.Visible = false;
+
+            toolStripButtonHClientes.Visible = false;
+            toolStripButtonHProveedor.Visible = false;
+            toolStripButtonHVentas.Visible = false;
+
+            tlSConfiguraciones.Visible = false;
+
+            // Manejar clics en los labels para mostrar/ocultar
+            toolStripLabelInventario.Click += (s, e) => 
+            {
+                bool show = !toolStripButton1.Visible;
+                toolStripButton1.Visible = show;
+                toolStripButtonDevoluciones.Visible = show;
+                toolStripButtonListarProductos.Visible = show;
+            };
+
+            toolStripLabelVentas.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonVentaR.Visible;
+                toolStripButtonVentaR.Visible = show;
+                toolStripButtonCuadre.Visible = show;
+            };
+
+            toolStripLabelCliente.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonCliente.Visible;
+                toolStripButtonCliente.Visible = show;
+                toolStripButtonCuentasPCobrar.Visible = show;
+            };
+
+            toolStripLabelHistorial.Click += (s, e) => 
+            {
+                bool show = !toolStripButtonHClientes.Visible;
+                toolStripButtonHClientes.Visible = show;
+                toolStripButtonHProveedor.Visible = show;
+                toolStripButtonHVentas.Visible = show;
+            };
+
+            toolStripButtonConfiguracion.Click += (s, e) => 
+            {
+                bool show = !tlSConfiguraciones.Visible;
+                tlSConfiguraciones.Visible = show;
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -29,93 +87,9 @@ namespace GBPColmadoNet
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var ventaRapida = Program.ServiceProvider.GetRequiredService<VentaRapidaForm>();
-            ventaRapida.Show();
-        }
-
         private void panelContent_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void btnCatInicio_Click(object sender, EventArgs e)
-        {
-            //var InicioForm = Program.ServiceProvider.GetRequiredService<MainForm>();
-            //InicioForm.Show();
-        }
-
-        private void btnEntradaSalida_Click(object sender, EventArgs e)
-        {
-            var eS = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            eS.Show();
-        }
-
-        private void btnDevoluciones_Click(object sender, EventArgs e)
-        {
-            var devoluciones = Program.ServiceProvider.GetRequiredService<DevolucionesList>();
-            devoluciones.Show();
-        }
-
-        private void btnCuadre_Click(object sender, EventArgs e)
-        {
-            var cuadre = Program.ServiceProvider.GetRequiredService<CuadreForm>();
-            cuadre.Show();
-        }
-
-        private void btnCliente_Click(object sender, EventArgs e)
-        {
-            var cliente = Program.ServiceProvider.GetRequiredService<ClienteList>();
-            cliente.Show();
-        }
-
-        private void btnCuentaPorPagar_Click(object sender, EventArgs e)
-        {
-            var cuentaPorCobrar = Program.ServiceProvider.GetRequiredService<CuentasPorCobrarList>();
-            cuentaPorCobrar.Show();
-        }
-
-        private void btnProveedor_Click(object sender, EventArgs e)
-        {
-            var proveedor = Program.ServiceProvider.GetRequiredService<ProveedorList>();
-            proveedor.Show();
-        }
-
-        private void BtnHVentas_Click(object sender, EventArgs e)
-        {
-            var hVentas = Program.ServiceProvider.GetRequiredService<HVentasList>();
-            hVentas.Show();
-        }
-
-        private void btnHClientes_Click(object sender, EventArgs e)
-        {
-            var hClientes = Program.ServiceProvider.GetRequiredService<HClienteList>();
-            hClientes.Show();
-        }
-
-        private void btnHProveedor_Click(object sender, EventArgs e)
-        {
-            var hProveedor = Program.ServiceProvider.GetRequiredService<HProveedorList>();
-            hProveedor.Show();
-        }
-
-        private void btnCatConfig_Click(object sender, EventArgs e)
-        {
-            var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
-            configuracion.Show();
-        }
-
-        private void btnCatCerrarSesion_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
-        }
-
-        private void btnListarProductos_Click_1(object sender, EventArgs e)
-        {
-            var listarInventario = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
-            listarInventario.ShowDialog();
         }
 
         private void eSToolStripMenuItem_Click(object sender, EventArgs e)
@@ -136,5 +110,22 @@ namespace GBPColmadoNet
             listarProductos.Show();
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos.Show();
+        }
+
+        private void toolStripButtonDevoluciones_Click(object sender, EventArgs e)
+        {
+            var devoluciones = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.Devoluciones.DevolucionesList>();
+            devoluciones.Show();
+        }
+
+        private void toolStripButtonListarProductos_Click(object sender, EventArgs e)
+        {
+            var listarProductos = Program.ServiceProvider.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
+            listarProductos.Show();
+        }
     }
 }

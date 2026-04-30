@@ -21,6 +21,7 @@ namespace GBPColmadoNet
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             panelHeader = new Panel();
             dateTimePicker1 = new DateTimePicker();
             lblBrandTitle = new Label();
@@ -30,33 +31,47 @@ namespace GBPColmadoNet
             eSToolStripMenuItem = new ToolStripMenuItem();
             devolucionesToolStripMenuItem = new ToolStripMenuItem();
             listarProductosToolStripMenuItem = new ToolStripMenuItem();
-            panelMenu = new Panel();
-            flpNavigation = new FlowLayoutPanel();
-            btnCatInicio = new Button();
-            btnCatInventario = new Button();
-            pnlSubInventario = new Panel();
-            btnListarProductos = new Button();
-            btnDevoluciones = new Button();
-            btnEntradaSalida = new Button();
-            btnCatVentas = new Button();
-            pnlSubVentas = new Panel();
-            btnVentaRapida = new Button();
-            btnCuadre = new Button();
-            btnCatClientes = new Button();
-            pnlSubClientes = new Panel();
-            btnCuentaPorPagar = new Button();
-            btnCliente = new Button();
-            btnCatProveedores = new Button();
-            pnlSubProveedores = new Panel();
-            btnProveedor = new Button();
-            btnCatHistorial = new Button();
-            pnlSubHistorial = new Panel();
-            btnHProveedor = new Button();
-            BtnHVentas = new Button();
-            btnHClientes = new Button();
-            btnCatConfig = new Button();
-            btnCatCerrarSesion = new Button();
+            ventasToolStripMenuItem = new ToolStripMenuItem();
+            ventaRapidaToolStripMenuItem = new ToolStripMenuItem();
+            cuadreToolStripMenuItem = new ToolStripMenuItem();
+            clientresToolStripMenuItem = new ToolStripMenuItem();
+            clienteToolStripMenuItem = new ToolStripMenuItem();
+            cuentasPorCobrarToolStripMenuItem = new ToolStripMenuItem();
+            historialToolStripMenuItem = new ToolStripMenuItem();
+            historialClienteToolStripMenuItem = new ToolStripMenuItem();
+            historialProveedorToolStripMenuItem = new ToolStripMenuItem();
+            historialVentasToolStripMenuItem = new ToolStripMenuItem();
+            configuracionToolStripMenuItem = new ToolStripMenuItem();
+            configuracionesToolStripMenuItem = new ToolStripMenuItem();
+            cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
             panelContent = new Panel();
+            toolStrip1 = new ToolStrip();
+            toolStripLabelMenuOp = new ToolStripLabel();
+            toolStripSeparator6 = new ToolStripSeparator();
+            toolStripLabelInventario = new ToolStripLabel();
+            toolStripButton1 = new ToolStripButton();
+            toolStripButtonDevoluciones = new ToolStripButton();
+            toolStripButtonListarProductos = new ToolStripButton();
+            toolStripSeparator5 = new ToolStripSeparator();
+            toolStripLabelVentas = new ToolStripLabel();
+            toolStripButtonVentaR = new ToolStripButton();
+            toolStripButtonCuadre = new ToolStripButton();
+            toolStripSeparator4 = new ToolStripSeparator();
+            toolStripLabelCliente = new ToolStripLabel();
+            toolStripButtonCliente = new ToolStripButton();
+            toolStripButtonCuentasPCobrar = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            toolStripLabelHistorial = new ToolStripLabel();
+            toolStripButtonHClientes = new ToolStripButton();
+            toolStripButtonHProveedor = new ToolStripButton();
+            toolStripButtonHVentas = new ToolStripButton();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripButton2 = new ToolStripButton();
+            toolStripButtonConfiguracion = new ToolStripLabel();
+            tlSConfiguraciones = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            tlSCerrarSesion = new ToolStripButton();
+            toolStripSeparator7 = new ToolStripSeparator();
             lblBienvenido = new Label();
             lblPanelActualizado = new Label();
             panelStatsTop = new Panel();
@@ -75,14 +90,8 @@ namespace GBPColmadoNet
             lblFiadosPendientesValue = new Label();
             panelHeader.SuspendLayout();
             menuStrip1.SuspendLayout();
-            panelMenu.SuspendLayout();
-            flpNavigation.SuspendLayout();
-            pnlSubInventario.SuspendLayout();
-            pnlSubVentas.SuspendLayout();
-            pnlSubClientes.SuspendLayout();
-            pnlSubProveedores.SuspendLayout();
-            pnlSubHistorial.SuspendLayout();
             panelContent.SuspendLayout();
+            toolStrip1.SuspendLayout();
             panelStatsTop.SuspendLayout();
             panelStatsBottom.SuspendLayout();
             SuspendLayout();
@@ -134,7 +143,7 @@ namespace GBPColmadoNet
             // menuStrip1
             // 
             menuStrip1.BackColor = Color.FromArgb(205, 234, 236);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, ventasToolStripMenuItem, clientresToolStripMenuItem, historialToolStripMenuItem, configuracionToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1023, 24);
@@ -152,7 +161,7 @@ namespace GBPColmadoNet
             // 
             eSToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             eSToolStripMenuItem.Name = "eSToolStripMenuItem";
-            eSToolStripMenuItem.Size = new Size(180, 22);
+            eSToolStripMenuItem.Size = new Size(159, 22);
             eSToolStripMenuItem.Text = "E/S";
             eSToolStripMenuItem.Click += eSToolStripMenuItem_Click;
             // 
@@ -160,7 +169,7 @@ namespace GBPColmadoNet
             // 
             devolucionesToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
-            devolucionesToolStripMenuItem.Size = new Size(180, 22);
+            devolucionesToolStripMenuItem.Size = new Size(159, 22);
             devolucionesToolStripMenuItem.Text = "Devoluciones";
             devolucionesToolStripMenuItem.Click += devolucionesToolStripMenuItem_Click;
             // 
@@ -168,384 +177,428 @@ namespace GBPColmadoNet
             // 
             listarProductosToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
-            listarProductosToolStripMenuItem.Size = new Size(180, 22);
+            listarProductosToolStripMenuItem.Size = new Size(159, 22);
             listarProductosToolStripMenuItem.Text = "Listar Productos";
             listarProductosToolStripMenuItem.Click += listarProductosToolStripMenuItem_Click;
             // 
-            // panelMenu
+            // ventasToolStripMenuItem
             // 
-            panelMenu.BackColor = Color.FromArgb(15, 32, 50);
-            panelMenu.Controls.Add(flpNavigation);
-            panelMenu.Dock = DockStyle.Left;
-            panelMenu.Location = new Point(0, 101);
-            panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(250, 543);
-            panelMenu.TabIndex = 1;
+            ventasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ventaRapidaToolStripMenuItem, cuadreToolStripMenuItem });
+            ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
+            ventasToolStripMenuItem.Size = new Size(53, 20);
+            ventasToolStripMenuItem.Text = "Ventas";
             // 
-            // flpNavigation
+            // ventaRapidaToolStripMenuItem
             // 
-            flpNavigation.AutoScroll = true;
-            flpNavigation.BackColor = Color.Transparent;
-            flpNavigation.Controls.Add(btnCatInicio);
-            flpNavigation.Controls.Add(btnCatInventario);
-            flpNavigation.Controls.Add(pnlSubInventario);
-            flpNavigation.Controls.Add(btnCatVentas);
-            flpNavigation.Controls.Add(pnlSubVentas);
-            flpNavigation.Controls.Add(btnCatClientes);
-            flpNavigation.Controls.Add(pnlSubClientes);
-            flpNavigation.Controls.Add(btnCatProveedores);
-            flpNavigation.Controls.Add(pnlSubProveedores);
-            flpNavigation.Controls.Add(btnCatHistorial);
-            flpNavigation.Controls.Add(pnlSubHistorial);
-            flpNavigation.Controls.Add(btnCatConfig);
-            flpNavigation.Controls.Add(btnCatCerrarSesion);
-            flpNavigation.Dock = DockStyle.Fill;
-            flpNavigation.FlowDirection = FlowDirection.TopDown;
-            flpNavigation.Location = new Point(0, 0);
-            flpNavigation.Name = "flpNavigation";
-            flpNavigation.Size = new Size(250, 543);
-            flpNavigation.TabIndex = 0;
-            flpNavigation.WrapContents = false;
+            ventaRapidaToolStripMenuItem.Name = "ventaRapidaToolStripMenuItem";
+            ventaRapidaToolStripMenuItem.Size = new Size(142, 22);
+            ventaRapidaToolStripMenuItem.Text = "Venta Rapida";
             // 
-            // btnCatInicio
+            // cuadreToolStripMenuItem
             // 
-            btnCatInicio.BackColor = Color.FromArgb(15, 32, 50);
-            btnCatInicio.FlatAppearance.BorderSize = 0;
-            btnCatInicio.FlatStyle = FlatStyle.Flat;
-            btnCatInicio.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatInicio.ForeColor = Color.White;
-            btnCatInicio.Location = new Point(3, 3);
-            btnCatInicio.Name = "btnCatInicio";
-            btnCatInicio.Size = new Size(230, 45);
-            btnCatInicio.TabIndex = 0;
-            btnCatInicio.Text = "  Inicio";
-            btnCatInicio.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatInicio.UseVisualStyleBackColor = false;
-            btnCatInicio.Click += btnCatInicio_Click;
+            cuadreToolStripMenuItem.Name = "cuadreToolStripMenuItem";
+            cuadreToolStripMenuItem.Size = new Size(142, 22);
+            cuadreToolStripMenuItem.Text = "Cuadre";
             // 
-            // btnCatInventario
+            // clientresToolStripMenuItem
             // 
-            btnCatInventario.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatInventario.FlatAppearance.BorderSize = 0;
-            btnCatInventario.FlatStyle = FlatStyle.Flat;
-            btnCatInventario.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatInventario.ForeColor = Color.White;
-            btnCatInventario.Location = new Point(3, 54);
-            btnCatInventario.Name = "btnCatInventario";
-            btnCatInventario.Size = new Size(230, 45);
-            btnCatInventario.TabIndex = 1;
-            btnCatInventario.Text = "  Inventario";
-            btnCatInventario.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatInventario.UseVisualStyleBackColor = false;
-            btnCatInventario.Click += btnInventario_Click;
+            clientresToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, cuentasPorCobrarToolStripMenuItem });
+            clientresToolStripMenuItem.Name = "clientresToolStripMenuItem";
+            clientresToolStripMenuItem.Size = new Size(65, 20);
+            clientresToolStripMenuItem.Text = "Clientres";
             // 
-            // pnlSubInventario
+            // clienteToolStripMenuItem
             // 
-            pnlSubInventario.BackColor = Color.Transparent;
-            pnlSubInventario.Controls.Add(btnListarProductos);
-            pnlSubInventario.Controls.Add(btnDevoluciones);
-            pnlSubInventario.Controls.Add(btnEntradaSalida);
-            pnlSubInventario.Location = new Point(3, 105);
-            pnlSubInventario.Name = "pnlSubInventario";
-            pnlSubInventario.Size = new Size(230, 136);
-            pnlSubInventario.TabIndex = 2;
-            pnlSubInventario.Visible = false;
+            clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            clienteToolStripMenuItem.Size = new Size(177, 22);
+            clienteToolStripMenuItem.Text = "Cliente";
             // 
-            // btnListarProductos
+            // cuentasPorCobrarToolStripMenuItem
             // 
-            btnListarProductos.FlatStyle = FlatStyle.Popup;
-            btnListarProductos.ForeColor = Color.White;
-            btnListarProductos.Location = new Point(-3, 93);
-            btnListarProductos.Name = "btnListarProductos";
-            btnListarProductos.Size = new Size(233, 39);
-            btnListarProductos.TabIndex = 4;
-            btnListarProductos.Text = "Listar Productos";
-            btnListarProductos.UseVisualStyleBackColor = true;
-            btnListarProductos.Click += btnListarProductos_Click_1;
+            cuentasPorCobrarToolStripMenuItem.Name = "cuentasPorCobrarToolStripMenuItem";
+            cuentasPorCobrarToolStripMenuItem.Size = new Size(177, 22);
+            cuentasPorCobrarToolStripMenuItem.Text = "Cuentas por Cobrar";
             // 
-            // btnDevoluciones
+            // historialToolStripMenuItem
             // 
-            btnDevoluciones.BackColor = Color.Transparent;
-            btnDevoluciones.FlatStyle = FlatStyle.Popup;
-            btnDevoluciones.ForeColor = Color.White;
-            btnDevoluciones.Location = new Point(-3, 48);
-            btnDevoluciones.Name = "btnDevoluciones";
-            btnDevoluciones.Size = new Size(233, 39);
-            btnDevoluciones.TabIndex = 3;
-            btnDevoluciones.Text = "Devoluciones";
-            btnDevoluciones.UseVisualStyleBackColor = false;
-            btnDevoluciones.Click += btnDevoluciones_Click;
+            historialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { historialClienteToolStripMenuItem, historialProveedorToolStripMenuItem, historialVentasToolStripMenuItem });
+            historialToolStripMenuItem.Name = "historialToolStripMenuItem";
+            historialToolStripMenuItem.Size = new Size(63, 20);
+            historialToolStripMenuItem.Text = "Historial";
             // 
-            // btnEntradaSalida
+            // historialClienteToolStripMenuItem
             // 
-            btnEntradaSalida.BackColor = Color.Transparent;
-            btnEntradaSalida.FlatStyle = FlatStyle.Popup;
-            btnEntradaSalida.ForeColor = Color.White;
-            btnEntradaSalida.Location = new Point(-3, 3);
-            btnEntradaSalida.Name = "btnEntradaSalida";
-            btnEntradaSalida.Size = new Size(233, 39);
-            btnEntradaSalida.TabIndex = 0;
-            btnEntradaSalida.Text = "E/S";
-            btnEntradaSalida.UseVisualStyleBackColor = false;
-            btnEntradaSalida.Click += btnEntradaSalida_Click;
+            historialClienteToolStripMenuItem.Name = "historialClienteToolStripMenuItem";
+            historialClienteToolStripMenuItem.Size = new Size(175, 22);
+            historialClienteToolStripMenuItem.Text = "Historial Cliente";
             // 
-            // btnCatVentas
+            // historialProveedorToolStripMenuItem
             // 
-            btnCatVentas.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatVentas.FlatAppearance.BorderSize = 0;
-            btnCatVentas.FlatStyle = FlatStyle.Flat;
-            btnCatVentas.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatVentas.ForeColor = Color.White;
-            btnCatVentas.Location = new Point(3, 247);
-            btnCatVentas.Name = "btnCatVentas";
-            btnCatVentas.Size = new Size(230, 45);
-            btnCatVentas.TabIndex = 3;
-            btnCatVentas.Text = "  Ventas";
-            btnCatVentas.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatVentas.UseVisualStyleBackColor = false;
-            btnCatVentas.Click += btnVentas_Click;
+            historialProveedorToolStripMenuItem.Name = "historialProveedorToolStripMenuItem";
+            historialProveedorToolStripMenuItem.Size = new Size(175, 22);
+            historialProveedorToolStripMenuItem.Text = "Historial Proveedor";
             // 
-            // pnlSubVentas
+            // historialVentasToolStripMenuItem
             // 
-            pnlSubVentas.BackColor = Color.Transparent;
-            pnlSubVentas.Controls.Add(btnVentaRapida);
-            pnlSubVentas.Controls.Add(btnCuadre);
-            pnlSubVentas.Location = new Point(3, 298);
-            pnlSubVentas.Name = "pnlSubVentas";
-            pnlSubVentas.Size = new Size(230, 98);
-            pnlSubVentas.TabIndex = 4;
-            pnlSubVentas.Visible = false;
+            historialVentasToolStripMenuItem.Name = "historialVentasToolStripMenuItem";
+            historialVentasToolStripMenuItem.Size = new Size(175, 22);
+            historialVentasToolStripMenuItem.Text = "Historial  Ventas";
             // 
-            // btnVentaRapida
+            // configuracionToolStripMenuItem
             // 
-            btnVentaRapida.FlatStyle = FlatStyle.Popup;
-            btnVentaRapida.ForeColor = Color.White;
-            btnVentaRapida.Location = new Point(-3, 3);
-            btnVentaRapida.Name = "btnVentaRapida";
-            btnVentaRapida.Size = new Size(233, 42);
-            btnVentaRapida.TabIndex = 1;
-            btnVentaRapida.Text = "Venta Rapida";
-            btnVentaRapida.UseVisualStyleBackColor = true;
-            btnVentaRapida.Click += button2_Click;
+            configuracionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configuracionesToolStripMenuItem, cerrarSesionToolStripMenuItem });
+            configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
+            configuracionToolStripMenuItem.Size = new Size(95, 20);
+            configuracionToolStripMenuItem.Text = "Configuracion";
             // 
-            // btnCuadre
+            // configuracionesToolStripMenuItem
             // 
-            btnCuadre.BackColor = Color.Transparent;
-            btnCuadre.FlatStyle = FlatStyle.Popup;
-            btnCuadre.ForeColor = Color.White;
-            btnCuadre.Location = new Point(-3, 51);
-            btnCuadre.Name = "btnCuadre";
-            btnCuadre.Size = new Size(233, 39);
-            btnCuadre.TabIndex = 0;
-            btnCuadre.Text = "Cuadre";
-            btnCuadre.UseVisualStyleBackColor = false;
-            btnCuadre.Click += btnCuadre_Click;
+            configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
+            configuracionesToolStripMenuItem.Size = new Size(161, 22);
+            configuracionesToolStripMenuItem.Text = "Configuraciones";
             // 
-            // btnCatClientes
+            // cerrarSesionToolStripMenuItem
             // 
-            btnCatClientes.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatClientes.FlatAppearance.BorderSize = 0;
-            btnCatClientes.FlatStyle = FlatStyle.Flat;
-            btnCatClientes.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatClientes.ForeColor = Color.White;
-            btnCatClientes.Location = new Point(3, 402);
-            btnCatClientes.Name = "btnCatClientes";
-            btnCatClientes.Size = new Size(230, 45);
-            btnCatClientes.TabIndex = 5;
-            btnCatClientes.Text = "  Clientes";
-            btnCatClientes.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatClientes.UseVisualStyleBackColor = false;
-            btnCatClientes.Click += btnClientes_Click;
-            // 
-            // pnlSubClientes
-            // 
-            pnlSubClientes.BackColor = Color.Transparent;
-            pnlSubClientes.Controls.Add(btnCuentaPorPagar);
-            pnlSubClientes.Controls.Add(btnCliente);
-            pnlSubClientes.Location = new Point(3, 453);
-            pnlSubClientes.Name = "pnlSubClientes";
-            pnlSubClientes.Size = new Size(230, 94);
-            pnlSubClientes.TabIndex = 6;
-            pnlSubClientes.Visible = false;
-            // 
-            // btnCuentaPorPagar
-            // 
-            btnCuentaPorPagar.FlatStyle = FlatStyle.Popup;
-            btnCuentaPorPagar.ForeColor = Color.White;
-            btnCuentaPorPagar.Location = new Point(-3, 47);
-            btnCuentaPorPagar.Name = "btnCuentaPorPagar";
-            btnCuentaPorPagar.Size = new Size(233, 39);
-            btnCuentaPorPagar.TabIndex = 5;
-            btnCuentaPorPagar.Text = "Cuentas por Cobrar";
-            btnCuentaPorPagar.UseVisualStyleBackColor = true;
-            btnCuentaPorPagar.Click += btnCuentaPorPagar_Click;
-            // 
-            // btnCliente
-            // 
-            btnCliente.FlatStyle = FlatStyle.Popup;
-            btnCliente.ForeColor = Color.White;
-            btnCliente.Location = new Point(-3, 3);
-            btnCliente.Name = "btnCliente";
-            btnCliente.Size = new Size(233, 38);
-            btnCliente.TabIndex = 4;
-            btnCliente.Text = "Cliente";
-            btnCliente.UseVisualStyleBackColor = true;
-            btnCliente.Click += btnCliente_Click;
-            // 
-            // btnCatProveedores
-            // 
-            btnCatProveedores.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatProveedores.FlatAppearance.BorderSize = 0;
-            btnCatProveedores.FlatStyle = FlatStyle.Flat;
-            btnCatProveedores.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatProveedores.ForeColor = Color.White;
-            btnCatProveedores.Location = new Point(3, 553);
-            btnCatProveedores.Name = "btnCatProveedores";
-            btnCatProveedores.Size = new Size(230, 45);
-            btnCatProveedores.TabIndex = 7;
-            btnCatProveedores.Text = "  Proveedores";
-            btnCatProveedores.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatProveedores.UseVisualStyleBackColor = false;
-            btnCatProveedores.Click += btnProveedores_Click;
-            // 
-            // pnlSubProveedores
-            // 
-            pnlSubProveedores.BackColor = Color.Transparent;
-            pnlSubProveedores.Controls.Add(btnProveedor);
-            pnlSubProveedores.Location = new Point(3, 604);
-            pnlSubProveedores.Name = "pnlSubProveedores";
-            pnlSubProveedores.Size = new Size(230, 42);
-            pnlSubProveedores.TabIndex = 8;
-            pnlSubProveedores.Visible = false;
-            // 
-            // btnProveedor
-            // 
-            btnProveedor.FlatStyle = FlatStyle.Popup;
-            btnProveedor.ForeColor = Color.White;
-            btnProveedor.Location = new Point(-3, 3);
-            btnProveedor.Name = "btnProveedor";
-            btnProveedor.Size = new Size(233, 37);
-            btnProveedor.TabIndex = 0;
-            btnProveedor.Text = "Proveedor";
-            btnProveedor.UseVisualStyleBackColor = true;
-            btnProveedor.Click += btnProveedor_Click;
-            // 
-            // btnCatHistorial
-            // 
-            btnCatHistorial.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatHistorial.FlatAppearance.BorderSize = 0;
-            btnCatHistorial.FlatStyle = FlatStyle.Flat;
-            btnCatHistorial.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatHistorial.ForeColor = Color.White;
-            btnCatHistorial.Location = new Point(3, 652);
-            btnCatHistorial.Name = "btnCatHistorial";
-            btnCatHistorial.Size = new Size(230, 45);
-            btnCatHistorial.TabIndex = 9;
-            btnCatHistorial.Text = "  Historial";
-            btnCatHistorial.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatHistorial.UseVisualStyleBackColor = false;
-            btnCatHistorial.Click += btnHistorial_Click;
-            // 
-            // pnlSubHistorial
-            // 
-            pnlSubHistorial.BackColor = Color.Transparent;
-            pnlSubHistorial.Controls.Add(btnHProveedor);
-            pnlSubHistorial.Controls.Add(BtnHVentas);
-            pnlSubHistorial.Controls.Add(btnHClientes);
-            pnlSubHistorial.Location = new Point(3, 703);
-            pnlSubHistorial.Name = "pnlSubHistorial";
-            pnlSubHistorial.Size = new Size(233, 145);
-            pnlSubHistorial.TabIndex = 10;
-            pnlSubHistorial.Visible = false;
-            // 
-            // btnHProveedor
-            // 
-            btnHProveedor.FlatStyle = FlatStyle.Popup;
-            btnHProveedor.ForeColor = Color.White;
-            btnHProveedor.Location = new Point(-3, 96);
-            btnHProveedor.Name = "btnHProveedor";
-            btnHProveedor.Size = new Size(233, 42);
-            btnHProveedor.TabIndex = 6;
-            btnHProveedor.Text = "Historial de Clientes";
-            btnHProveedor.UseVisualStyleBackColor = true;
-            btnHProveedor.Click += btnHProveedor_Click;
-            // 
-            // BtnHVentas
-            // 
-            BtnHVentas.FlatStyle = FlatStyle.Popup;
-            BtnHVentas.ForeColor = Color.White;
-            BtnHVentas.Location = new Point(-3, 3);
-            BtnHVentas.Name = "BtnHVentas";
-            BtnHVentas.Size = new Size(233, 39);
-            BtnHVentas.TabIndex = 4;
-            BtnHVentas.Text = "Historial de Ventas";
-            BtnHVentas.UseVisualStyleBackColor = true;
-            BtnHVentas.Click += BtnHVentas_Click;
-            // 
-            // btnHClientes
-            // 
-            btnHClientes.FlatStyle = FlatStyle.Popup;
-            btnHClientes.ForeColor = Color.White;
-            btnHClientes.Location = new Point(-3, 48);
-            btnHClientes.Name = "btnHClientes";
-            btnHClientes.Size = new Size(233, 42);
-            btnHClientes.TabIndex = 5;
-            btnHClientes.Text = "Historial de Clientes";
-            btnHClientes.UseVisualStyleBackColor = true;
-            btnHClientes.Click += btnHClientes_Click;
-            // 
-            // btnCatConfig
-            // 
-            btnCatConfig.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatConfig.FlatAppearance.BorderSize = 0;
-            btnCatConfig.FlatStyle = FlatStyle.Flat;
-            btnCatConfig.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatConfig.ForeColor = Color.White;
-            btnCatConfig.Location = new Point(3, 854);
-            btnCatConfig.Name = "btnCatConfig";
-            btnCatConfig.Size = new Size(230, 45);
-            btnCatConfig.TabIndex = 11;
-            btnCatConfig.Text = "  Configuración";
-            btnCatConfig.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatConfig.UseVisualStyleBackColor = false;
-            btnCatConfig.Click += btnCatConfig_Click;
-            // 
-            // btnCatCerrarSesion
-            // 
-            btnCatCerrarSesion.BackColor = Color.FromArgb(20, 45, 65);
-            btnCatCerrarSesion.FlatAppearance.BorderSize = 0;
-            btnCatCerrarSesion.FlatStyle = FlatStyle.Flat;
-            btnCatCerrarSesion.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            btnCatCerrarSesion.ForeColor = Color.White;
-            btnCatCerrarSesion.Location = new Point(3, 905);
-            btnCatCerrarSesion.Name = "btnCatCerrarSesion";
-            btnCatCerrarSesion.Size = new Size(230, 45);
-            btnCatCerrarSesion.TabIndex = 13;
-            btnCatCerrarSesion.Text = "  Cerrar Sesión";
-            btnCatCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
-            btnCatCerrarSesion.UseVisualStyleBackColor = false;
-            btnCatCerrarSesion.Click += btnCatCerrarSesion_Click;
+            cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            cerrarSesionToolStripMenuItem.Size = new Size(161, 22);
+            cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
             // 
             // panelContent
             // 
             panelContent.BackColor = Color.FromArgb(238, 238, 238);
+            panelContent.Controls.Add(toolStrip1);
             panelContent.Controls.Add(lblBienvenido);
             panelContent.Controls.Add(lblPanelActualizado);
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelStatsBottom);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(250, 101);
+            panelContent.Location = new Point(0, 101);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(773, 543);
+            panelContent.Size = new Size(1023, 543);
             panelContent.TabIndex = 2;
             panelContent.Paint += panelContent_Paint;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.AutoSize = false;
+            toolStrip1.BackColor = Color.FromArgb(15, 35, 50);
+            toolStrip1.Dock = DockStyle.Left;
+            toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabelMenuOp, toolStripSeparator6, toolStripLabelInventario, toolStripButton1, toolStripButtonDevoluciones, toolStripButtonListarProductos, toolStripSeparator5, toolStripLabelVentas, toolStripButtonVentaR, toolStripButtonCuadre, toolStripSeparator4, toolStripLabelCliente, toolStripButtonCliente, toolStripButtonCuentasPCobrar, toolStripSeparator1, toolStripLabelHistorial, toolStripButtonHClientes, toolStripButtonHProveedor, toolStripButtonHVentas, toolStripSeparator2, toolStripButton2, toolStripButtonConfiguracion, tlSConfiguraciones, toolStripSeparator3, tlSCerrarSesion, toolStripSeparator7 });
+            toolStrip1.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(212, 543);
+            toolStrip1.TabIndex = 4;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripLabelMenuOp
+            // 
+            toolStripLabelMenuOp.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabelMenuOp.ForeColor = Color.White;
+            toolStripLabelMenuOp.Name = "toolStripLabelMenuOp";
+            toolStripLabelMenuOp.Size = new Size(210, 30);
+            toolStripLabelMenuOp.Text = "Menu de Opciones";
+            toolStripLabelMenuOp.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(210, 6);
+            // 
+            // toolStripLabelInventario
+            // 
+            toolStripLabelInventario.ActiveLinkColor = Color.LightGray;
+            toolStripLabelInventario.BackColor = Color.Transparent;
+            toolStripLabelInventario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabelInventario.ForeColor = Color.White;
+            toolStripLabelInventario.IsLink = true;
+            toolStripLabelInventario.LinkBehavior = LinkBehavior.NeverUnderline;
+            toolStripLabelInventario.LinkColor = Color.White;
+            toolStripLabelInventario.Name = "toolStripLabelInventario";
+            toolStripLabelInventario.Size = new Size(210, 21);
+            toolStripLabelInventario.Text = "Inventario";
+            toolStripLabelInventario.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton1.ForeColor = Color.White;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Padding = new Padding(20, 0, 0, 0);
+            toolStripButton1.Size = new Size(210, 19);
+            toolStripButton1.Text = "E/S";
+            toolStripButton1.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // toolStripButtonDevoluciones
+            // 
+            toolStripButtonDevoluciones.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonDevoluciones.ForeColor = Color.White;
+            toolStripButtonDevoluciones.Image = (Image)resources.GetObject("toolStripButtonDevoluciones.Image");
+            toolStripButtonDevoluciones.ImageTransparentColor = Color.Magenta;
+            toolStripButtonDevoluciones.Name = "toolStripButtonDevoluciones";
+            toolStripButtonDevoluciones.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonDevoluciones.Size = new Size(210, 19);
+            toolStripButtonDevoluciones.Text = "Devoluciones";
+            toolStripButtonDevoluciones.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonDevoluciones.Click += toolStripButtonDevoluciones_Click;
+            // 
+            // toolStripButtonListarProductos
+            // 
+            toolStripButtonListarProductos.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonListarProductos.ForeColor = Color.White;
+            toolStripButtonListarProductos.Image = (Image)resources.GetObject("toolStripButtonListarProductos.Image");
+            toolStripButtonListarProductos.ImageTransparentColor = Color.Magenta;
+            toolStripButtonListarProductos.Name = "toolStripButtonListarProductos";
+            toolStripButtonListarProductos.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonListarProductos.Size = new Size(210, 19);
+            toolStripButtonListarProductos.Text = "Listar Productos";
+            toolStripButtonListarProductos.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonListarProductos.Click += toolStripButtonListarProductos_Click;
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(210, 6);
+            // 
+            // toolStripLabelVentas
+            // 
+            toolStripLabelVentas.ActiveLinkColor = Color.LightGray;
+            toolStripLabelVentas.BackColor = Color.Transparent;
+            toolStripLabelVentas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabelVentas.ForeColor = Color.White;
+            toolStripLabelVentas.IsLink = true;
+            toolStripLabelVentas.LinkBehavior = LinkBehavior.NeverUnderline;
+            toolStripLabelVentas.LinkColor = Color.White;
+            toolStripLabelVentas.Name = "toolStripLabelVentas";
+            toolStripLabelVentas.Size = new Size(210, 21);
+            toolStripLabelVentas.Text = "Ventas";
+            toolStripLabelVentas.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonVentaR
+            // 
+            toolStripButtonVentaR.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonVentaR.ForeColor = Color.White;
+            toolStripButtonVentaR.Image = (Image)resources.GetObject("toolStripButtonVentaR.Image");
+            toolStripButtonVentaR.ImageTransparentColor = Color.Magenta;
+            toolStripButtonVentaR.Name = "toolStripButtonVentaR";
+            toolStripButtonVentaR.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonVentaR.Size = new Size(210, 19);
+            toolStripButtonVentaR.Text = "Venta Rapida";
+            toolStripButtonVentaR.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonCuadre
+            // 
+            toolStripButtonCuadre.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonCuadre.ForeColor = Color.White;
+            toolStripButtonCuadre.Image = (Image)resources.GetObject("toolStripButtonCuadre.Image");
+            toolStripButtonCuadre.ImageTransparentColor = Color.Magenta;
+            toolStripButtonCuadre.Name = "toolStripButtonCuadre";
+            toolStripButtonCuadre.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonCuadre.Size = new Size(210, 19);
+            toolStripButtonCuadre.Text = "Cuadre";
+            toolStripButtonCuadre.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(210, 6);
+            // 
+            // toolStripLabelCliente
+            // 
+            toolStripLabelCliente.ActiveLinkColor = Color.LightGray;
+            toolStripLabelCliente.BackColor = Color.Transparent;
+            toolStripLabelCliente.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabelCliente.ForeColor = Color.White;
+            toolStripLabelCliente.IsLink = true;
+            toolStripLabelCliente.LinkBehavior = LinkBehavior.NeverUnderline;
+            toolStripLabelCliente.LinkColor = Color.White;
+            toolStripLabelCliente.Name = "toolStripLabelCliente";
+            toolStripLabelCliente.Size = new Size(210, 21);
+            toolStripLabelCliente.Text = "Cliente";
+            toolStripLabelCliente.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonCliente
+            // 
+            toolStripButtonCliente.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonCliente.ForeColor = Color.White;
+            toolStripButtonCliente.Image = (Image)resources.GetObject("toolStripButtonCliente.Image");
+            toolStripButtonCliente.ImageTransparentColor = Color.Magenta;
+            toolStripButtonCliente.Name = "toolStripButtonCliente";
+            toolStripButtonCliente.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonCliente.Size = new Size(210, 19);
+            toolStripButtonCliente.Text = "Cliente";
+            toolStripButtonCliente.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonCuentasPCobrar
+            // 
+            toolStripButtonCuentasPCobrar.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonCuentasPCobrar.ForeColor = Color.White;
+            toolStripButtonCuentasPCobrar.Image = (Image)resources.GetObject("toolStripButtonCuentasPCobrar.Image");
+            toolStripButtonCuentasPCobrar.ImageTransparentColor = Color.Magenta;
+            toolStripButtonCuentasPCobrar.Name = "toolStripButtonCuentasPCobrar";
+            toolStripButtonCuentasPCobrar.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonCuentasPCobrar.Size = new Size(210, 19);
+            toolStripButtonCuentasPCobrar.Text = "Cuentas por Cobrar";
+            toolStripButtonCuentasPCobrar.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(210, 6);
+            // 
+            // toolStripLabelHistorial
+            // 
+            toolStripLabelHistorial.ActiveLinkColor = Color.LightGray;
+            toolStripLabelHistorial.BackColor = Color.Transparent;
+            toolStripLabelHistorial.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripLabelHistorial.ForeColor = Color.White;
+            toolStripLabelHistorial.IsLink = true;
+            toolStripLabelHistorial.LinkBehavior = LinkBehavior.NeverUnderline;
+            toolStripLabelHistorial.LinkColor = Color.White;
+            toolStripLabelHistorial.Name = "toolStripLabelHistorial";
+            toolStripLabelHistorial.Size = new Size(210, 21);
+            toolStripLabelHistorial.Text = "Historial";
+            toolStripLabelHistorial.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonHClientes
+            // 
+            toolStripButtonHClientes.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonHClientes.ForeColor = Color.White;
+            toolStripButtonHClientes.Image = (Image)resources.GetObject("toolStripButtonHClientes.Image");
+            toolStripButtonHClientes.ImageTransparentColor = Color.Magenta;
+            toolStripButtonHClientes.Name = "toolStripButtonHClientes";
+            toolStripButtonHClientes.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonHClientes.Size = new Size(210, 19);
+            toolStripButtonHClientes.Text = "Historial de Clientes";
+            toolStripButtonHClientes.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonHProveedor
+            // 
+            toolStripButtonHProveedor.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonHProveedor.ForeColor = Color.White;
+            toolStripButtonHProveedor.Image = (Image)resources.GetObject("toolStripButtonHProveedor.Image");
+            toolStripButtonHProveedor.ImageTransparentColor = Color.Magenta;
+            toolStripButtonHProveedor.Name = "toolStripButtonHProveedor";
+            toolStripButtonHProveedor.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonHProveedor.Size = new Size(210, 19);
+            toolStripButtonHProveedor.Text = "Historial de Proveedores";
+            toolStripButtonHProveedor.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonHVentas
+            // 
+            toolStripButtonHVentas.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButtonHVentas.ForeColor = Color.White;
+            toolStripButtonHVentas.Image = (Image)resources.GetObject("toolStripButtonHVentas.Image");
+            toolStripButtonHVentas.ImageTransparentColor = Color.Magenta;
+            toolStripButtonHVentas.Name = "toolStripButtonHVentas";
+            toolStripButtonHVentas.Padding = new Padding(20, 0, 0, 0);
+            toolStripButtonHVentas.Size = new Size(210, 19);
+            toolStripButtonHVentas.Text = "Historial de Ventas";
+            toolStripButtonHVentas.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(210, 6);
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripButton2.ForeColor = Color.White;
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(210, 4);
+            // 
+            // toolStripButtonConfiguracion 
+            // 
+            toolStripButtonConfiguracion.BackColor = Color.Transparent;
+            toolStripButtonConfiguracion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripButtonConfiguracion.ForeColor = Color.White;
+            toolStripButtonConfiguracion.Name = "toolStripButtonConfiguracion";
+            toolStripButtonConfiguracion.Size = new Size(210, 21);
+            toolStripButtonConfiguracion.Text = "Configuracion";
+            toolStripButtonConfiguracion.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tlSConfiguraciones
+            // 
+            tlSConfiguraciones.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlSConfiguraciones.ForeColor = Color.White;
+            tlSConfiguraciones.Name = "tlSConfiguraciones";
+            tlSConfiguraciones.Padding = new Padding(20, 0, 0, 0);
+            tlSConfiguraciones.Size = new Size(210, 19);
+            tlSConfiguraciones.Text = "Configuraciones";
+            tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tlSCerrarSesion
+            // 
+            tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlSCerrarSesion.ForeColor = Color.White;
+            tlSCerrarSesion.Name = "tlSCerrarSesion";
+            tlSCerrarSesion.Padding = new Padding(20, 0, 0, 0);
+            tlSCerrarSesion.Size = new Size(210, 19);
+            tlSCerrarSesion.Text = "Cerrar Sesion";
+            tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButton2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripButtonConfiguracion
+            // 
+            toolStripButtonConfiguracion.ActiveLinkColor = Color.LightGray;
+            toolStripButtonConfiguracion.BackColor = Color.Transparent;
+            toolStripButtonConfiguracion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toolStripButtonConfiguracion.ForeColor = Color.White;
+            toolStripButtonConfiguracion.IsLink = true;
+            toolStripButtonConfiguracion.LinkBehavior = LinkBehavior.NeverUnderline;
+            toolStripButtonConfiguracion.LinkColor = Color.White;
+            toolStripButtonConfiguracion.Name = "toolStripButtonConfiguracion";
+            toolStripButtonConfiguracion.Size = new Size(210, 40);
+            toolStripButtonConfiguracion.Text = "Configuracion";
+            toolStripButtonConfiguracion.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tlSConfiguraciones
+            // 
+            tlSConfiguraciones.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlSConfiguraciones.ForeColor = Color.White;
+            tlSConfiguraciones.Image = (Image)resources.GetObject("tlSConfiguraciones.Image");
+            tlSConfiguraciones.ImageTransparentColor = Color.Magenta;
+            tlSConfiguraciones.Name = "tlSConfiguraciones";
+            tlSConfiguraciones.Padding = new Padding(20, 0, 0, 0);
+            tlSConfiguraciones.Size = new Size(210, 30);
+            tlSConfiguraciones.Text = "Configuraciones";
+            tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(210, 6);
+            // 
+            // tlSCerrarSesion
+            // 
+            tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlSCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tlSCerrarSesion.ForeColor = Color.White;
+            tlSCerrarSesion.Image = (Image)resources.GetObject("tlSCerrarSesion.Image");
+            tlSCerrarSesion.ImageTransparentColor = Color.Magenta;
+            tlSCerrarSesion.Name = "tlSCerrarSesion";
+            tlSCerrarSesion.Size = new Size(210, 40);
+            tlSCerrarSesion.Text = "Cerrar Sesion";
+            tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new Size(210, 6);
             // 
             // lblBienvenido
             // 
             lblBienvenido.AutoSize = true;
             lblBienvenido.Font = new Font("Segoe UI", 40F, FontStyle.Bold, GraphicsUnit.Pixel);
             lblBienvenido.ForeColor = Color.FromArgb(56, 67, 83);
-            lblBienvenido.Location = new Point(6, 0);
+            lblBienvenido.Location = new Point(224, 0);
             lblBienvenido.Name = "lblBienvenido";
             lblBienvenido.Size = new Size(506, 54);
             lblBienvenido.TabIndex = 0;
@@ -556,7 +609,7 @@ namespace GBPColmadoNet
             lblPanelActualizado.AutoSize = true;
             lblPanelActualizado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
             lblPanelActualizado.ForeColor = Color.FromArgb(112, 112, 112);
-            lblPanelActualizado.Location = new Point(603, 30);
+            lblPanelActualizado.Location = new Point(832, 31);
             lblPanelActualizado.Name = "lblPanelActualizado";
             lblPanelActualizado.Size = new Size(156, 15);
             lblPanelActualizado.TabIndex = 1;
@@ -571,7 +624,7 @@ namespace GBPColmadoNet
             panelStatsTop.Controls.Add(lblProductosActivosValue);
             panelStatsTop.Controls.Add(lblProveedoresPendientesValue);
             panelStatsTop.Controls.Add(lblStockCriticoValue);
-            panelStatsTop.Location = new Point(6, 56);
+            panelStatsTop.Location = new Point(233, 57);
             panelStatsTop.Name = "panelStatsTop";
             panelStatsTop.Size = new Size(755, 108);
             panelStatsTop.TabIndex = 2;
@@ -645,7 +698,7 @@ namespace GBPColmadoNet
             panelStatsBottom.Controls.Add(lblVentaTotalValue);
             panelStatsBottom.Controls.Add(lblGananciaEstimadaValue);
             panelStatsBottom.Controls.Add(lblFiadosPendientesValue);
-            panelStatsBottom.Location = new Point(6, 174);
+            panelStatsBottom.Location = new Point(233, 171);
             panelStatsBottom.Name = "panelStatsBottom";
             panelStatsBottom.Size = new Size(755, 110);
             panelStatsBottom.TabIndex = 3;
@@ -717,7 +770,6 @@ namespace GBPColmadoNet
             AutoSize = true;
             ClientSize = new Size(1023, 644);
             Controls.Add(panelContent);
-            Controls.Add(panelMenu);
             Controls.Add(panelHeader);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = menuStrip1;
@@ -730,15 +782,10 @@ namespace GBPColmadoNet
             panelHeader.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panelMenu.ResumeLayout(false);
-            flpNavigation.ResumeLayout(false);
-            pnlSubInventario.ResumeLayout(false);
-            pnlSubVentas.ResumeLayout(false);
-            pnlSubClientes.ResumeLayout(false);
-            pnlSubProveedores.ResumeLayout(false);
-            pnlSubHistorial.ResumeLayout(false);
             panelContent.ResumeLayout(false);
             panelContent.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             panelStatsTop.ResumeLayout(false);
             panelStatsTop.PerformLayout();
             panelStatsBottom.ResumeLayout(false);
@@ -768,27 +815,15 @@ namespace GBPColmadoNet
         private Label lblBrandTitle;
         private Label lblBrandSub;
 
-        private Panel panelMenu;
-        private FlowLayoutPanel flpNavigation;
-        private Button btnCatInicio;
-        private Button btnCatInventario;
-        private Panel pnlSubInventario;
-        private Button btnEntradaSalida;
-        private Button btnCatVentas;
-        private Panel pnlSubVentas;
-        private Button btnCatClientes;
-        private Panel pnlSubClientes;
-        private Button btnCatProveedores;
-        private Panel pnlSubProveedores;
-        private Button btnCatHistorial;
-        private Panel pnlSubHistorial;
-        private Button btnCatConfig;
-        private Button btnCatCerrarSesion;
-
         private Panel panelContent;
+        private DateTimePicker dateTimePicker1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem inventarioToolStripMenuItem;
+        private ToolStripMenuItem eSToolStripMenuItem;
+        private ToolStripMenuItem devolucionesToolStripMenuItem;
+        private ToolStripMenuItem listarProductosToolStripMenuItem;
         private Label lblBienvenido;
         private Label lblPanelActualizado;
-
         private Panel panelStatsTop;
         private Label lblProductosActivosTitle;
         private Label lblProveedoresPendientesTitle;
@@ -796,7 +831,6 @@ namespace GBPColmadoNet
         private Label lblProductosActivosValue;
         private Label lblProveedoresPendientesValue;
         private Label lblStockCriticoValue;
-
         private Panel panelStatsBottom;
         private Label lblVentaTotalTitle;
         private Label lblGananciaEstimadaTitle;
@@ -804,27 +838,45 @@ namespace GBPColmadoNet
         private Label lblVentaTotalValue;
         private Label lblGananciaEstimadaValue;
         private Label lblFiadosPendientesValue;
-        private void btnInventario_Click(object sender, EventArgs e) => pnlSubInventario.Visible = !pnlSubInventario.Visible;
-        private void btnVentas_Click(object sender, EventArgs e) => pnlSubVentas.Visible = !pnlSubVentas.Visible;
-        private void btnClientes_Click(object sender, EventArgs e) => pnlSubClientes.Visible = !pnlSubClientes.Visible;
-        private void btnProveedores_Click(object sender, EventArgs e) => pnlSubProveedores.Visible = !pnlSubProveedores.Visible;
-        private void btnHistorial_Click(object sender, EventArgs e) => pnlSubHistorial.Visible = !pnlSubHistorial.Visible;
-
-        private Button btnDevoluciones;
-        private Button btnVentaRapida;
-        private Button btnCuadre;
-        private Button btnCuentaPorPagar;
-        private Button btnCliente;
-        private Button btnProveedor;
-        private Button btnHProveedor;
-        private Button BtnHVentas;
-        private Button btnHClientes;
-        private DateTimePicker dateTimePicker1;
-        private Button btnListarProductos;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem inventarioToolStripMenuItem;
-        private ToolStripMenuItem eSToolStripMenuItem;
-        private ToolStripMenuItem devolucionesToolStripMenuItem;
-        private ToolStripMenuItem listarProductosToolStripMenuItem;
+        private ToolStripMenuItem ventasToolStripMenuItem;
+        private ToolStripMenuItem ventaRapidaToolStripMenuItem;
+        private ToolStripMenuItem cuadreToolStripMenuItem;
+        private ToolStripMenuItem clientresToolStripMenuItem;
+        private ToolStripMenuItem clienteToolStripMenuItem;
+        private ToolStripMenuItem historialToolStripMenuItem;
+        private ToolStripMenuItem configuracionToolStripMenuItem;
+        private ToolStripMenuItem cuentasPorCobrarToolStripMenuItem;
+        private ToolStripMenuItem historialClienteToolStripMenuItem;
+        private ToolStripMenuItem historialProveedorToolStripMenuItem;
+        private ToolStripMenuItem historialVentasToolStripMenuItem;
+        private ToolStripMenuItem configuracionesToolStripMenuItem;
+        private ToolStripMenuItem cerrarSesionToolStripMenuItem;
+        private ToolStrip toolStrip1;
+        private ToolStripLabel toolStripLabelMenuOp;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripLabel toolStripLabelInventario;
+        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButtonDevoluciones;
+        private ToolStripButton toolStripButtonListarProductos;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripLabel toolStripLabelVentas;
+        private ToolStripButton toolStripButtonVentaR;
+        private ToolStripButton toolStripButtonCuadre;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripLabel toolStripLabelCliente;
+        private ToolStripButton toolStripButtonCliente;
+        private ToolStripButton toolStripButtonCuentasPCobrar;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripLabel toolStripLabelHistorial;
+        private ToolStripButton toolStripButtonHClientes;
+        private ToolStripButton toolStripButtonHProveedor;
+        private ToolStripButton toolStripButtonHVentas;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripButton toolStripButton2;
+        private ToolStripLabel toolStripButtonConfiguracion;
+        private ToolStripButton tlSConfiguraciones;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripButton tlSCerrarSesion;
+        private ToolStripSeparator toolStripSeparator7;
     }
 }
