@@ -1,42 +1,43 @@
-using GBPColmadoNet.Data.Models;
+﻿using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.Tests.Infraestructura;
 using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace GBPColmadoNet.Tests
 {
-    public class ProveedorServiceTest
+    public class RoleServiceTest
     {
         [Fact]
-        public async Task Buscar_CuandoExisteProveedor_RetornaEntidad()
+        public async Task Buscar_CuandoExisteRole_RetornaEntidad()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 1, nombre: "Proveedor de Prueba"));
+                seedContext.Roles.Add(CreateRole(id: 1, nombre: "Administrador"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new RoleService(context);
 
             // Act
             var result = await service.Buscar(1);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(1, result!.ProveedorId);
-            Assert.Equal("Proveedor de Prueba", result.Nombre);
+            Assert.Equal(1, result!.RolId);
+            Assert.Equal("Administrador", result.Nombre);
+            // Verificamos que se use AsNoTracking para optimizar el rendimiento
             Assert.Empty(context.ChangeTracker.Entries());
         }
 
         [Fact]
-        public async Task Buscar_CuandoNoExisteProveedor_RetornaNull()
+        public async Task Buscar_CuandoNoExisteRole_RetornaNull()
         {
             // Arrange
             await using var context = TestDbContextFactory.CreateContext(TestDbContextFactory.NewDataBaseName());
-            var service = new ProveedorService(context);
+            var service = new RoleService(context);
 
             // Act
             var result = await service.Buscar(99);
@@ -52,85 +53,82 @@ namespace GBPColmadoNet.Tests
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.AddRange(
-                    CreateProveedor(id: 1, nombre: "Distribuidora A"),
-                    CreateProveedor(id: 2, nombre: "Distribuidora B"),
-                    CreateProveedor(id: 3, nombre: "Almacenes Central")
+                seedContext.Roles.AddRange(
+                    CreateRole(id: 1, nombre: "Admin"),
+                    CreateRole(id: 2, nombre: "Cajero"),
+                    CreateRole(id: 3, nombre: "Supervisor")
                 );
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new RoleService(context);
 
             // Act
-            var result = await service.GetList(p => p.Nombre.Contains("Distribuidora"));
+            var result = await service.GetList(r => r.Nombre.ToLower().Contains("a"));
 
             // Assert
             Assert.Equal(2, result.Count);
-            Assert.All(result, p => Assert.Contains("Distribuidora", p.Nombre));
+            Assert.Contains(result, r => r.RolId == 1);
+            Assert.Contains(result, r => r.RolId == 2);
         }
 
         [Fact]
-        public async Task Guardar_CuandoProveedorNoExiste_InsertaYRetornaTrue()
+        public async Task Guardar_CuandoRoleNoExiste_InsertaYRetornaTrue()
         {
             // Arrange
             await using var context = TestDbContextFactory.CreateContext(TestDbContextFactory.NewDataBaseName());
-            var service = new ProveedorService(context);
-            var nuevoProveedor = CreateProveedor(id: 15, nombre: "Embutidos Sosua");
+            var service = new RoleService(context);
+            var nuevoRole = CreateRole(id: 10, nombre: "Cajero de Noche");
 
             // Act
-            var result = await service.Guardar(nuevoProveedor);
+            var result = await service.Guardar(nuevoRole);
 
             // Assert
             Assert.True(result);
-
-            var saved = await context.Proveedores.FirstOrDefaultAsync(p => p.ProveedorId == 15);
+            var saved = await context.Roles.FirstOrDefaultAsync(r => r.RolId == 10);
             Assert.NotNull(saved);
-            Assert.Equal("Embutidos Sosua", saved!.Nombre);
+            Assert.Equal("Cajero de Noche", saved!.Nombre);
         }
 
         [Fact]
-        public async Task Guardar_CuandoProveedorExiste_ModificaYRetornaTrue()
+        public async Task Guardar_CuandoRoleExiste_ModificaYRetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
-
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 25, nombre: "Coca Cola Co."));
+                seedContext.Roles.Add(CreateRole(id: 20, nombre: "Vendedor"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
-
-            var updated = CreateProveedor(id: 25, nombre: "Bepensa Dominicana");
+            var service = new RoleService(context);
+            var updated = CreateRole(id: 20, nombre: "Vendedor Senior");
 
             // Act
             var result = await service.Guardar(updated);
 
             // Assert
             Assert.True(result);
-
-            var saved = await context.Proveedores.FirstOrDefaultAsync(p => p.ProveedorId == 25);
+            var saved = await context.Roles.FirstOrDefaultAsync(r => r.RolId == 20);
             Assert.NotNull(saved);
-            Assert.Equal("Bepensa Dominicana", saved!.Nombre);
+            Assert.Equal("Vendedor Senior", saved!.Nombre);
         }
 
         [Fact]
-        public async Task Existe_CuandoProveedorExiste_RetornaTrue()
+        public async Task Existe_CuandoRoleExiste_RetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 5, nombre: "Proveedor Temporal"));
+                seedContext.Roles.Add(CreateRole(id: 5, nombre: "Invitado"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new RoleService(context);
 
             // Act
             var exists = await service.Existe(5);
@@ -140,35 +138,34 @@ namespace GBPColmadoNet.Tests
         }
 
         [Fact]
-        public async Task Eliminar_CuandoExisteProveedor_LoBorraYRetornaTrue()
+        public async Task Eliminar_CuandoExisteRole_LoBorraYRetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 10, nombre: "Proveedor a Eliminar"));
+                seedContext.Roles.Add(CreateRole(id: 30, nombre: "Rol Temporal"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new RoleService(context);
 
             // Act
-            var result = await service.Eliminar(10);
+            var result = await service.Eliminar(30);
 
             // Assert
             Assert.True(result);
-            var eliminado = await context.Proveedores.FindAsync(10);
+            var eliminado = await context.Roles.FindAsync(30);
             Assert.Null(eliminado);
         }
 
-        private static Proveedore CreateProveedor(int id, string nombre)
+        private static Role CreateRole(int id, string nombre)
         {
-            return new Proveedore
+            return new Role
             {
-                ProveedorId = id,
+                RolId = id,
                 Nombre = nombre,
-                FechaRegistro = DateTime.Now
             };
         }
     }
