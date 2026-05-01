@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Services
     {
         public async Task<bool> Guardar(CuentasPorCobrar entidad)
         {
-            if (!await Existe((decimal)entidad.BalancePendiente!))
+            if (!await Existe((decimal)entidad.Id!))
                 return await Insertar(entidad);
             else
                 return await Modificar(entidad);
@@ -25,7 +25,7 @@ namespace GBPColmadoNet.UI.Services
 
         public async Task<bool> Existe(Decimal id)
         {
-            return await context.CuentasPorCobrars.AnyAsync(a => a.BalancePendiente == id);
+            return await context.CuentasPorCobrars.AnyAsync(a => a.Id == id);
         }
 
         public async Task<bool> Modificar(Data.Models.CuentasPorCobrar entidad)
@@ -38,7 +38,7 @@ namespace GBPColmadoNet.UI.Services
         {
             return await context.CuentasPorCobrars
                 .AsNoTracking()
-                .FirstOrDefaultAsync(c => c.BalancePendiente == id);
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<bool> Eliminar(int id)

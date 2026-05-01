@@ -28,9 +28,9 @@ namespace GBPColmadoNet.UI.Services
             return await context.Usuarios.AnyAsync(a => a.UsuarioId == id);
         }
 
-        public async Task<bool> Modificar(Data.Models.Usuario entiad)
+        public async Task<bool> Modificar(Data.Models.Usuario entidad)
         {
-            context.Usuarios.Update(entiad);
+            context.Usuarios.Update(entidad);
             return await context.SaveChangesAsync() > 0;
         }
         

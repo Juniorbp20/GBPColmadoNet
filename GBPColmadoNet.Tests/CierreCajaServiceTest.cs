@@ -1,136 +1,140 @@
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
+using Microsoft.EntityFrameworkCore;
 using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.Tests.Infraestructura;
 using GBPColmadoNet.UI.Services;
-using Microsoft.EntityFrameworkCore;
 
 namespace GBPColmadoNet.Tests
 {
-    public class ProveedorServiceTest
+    public class CierreCajaServiceTest
     {
         [Fact]
-        public async Task Buscar_CuandoExisteProveedor_RetornaEntidad()
+        public async Task Buscar_CuandoExisteCierre_RetornaEntidad()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 1, nombre: "Proveedor de Prueba"));
+                seedContext.CierresCajas.Add(CreateCierre(id: 1, montoInicial: 2000m, estado: "Abierto"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
             // Act
             var result = await service.Buscar(1);
 
             // Assert
             Assert.NotNull(result);
-            Assert.Equal(1, result!.ProveedorId);
-            Assert.Equal("Proveedor de Prueba", result.Nombre);
+            Assert.Equal(1, result!.CierreId);
+            Assert.Equal(2000m, result.MontoInicial);
             Assert.Empty(context.ChangeTracker.Entries());
         }
 
         [Fact]
-        public async Task Buscar_CuandoNoExisteProveedor_RetornaNull()
+        public async Task Buscar_CuandoNoExisteCierre_RetornaNull()
         {
             // Arrange
             await using var context = TestDbContextFactory.CreateContext(TestDbContextFactory.NewDataBaseName());
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
             // Act
-            var result = await service.Buscar(99);
+            var result = await service.Buscar(999);
 
             // Assert
             Assert.Null(result);
         }
 
         [Fact]
-        public async Task GetList_CuandoSeFiltraPorNombre_RetornaCoincidencias()
+        public async Task GetList_CuandoSeFiltraPorEstado_RetornaCoincidencias()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.AddRange(
-                    CreateProveedor(id: 1, nombre: "Distribuidora A"),
-                    CreateProveedor(id: 2, nombre: "Distribuidora B"),
-                    CreateProveedor(id: 3, nombre: "Almacenes Central")
+                seedContext.CierresCajas.AddRange(
+                    CreateCierre(id: 1, estado: "Cerrado"),
+                    CreateCierre(id: 2, estado: "Abierto"),
+                    CreateCierre(id: 3, estado: "Cerrado")
                 );
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
             // Act
-            var result = await service.GetList(p => p.Nombre.Contains("Distribuidora"));
+            var result = await service.GetList(c => c.Estado == "Cerrado"); // Variable real: Estado
 
             // Assert
             Assert.Equal(2, result.Count);
-            Assert.All(result, p => Assert.Contains("Distribuidora", p.Nombre));
+            Assert.All(result, c => Assert.Equal("Cerrado", c.Estado));
         }
 
         [Fact]
-        public async Task Guardar_CuandoProveedorNoExiste_InsertaYRetornaTrue()
+        public async Task Guardar_CuandoCierreNoExiste_InsertaYRetornaTrue()
         {
             // Arrange
             await using var context = TestDbContextFactory.CreateContext(TestDbContextFactory.NewDataBaseName());
-            var service = new ProveedorService(context);
-            var nuevoProveedor = CreateProveedor(id: 15, nombre: "Embutidos Sosua");
+            var service = new CierreCajaService(context);
+            var nuevoCierre = CreateCierre(id: 10, montoInicial: 5000m, esperado: 15000m);
 
             // Act
-            var result = await service.Guardar(nuevoProveedor);
+            var result = await service.Guardar(nuevoCierre);
 
             // Assert
             Assert.True(result);
-
-            var saved = await context.Proveedores.FirstOrDefaultAsync(p => p.ProveedorId == 15);
+            var saved = await context.CierresCajas.FirstOrDefaultAsync(c => c.CierreId == 10);
             Assert.NotNull(saved);
-            Assert.Equal("Embutidos Sosua", saved!.Nombre);
+            Assert.Equal(5000m, saved!.MontoInicial);
+            Assert.Equal(15000m, saved.MontoFinalEsperado);
         }
 
         [Fact]
-        public async Task Guardar_CuandoProveedorExiste_ModificaYRetornaTrue()
+        public async Task Guardar_CuandoCierreExiste_ModificaYRetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
-
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 25, nombre: "Coca Cola Co."));
+                seedContext.CierresCajas.Add(CreateCierre(id: 20, estado: "Abierto"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
-            var updated = CreateProveedor(id: 25, nombre: "Bepensa Dominicana");
+            var updated = CreateCierre(id: 20, estado: "Cerrado");
+            updated.FechaCierre = DateTime.Now;
 
             // Act
             var result = await service.Guardar(updated);
 
             // Assert
             Assert.True(result);
-
-            var saved = await context.Proveedores.FirstOrDefaultAsync(p => p.ProveedorId == 25);
+            var saved = await context.CierresCajas.FirstOrDefaultAsync(c => c.CierreId == 20);
             Assert.NotNull(saved);
-            Assert.Equal("Bepensa Dominicana", saved!.Nombre);
+            Assert.Equal("Cerrado", saved!.Estado);
+            Assert.NotNull(saved.FechaCierre);
         }
 
         [Fact]
-        public async Task Existe_CuandoProveedorExiste_RetornaTrue()
+        public async Task Existe_CuandoCierreExiste_RetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 5, nombre: "Proveedor Temporal"));
+                seedContext.CierresCajas.Add(CreateCierre(id: 5, estado: "Abierto"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
             // Act
             var exists = await service.Existe(5);
@@ -140,35 +144,38 @@ namespace GBPColmadoNet.Tests
         }
 
         [Fact]
-        public async Task Eliminar_CuandoExisteProveedor_LoBorraYRetornaTrue()
+        public async Task Eliminar_CuandoExisteCierre_LoBorraYRetornaTrue()
         {
             // Arrange
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
-                seedContext.Proveedores.Add(CreateProveedor(id: 10, nombre: "Proveedor a Eliminar"));
+                seedContext.CierresCajas.Add(CreateCierre(id: 50, estado: "Abierto"));
                 await seedContext.SaveChangesAsync();
             }
 
             await using var context = TestDbContextFactory.CreateContext(dbName);
-            var service = new ProveedorService(context);
+            var service = new CierreCajaService(context);
 
             // Act
-            var result = await service.Eliminar(10);
+            var result = await service.Eliminar(50);
 
             // Assert
             Assert.True(result);
-            var eliminado = await context.Proveedores.FindAsync(10);
+            var eliminado = await context.CierresCajas.FindAsync(50);
             Assert.Null(eliminado);
         }
 
-        private static Proveedore CreateProveedor(int id, string nombre)
+        private static CierresCaja CreateCierre(int id, string estado = "Abierto", decimal montoInicial = 1000m, decimal esperado = 1000m)
         {
-            return new Proveedore
+            return new CierresCaja
             {
-                ProveedorId = id,
-                Nombre = nombre,
-                FechaRegistro = DateTime.Now
+                CierreId = id,
+                UsuarioId = 1,
+                FechaApertura = DateTime.Now,
+                MontoInicial = montoInicial,
+                MontoFinalEsperado = esperado,
+                Estado = estado
             };
         }
     }

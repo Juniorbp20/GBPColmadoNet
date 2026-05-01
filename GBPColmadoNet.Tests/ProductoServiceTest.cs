@@ -8,6 +8,71 @@ namespace GBPColmadoNet.Tests
     public class ProductoServiceTest
     {
         [Fact]
+        public async Task Buscar_CuandoExisteProducto_RetornaEntidad()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Productos.Add(CreateProducto(id: 1, nombre: "Aceite Vegetal", precioCompra: 150m, precioVenta: 180m));
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new ProductoService(context);
+
+            // Act
+            var result = await service.Buscar(1);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(1, result!.ProductoId);
+            Assert.Equal("Aceite Vegetal", result.Nombre);
+            Assert.Empty(context.ChangeTracker.Entries());
+        }
+
+        [Fact]
+        public async Task Buscar_CuandoNoExisteProducto_RetornaNull()
+        {
+            // Arrange
+            await using var context = TestDbContextFactory.CreateContext(TestDbContextFactory.NewDataBaseName());
+            var service = new ProductoService(context);
+
+            // Act
+            var result = await service.Buscar(999);
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task GetList_CuandoSeFiltraPorStock_RetornaCoincidencias()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Productos.AddRange(
+                    CreateProducto(id: 1, nombre: "Sal Refinada", stock: 10m),
+                    CreateProducto(id: 2, nombre: "Azúcar Crema", stock: 5m),
+                    CreateProducto(id: 3, nombre: "Harina de Trigo", stock: 2m)
+                );
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new ProductoService(context);
+
+            // Act
+            var result = await service.GetList(p => p.Stock <= 5m);
+
+            // Assert
+            Assert.Equal(2, result.Count);
+            Assert.Contains(result, p => p.ProductoId == 2);
+            Assert.Contains(result, p => p.ProductoId == 3);
+        }
+
+        [Fact]
         public async Task Guardar_CuandoProductoNoExiste_InsertaYRetornaTrue()
         {
             // Arrange
@@ -54,6 +119,50 @@ namespace GBPColmadoNet.Tests
             Assert.NotNull(saved);
             Assert.Equal("Habichuela Negra", saved!.Nombre);
             Assert.Equal(35m, saved.PrecioCompra);
+        }
+
+        [Fact]
+        public async Task Existe_CuandoProductoExiste_RetornaTrue()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Productos.Add(CreateProducto(id: 50, nombre: "Café Santo Domingo"));
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new ProductoService(context);
+
+            // Act
+            var result = await service.Existe(50);
+
+            // Assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task Eliminar_CuandoExisteProducto_LoBorraYRetornaTrue()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Productos.Add(CreateProducto(id: 80, nombre: "Salami Especial"));
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new ProductoService(context);
+
+            // Act
+            var result = await service.Eliminar(80);
+
+            // Assert
+            Assert.True(result);
+            var eliminado = await context.Productos.FindAsync(80);
+            Assert.Null(eliminado);
         }
 
         private static Producto CreateProducto(
