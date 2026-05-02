@@ -8,11 +8,10 @@ using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
-using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 using Microsoft.Extensions.DependencyInjection;
-using ListarProductosList = GBPColmadoNet.UI.Forms.Inventario.ListarProductos.ListarProductosList;
+using ListarProductosList = GBPColmadoNet.UI.Forms.Inventario.ESForm.ListarProductosList;
 
 namespace GBPColmadoNet
 {
