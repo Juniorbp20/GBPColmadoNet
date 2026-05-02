@@ -161,7 +161,7 @@ namespace GBPColmadoNet
             // 
             eSToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             eSToolStripMenuItem.Name = "eSToolStripMenuItem";
-            eSToolStripMenuItem.Size = new Size(180, 22);
+            eSToolStripMenuItem.Size = new Size(159, 22);
             eSToolStripMenuItem.Text = "E/S";
             eSToolStripMenuItem.Click += eSToolStripMenuItem_Click;
             // 
@@ -169,7 +169,7 @@ namespace GBPColmadoNet
             // 
             devolucionesToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
-            devolucionesToolStripMenuItem.Size = new Size(180, 22);
+            devolucionesToolStripMenuItem.Size = new Size(159, 22);
             devolucionesToolStripMenuItem.Text = "Devoluciones";
             devolucionesToolStripMenuItem.Click += devolucionesToolStripMenuItem_Click;
             // 
@@ -177,7 +177,7 @@ namespace GBPColmadoNet
             // 
             listarProductosToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
             listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
-            listarProductosToolStripMenuItem.Size = new Size(180, 22);
+            listarProductosToolStripMenuItem.Size = new Size(159, 22);
             listarProductosToolStripMenuItem.Text = "Listar Productos";
             listarProductosToolStripMenuItem.Click += listarProductosToolStripMenuItem_Click;
             // 
@@ -548,7 +548,7 @@ namespace GBPColmadoNet
             // 
             // tlSCerrarSesion
             // 
-            tlSCerrarSesion.BackColor = Color.Red;
+            tlSCerrarSesion.BackColor = Color.FromArgb(15, 35, 50);
             tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
             tlSCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tlSCerrarSesion.ForeColor = Color.White;
