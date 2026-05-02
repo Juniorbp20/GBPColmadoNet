@@ -12,7 +12,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         private readonly ProductoService _productoService;
         private readonly CategoriaService _categoriaService;
         private readonly ProveedorService _proveedorService;
-        private readonly Producto _producto;
+        private Producto _producto;
         private ErrorProvider errorProviderES;
 
         public ModificarInventarioForm(ProductoService productoService,
@@ -35,8 +35,57 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
             btnGuardar.Click += btnGuardar_Click;
             btnLimpiarFormulario.Click += btnLimpiarFormulario_Click;
+            txCodigoBarras.KeyDown += txCodigoBarras_KeyDown;
 
             this.Load += async (s, e) => await CargarCombosYDatos();
+        }
+
+        private async void txCodigoBarras_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!string.IsNullOrWhiteSpace(txCodigoBarras.Text))
+                {
+                    await BuscarProducto(txCodigoBarras.Text.Trim());
+                    e.SuppressKeyPress = true;
+                }
+            }
+        }
+
+        private async Task BuscarProducto(string criterio)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(criterio)) return;
+
+                var resultados = await _productoService.GetList(p =>
+                    p.CodigoBarras == criterio ||
+                    p.Nombre.Contains(criterio));
+
+                var prodEncontrado = resultados.FirstOrDefault();
+
+                if (prodEncontrado == null && int.TryParse(criterio, out int idBusqueda))
+                {
+                    prodEncontrado = await _productoService.Buscar(idBusqueda);
+                }
+
+                if (prodEncontrado != null)
+                {
+                    _producto = prodEncontrado;
+                    CargarDatosProducto();
+                    txNombreProducto.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Producto no encontrado. Verifique el código.", "Búsqueda",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error en la búsqueda: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async Task CargarCombosYDatos()
@@ -56,30 +105,37 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
                 if (_producto != null)
                 {
-                    txCodigoBarras.Text = _producto.CodigoBarras;
-                    txNombreProducto.Text = _producto.Nombre;
-                    numericUpDownPrecioCompra.Value = _producto.PrecioCompra;
-                    numericUpDownPrecioVenta.Value = _producto.PrecioVenta;
-                    numericUpDownStock.Value = _producto.Stock ?? 0;
-
-                    if (_producto.TasaItbis == 18) RbtnItbis18.Checked = true;
-                    else if (_producto.TasaItbis == 10) RbtnItbis10.Checked = true;
-                    else if (_producto.TasaItbis == 28) RbtnItebis28.Checked = true;
-                    else EbtnNoItebis.Checked = true;
-
-                    if (_producto.CategoriaId.HasValue)
-                        CboxCategoria.SelectedValue = _producto.CategoriaId.Value;
-
-                    if (_producto.ProveedorId.HasValue)
-                        CboxProveedor.SelectedValue = _producto.ProveedorId.Value;
-
-                    CalcularValores();
+                    CargarDatosProducto();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar catálogos: {ex.Message}");
             }
+        }
+
+        private void CargarDatosProducto()
+        {
+            if (_producto == null) return;
+
+            txCodigoBarras.Text = _producto.CodigoBarras;
+            txNombreProducto.Text = _producto.Nombre;
+            numericUpDownPrecioCompra.Value = _producto.PrecioCompra;
+            numericUpDownPrecioVenta.Value = _producto.PrecioVenta;
+            numericUpDownStock.Value = _producto.Stock ?? 0;
+
+            if (_producto.TasaItbis == 18) RbtnItbis18.Checked = true;
+            else if (_producto.TasaItbis == 10) RbtnItbis10.Checked = true;
+            else if (_producto.TasaItbis == 28) RbtnItebis28.Checked = true;
+            else EbtnNoItebis.Checked = true;
+
+            if (_producto.CategoriaId.HasValue)
+                CboxCategoria.SelectedValue = _producto.CategoriaId.Value;
+
+            if (_producto.ProveedorId.HasValue)
+                CboxProveedor.SelectedValue = _producto.ProveedorId.Value;
+
+            CalcularValores();
         }
 
         private async void btnGuardar_Click(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-﻿using Aplicada1.Core;
+using Aplicada1.Core;
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -60,9 +60,15 @@ namespace GBPColmadoNet.UI.Services
             return await context.Productos.AnyAsync(a => a.ProductoId == id);
         }
 
-        public async Task<bool> Modificar(Data.Models.Producto entiad)
+        public async Task<bool> Modificar(Data.Models.Producto entidad)
         {
-            context.Productos.Update(entiad);
+            var tracked = context.Productos.Local.FirstOrDefault(e => e.ProductoId == entidad.ProductoId);
+            if (tracked != null)
+            {
+                context.Entry(tracked).State = EntityState.Detached;
+            }
+
+            context.Productos.Update(entidad);
             return await context.SaveChangesAsync() > 0;
         }
     }

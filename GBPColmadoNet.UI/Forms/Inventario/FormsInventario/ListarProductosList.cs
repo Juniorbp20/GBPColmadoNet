@@ -35,6 +35,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             try
             {
                 var productosParaMostrar = await _service.GetList(d => true);
+                productoDataGridView.DataSource = null;
                 productoDataGridView.DataSource = productosParaMostrar;
 
                 ConfigurarDiseñoGrid();
@@ -58,14 +59,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
         private async void btnEntrada_Click(object sender, EventArgs e)
         {
-            var EForm = Program.ServiceProvider.GetRequiredService<Forms.CrearProductoForm>();
+            var EForm = Program.ServiceProvider.GetRequiredService<CrearProductoForm>();
             EForm.ShowDialog();
             await LoadDataAsync();
         }
 
         private async void btnSalida_Click(object sender, EventArgs e)
         {
-            var SForm = Program.ServiceProvider.GetRequiredService<EForm>();
+            var SForm = Program.ServiceProvider.GetRequiredService<SForm>();
             SForm.ShowDialog();
             await LoadDataAsync();
         }
@@ -192,6 +193,13 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             {
                 _isSearching = false;
             }
+        }
+
+        private async void lbSalidaProductoss_Click(object sender, EventArgs e)
+        {
+            var salidaProductos = Program.ServiceProvider.GetRequiredService<SForm>();
+            salidaProductos.ShowDialog();
+            await LoadDataAsync();
         }
     }
 }
