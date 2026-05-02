@@ -1,4 +1,4 @@
-﻿using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
 using GBPColmadoNet.UI.Services;
@@ -29,7 +29,7 @@ namespace GBPColmadoNet.UI.Forms
             RbtnItebis28.CheckedChanged += (s, e) => { if (RbtnItebis28.Checked) CalcularValores(); };
 
             CalcularValores();
-            _ =CargarCombos();
+            _ = CargarCombos();
         }
 
         private async void btnGuardar_Click(object sender, EventArgs e)
