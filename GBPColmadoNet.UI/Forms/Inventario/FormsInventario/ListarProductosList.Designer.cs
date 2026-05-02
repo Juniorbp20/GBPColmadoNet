@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lbTituloList = new Label();
             productoDataGridView = new DataGridView();
             btnCreaProductos = new Button();
             btnEntradaProductos = new Button();
             panelContent = new Panel();
             PanelHeder = new Panel();
+            lbSalidaProductoss = new Button();
+            lbBuscar = new Label();
             txBuscarProducto = new TextBox();
             btnELiminar = new Button();
             btnModificar = new Button();
-            lbBuscar = new Label();
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).BeginInit();
             panelContent.SuspendLayout();
             PanelHeder.SuspendLayout();
@@ -60,18 +61,18 @@
             productoDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             productoDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             productoDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            productoDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            productoDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
             productoDataGridView.Dock = DockStyle.Fill;
             productoDataGridView.Location = new Point(0, 0);
             productoDataGridView.Name = "productoDataGridView";
-            productoDataGridView.Size = new Size(800, 350);
+            productoDataGridView.Size = new Size(800, 317);
             productoDataGridView.TabIndex = 1;
             // 
             // btnCreaProductos
@@ -79,7 +80,7 @@
             btnCreaProductos.FlatStyle = FlatStyle.System;
             btnCreaProductos.Location = new Point(12, 62);
             btnCreaProductos.Name = "btnCreaProductos";
-            btnCreaProductos.Size = new Size(147, 23);
+            btnCreaProductos.Size = new Size(98, 23);
             btnCreaProductos.TabIndex = 2;
             btnCreaProductos.Text = "Crear Productos";
             btnCreaProductos.UseVisualStyleBackColor = true;
@@ -87,7 +88,7 @@
             // 
             // btnEntradaProductos
             // 
-            btnEntradaProductos.Location = new Point(165, 62);
+            btnEntradaProductos.Location = new Point(12, 91);
             btnEntradaProductos.Name = "btnEntradaProductos";
             btnEntradaProductos.Size = new Size(139, 23);
             btnEntradaProductos.TabIndex = 3;
@@ -99,22 +100,43 @@
             // 
             panelContent.Controls.Add(productoDataGridView);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(0, 100);
+            panelContent.Location = new Point(0, 133);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(800, 350);
+            panelContent.Size = new Size(800, 317);
             panelContent.TabIndex = 4;
             // 
             // PanelHeder
             // 
+            PanelHeder.Controls.Add(lbSalidaProductoss);
             PanelHeder.Controls.Add(lbBuscar);
+            PanelHeder.Controls.Add(btnEntradaProductos);
             PanelHeder.Controls.Add(txBuscarProducto);
             PanelHeder.Controls.Add(btnELiminar);
             PanelHeder.Controls.Add(btnModificar);
             PanelHeder.Dock = DockStyle.Top;
             PanelHeder.Location = new Point(0, 0);
             PanelHeder.Name = "PanelHeder";
-            PanelHeder.Size = new Size(800, 100);
+            PanelHeder.Size = new Size(800, 133);
             PanelHeder.TabIndex = 5;
+            // 
+            // lbSalidaProductoss
+            // 
+            lbSalidaProductoss.Location = new Point(157, 91);
+            lbSalidaProductoss.Name = "lbSalidaProductoss";
+            lbSalidaProductoss.Size = new Size(136, 23);
+            lbSalidaProductoss.TabIndex = 4;
+            lbSalidaProductoss.Text = "Salida de Productos";
+            lbSalidaProductoss.UseVisualStyleBackColor = true;
+            lbSalidaProductoss.Click += lbSalidaProductoss_Click;
+            // 
+            // lbBuscar
+            // 
+            lbBuscar.AutoSize = true;
+            lbBuscar.Location = new Point(625, 44);
+            lbBuscar.Name = "lbBuscar";
+            lbBuscar.Size = new Size(94, 15);
+            lbBuscar.TabIndex = 3;
+            lbBuscar.Text = "Buscar Producto";
             // 
             // txBuscarProducto
             // 
@@ -126,7 +148,7 @@
             // 
             // btnELiminar
             // 
-            btnELiminar.Location = new Point(391, 62);
+            btnELiminar.Location = new Point(218, 62);
             btnELiminar.Name = "btnELiminar";
             btnELiminar.Size = new Size(75, 23);
             btnELiminar.TabIndex = 1;
@@ -136,22 +158,13 @@
             // 
             // btnModificar
             // 
-            btnModificar.Location = new Point(310, 62);
+            btnModificar.Location = new Point(114, 62);
             btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(75, 23);
+            btnModificar.Size = new Size(98, 23);
             btnModificar.TabIndex = 0;
             btnModificar.Text = "Modificar";
             btnModificar.UseVisualStyleBackColor = true;
             btnModificar.Click += btnModificar_Click;
-            // 
-            // lbBuscar
-            // 
-            lbBuscar.AutoSize = true;
-            lbBuscar.Location = new Point(625, 44);
-            lbBuscar.Name = "lbBuscar";
-            lbBuscar.Size = new Size(94, 15);
-            lbBuscar.TabIndex = 3;
-            lbBuscar.Text = "Buscar Producto";
             // 
             // ListarProductosList
             // 
@@ -160,7 +173,6 @@
             ClientSize = new Size(800, 450);
             Controls.Add(lbTituloList);
             Controls.Add(btnCreaProductos);
-            Controls.Add(btnEntradaProductos);
             Controls.Add(panelContent);
             Controls.Add(PanelHeder);
             Name = "ListarProductosList";
@@ -187,5 +199,6 @@
         private Label label1;
         private TextBox txBuscarProducto;
         private Label lbBuscar;
+        private Button lbSalidaProductoss;
     }
 }

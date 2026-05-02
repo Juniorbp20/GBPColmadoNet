@@ -1,4 +1,4 @@
-﻿using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -141,7 +141,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 {
                     MessageBox.Show($"Inventario actualizado con éxito. Nuevo Stock: {_productoActual.Stock}",
                         "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LimpiarFormulario();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
                 else
                 {
