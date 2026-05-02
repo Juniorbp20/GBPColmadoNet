@@ -513,36 +513,6 @@ namespace GBPColmadoNet
             toolStripButton2.ImageTransparentColor = Color.Magenta;
             toolStripButton2.Name = "toolStripButton2";
             toolStripButton2.Size = new Size(210, 4);
-            // 
-            // toolStripButtonConfiguracion 
-            // 
-            toolStripButtonConfiguracion.BackColor = Color.Transparent;
-            toolStripButtonConfiguracion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            toolStripButtonConfiguracion.ForeColor = Color.White;
-            toolStripButtonConfiguracion.Name = "toolStripButtonConfiguracion";
-            toolStripButtonConfiguracion.Size = new Size(210, 21);
-            toolStripButtonConfiguracion.Text = "Configuracion";
-            toolStripButtonConfiguracion.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // tlSConfiguraciones
-            // 
-            tlSConfiguraciones.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            tlSConfiguraciones.ForeColor = Color.White;
-            tlSConfiguraciones.Name = "tlSConfiguraciones";
-            tlSConfiguraciones.Padding = new Padding(20, 0, 0, 0);
-            tlSConfiguraciones.Size = new Size(210, 19);
-            tlSConfiguraciones.Text = "Configuraciones";
-            tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // tlSCerrarSesion
-            // 
-            tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            tlSCerrarSesion.ForeColor = Color.White;
-            tlSCerrarSesion.Name = "tlSCerrarSesion";
-            tlSCerrarSesion.Padding = new Padding(20, 0, 0, 0);
-            tlSCerrarSesion.Size = new Size(210, 19);
-            tlSCerrarSesion.Text = "Cerrar Sesion";
-            tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
             toolStripButton2.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // toolStripButtonConfiguracion
@@ -555,7 +525,7 @@ namespace GBPColmadoNet
             toolStripButtonConfiguracion.LinkBehavior = LinkBehavior.NeverUnderline;
             toolStripButtonConfiguracion.LinkColor = Color.White;
             toolStripButtonConfiguracion.Name = "toolStripButtonConfiguracion";
-            toolStripButtonConfiguracion.Size = new Size(210, 40);
+            toolStripButtonConfiguracion.Size = new Size(210, 21);
             toolStripButtonConfiguracion.Text = "Configuracion";
             toolStripButtonConfiguracion.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -567,7 +537,7 @@ namespace GBPColmadoNet
             tlSConfiguraciones.ImageTransparentColor = Color.Magenta;
             tlSConfiguraciones.Name = "tlSConfiguraciones";
             tlSConfiguraciones.Padding = new Padding(20, 0, 0, 0);
-            tlSConfiguraciones.Size = new Size(210, 30);
+            tlSConfiguraciones.Size = new Size(210, 19);
             tlSConfiguraciones.Text = "Configuraciones";
             tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -578,13 +548,15 @@ namespace GBPColmadoNet
             // 
             // tlSCerrarSesion
             // 
+            tlSCerrarSesion.BackColor = Color.FromArgb(15, 35, 50);
             tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
             tlSCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tlSCerrarSesion.ForeColor = Color.White;
             tlSCerrarSesion.Image = (Image)resources.GetObject("tlSCerrarSesion.Image");
             tlSCerrarSesion.ImageTransparentColor = Color.Magenta;
             tlSCerrarSesion.Name = "tlSCerrarSesion";
-            tlSCerrarSesion.Size = new Size(210, 40);
+            tlSCerrarSesion.Padding = new Padding(20, 0, 0, 0);
+            tlSCerrarSesion.Size = new Size(210, 25);
             tlSCerrarSesion.Text = "Cerrar Sesion";
             tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
             // 
