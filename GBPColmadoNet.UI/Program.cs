@@ -64,6 +64,7 @@ namespace GBPColmadoNet;
         services.AddTransient<CuadreForm>();
         services.AddTransient<VentaRapidaForm>();
         services.AddTransient<EForm>();
+        services.AddTransient<ModificarInventarioForm>();
 
 
 
