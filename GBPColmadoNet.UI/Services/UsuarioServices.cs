@@ -1,4 +1,4 @@
-﻿using Aplicada1.Core;
+using Aplicada1.Core;
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -62,6 +62,35 @@ namespace GBPColmadoNet.UI.Services
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();
+        }
+
+        public async Task<Usuario?> AutenticarAsync(string username, string password)
+        {
+            var usuario = await context.Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Username == username && u.Activo != false);
+
+            if (usuario == null)
+                return null;
+
+            bool validPassword = false;
+            try
+            {
+                validPassword = BCrypt.Net.BCrypt.Verify(password, usuario.PasswordHash);
+            }
+            catch (BCrypt.Net.SaltParseException)
+            {
+                // Fallback temporal por si hay contraseñas en texto plano en la base de datos
+                if (password == usuario.PasswordHash)
+                {
+                    validPassword = true;
+                }
+            }
+
+            if (validPassword)
+                return usuario;
+
+            return null;
         }
     }
 }

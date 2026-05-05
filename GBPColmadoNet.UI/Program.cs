@@ -7,6 +7,7 @@ using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
+using GBPColmadoNet.UI.Forms.LoginForm;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 using GBPColmadoNet.UI.Services;
@@ -31,7 +32,16 @@ static class Program
         ConfigureServices(services);
 
         ServiceProvider = services.BuildServiceProvider();
-        Application.Run(ServiceProvider.GetRequiredService<MainForm>());
+        
+        var loginForm = ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Forms.LoginForm.LoginForm>();
+        if (loginForm.ShowDialog() == DialogResult.OK)
+        {
+            Application.Run(ServiceProvider.GetRequiredService<MainForm>());
+        }
+        else
+        {
+            Application.Exit();
+        }
     }
 
     private static void ConfigureServices(ServiceCollection services)
@@ -47,6 +57,7 @@ static class Program
             }));
 
         //Form y List
+        services.AddTransient<LoginForm>();
         services.AddTransient<MainForm>();
         services.AddTransient<ClienteForm>();
         services.AddTransient<ClienteList>();
@@ -66,8 +77,6 @@ static class Program
         services.AddTransient<EForm>();
         services.AddTransient<ModificarInventarioForm>();
         services.AddTransient<SForm>();
-
-
 
         //Services 
         services.AddTransient<ProductoService>();

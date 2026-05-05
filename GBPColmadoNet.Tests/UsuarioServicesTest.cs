@@ -77,7 +77,6 @@ namespace GBPColmadoNet.Tests
             Assert.NotNull(result);
             Assert.Equal(1, result!.UsuarioId);
             Assert.Equal("bonifacio_dev", result.Username);
-            // Verificamos que no se esté rastreando la entidad (AsNoTracking)
             Assert.Empty(context.ChangeTracker.Entries());
         }
 
@@ -144,16 +143,66 @@ namespace GBPColmadoNet.Tests
             Assert.Null(eliminado);
         }
 
+        [Fact]
+        public async Task Autenticar_ConCredencialesCorrectas_RetornaUsuario()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            var passwordPlainText = "MiClaveSecreta";
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(passwordPlainText);
+
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Usuarios.Add(CreateUsuario(id: 1, username: "test_user", passwordHash: passwordHash));
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new UsuarioServices(context);
+
+            // Act
+            var result = await service.AutenticarAsync("test_user", passwordPlainText);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("test_user", result!.Username);
+        }
+
+        [Fact]
+        public async Task Autenticar_ConCredencialesIncorrectas_RetornaNull()
+        {
+            // Arrange
+            var dbName = TestDbContextFactory.NewDataBaseName();
+            var passwordPlainText = "MiClaveSecreta";
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(passwordPlainText);
+
+            await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
+            {
+                seedContext.Usuarios.Add(CreateUsuario(id: 1, username: "test_user", passwordHash: passwordHash));
+                await seedContext.SaveChangesAsync();
+            }
+
+            await using var context = TestDbContextFactory.CreateContext(dbName);
+            var service = new UsuarioServices(context);
+
+            // Act
+            var result = await service.AutenticarAsync("test_user", "ClaveEquivocada");
+
+            // Assert
+            Assert.Null(result);
+        }
+
         private static Usuario CreateUsuario(
             int id,
             string username,
-            string rol = "Admin")
+            string rol = "Admin",
+            string? passwordHash = null)
         {
             return new Usuario
             {
                 UsuarioId = id,
                 Username = username,
-                PasswordHash = "12345",
+                PasswordHash = passwordHash ?? "12345",
                 Rol = rol,
                 FechaRegistro = DateTime.Now
             };
