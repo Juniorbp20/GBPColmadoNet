@@ -8,11 +8,10 @@ using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
 using GBPColmadoNet.UI.Forms.Inventario.Devoluciones;
 using GBPColmadoNet.UI.Forms.Inventario.ESForm;
-using GBPColmadoNet.UI.Forms.Inventario.ListarProductos;
 using GBPColmadoNet.UI.Forms.Proveedor;
 using GBPColmadoNet.UI.Forms.Ventas;
 using Microsoft.Extensions.DependencyInjection;
-using ListarProductosList = GBPColmadoNet.UI.Forms.Inventario.ListarProductos.ListarProductosList;
+using ListarProductosList = GBPColmadoNet.UI.Forms.Inventario.ESForm.ListarProductosList;
 
 namespace GBPColmadoNet
 {
@@ -45,7 +44,7 @@ namespace GBPColmadoNet
             tlSConfiguraciones.Visible = false;
 
             // Manejar clics en los labels para mostrar/ocultar
-            toolStripLabelInventario.Click += (s, e) => 
+            toolStripLabelInventario.Click += (s, e) =>
             {
                 bool show = !toolStripButton1.Visible;
                 toolStripButton1.Visible = show;
@@ -53,21 +52,21 @@ namespace GBPColmadoNet
                 toolStripButtonListarProductos.Visible = show;
             };
 
-            toolStripLabelVentas.Click += (s, e) => 
+            toolStripLabelVentas.Click += (s, e) =>
             {
                 bool show = !toolStripButtonVentaR.Visible;
                 toolStripButtonVentaR.Visible = show;
                 toolStripButtonCuadre.Visible = show;
             };
 
-            toolStripLabelCliente.Click += (s, e) => 
+            toolStripLabelCliente.Click += (s, e) =>
             {
                 bool show = !toolStripButtonCliente.Visible;
                 toolStripButtonCliente.Visible = show;
                 toolStripButtonCuentasPCobrar.Visible = show;
             };
 
-            toolStripLabelHistorial.Click += (s, e) => 
+            toolStripLabelHistorial.Click += (s, e) =>
             {
                 bool show = !toolStripButtonHClientes.Visible;
                 toolStripButtonHClientes.Visible = show;
@@ -75,7 +74,7 @@ namespace GBPColmadoNet
                 toolStripButtonHVentas.Visible = show;
             };
 
-            toolStripButtonConfiguracion.Click += (s, e) => 
+            toolStripButtonConfiguracion.Click += (s, e) =>
             {
                 bool show = !tlSConfiguraciones.Visible;
                 tlSConfiguraciones.Visible = show;
@@ -126,6 +125,13 @@ namespace GBPColmadoNet
         {
             var listarProductos = Program.ServiceProvider?.GetRequiredService<UI.Forms.Inventario.ESForm.ListarProductosList>();
             listarProductos?.Show();
+        }
+
+        private void toolStripButtonVentaR_Click(object sender, EventArgs e)
+        {
+            var ventaRapida = Program.ServiceProvider.GetRequiredService<VentaRapidaForm>();
+            ventaRapida?.ShowDialog();
+
         }
     }
 }
