@@ -389,6 +389,7 @@ namespace GBPColmadoNet
             toolStripButtonVentaR.Size = new Size(210, 19);
             toolStripButtonVentaR.Text = "Venta Rapida";
             toolStripButtonVentaR.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonVentaR.Click += toolStripButtonVentaR_Click;
             // 
             // toolStripButtonCuadre
             // 

@@ -196,7 +196,6 @@
         private Panel PanelHeder;
         private Button btnModificar;
         private Button btnELiminar;
-        private Label label1;
         private TextBox txBuscarProducto;
         private Label lbBuscar;
         private Button lbSalidaProductoss;

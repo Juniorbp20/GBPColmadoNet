@@ -15,15 +15,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GBPColmadoNet;
 
-     static class Program
-    {
+static class Program
+{
     public static ServiceProvider ServiceProvider { get; private set; } = null!;
     /// <summary>
     ///  The main entry point for the application.
     /// </summary>
     [STAThread]
-        static void Main()
-        {
+    static void Main()
+    {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
@@ -66,7 +66,7 @@ namespace GBPColmadoNet;
         services.AddTransient<EForm>();
         services.AddTransient<ModificarInventarioForm>();
         services.AddTransient<SForm>();
-        
+
 
 
         //Services 
@@ -82,6 +82,7 @@ namespace GBPColmadoNet;
         services.AddTransient<RoleService>();
         services.AddTransient<UsuarioServices>();
         services.AddTransient<VentasService>();
+        services.AddTransient<CarritoItemService>();
 
 
     }
