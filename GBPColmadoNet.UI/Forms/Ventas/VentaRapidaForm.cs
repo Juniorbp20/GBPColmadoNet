@@ -19,14 +19,6 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             _ventasService = ventasService;
             _clienteService = clienteService;
 
-            var tempLocation = txtDineroRecibido.Location;
-            txtDineroRecibido.Location = txtDescuento.Location;
-            txtDescuento.Location = tempLocation;
-
-            var tempTabIndex = txtDineroRecibido.TabIndex;
-            txtDineroRecibido.TabIndex = txtDescuento.TabIndex;
-            txtDescuento.TabIndex = tempTabIndex;
-
             _carrito = new BindingList<CarritoItem>();
             dgvVenta.DataSource = _carrito;
         }
@@ -57,13 +49,19 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             {
                 // Cargar Clientes
                 var clientes = await _clienteService.GetList(c => true);
-                var listaClientes = new List<Cliente> { new Cliente { ClienteId = 0, Nombre = "Ninguno" } };
+                var listaClientes = new List<Cliente> { new Cliente { ClienteId = 0, Nombre = "Consumidor Final" } };
                 listaClientes.AddRange(clientes);
 
                 cmbCliente.DataSource = listaClientes;
                 cmbCliente.DisplayMember = "Nombre";
                 cmbCliente.ValueMember = "ClienteId";
                 cmbCliente.SelectedIndex = 0;
+                
+                // Configurar Tipo de Pago por defecto
+                if (cmbTipoPago.Items.Count > 0)
+                {
+                    cmbTipoPago.SelectedIndex = 0;
+                }
 
                 // Cargar Productos
                 _productosDisponibles = await _productoService.GetList(p => p.Activo == true);
@@ -75,6 +73,22 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar datos: {ex.Message}");
+            }
+        }
+
+        private void CmbCliente_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (cmbCliente.SelectedValue is int cId && cId > 0)
+            {
+                lblTipoPago.Visible = true;
+                cmbTipoPago.Visible = true;
+            }
+            else
+            {
+                lblTipoPago.Visible = false;
+                cmbTipoPago.Visible = false;
+                if (cmbTipoPago.Items.Count > 0)
+                    cmbTipoPago.SelectedIndex = 0; // Por defecto Efectivo
             }
         }
 
@@ -256,10 +270,14 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                 clienteId = cId;
             }
 
-            // Validar pago completo si no hay cliente (al contado obligado)
-            if (recibido < totalPagar && clienteId == null)
+            string tipoPago = cmbTipoPago.Visible && cmbTipoPago.SelectedItem != null 
+                ? cmbTipoPago.SelectedItem.ToString() ?? "Efectivo" 
+                : "Efectivo";
+
+            // Validar pago completo si es en efectivo
+            if (tipoPago == "Efectivo" && recibido < totalPagar)
             {
-                MessageBox.Show("Pago insuficiente. Para ventas a crédito debe seleccionar un cliente.");
+                MessageBox.Show("Pago insuficiente. El dinero recibido no cubre el total de la venta en efectivo.");
                 return;
             }
 
@@ -287,6 +305,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                 var venta = new Venta
                 {
                     Fecha = DateTime.Now,
+                    UsuarioId = SessionManager.CurrentUser?.UsuarioId,
                     TotalNeto = _carrito.Sum(c => c.Subtotal) - (decimal.TryParse(txtDescuento.Text, out decimal desc) ? desc : 0),
                     TotalItbis = _carrito.Sum(c => c.Itbis),
                     ClienteId = clienteId
@@ -311,8 +330,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                     }
                 }
 
-                // Generar Cuentas por Cobrar si fue fiado (opcional según la regla de negocio)
-                if (recibido < totalPagar && clienteId != null)
+                // Generar Cuentas por Cobrar si fue fiado
+                if (tipoPago == "Crédito" && clienteId != null)
                 {
                     venta.CuentasPorCobrars.Add(new CuentasPorCobrar
                     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -65,6 +65,21 @@ namespace GBPColmadoNet.UI.Services
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();
+        }
+
+        public async Task<CierresCaja?> ObtenerCajaAbiertaAsync(int usuarioId)
+        {
+            return await context.CierresCajas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.UsuarioId == usuarioId && c.Estado == "Abierta");
+        }
+
+        public async Task<bool> CerrarCajaAsync(CierresCaja cierre)
+        {
+            cierre.Estado = "Cerrada";
+            cierre.FechaCierre = DateTime.Now;
+            context.CierresCajas.Update(cierre);
+            return await context.SaveChangesAsync() > 0;
         }
     }
 }

@@ -18,6 +18,34 @@ namespace GBPColmadoNet
         {
             InitializeComponent();
             ConfigurarMenuAcordeon();
+
+            cerrarSesionToolStripMenuItem.Click += CerrarSesion_Click;
+            tlSCerrarSesion.Click += CerrarSesion_Click;
+        }
+
+        private void CerrarSesion_Click(object? sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            var currentUser = GBPColmadoNet.UI.Services.SessionManager.CurrentUser;
+            if (currentUser != null && currentUser.Rol != "Admin")
+            {
+                var cierreCajaService = Program.ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Services.CierreCajaService>();
+
+                // Evitar deadlock en WinForms
+                var cajaAbierta = Task.Run(() => cierreCajaService.ObtenerCajaAbiertaAsync(currentUser.UsuarioId)).Result;
+
+                if (cajaAbierta != null)
+                {
+                    MessageBox.Show("No puede cerrar el sistema ni la sesión sin antes realizar el cuadre de caja.", "Caja Abierta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            base.OnFormClosing(e);
         }
 
         private void ConfigurarMenuAcordeon()
@@ -174,6 +202,12 @@ namespace GBPColmadoNet
         {
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
+        }
+
+        private void toolStripButtonCuadre_Click(object sender, EventArgs e)
+        {
+            var cuadre = Program.ServiceProvider.GetRequiredService<CuadreForm>();
+            cuadre.ShowDialog();
         }
     }
 }

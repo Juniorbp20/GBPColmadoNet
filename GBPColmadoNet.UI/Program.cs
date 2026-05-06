@@ -36,6 +36,24 @@ static class Program
         var loginForm = ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Forms.LoginForm.LoginForm>();
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
+            var cierreCajaService = ServiceProvider.GetRequiredService<CierreCajaService>();
+            var currentUser = SessionManager.CurrentUser;
+            
+            // Requerir caja abierta
+            if (currentUser != null)
+            {
+                var cajaAbierta = cierreCajaService.ObtenerCajaAbiertaAsync(currentUser.UsuarioId).Result;
+                if (cajaAbierta == null)
+                {
+                    var aperturaForm = ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Forms.Ventas.AperturaCajaForm>();
+                    if (aperturaForm.ShowDialog() != DialogResult.OK)
+                    {
+                        Application.Exit();
+                        return;
+                    }
+                }
+            }
+
             Application.Run(ServiceProvider.GetRequiredService<MainForm>());
         }
         else
@@ -58,6 +76,7 @@ static class Program
 
         //Form y List
         services.AddTransient<LoginForm>();
+        services.AddTransient<GBPColmadoNet.UI.Forms.Ventas.AperturaCajaForm>();
         services.AddTransient<MainForm>();
         services.AddTransient<ClienteForm>();
         services.AddTransient<ClienteList>();
