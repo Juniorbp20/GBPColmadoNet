@@ -111,6 +111,7 @@ static class Program
         services.AddTransient<UsuarioServices>();
         services.AddTransient<VentasService>();
         services.AddTransient<CarritoItemService>();
+        services.AddTransient<ConfiguracionService>();
 
 
     }

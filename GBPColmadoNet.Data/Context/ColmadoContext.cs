@@ -30,6 +30,8 @@ public partial class ColmadoContext : DbContext
 
     public virtual DbSet<ComprasDetalle> ComprasDetalles { get; set; }
 
+    public virtual DbSet<ConfiguracionesNegocio> ConfiguracionesNegocios { get; set; }
+
     public virtual DbSet<CuentasPorCobrar> CuentasPorCobrars { get; set; }
 
     public virtual DbSet<Producto> Productos { get; set; }
@@ -48,7 +50,7 @@ public partial class ColmadoContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=GBPColmadoDB;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=GBPColmadoDB;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -195,6 +197,24 @@ public partial class ColmadoContext : DbContext
                 .HasForeignKey(d => d.ProductoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__ComprasDe__Produ__151B244E");
+        });
+
+        modelBuilder.Entity<ConfiguracionesNegocio>(entity =>
+        {
+            entity.ToTable("ConfiguracionesNegocio");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.CiudadProvincia).HasMaxLength(100);
+            entity.Property(e => e.Correo).HasMaxLength(100);
+            entity.Property(e => e.Direccion).HasMaxLength(500);
+            entity.Property(e => e.ItbisDefecto).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.MargenGananciaDefecto).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.NombreComercial).HasMaxLength(200);
+            entity.Property(e => e.Rnc)
+                .HasMaxLength(20)
+                .HasColumnName("RNC");
+            entity.Property(e => e.Telefono).HasMaxLength(20);
+            entity.Property(e => e.ImpresoraPredeterminada).HasMaxLength(200);
         });
 
         modelBuilder.Entity<CuentasPorCobrar>(entity =>
@@ -357,9 +377,18 @@ public partial class ColmadoContext : DbContext
                 .HasConstraintName("FK__VentasDet__Venta__628FA481");
         });
 
+        modelBuilder.Entity<CarritoItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Nombre).HasMaxLength(100);
+            entity.Property(e => e.Codigo).HasMaxLength(50);
+            entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
+            entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TasaItbis).HasColumnType("decimal(5, 2)");
+        });
+
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
 }
