@@ -24,4 +24,6 @@ public partial class Venta
     public virtual Usuario? Usuario { get; set; }
 
     public virtual ICollection<VentasDetalle> VentasDetalles { get; set; } = new List<VentasDetalle>();
+
+    public string DisplayVenta => $"#{VentaId} - {(Cliente != null ? Cliente.Nombre : "Consumidor Final")} - {Fecha:dd/MM/yyyy}";
 }

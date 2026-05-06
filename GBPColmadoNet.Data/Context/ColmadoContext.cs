@@ -48,6 +48,8 @@ public partial class ColmadoContext : DbContext
 
     public virtual DbSet<CarritoItem> CarritoItems { get; set; }
 
+    public virtual DbSet<Devolucion> Devoluciones { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=GBPColmadoDB;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -385,6 +387,30 @@ public partial class ColmadoContext : DbContext
             entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
             entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.TasaItbis).HasColumnType("decimal(5, 2)");
+        });
+
+        modelBuilder.Entity<Devolucion>(entity =>
+        {
+            entity.HasKey(e => e.DevolucionId);
+
+            entity.Property(e => e.Cantidad).HasColumnType("int");
+            entity.Property(e => e.Estado).HasMaxLength(20).HasDefaultValue("Pendiente");
+            entity.Property(e => e.FechaRegistro)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.MontoReembolsado).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.Motivo).HasMaxLength(500);
+            entity.Property(e => e.ProductoNombre).HasMaxLength(100);
+
+            entity.HasOne(d => d.Venta).WithMany()
+                .HasForeignKey(d => d.VentaId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Devolucio__Venta");
+
+            entity.HasOne(d => d.Usuario).WithMany()
+                .HasForeignKey(d => d.UsuarioId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK__Devolucio__Usuar");
         });
 
         OnModelCreatingPartial(modelBuilder);
