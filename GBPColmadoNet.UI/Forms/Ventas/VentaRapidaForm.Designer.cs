@@ -50,6 +50,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             btnEliminarItem = new Button();
             btnCancelarVenta = new Button();
             btnConfirmarVenta = new Button();
+            lblTipoPago = new Label();
+            cmbTipoPago = new ComboBox();
             PanelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numCantidad).BeginInit();
             PanelMiddle.SuspendLayout();
@@ -60,6 +62,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // 
             // PanelTop
             // 
+            PanelTop.Controls.Add(lblTipoPago);
+            PanelTop.Controls.Add(cmbTipoPago);
             PanelTop.Controls.Add(lblCliente);
             PanelTop.Controls.Add(cmbCliente);
             PanelTop.Controls.Add(lblProducto);
@@ -93,11 +97,33 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             cmbCliente.Name = "cmbCliente";
             cmbCliente.Size = new Size(200, 23);
             cmbCliente.TabIndex = 1;
+            cmbCliente.SelectedIndexChanged += CmbCliente_SelectedIndexChanged;
+            // 
+            // 
+            // lblTipoPago
+            // 
+            lblTipoPago.AutoSize = true;
+            lblTipoPago.Location = new Point(295, 20);
+            lblTipoPago.Name = "lblTipoPago";
+            lblTipoPago.Size = new Size(63, 15);
+            lblTipoPago.TabIndex = 11;
+            lblTipoPago.Text = "Tipo Pago:";
+            lblTipoPago.Visible = false;
+            // 
+            // cmbTipoPago
+            // 
+            cmbTipoPago.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoPago.Items.AddRange(new object[] { "Efectivo", "Crédito" });
+            cmbTipoPago.Location = new Point(365, 17);
+            cmbTipoPago.Name = "cmbTipoPago";
+            cmbTipoPago.Size = new Size(100, 23);
+            cmbTipoPago.TabIndex = 12;
+            cmbTipoPago.Visible = false;
             // 
             // lblProducto
             // 
             lblProducto.AutoSize = true;
-            lblProducto.Location = new Point(300, 23);
+            lblProducto.Location = new Point(475, 20);
             lblProducto.Name = "lblProducto";
             lblProducto.Size = new Size(59, 15);
             lblProducto.TabIndex = 2;
@@ -108,9 +134,9 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             cmbProducto.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbProducto.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbProducto.FormattingEnabled = true;
-            cmbProducto.Location = new Point(365, 20);
+            cmbProducto.Location = new Point(540, 17);
             cmbProducto.Name = "cmbProducto";
-            cmbProducto.Size = new Size(515, 23);
+            cmbProducto.Size = new Size(340, 23);
             cmbProducto.TabIndex = 3;
             cmbProducto.SelectedIndexChanged += CmbProducto_SelectedIndexChanged;
             cmbProducto.KeyUp += CmbProducto_KeyUp;
@@ -332,10 +358,10 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // 
             // txtDineroRecibido
             // 
-            txtDineroRecibido.Location = new Point(549, 17);
+            txtDineroRecibido.Location = new Point(140, 110);
             txtDineroRecibido.Name = "txtDineroRecibido";
             txtDineroRecibido.Size = new Size(100, 23);
-            txtDineroRecibido.TabIndex = 8;
+            txtDineroRecibido.TabIndex = 10;
             txtDineroRecibido.Text = "0.00";
             txtDineroRecibido.TextAlign = HorizontalAlignment.Right;
             txtDineroRecibido.TextChanged += TxtDineroRecibido_TextChanged;
@@ -351,10 +377,10 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // 
             // txtDescuento
             // 
-            txtDescuento.Location = new Point(140, 110);
+            txtDescuento.Location = new Point(549, 17);
             txtDescuento.Name = "txtDescuento";
             txtDescuento.Size = new Size(100, 23);
-            txtDescuento.TabIndex = 10;
+            txtDescuento.TabIndex = 8;
             txtDescuento.Text = "0.00";
             txtDescuento.TextAlign = HorizontalAlignment.Right;
             txtDescuento.TextChanged += TxtDescuento_TextChanged;
@@ -464,6 +490,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
         private System.Windows.Forms.Panel PanelTop;
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.ComboBox cmbCliente;
+        private System.Windows.Forms.Label lblTipoPago;
+        private System.Windows.Forms.ComboBox cmbTipoPago;
         private System.Windows.Forms.Label lblProducto;
         private System.Windows.Forms.ComboBox cmbProducto;
         private System.Windows.Forms.Label lblStockLabel;

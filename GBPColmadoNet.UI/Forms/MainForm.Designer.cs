@@ -233,21 +233,21 @@ namespace GBPColmadoNet
             // historialClienteToolStripMenuItem
             // 
             historialClienteToolStripMenuItem.Name = "historialClienteToolStripMenuItem";
-            historialClienteToolStripMenuItem.Size = new Size(180, 22);
+            historialClienteToolStripMenuItem.Size = new Size(175, 22);
             historialClienteToolStripMenuItem.Text = "Historial Cliente";
             historialClienteToolStripMenuItem.Click += historialClienteToolStripMenuItem_Click;
             // 
             // historialProveedorToolStripMenuItem
             // 
             historialProveedorToolStripMenuItem.Name = "historialProveedorToolStripMenuItem";
-            historialProveedorToolStripMenuItem.Size = new Size(180, 22);
+            historialProveedorToolStripMenuItem.Size = new Size(175, 22);
             historialProveedorToolStripMenuItem.Text = "Historial Proveedor";
             historialProveedorToolStripMenuItem.Click += historialProveedorToolStripMenuItem_Click;
             // 
             // historialVentasToolStripMenuItem
             // 
             historialVentasToolStripMenuItem.Name = "historialVentasToolStripMenuItem";
-            historialVentasToolStripMenuItem.Size = new Size(180, 22);
+            historialVentasToolStripMenuItem.Size = new Size(175, 22);
             historialVentasToolStripMenuItem.Text = "Historial  Ventas";
             historialVentasToolStripMenuItem.Click += historialVentasToolStripMenuItem_Click;
             // 
@@ -262,13 +262,13 @@ namespace GBPColmadoNet
             // configuracionesToolStripMenuItem
             // 
             configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
-            configuracionesToolStripMenuItem.Size = new Size(180, 22);
+            configuracionesToolStripMenuItem.Size = new Size(161, 22);
             configuracionesToolStripMenuItem.Text = "Configuraciones";
             // 
             // cerrarSesionToolStripMenuItem
             // 
             cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
+            cerrarSesionToolStripMenuItem.Size = new Size(161, 22);
             cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
             // 
             // panelContent
@@ -410,6 +410,7 @@ namespace GBPColmadoNet
             toolStripButtonCuadre.Size = new Size(210, 19);
             toolStripButtonCuadre.Text = "Cuadre";
             toolStripButtonCuadre.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonCuadre.Click += toolStripButtonCuadre_Click;
             // 
             // toolStripSeparator4
             // 
