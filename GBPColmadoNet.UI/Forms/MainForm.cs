@@ -103,9 +103,76 @@ namespace GBPColmadoNet
             };
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
+            await CargarDashboard();
+        }
 
+        private async Task CargarDashboard()
+        {
+            try
+            {
+                var context = Program.ServiceProvider.GetRequiredService<ColmadoContext>();
+                var configService = Program.ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Services.ConfiguracionService>();
+                
+                // 1. Configuracion del negocio (Header)
+                var config = await configService.ObtenerConfiguracionAsync();
+                if (config != null)
+                {
+                    lblBrandTitle.Text = string.IsNullOrEmpty(config.NombreComercial) ? "GBPColmadoNet" : config.NombreComercial;
+                    lblBrandSub.Text = string.IsNullOrEmpty(config.Descripcion) ? "Gestiona tu inventario, ventas y proveedores desde un solo lugar" : config.Descripcion;
+                }
+
+                // 2. Usuario Actual
+                var currentUser = GBPColmadoNet.UI.Services.SessionManager.CurrentUser;
+                if (currentUser != null)
+                {
+                    lblBienvenido.Text = $"Bienvenido {currentUser.Username} ({currentUser.Rol})";
+                }
+
+                // 3. Stats
+                // Productos activos
+                var productosActivos = context.Productos.Count(p => p.Activo == true);
+                lblProductosActivosValue.Text = productosActivos.ToString();
+
+                // Proveedores registrados
+                var proveedores = context.Proveedores.Count();
+                lblProveedoresPendientesValue.Text = proveedores.ToString();
+
+                // Stock critico (<= 5)
+                var stockCritico = context.Productos.Count(p => p.Stock <= 5 && p.Activo == true);
+                lblStockCriticoValue.Text = stockCritico.ToString();
+
+                // Venta Total hoy
+                var ventasHoy = context.Ventas
+                    .Where(v => v.Fecha.HasValue && v.Fecha.Value.Date == DateTime.Today)
+                    .Sum(v => (decimal?)v.TotalNeto + (decimal?)v.TotalItbis) ?? 0m;
+                lblVentaTotalValue.Text = ventasHoy.ToString("N2");
+
+                // Ganancia estimada de hoy
+                var detallesHoy = context.VentasDetalles
+                    .Where(d => d.Venta != null && d.Venta.Fecha.HasValue && d.Venta.Fecha.Value.Date == DateTime.Today)
+                    .Select(d => new 
+                    {
+                        d.Cantidad,
+                        d.PrecioUnitario,
+                        PrecioCompra = d.Producto != null ? d.Producto.PrecioCompra : 0
+                    }).ToList();
+                
+                decimal gananciaHoy = detallesHoy.Sum(d => (d.PrecioUnitario - d.PrecioCompra) * d.Cantidad);
+                lblGananciaEstimadaValue.Text = gananciaHoy.ToString("N2");
+
+                // Fiados pendientes
+                var fiadosPendientes = context.CuentasPorCobrars
+                    .Where(c => c.Estado == "Pendiente")
+                    .Sum(c => (decimal?)c.BalancePendiente) ?? 0m;
+                lblFiadosPendientesValue.Text = fiadosPendientes.ToString("N2");
+            }
+            catch (Exception ex)
+            {
+                // Ignorar o loguear error de dashboard
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void panelContent_Paint(object sender, PaintEventArgs e)
