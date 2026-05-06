@@ -46,6 +46,8 @@ public partial class ColmadoContext : DbContext
 
     public virtual DbSet<VentasDetalle> VentasDetalles { get; set; }
 
+    public virtual DbSet<CarritoItem> CarritoItems { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=GBPColmadoDB;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -373,6 +375,16 @@ public partial class ColmadoContext : DbContext
             entity.HasOne(d => d.Venta).WithMany(p => p.VentasDetalles)
                 .HasForeignKey(d => d.VentaId)
                 .HasConstraintName("FK__VentasDet__Venta__628FA481");
+        });
+
+        modelBuilder.Entity<CarritoItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Nombre).HasMaxLength(100);
+            entity.Property(e => e.Codigo).HasMaxLength(50);
+            entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
+            entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TasaItbis).HasColumnType("decimal(5, 2)");
         });
 
         OnModelCreatingPartial(modelBuilder);
