@@ -36,11 +36,21 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                 txtMensajeTicket.Text = _configuracionActual.MensajeTicket;
                 numMargenGanancia.Value = _configuracionActual.MargenGananciaDefecto;
 
-                if (!string.IsNullOrEmpty(_configuracionActual.ImpresoraPredeterminada) && 
+                if (!string.IsNullOrEmpty(_configuracionActual.ImpresoraPredeterminada) &&
                     cmbImpresora.Items.Contains(_configuracionActual.ImpresoraPredeterminada))
                 {
                     cmbImpresora.SelectedItem = _configuracionActual.ImpresoraPredeterminada;
                 }
+            }
+
+            var currentUser = SessionManager.CurrentUser;
+            if (currentUser != null && currentUser.Rol == "Admin")
+            {
+                grpUsuarios.Visible = true;
+            }
+            else
+            {
+                grpUsuarios.Visible = false;
             }
         }
 
@@ -80,7 +90,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             _configuracionActual.Descripcion = txtDescripcion.Text;
             _configuracionActual.MensajeTicket = txtMensajeTicket.Text;
             _configuracionActual.MargenGananciaDefecto = numMargenGanancia.Value;
-            
+
             if (cmbImpresora.SelectedItem != null)
             {
                 _configuracionActual.ImpresoraPredeterminada = cmbImpresora.SelectedItem.ToString();
@@ -107,6 +117,12 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnCrearUsuario_Click_1(object sender, EventArgs e)
+        {
+            var crearUsuarioForm = Program.ServiceProvider.GetRequiredService<CrearUsuarioForm>();
+            crearUsuarioForm.ShowDialog();
         }
     }
 }
