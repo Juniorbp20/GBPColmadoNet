@@ -6,12 +6,11 @@ using System.Linq.Expressions;
 
 namespace GBPColmadoNet.UI.Services
 {
-    public class CuentasPorCobrarService(ColmadoContext context
-    ) : IService<CuentasPorCobrar, int>
+    public class CuentasPorCobrarService(ColmadoContext context) : IService<CuentasPorCobrar, int>
     {
         public async Task<bool> Guardar(CuentasPorCobrar entidad)
         {
-            if (!await Existe((decimal)entidad.Id!))
+            if (entidad.Id == 0)
                 return await Insertar(entidad);
             else
                 return await Modificar(entidad);
@@ -23,12 +22,12 @@ namespace GBPColmadoNet.UI.Services
             return await context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Existe(Decimal id)
+        public async Task<bool> Existe(int id)
         {
-            return await context.CuentasPorCobrars.AnyAsync(a => a.Id == id);
+            return await context.CuentasPorCobrars.AnyAsync(c => c.Id == id);
         }
 
-        public async Task<bool> Modificar(Data.Models.CuentasPorCobrar entidad)
+        public async Task<bool> Modificar(CuentasPorCobrar entidad)
         {
             context.CuentasPorCobrars.Update(entidad);
             return await context.SaveChangesAsync() > 0;
@@ -37,31 +36,83 @@ namespace GBPColmadoNet.UI.Services
         public async Task<CuentasPorCobrar?> Buscar(int id)
         {
             return await context.CuentasPorCobrars
+                .Include(c => c.Cliente)
+                .Include(c => c.Venta)
+                .Include(c => c.Abonos)
+                    .ThenInclude(a => a.Usuario)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<bool> Eliminar(int id)
         {
-            var cuentasPorCobrar = await context
-                .CuentasPorCobrars
-                .FindAsync(id);
-
-            if (cuentasPorCobrar == null)
+            var cuenta = await context.CuentasPorCobrars.FindAsync(id);
+            if (cuenta == null)
                 return false;
 
-            context.CuentasPorCobrars.Remove(cuentasPorCobrar);
-            var cantidad = await context.SaveChangesAsync();
-
-            return cantidad > 0; ;
+            context.CuentasPorCobrars.Remove(cuenta);
+            return await context.SaveChangesAsync() > 0;
         }
 
         public async Task<List<CuentasPorCobrar>> GetList(Expression<Func<CuentasPorCobrar, bool>> criterio)
         {
             return await context.CuentasPorCobrars
+                .Include(c => c.Cliente)
+                .Include(c => c.Venta)
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();
+        }
+
+        public async Task<List<Cliente>> GetClientesAsync()
+        {
+            return await context.Clientes
+                .Where(c => c.Activo == true)
+                .OrderBy(c => c.Nombre)
+                .ToListAsync();
+        }
+
+        public async Task<List<Venta>> GetVentasSinCuentaAsync()
+        {
+            var ventasConCuenta = await context.CuentasPorCobrars
+                .Where(c => c.VentaId != null)
+                .Select(c => c.VentaId)
+                .ToListAsync();
+
+            return await context.Ventas
+                .Include(v => v.Cliente)
+                .Where(v => !ventasConCuenta.Contains(v.VentaId))
+                .OrderByDescending(v => v.Fecha)
+                .ToListAsync();
+        }
+
+        public async Task<bool> RegistrarAbonoAsync(int cuentaId, decimal monto, int usuarioId)
+        {
+            var cuenta = await context.CuentasPorCobrars.FindAsync(cuentaId);
+            if (cuenta == null)
+                return false;
+
+            var abono = new Abono
+            {
+                CuentaPorCobrarId = cuentaId,
+                Monto = monto,
+                Fecha = DateTime.Now,
+                FechaRegistro = DateTime.Now,
+                UsuarioId = usuarioId
+            };
+
+            context.Abonos.Add(abono);
+
+            cuenta.MontoAbonado = (cuenta.MontoAbonado ?? 0) + monto;
+            cuenta.BalancePendiente = cuenta.MontoDeuda - cuenta.MontoAbonado;
+
+            if (cuenta.BalancePendiente <= 0)
+            {
+                cuenta.Estado = "Pagada";
+                cuenta.BalancePendiente = 0;
+            }
+
+            return await context.SaveChangesAsync() > 0;
         }
     }
 }

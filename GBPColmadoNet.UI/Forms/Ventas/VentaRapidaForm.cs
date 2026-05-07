@@ -92,6 +92,20 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             }
         }
 
+        private void CmbTipoPago_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            if (cmbTipoPago.SelectedItem != null && cmbTipoPago.SelectedItem.ToString() == "Crédito")
+            {
+                txtDineroRecibido.Text = "0.00";
+                txtDineroRecibido.Enabled = false;
+            }
+            else
+            {
+                txtDineroRecibido.Enabled = true;
+                txtDineroRecibido.Text = string.Empty;
+            }
+        }
+
         private void CmbProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             MostrarInfoProductoSeleccionado();
@@ -282,14 +296,24 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             }
 
             decimal itbisTotal = _carrito.Sum(c => c.Itbis);
-            decimal cambio = recibido - totalPagar;
+            decimal cambio = 0;
+            string mensajeConfirmacion;
 
-            // Confirmación exacta a la solicitada en la imagen
-            string mensajeConfirmacion = $"Total a Pagar: RD$ {totalPagar:N2}\n" +
-                                         $"ITBIS Incluido: RD$ {itbisTotal:N2}\n" +
-                                         $"Dinero Recibido: RD$ {recibido:N2}\n" +
-                                         $"Cambio a Devolver: RD$ {(cambio > 0 ? cambio : 0):N2}\n\n" +
-                                         "¿Confirmar y guardar la venta?";
+            if (tipoPago == "Crédito")
+            {
+                mensajeConfirmacion = $"Total a Pagar (Crédito): RD$ {totalPagar:N2}\n" +
+                                      $"ITBIS Incluido: RD$ {itbisTotal:N2}\n\n" +
+                                      "¿Confirmar y guardar la venta a crédito?";
+            }
+            else
+            {
+                cambio = recibido - totalPagar;
+                mensajeConfirmacion = $"Total a Pagar: RD$ {totalPagar:N2}\n" +
+                                      $"ITBIS Incluido: RD$ {itbisTotal:N2}\n" +
+                                      $"Dinero Recibido: RD$ {recibido:N2}\n" +
+                                      $"Cambio a Devolver: RD$ {(cambio > 0 ? cambio : 0):N2}\n\n" +
+                                      "¿Confirmar y guardar la venta?";
+            }
 
             var confirmacion = MessageBox.Show(mensajeConfirmacion, "Confirmar Venta Final", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -325,6 +349,9 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                     if (prodDb != null)
                     {
                         prodDb.Stock -= item.Cantidad;
+                        prodDb.Categoria = null;
+                        prodDb.Proveedor = null;
+                        
                         // Hacemos detach si ya está en local tracking para evitar choques
                         await _productoService.Modificar(prodDb);
                     }

@@ -35,10 +35,13 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             txtMensajeTicket = new System.Windows.Forms.TextBox();
             lblImpresora = new System.Windows.Forms.Label();
             cmbImpresora = new System.Windows.Forms.ComboBox();
+            lblMargenGanancia = new System.Windows.Forms.Label();
+            numMargenGanancia = new System.Windows.Forms.NumericUpDown();
             btnGuardar = new System.Windows.Forms.Button();
             btnCancelar = new System.Windows.Forms.Button();
             grpDatosNegocio.SuspendLayout();
             grpParametros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(numMargenGanancia)).BeginInit();
             SuspendLayout();
             // 
             // grpDatosNegocio
@@ -182,9 +185,11 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             grpParametros.Controls.Add(txtMensajeTicket);
             grpParametros.Controls.Add(lblImpresora);
             grpParametros.Controls.Add(cmbImpresora);
+            grpParametros.Controls.Add(lblMargenGanancia);
+            grpParametros.Controls.Add(numMargenGanancia);
             grpParametros.Location = new System.Drawing.Point(20, 320);
             grpParametros.Name = "grpParametros";
-            grpParametros.Size = new System.Drawing.Size(600, 100);
+            grpParametros.Size = new System.Drawing.Size(600, 140);
             grpParametros.TabIndex = 1;
             grpParametros.TabStop = false;
             grpParametros.Text = "Parámetros del Sistema";
@@ -223,11 +228,29 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             cmbImpresora.Size = new System.Drawing.Size(420, 23);
             cmbImpresora.TabIndex = 1;
             // 
+            // lblMargenGanancia
+            // 
+            lblMargenGanancia.AutoSize = true;
+            lblMargenGanancia.Location = new System.Drawing.Point(20, 100);
+            lblMargenGanancia.Name = "lblMargenGanancia";
+            lblMargenGanancia.Size = new System.Drawing.Size(126, 15);
+            lblMargenGanancia.TabIndex = 4;
+            lblMargenGanancia.Text = "Margen de Ganancia %:";
+            // 
+            // numMargenGanancia
+            // 
+            numMargenGanancia.Location = new System.Drawing.Point(160, 97);
+            numMargenGanancia.Name = "numMargenGanancia";
+            numMargenGanancia.Size = new System.Drawing.Size(120, 23);
+            numMargenGanancia.TabIndex = 5;
+            numMargenGanancia.DecimalPlaces = 2;
+            numMargenGanancia.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
+            // 
             // btnGuardar
             // 
             btnGuardar.BackColor = System.Drawing.Color.Teal;
             btnGuardar.ForeColor = System.Drawing.Color.White;
-            btnGuardar.Location = new System.Drawing.Point(500, 440);
+            btnGuardar.Location = new System.Drawing.Point(500, 480);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new System.Drawing.Size(120, 35);
             btnGuardar.TabIndex = 2;
@@ -238,7 +261,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // btnCancelar
             // 
             btnCancelar.BackColor = System.Drawing.Color.Silver;
-            btnCancelar.Location = new System.Drawing.Point(360, 440);
+            btnCancelar.Location = new System.Drawing.Point(360, 480);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new System.Drawing.Size(120, 35);
             btnCancelar.TabIndex = 3;
@@ -250,7 +273,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(650, 500);
+            ClientSize = new System.Drawing.Size(650, 530);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grpParametros);
@@ -263,6 +286,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             grpDatosNegocio.PerformLayout();
             grpParametros.ResumeLayout(false);
             grpParametros.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numMargenGanancia).EndInit();
             ResumeLayout(false);
         }
 
@@ -286,6 +310,8 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
         private System.Windows.Forms.TextBox txtMensajeTicket;
         private System.Windows.Forms.Label lblImpresora;
         private System.Windows.Forms.ComboBox cmbImpresora;
+        private System.Windows.Forms.Label lblMargenGanancia;
+        private System.Windows.Forms.NumericUpDown numMargenGanancia;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
     }

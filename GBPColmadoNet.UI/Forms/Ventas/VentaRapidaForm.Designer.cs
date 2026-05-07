@@ -119,6 +119,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             cmbTipoPago.Size = new Size(100, 23);
             cmbTipoPago.TabIndex = 12;
             cmbTipoPago.Visible = false;
+            cmbTipoPago.SelectedIndexChanged += CmbTipoPago_SelectedIndexChanged;
             // 
             // lblProducto
             // 

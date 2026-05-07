@@ -66,8 +66,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
         private async void btnSalida_Click(object sender, EventArgs e)
         {
-            var SForm = Program.ServiceProvider.GetRequiredService<SForm>();
-            SForm.ShowDialog();
+            var eForm = Program.ServiceProvider.GetRequiredService<EForm>();
+            eForm.ShowDialog();
             await LoadDataAsync();
         }
 

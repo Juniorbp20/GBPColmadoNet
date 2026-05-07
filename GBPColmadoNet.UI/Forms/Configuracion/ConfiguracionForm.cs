@@ -34,6 +34,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                 txtCorreo.Text = _configuracionActual.Correo;
                 txtDescripcion.Text = _configuracionActual.Descripcion;
                 txtMensajeTicket.Text = _configuracionActual.MensajeTicket;
+                numMargenGanancia.Value = _configuracionActual.MargenGananciaDefecto;
 
                 if (!string.IsNullOrEmpty(_configuracionActual.ImpresoraPredeterminada) && 
                     cmbImpresora.Items.Contains(_configuracionActual.ImpresoraPredeterminada))
@@ -78,6 +79,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             _configuracionActual.Correo = txtCorreo.Text;
             _configuracionActual.Descripcion = txtDescripcion.Text;
             _configuracionActual.MensajeTicket = txtMensajeTicket.Text;
+            _configuracionActual.MargenGananciaDefecto = numMargenGanancia.Value;
             
             if (cmbImpresora.SelectedItem != null)
             {

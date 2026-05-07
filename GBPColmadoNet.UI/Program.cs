@@ -1,7 +1,7 @@
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.UI.Forms;
 using GBPColmadoNet.UI.Forms.Clientes;
-using GBPColmadoNet.UI.Forms.Clientes.FiaoForm;
+using GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar;
 using GBPColmadoNet.UI.Forms.Configuracion;
 using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
 using GBPColmadoNet.UI.Forms.Historial.HVentasForm;
@@ -81,6 +81,7 @@ static class Program
         services.AddTransient<ClienteForm>();
         services.AddTransient<ClienteList>();
         services.AddTransient<CuentasPorCobrarList>();
+        services.AddTransient<CuentasPorCobrarForm>();
         services.AddTransient<ConfiguracionForm>();
         services.AddTransient<HClienteList>();
         services.AddTransient<HProveedorList>();

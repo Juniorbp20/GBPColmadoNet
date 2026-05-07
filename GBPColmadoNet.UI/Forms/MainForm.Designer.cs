@@ -442,6 +442,7 @@ namespace GBPColmadoNet
             toolStripButtonCliente.Size = new Size(210, 19);
             toolStripButtonCliente.Text = "Cliente";
             toolStripButtonCliente.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonCliente.Click += toolStripButtonCliente_Click;
             // 
             // toolStripButtonCuentasPCobrar
             // 
@@ -454,6 +455,7 @@ namespace GBPColmadoNet
             toolStripButtonCuentasPCobrar.Size = new Size(210, 19);
             toolStripButtonCuentasPCobrar.Text = "Cuentas por Cobrar";
             toolStripButtonCuentasPCobrar.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonCuentasPCobrar.Click += toolStripButtonCuentasPCobrar_Click;
             // 
             // toolStripSeparator1
             // 
@@ -485,6 +487,7 @@ namespace GBPColmadoNet
             toolStripButtonHClientes.Size = new Size(210, 19);
             toolStripButtonHClientes.Text = "Historial de Clientes";
             toolStripButtonHClientes.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHClientes.Click += toolStripButtonHClientes_Click;
             // 
             // toolStripButtonHProveedor
             // 
@@ -497,6 +500,7 @@ namespace GBPColmadoNet
             toolStripButtonHProveedor.Size = new Size(210, 19);
             toolStripButtonHProveedor.Text = "Historial de Proveedores";
             toolStripButtonHProveedor.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHProveedor.Click += toolStripButtonHProveedor_Click;
             // 
             // toolStripButtonHVentas
             // 
@@ -509,6 +513,7 @@ namespace GBPColmadoNet
             toolStripButtonHVentas.Size = new Size(210, 19);
             toolStripButtonHVentas.Text = "Historial de Ventas";
             toolStripButtonHVentas.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHVentas.Click += toolStripButtonHVentas_Click;
             // 
             // toolStripSeparator2
             // 
@@ -550,6 +555,7 @@ namespace GBPColmadoNet
             tlSConfiguraciones.Size = new Size(210, 19);
             tlSConfiguraciones.Text = "Configuraciones";
             tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
+            tlSConfiguraciones.Click += tlSConfiguraciones_Click;
             // 
             // toolStripSeparator3
             // 
@@ -569,6 +575,7 @@ namespace GBPColmadoNet
             tlSCerrarSesion.Size = new Size(210, 25);
             tlSCerrarSesion.Text = "Cerrar Sesion";
             tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            tlSCerrarSesion.Click += tlSCerrarSesion_Click;
             // 
             // toolStripSeparator7
             // 
