@@ -1,4 +1,4 @@
-﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
+namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     partial class EForm
     {
@@ -307,6 +307,7 @@
             // numericUpDownStockIngresado
             // 
             numericUpDownStockIngresado.Location = new Point(413, 200);
+            numericUpDownStockIngresado.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             numericUpDownStockIngresado.Name = "numericUpDownStockIngresado";
             numericUpDownStockIngresado.Size = new Size(120, 23);
             numericUpDownStockIngresado.TabIndex = 57;

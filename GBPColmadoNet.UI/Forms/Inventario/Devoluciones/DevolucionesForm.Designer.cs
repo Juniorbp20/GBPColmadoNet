@@ -1,4 +1,4 @@
-﻿namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
+namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
 {
     partial class DevolucionesForm
     {
@@ -30,6 +30,8 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.errorProviderDevolucion = new System.Windows.Forms.ErrorProvider();
             this.lblInfoMonto = new System.Windows.Forms.Label();
+            this.lblAccion = new System.Windows.Forms.Label();
+            this.cmbAccion = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
             this.SuspendLayout();
@@ -105,7 +107,7 @@
             // lblMotivo
             // 
             this.lblMotivo.AutoSize = true;
-            this.lblMotivo.Location = new System.Drawing.Point(150, 265);
+            this.lblMotivo.Location = new System.Drawing.Point(30, 320);
             this.lblMotivo.Name = "lblMotivo";
             this.lblMotivo.Size = new System.Drawing.Size(45, 15);
             this.lblMotivo.TabIndex = 7;
@@ -113,16 +115,34 @@
             // 
             // txtMotivo
             // 
-            this.txtMotivo.Location = new System.Drawing.Point(150, 283);
+            this.txtMotivo.Location = new System.Drawing.Point(30, 338);
             this.txtMotivo.Multiline = true;
             this.txtMotivo.Name = "txtMotivo";
-            this.txtMotivo.Size = new System.Drawing.Size(400, 23);
+            this.txtMotivo.Size = new System.Drawing.Size(520, 23);
             this.txtMotivo.TabIndex = 8;
+            // 
+            // lblAccion
+            // 
+            this.lblAccion.AutoSize = true;
+            this.lblAccion.Location = new System.Drawing.Point(150, 265);
+            this.lblAccion.Name = "lblAccion";
+            this.lblAccion.Size = new System.Drawing.Size(125, 15);
+            this.lblAccion.TabIndex = 12;
+            this.lblAccion.Text = "Destino del Inventario:";
+            // 
+            // cmbAccion
+            // 
+            this.cmbAccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAccion.FormattingEnabled = true;
+            this.cmbAccion.Location = new System.Drawing.Point(150, 283);
+            this.cmbAccion.Name = "cmbAccion";
+            this.cmbAccion.Size = new System.Drawing.Size(400, 23);
+            this.cmbAccion.TabIndex = 13;
             // 
             // btnGuardar
             // 
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnGuardar.Location = new System.Drawing.Point(200, 330);
+            this.btnGuardar.Location = new System.Drawing.Point(200, 385);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(120, 35);
             this.btnGuardar.TabIndex = 9;
@@ -133,7 +153,7 @@
             // btnCancelar
             // 
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancelar.Location = new System.Drawing.Point(340, 330);
+            this.btnCancelar.Location = new System.Drawing.Point(340, 385);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 35);
             this.btnCancelar.TabIndex = 10;
@@ -148,7 +168,7 @@
             // lblInfoMonto
             // 
             this.lblInfoMonto.AutoSize = true;
-            this.lblInfoMonto.Location = new System.Drawing.Point(270, 320);
+            this.lblInfoMonto.Location = new System.Drawing.Point(270, 375);
             this.lblInfoMonto.Name = "lblInfoMonto";
             this.lblInfoMonto.Size = new System.Drawing.Size(0, 15);
             this.lblInfoMonto.TabIndex = 11;
@@ -157,7 +177,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 400);
+            this.ClientSize = new System.Drawing.Size(580, 450);
+            this.Controls.Add(this.cmbAccion);
+            this.Controls.Add(this.lblAccion);
             this.Controls.Add(this.lblInfoMonto);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
@@ -198,5 +220,7 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.ErrorProvider errorProviderDevolucion;
         private System.Windows.Forms.Label lblInfoMonto;
+        private System.Windows.Forms.Label lblAccion;
+        private System.Windows.Forms.ComboBox cmbAccion;
     }
 }

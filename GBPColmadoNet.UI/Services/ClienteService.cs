@@ -1,4 +1,4 @@
-﻿using Aplicada1.Core;
+using Aplicada1.Core;
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,15 @@ namespace GBPColmadoNet.UI.Services
 
         public async Task<bool> Modificar(Data.Models.Cliente entidad)
         {
-            context.Clientes.Update(entidad);
+            var tracked = context.Clientes.Local.FirstOrDefault(c => c.ClienteId == entidad.ClienteId);
+            if (tracked != null)
+            {
+                context.Entry(tracked).CurrentValues.SetValues(entidad);
+            }
+            else
+            {
+                context.Clientes.Update(entidad);
+            }
             return await context.SaveChangesAsync() > 0;
         }
 

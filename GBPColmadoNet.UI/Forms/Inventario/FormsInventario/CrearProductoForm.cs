@@ -12,24 +12,146 @@ namespace GBPColmadoNet.UI.Forms
         private readonly ProductoService _productoService;
         private readonly CategoriaService _categoriaService;
         private readonly ProveedorService _proveedorService;
+        private readonly ConfiguracionService _configuracionService;
+
+        private ConfiguracionesNegocio? _configuracion;
+        private bool _precioVentaCalculadoAutomaticamente = true;
+        private decimal _margenConfigurado = 20;
+        private decimal _itbisConfigurado = 18;
 
         public CrearProductoForm(ProductoService productoService,
             CategoriaService categoriaService,
-            ProveedorService proveedorService)
+            ProveedorService proveedorService,
+            ConfiguracionService configuracionService)
         {
             InitializeComponent();
             _productoService = productoService;
             _categoriaService = categoriaService;
             _proveedorService = proveedorService;
+            _configuracionService = configuracionService;
 
-            numericUpDownPrecioCompra.ValueChanged += (s, e) => CalcularValores();
-            numericUpDownPrecioVenta.ValueChanged += (s, e) => CalcularValores();
+            numericUpDownPrecioCompra.ValueChanged += NumericUpDownPrecioCompra_ValueChanged;
+            numericUpDownPrecioVenta.Leave += NumericUpDownPrecioVenta_Leave;
+            numericUpDownPrecioVenta.Enter += NumericUpDownPrecioVenta_Enter;
+
             RbtnItbis18.CheckedChanged += (s, e) => { if (RbtnItbis18.Checked) CalcularValores(); };
             RbtnItbis10.CheckedChanged += (s, e) => { if (RbtnItbis10.Checked) CalcularValores(); };
             RbtnItebis28.CheckedChanged += (s, e) => { if (RbtnItebis28.Checked) CalcularValores(); };
+            EbtnNoItebis.CheckedChanged += (s, e) => { if (EbtnNoItebis.Checked) CalcularValores(); };
 
+            this.Load += async (s, e) =>
+            {
+                await CargarConfiguracion();
+                await CargarCombos();
+            };
+        }
+
+        private async Task CargarConfiguracion()
+        {
+            try
+            {
+                _configuracion = await _configuracionService.ObtenerConfiguracionAsync();
+
+                if (_configuracion != null)
+                {
+                    _margenConfigurado = _configuracion.MargenGananciaDefecto > 0
+                        ? _configuracion.MargenGananciaDefecto
+                        : 20;
+
+                    _itbisConfigurado = _configuracion.ItbisDefecto > 0
+                        ? _configuracion.ItbisDefecto
+                        : 18;
+                }
+
+                switch ((int)_itbisConfigurado)
+                {
+                    case 18:
+                        RbtnItbis18.Checked = true;
+                        break;
+                    case 10:
+                        RbtnItbis10.Checked = true;
+                        break;
+                    case 28:
+                        RbtnItebis28.Checked = true;
+                        break;
+                    default:
+                        EbtnNoItebis.Checked = true;
+                        break;
+                }
+
+                lbInfoItbis.Text = $"ITBIS ({_itbisConfigurado}%): RD$ 0.00";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al cargar configuración: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void NumericUpDownPrecioCompra_ValueChanged(object sender, EventArgs e)
+        {
+            if (_precioVentaCalculadoAutomaticamente)
+            {
+                CalcularPrecioVentaSugerido();
+            }
             CalcularValores();
-            _ = CargarCombos();
+        }
+
+        private void NumericUpDownPrecioVenta_Enter(object sender, EventArgs e)
+        {
+            _precioVentaCalculadoAutomaticamente = false;
+        }
+
+        private void NumericUpDownPrecioVenta_Leave(object sender, EventArgs e)
+        {
+            CalcularValores();
+        }
+
+        private void CalcularPrecioVentaSugerido()
+        {
+            decimal precioCompra = numericUpDownPrecioCompra.Value;
+
+            if (precioCompra > 0)
+            {
+                decimal precioVentaSugerido = precioCompra * (1 + (_margenConfigurado / 100));
+                numericUpDownPrecioVenta.Value = Math.Round(precioVentaSugerido, 2);
+            }
+            else
+            {
+                numericUpDownPrecioVenta.Value = 0;
+            }
+        }
+
+        private void CalcularValores()
+        {
+            decimal precioCompra = numericUpDownPrecioCompra.Value;
+            decimal precioVenta = numericUpDownPrecioVenta.Value;
+            decimal tasa = ObtenerTasaSeleccionada();
+
+            decimal itbisCalculado = precioVenta * (tasa / 100);
+            decimal totalCliente = precioVenta + itbisCalculado;
+            decimal ganancia = precioVenta - precioCompra;
+            decimal margenReal = precioCompra > 0 ? ((precioVenta - precioCompra) / precioCompra) * 100 : 0;
+
+            lbInfoItbis.Text = $"ITBIS ({tasa}%): RD$ {itbisCalculado:N2}";
+            lbVentaFinalItbis.Text = $"Total Cliente: RD$ {totalCliente:N2}";
+            lbGanancia.Text = $"Ganancia: RD$ {ganancia:N2} ({margenReal:N1}%)";
+
+            bool margenBajo = precioCompra > 0 && margenReal < _margenConfigurado;
+            lbGanancia.ForeColor = margenBajo ? Color.Red : Color.Green;
+
+            if (margenBajo && !_precioVentaCalculadoAutomaticamente)
+            {
+                lbGanancia.Text += " - MARGEN BAJO!";
+            }
+        }
+
+        private decimal ObtenerTasaSeleccionada()
+        {
+            if (RbtnItbis18.Checked) return 18;
+            if (RbtnItbis10.Checked) return 10;
+            if (RbtnItebis28.Checked) return 28;
+            return 0;
         }
 
         private async void btnGuardar_Click(object sender, EventArgs e)
@@ -56,7 +178,7 @@ namespace GBPColmadoNet.UI.Forms
                     proveedorId = nuevoProv.ProveedorId;
                 }
 
-                decimal tasa = RbtnItbis18.Checked ? 18 : (RbtnItbis10.Checked ? 10 : (RbtnItebis28.Checked ? 28 : 0));
+                decimal tasa = ObtenerTasaSeleccionada();
 
                 var producto = new Producto()
                 {
@@ -79,13 +201,18 @@ namespace GBPColmadoNet.UI.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
-
             }
             catch (Exception ex)
             {
                 var realMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (realMsg.Contains("UNIQUE KEY") || realMsg.Contains("Cannot insert duplicate key"))
+                {
+                    MessageBox.Show("El Código de Barras ingresado ya pertenece a otro producto en el sistema (incluso si está en la lista de Inactivos). \n\nPor favor, intente con un código diferente o busque el producto en 'Ver Inactivos' para reactivarlo.", "Código Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {
@@ -143,27 +270,6 @@ namespace GBPColmadoNet.UI.Forms
             return valid;
         }
 
-        private void CalcularValores()
-        {
-            decimal costo = numericUpDownPrecioCompra.Value;
-            decimal precioBase = numericUpDownPrecioVenta.Value;
-            decimal tasa = 0;
-
-            if (RbtnItbis18.Checked) tasa = 18;
-            else if (RbtnItbis10.Checked) tasa = 10;
-            else if (RbtnItebis28.Checked) tasa = 28;
-
-            decimal itbisCalculado = precioBase * (tasa / 100);
-            decimal precioFinal = precioBase + itbisCalculado;
-            decimal ganancia = precioBase - costo;
-
-            lbInfoItbis.Text = $"ITBIS ({tasa}%): RD$ {itbisCalculado:N2}";
-            lbVentaFinalItbis.Text = $"Total Cliente: RD$ {precioFinal:N2}";
-            lbGanancia.Text = $"Ganancia: RD$ {ganancia:N2}";
-
-            lbGanancia.ForeColor = ganancia <= 0 ? Color.Red : Color.DarkGreen;
-        }
-
         private void btnLimpiarFormulario_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
@@ -183,6 +289,11 @@ namespace GBPColmadoNet.UI.Forms
             CboxCategoria.Text = string.Empty;
             CboxProveedor.Text = string.Empty;
             txCodigoBarras.Focus();
+            _precioVentaCalculadoAutomaticamente = true;
+            lbInfoItbis.Text = $"ITBIS ({_itbisConfigurado}%): RD$ 0.00";
+            lbVentaFinalItbis.Text = "Total Cliente: RD$ 0.00";
+            lbGanancia.Text = "Ganancia: RD$ 0.00 (0%)";
+            lbGanancia.ForeColor = Color.Black;
         }
 
         private async Task CargarCombos()

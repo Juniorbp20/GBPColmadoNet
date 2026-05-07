@@ -119,6 +119,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             cmbTipoPago.Size = new Size(100, 23);
             cmbTipoPago.TabIndex = 12;
             cmbTipoPago.Visible = false;
+            cmbTipoPago.SelectedIndexChanged += CmbTipoPago_SelectedIndexChanged;
             // 
             // lblProducto
             // 
@@ -237,7 +238,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             dgvVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVenta.Location = new Point(20, 25);
             dgvVenta.Name = "dgvVenta";
-            dgvVenta.ReadOnly = true;
+            dgvVenta.ReadOnly = false;
             dgvVenta.RowHeadersVisible = false;
             dgvVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvVenta.Size = new Size(860, 225);

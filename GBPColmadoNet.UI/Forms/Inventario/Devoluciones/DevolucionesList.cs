@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,8 +30,22 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
             try
             {
                 var devoluciones = await _service.GetList(d => true);
+                
+                var listaMostrada = devoluciones.Select(d => new
+                {
+                    DevolucionId = d.DevolucionId,
+                    Venta = $"#{d.VentaId}",
+                    Producto = d.ProductoNombre,
+                    Cantidad = d.Cantidad,
+                    Reembolso = d.MontoReembolsado,
+                    Motivo = d.Motivo,
+                    Estado = d.Estado,
+                    Fecha = d.FechaRegistro.ToString("dd/MM/yyyy HH:mm"),
+                    Usuario = d.Usuario?.Username ?? "Desconocido"
+                }).ToList();
+
                 devolucionDataGridView.DataSource = null;
-                devolucionDataGridView.DataSource = devoluciones;
+                devolucionDataGridView.DataSource = listaMostrada;
             }
             catch (Exception ex)
             {
@@ -81,9 +95,22 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                         d.Motivo.Contains(criterio)
                     );
 
+                    var listaMostrada = resultados.Select(d => new
+                    {
+                        DevolucionId = d.DevolucionId,
+                        Venta = $"#{d.VentaId}",
+                        Producto = d.ProductoNombre,
+                        Cantidad = d.Cantidad,
+                        Reembolso = d.MontoReembolsado,
+                        Motivo = d.Motivo,
+                        Estado = d.Estado,
+                        Fecha = d.FechaRegistro.ToString("dd/MM/yyyy HH:mm"),
+                        Usuario = d.Usuario?.Username ?? "Desconocido"
+                    }).ToList();
+
                     if (!token.IsCancellationRequested)
                     {
-                        devolucionDataGridView.DataSource = resultados;
+                        devolucionDataGridView.DataSource = listaMostrada;
                     }
                 }
             }

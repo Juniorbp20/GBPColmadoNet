@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -23,7 +23,8 @@ namespace GBPColmadoNet
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             panelHeader = new Panel();
-            dateTimePicker1 = new DateTimePicker();
+            lblClock = new Label();
+            lblDate = new Label();
             lblBrandTitle = new Label();
             lblBrandSub = new Label();
             menuStrip1 = new MenuStrip();
@@ -73,13 +74,10 @@ namespace GBPColmadoNet
             tlSCerrarSesion = new ToolStripButton();
             toolStripSeparator7 = new ToolStripSeparator();
             lblBienvenido = new Label();
-            lblPanelActualizado = new Label();
             panelStatsTop = new Panel();
             lblProductosActivosTitle = new Label();
-            lblProveedoresPendientesTitle = new Label();
             lblStockCriticoTitle = new Label();
             lblProductosActivosValue = new Label();
-            lblProveedoresPendientesValue = new Label();
             lblStockCriticoValue = new Label();
             panelStatsBottom = new Panel();
             lblVentaTotalTitle = new Label();
@@ -99,7 +97,8 @@ namespace GBPColmadoNet
             // panelHeader
             // 
             panelHeader.BackColor = Color.FromArgb(209, 209, 209);
-            panelHeader.Controls.Add(dateTimePicker1);
+            panelHeader.Controls.Add(lblClock);
+            panelHeader.Controls.Add(lblDate);
             panelHeader.Controls.Add(lblBrandTitle);
             panelHeader.Controls.Add(lblBrandSub);
             panelHeader.Controls.Add(menuStrip1);
@@ -109,14 +108,29 @@ namespace GBPColmadoNet
             panelHeader.Size = new Size(1023, 101);
             panelHeader.TabIndex = 0;
             // 
-            // dateTimePicker1
+            // lblClock
             // 
-            dateTimePicker1.CalendarMonthBackground = Color.FromArgb(205, 234, 236);
-            dateTimePicker1.CausesValidation = false;
-            dateTimePicker1.Location = new Point(788, 24);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(221, 23);
-            dateTimePicker1.TabIndex = 3;
+            lblClock.AutoSize = true;
+            lblClock.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            lblClock.ForeColor = Color.FromArgb(54, 66, 81);
+            lblClock.Location = new Point(797, 24);
+            lblClock.Name = "lblClock";
+            lblClock.Size = new Size(146, 45);
+            lblClock.TabIndex = 3;
+            lblClock.Text = "12:00:00";
+            lblClock.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Font = new Font("Segoe UI", 10F);
+            lblDate.ForeColor = Color.FromArgb(96, 96, 96);
+            lblDate.Location = new Point(807, 66);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(118, 19);
+            lblDate.TabIndex = 4;
+            lblDate.Text = "Lunes, 1 de Enero";
+            lblDate.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblBrandTitle
             // 
@@ -276,7 +290,6 @@ namespace GBPColmadoNet
             panelContent.BackColor = Color.FromArgb(238, 238, 238);
             panelContent.Controls.Add(toolStrip1);
             panelContent.Controls.Add(lblBienvenido);
-            panelContent.Controls.Add(lblPanelActualizado);
             panelContent.Controls.Add(panelStatsTop);
             panelContent.Controls.Add(panelStatsBottom);
             panelContent.Dock = DockStyle.Fill;
@@ -442,6 +455,7 @@ namespace GBPColmadoNet
             toolStripButtonCliente.Size = new Size(210, 19);
             toolStripButtonCliente.Text = "Cliente";
             toolStripButtonCliente.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonCliente.Click += toolStripButtonCliente_Click;
             // 
             // toolStripButtonCuentasPCobrar
             // 
@@ -454,6 +468,7 @@ namespace GBPColmadoNet
             toolStripButtonCuentasPCobrar.Size = new Size(210, 19);
             toolStripButtonCuentasPCobrar.Text = "Cuentas por Cobrar";
             toolStripButtonCuentasPCobrar.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonCuentasPCobrar.Click += toolStripButtonCuentasPCobrar_Click;
             // 
             // toolStripSeparator1
             // 
@@ -485,6 +500,7 @@ namespace GBPColmadoNet
             toolStripButtonHClientes.Size = new Size(210, 19);
             toolStripButtonHClientes.Text = "Historial de Clientes";
             toolStripButtonHClientes.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHClientes.Click += toolStripButtonHClientes_Click;
             // 
             // toolStripButtonHProveedor
             // 
@@ -497,6 +513,7 @@ namespace GBPColmadoNet
             toolStripButtonHProveedor.Size = new Size(210, 19);
             toolStripButtonHProveedor.Text = "Historial de Proveedores";
             toolStripButtonHProveedor.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHProveedor.Click += toolStripButtonHProveedor_Click;
             // 
             // toolStripButtonHVentas
             // 
@@ -509,6 +526,7 @@ namespace GBPColmadoNet
             toolStripButtonHVentas.Size = new Size(210, 19);
             toolStripButtonHVentas.Text = "Historial de Ventas";
             toolStripButtonHVentas.TextAlign = ContentAlignment.MiddleLeft;
+            toolStripButtonHVentas.Click += toolStripButtonHVentas_Click;
             // 
             // toolStripSeparator2
             // 
@@ -550,6 +568,7 @@ namespace GBPColmadoNet
             tlSConfiguraciones.Size = new Size(210, 19);
             tlSConfiguraciones.Text = "Configuraciones";
             tlSConfiguraciones.TextAlign = ContentAlignment.MiddleLeft;
+            tlSConfiguraciones.Click += tlSConfiguraciones_Click;
             // 
             // toolStripSeparator3
             // 
@@ -569,6 +588,7 @@ namespace GBPColmadoNet
             tlSCerrarSesion.Size = new Size(210, 25);
             tlSCerrarSesion.Text = "Cerrar Sesion";
             tlSCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
+            tlSCerrarSesion.Click += tlSCerrarSesion_Click;
             // 
             // toolStripSeparator7
             // 
@@ -586,25 +606,12 @@ namespace GBPColmadoNet
             lblBienvenido.TabIndex = 0;
             lblBienvenido.Text = "Bienvenido Usuario (ROL)";
             // 
-            // lblPanelActualizado
-            // 
-            lblPanelActualizado.AutoSize = true;
-            lblPanelActualizado.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Pixel);
-            lblPanelActualizado.ForeColor = Color.FromArgb(112, 112, 112);
-            lblPanelActualizado.Location = new Point(832, 31);
-            lblPanelActualizado.Name = "lblPanelActualizado";
-            lblPanelActualizado.Size = new Size(156, 15);
-            lblPanelActualizado.TabIndex = 1;
-            lblPanelActualizado.Text = "Panel actualizado al instante";
-            // 
             // panelStatsTop
             // 
             panelStatsTop.BackColor = Color.FromArgb(205, 234, 236);
             panelStatsTop.Controls.Add(lblProductosActivosTitle);
-            panelStatsTop.Controls.Add(lblProveedoresPendientesTitle);
             panelStatsTop.Controls.Add(lblStockCriticoTitle);
             panelStatsTop.Controls.Add(lblProductosActivosValue);
-            panelStatsTop.Controls.Add(lblProveedoresPendientesValue);
             panelStatsTop.Controls.Add(lblStockCriticoValue);
             panelStatsTop.Location = new Point(233, 57);
             panelStatsTop.Name = "panelStatsTop";
@@ -620,19 +627,10 @@ namespace GBPColmadoNet
             lblProductosActivosTitle.TabIndex = 0;
             lblProductosActivosTitle.Text = "Productos activos";
             // 
-            // lblProveedoresPendientesTitle
-            // 
-            lblProveedoresPendientesTitle.AutoSize = true;
-            lblProveedoresPendientesTitle.Location = new Point(284, 12);
-            lblProveedoresPendientesTitle.Name = "lblProveedoresPendientesTitle";
-            lblProveedoresPendientesTitle.Size = new Size(133, 15);
-            lblProveedoresPendientesTitle.TabIndex = 1;
-            lblProveedoresPendientesTitle.Text = "Proveedores Pendientes";
-            // 
             // lblStockCriticoTitle
             // 
             lblStockCriticoTitle.AutoSize = true;
-            lblStockCriticoTitle.Location = new Point(534, 12);
+            lblStockCriticoTitle.Location = new Point(350, 12);
             lblStockCriticoTitle.Name = "lblStockCriticoTitle";
             lblStockCriticoTitle.Size = new Size(72, 15);
             lblStockCriticoTitle.TabIndex = 2;
@@ -649,23 +647,12 @@ namespace GBPColmadoNet
             lblProductosActivosValue.TabIndex = 3;
             lblProductosActivosValue.Text = "0";
             // 
-            // lblProveedoresPendientesValue
-            // 
-            lblProveedoresPendientesValue.AutoSize = true;
-            lblProveedoresPendientesValue.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Pixel);
-            lblProveedoresPendientesValue.ForeColor = Color.FromArgb(53, 70, 90);
-            lblProveedoresPendientesValue.Location = new Point(286, 40);
-            lblProveedoresPendientesValue.Name = "lblProveedoresPendientesValue";
-            lblProveedoresPendientesValue.Size = new Size(41, 48);
-            lblProveedoresPendientesValue.TabIndex = 4;
-            lblProveedoresPendientesValue.Text = "0";
-            // 
             // lblStockCriticoValue
             // 
             lblStockCriticoValue.AutoSize = true;
             lblStockCriticoValue.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Pixel);
             lblStockCriticoValue.ForeColor = Color.Red;
-            lblStockCriticoValue.Location = new Point(536, 40);
+            lblStockCriticoValue.Location = new Point(352, 40);
             lblStockCriticoValue.Name = "lblStockCriticoValue";
             lblStockCriticoValue.Size = new Size(41, 48);
             lblStockCriticoValue.TabIndex = 5;
@@ -798,20 +785,18 @@ namespace GBPColmadoNet
         private Label lblBrandSub;
 
         private Panel panelContent;
-        private DateTimePicker dateTimePicker1;
+        private Label lblClock;
+        private Label lblDate;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem inventarioToolStripMenuItem;
         private ToolStripMenuItem eSToolStripMenuItem;
         private ToolStripMenuItem devolucionesToolStripMenuItem;
         private ToolStripMenuItem listarProductosToolStripMenuItem;
         private Label lblBienvenido;
-        private Label lblPanelActualizado;
         private Panel panelStatsTop;
         private Label lblProductosActivosTitle;
-        private Label lblProveedoresPendientesTitle;
         private Label lblStockCriticoTitle;
         private Label lblProductosActivosValue;
-        private Label lblProveedoresPendientesValue;
         private Label lblStockCriticoValue;
         private Panel panelStatsBottom;
         private Label lblVentaTotalTitle;

@@ -1,4 +1,4 @@
-﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
+namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     partial class ModificarInventarioForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            chkActivo = new CheckBox();
             lbGanancia = new Label();
             lbVentaFinalItbis = new Label();
             lbInfoItbis = new Label();
@@ -113,6 +114,17 @@
             lbProveedor.Size = new Size(67, 15);
             lbProveedor.TabIndex = 50;
             lbProveedor.Text = "Proveedor: ";
+            // 
+            // chkActivo
+            // 
+            chkActivo.AutoSize = true;
+            chkActivo.Location = new Point(151, 290);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(111, 19);
+            chkActivo.TabIndex = 56;
+            chkActivo.Text = "Producto Activo";
+            chkActivo.UseVisualStyleBackColor = true;
+            chkActivo.Checked = true;
             // 
             // lbCategoria
             // 
@@ -294,6 +306,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(chkActivo);
             Controls.Add(lbGanancia);
             Controls.Add(lbVentaFinalItbis);
             Controls.Add(lbInfoItbis);
@@ -330,6 +343,7 @@
 
         #endregion
 
+        private CheckBox chkActivo;
         private Label lbGanancia;
         private Label lbVentaFinalItbis;
         private Label lbInfoItbis;
