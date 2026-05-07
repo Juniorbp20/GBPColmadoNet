@@ -279,10 +279,11 @@ namespace GBPColmadoNet
             historialVentas.ShowDialog();
         }
 
-        private void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
+            await CargarDashboard();
         }
 
         private void toolStripButtonCuadre_Click(object sender, EventArgs e)
@@ -321,10 +322,11 @@ namespace GBPColmadoNet
             historialVentas.ShowDialog();
         }
 
-        private void tlSConfiguraciones_Click(object sender, EventArgs e)
+        private async void tlSConfiguraciones_Click(object sender, EventArgs e)
         {
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
+            await CargarDashboard();
         }
 
         private void tlSCerrarSesion_Click(object sender, EventArgs e)
