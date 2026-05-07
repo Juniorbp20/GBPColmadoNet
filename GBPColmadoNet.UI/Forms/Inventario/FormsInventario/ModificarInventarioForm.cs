@@ -135,6 +135,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             if (_producto.ProveedorId.HasValue)
                 CboxProveedor.SelectedValue = _producto.ProveedorId.Value;
 
+            chkActivo.Checked = _producto.Activo ?? true;
+
             CalcularValores();
         }
 
@@ -172,6 +174,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 _producto.TasaItbis = tasa;
                 _producto.CategoriaId = categoriaId;
                 _producto.ProveedorId = proveedorId;
+                _producto.Activo = chkActivo.Checked;
                 _producto.FechaModificacion = DateTime.Now;
 
                 await _productoService.Guardar(_producto);
@@ -185,8 +188,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             catch (Exception ex)
             {
                 var realMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (realMsg.Contains("UNIQUE KEY") || realMsg.Contains("Cannot insert duplicate key"))
+                {
+                    MessageBox.Show("El Código de Barras ingresado ya pertenece a otro producto en el sistema. \n\nPor favor, asigne un código de barras único.", "Código Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {

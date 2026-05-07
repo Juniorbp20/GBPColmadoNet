@@ -72,7 +72,7 @@ static class Program
             options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
             {
                 sqlOptions.EnableRetryOnFailure();
-            }));
+            }), ServiceLifetime.Transient);
 
         //Form y List
         services.AddTransient<LoginForm>();

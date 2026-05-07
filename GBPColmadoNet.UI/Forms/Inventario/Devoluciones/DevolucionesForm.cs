@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -12,6 +12,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
     {
         private readonly DevolucionService _devolucionService;
         private readonly VentasService _ventasService;
+        private readonly ProductoService _productoService;
         private List<Venta> _ventas;
         private Venta? _ventaSeleccionada;
         private VentasDetalle? _productoSeleccionado;
@@ -21,11 +22,17 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
             InitializeComponent();
             _devolucionService = Program.ServiceProvider.GetRequiredService<DevolucionService>();
             _ventasService = Program.ServiceProvider.GetRequiredService<VentasService>();
+            _productoService = Program.ServiceProvider.GetRequiredService<ProductoService>();
             _ventas = new List<Venta>();
         }
 
         private async void DevolucionesForm_Load(object sender, EventArgs e)
         {
+            cmbAccion.Items.Add("Devolver al inventario (+ Stock)");
+            cmbAccion.Items.Add("Artículo dañado (Desechar) [Reportar a Proveedor]");
+            cmbAccion.Items.Add("Cambio por artículo nuevo (- Stock)");
+            cmbAccion.SelectedIndex = 0;
+
             await CargarVentas();
         }
 
@@ -112,6 +119,12 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                 valid = false;
             }
 
+            if (cmbAccion.SelectedIndex == -1)
+            {
+                errorProviderDevolucion.SetError(cmbAccion, "Debe seleccionar un destino para el inventario.");
+                valid = false;
+            }
+
             return valid;
         }
 
@@ -139,6 +152,25 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                 btnGuardar.Enabled = false;
 
                 decimal montoReembolsado = precioUnitario * numericCantidad.Value;
+                string accionSeleccionada = cmbAccion.SelectedItem?.ToString() ?? "";
+                
+                var producto = await _productoService.Buscar(productoId);
+                if (producto != null)
+                {
+                    if (accionSeleccionada.Contains("Devolver al inventario"))
+                    {
+                        producto.Stock += numericCantidad.Value;
+                    }
+                    else if (accionSeleccionada.Contains("Cambio por artículo nuevo"))
+                    {
+                        producto.Stock -= numericCantidad.Value;
+                    }
+                    // Si es "Desechar", no hacemos nada con el stock (se pierde).
+                    
+                    await _productoService.Guardar(producto);
+                }
+
+                string motivoFinal = $"[{accionSeleccionada}] " + txtMotivo.Text.Trim();
 
                 var devolucion = new Devolucion
                 {
@@ -146,7 +178,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                     ProductoNombre = nombreProducto,
                     Cantidad = (int)numericCantidad.Value,
                     MontoReembolsado = montoReembolsado,
-                    Motivo = txtMotivo.Text.Trim(),
+                    Motivo = motivoFinal,
                     Estado = "Pendiente",
                     FechaRegistro = DateTime.Now,
                     UsuarioId = SessionManager.CurrentUser?.UsuarioId

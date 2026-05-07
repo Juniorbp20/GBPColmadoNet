@@ -14,13 +14,28 @@ namespace GBPColmadoNet
     public partial class MainForm : Form
     {
 
+        private System.Windows.Forms.Timer _timer;
+
         public MainForm(ColmadoContext context)
         {
             InitializeComponent();
             ConfigurarMenuAcordeon();
 
+            toolStrip1.Renderer = new CustomToolStripRenderer();
+
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 1000;
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+
             cerrarSesionToolStripMenuItem.Click += CerrarSesion_Click;
             tlSCerrarSesion.Click += CerrarSesion_Click;
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            if (lblClock != null) lblClock.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            if (lblDate != null) lblDate.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy");
         }
 
         private void CerrarSesion_Click(object? sender, EventArgs e)
@@ -119,7 +134,9 @@ namespace GBPColmadoNet
                 var config = await configService.ObtenerConfiguracionAsync();
                 if (config != null)
                 {
-                    lblBrandTitle.Text = string.IsNullOrEmpty(config.NombreComercial) ? "GBPColmadoNet" : config.NombreComercial;
+                    string nombreNegocio = string.IsNullOrEmpty(config.NombreComercial) ? "GBPColmadoNet" : config.NombreComercial;
+                    lblBrandTitle.Text = nombreNegocio;
+                    this.Text = $"Sistema Colmado {nombreNegocio}";
                     lblBrandSub.Text = string.IsNullOrEmpty(config.Descripcion) ? "Gestiona tu inventario, ventas y proveedores desde un solo lugar" : config.Descripcion;
                 }
 
@@ -135,9 +152,7 @@ namespace GBPColmadoNet
                 var productosActivos = context.Productos.Count(p => p.Activo == true);
                 lblProductosActivosValue.Text = productosActivos.ToString();
 
-                // Proveedores registrados
-                var proveedores = context.Proveedores.Count();
-                lblProveedoresPendientesValue.Text = proveedores.ToString();
+                // Proveedores eliminados de la vista principal
 
                 // Stock critico (<= 5)
                 var stockCritico = context.Productos.Count(p => p.Stock <= 5 && p.Activo == true);
@@ -165,7 +180,7 @@ namespace GBPColmadoNet
                 // Fiados pendientes
                 var fiadosPendientes = context.CuentasPorCobrars
                     .Where(c => c.Estado == "Pendiente")
-                    .Sum(c => (decimal?)c.BalancePendiente) ?? 0m;
+                    .Sum(c => (decimal?)c.MontoDeuda - (decimal?)(c.MontoAbonado ?? 0m)) ?? 0m;
                 lblFiadosPendientesValue.Text = fiadosPendientes.ToString("N2");
             }
             catch (Exception ex)
@@ -316,5 +331,44 @@ namespace GBPColmadoNet
         {
 
         }
+    }
+
+    public class CustomToolStripRenderer : ToolStripProfessionalRenderer
+    {
+        public CustomToolStripRenderer() : base(new CustomColorTable()) { }
+    }
+
+    public class CustomColorTable : ProfessionalColorTable
+    {
+        public override Color ToolStripDropDownBackground => Color.FromArgb(15, 35, 50);
+        public override Color ImageMarginGradientBegin => Color.FromArgb(15, 35, 50);
+        public override Color ImageMarginGradientMiddle => Color.FromArgb(15, 35, 50);
+        public override Color ImageMarginGradientEnd => Color.FromArgb(15, 35, 50);
+        public override Color MenuBorder => Color.FromArgb(15, 35, 50);
+        public override Color MenuItemBorder => Color.FromArgb(15, 35, 50);
+        public override Color MenuItemSelected => Color.FromArgb(30, 60, 85);
+        public override Color MenuStripGradientBegin => Color.FromArgb(15, 35, 50);
+        public override Color MenuStripGradientEnd => Color.FromArgb(15, 35, 50);
+        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(30, 60, 85);
+        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(30, 60, 85);
+        public override Color MenuItemPressedGradientBegin => Color.FromArgb(30, 60, 85);
+        public override Color MenuItemPressedGradientEnd => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedHighlight => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedHighlightBorder => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedHighlight => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedHighlightBorder => Color.FromArgb(30, 60, 85);
+        public override Color ButtonCheckedHighlight => Color.FromArgb(30, 60, 85);
+        public override Color ButtonCheckedHighlightBorder => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedBorder => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedBorder => Color.FromArgb(30, 60, 85);
+        public override Color ButtonCheckedGradientBegin => Color.FromArgb(30, 60, 85);
+        public override Color ButtonCheckedGradientMiddle => Color.FromArgb(30, 60, 85);
+        public override Color ButtonCheckedGradientEnd => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedGradientBegin => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedGradientMiddle => Color.FromArgb(30, 60, 85);
+        public override Color ButtonSelectedGradientEnd => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedGradientBegin => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedGradientMiddle => Color.FromArgb(30, 60, 85);
+        public override Color ButtonPressedGradientEnd => Color.FromArgb(30, 60, 85);
     }
 }

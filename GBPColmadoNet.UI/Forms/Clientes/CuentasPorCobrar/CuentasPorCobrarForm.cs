@@ -134,7 +134,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
         {
             if (_cuentaActual == null) return;
 
-            decimal balance = _cuentaActual.BalancePendiente ?? (_cuentaActual.MontoDeuda - (_cuentaActual.MontoAbonado ?? 0));
+            decimal balance = _cuentaActual.MontoDeuda - (_cuentaActual.MontoAbonado ?? 0);
             lblInfoBalance.Text = $"Deuda: RD$ {_cuentaActual.MontoDeuda:N2} | Abonado: RD$ {(_cuentaActual.MontoAbonado ?? 0):N2} | Balance: RD$ {balance:N2}";
         }
 
@@ -236,10 +236,11 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
                 return;
             }
 
-            if (numericAbono.Value > (_cuentaActual.BalancePendiente ?? 0))
+            decimal balanceReal = _cuentaActual.MontoDeuda - (_cuentaActual.MontoAbonado ?? 0);
+            if (numericAbono.Value > balanceReal)
             {
                 var resultado = MessageBox.Show(
-                    $"El abono es mayor que el balance pendiente ({_cuentaActual.BalancePendiente:N2}). ¿Desea marcar la cuenta como pagada?",
+                    $"El abono es mayor que el balance pendiente ({balanceReal:N2}). ¿Desea marcar la cuenta como pagada?",
                     "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (resultado != DialogResult.Yes)

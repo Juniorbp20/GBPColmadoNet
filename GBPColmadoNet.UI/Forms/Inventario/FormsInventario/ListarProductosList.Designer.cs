@@ -1,4 +1,4 @@
-﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
+namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     partial class ListarProductosList
     {
@@ -40,6 +40,7 @@
             txBuscarProducto = new TextBox();
             btnELiminar = new Button();
             btnModificar = new Button();
+            btnToggleVista = new Button();
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).BeginInit();
             panelContent.SuspendLayout();
             PanelHeder.SuspendLayout();
@@ -112,6 +113,7 @@
             PanelHeder.Controls.Add(btnEntradaProductos);
             PanelHeder.Controls.Add(txBuscarProducto);
             PanelHeder.Controls.Add(btnELiminar);
+            PanelHeder.Controls.Add(btnToggleVista);
             PanelHeder.Controls.Add(btnModificar);
             PanelHeder.Dock = DockStyle.Top;
             PanelHeder.Location = new Point(0, 0);
@@ -150,11 +152,21 @@
             // 
             btnELiminar.Location = new Point(218, 62);
             btnELiminar.Name = "btnELiminar";
-            btnELiminar.Size = new Size(75, 23);
+            btnELiminar.Size = new Size(90, 23);
             btnELiminar.TabIndex = 1;
-            btnELiminar.Text = "Eliminar";
+            btnELiminar.Text = "Desactivar";
             btnELiminar.UseVisualStyleBackColor = true;
             btnELiminar.Click += btnELiminar_Click;
+            // 
+            // btnToggleVista
+            // 
+            btnToggleVista.Location = new Point(314, 62);
+            btnToggleVista.Name = "btnToggleVista";
+            btnToggleVista.Size = new Size(110, 23);
+            btnToggleVista.TabIndex = 6;
+            btnToggleVista.Text = "Ver Inactivos";
+            btnToggleVista.UseVisualStyleBackColor = true;
+            btnToggleVista.Click += btnToggleVista_Click;
             // 
             // btnModificar
             // 
@@ -199,5 +211,6 @@
         private TextBox txBuscarProducto;
         private Label lbBuscar;
         private Button lbSalidaProductoss;
+        private Button btnToggleVista;
     }
 }
