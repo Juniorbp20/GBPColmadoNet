@@ -1,5 +1,7 @@
 using GBPColmadoNet.Data.Context;
+using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.UI.Forms.Clientes;
+using GBPColmadoNet.UI.Services;
 using GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar;
 using GBPColmadoNet.UI.Forms.Configuracion;
 using GBPColmadoNet.UI.Forms.Historial.HProveedorList;
@@ -45,8 +47,8 @@ namespace GBPColmadoNet
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            var currentUser = GBPColmadoNet.UI.Services.SessionManager.CurrentUser;
-            if (currentUser != null && currentUser.Rol != "Admin")
+            var currentUser = SessionManager.CurrentUser;
+            if (currentUser != null && (currentUser.Rol == "Admin" || currentUser.Rol == "Cajero"))
             {
                 var cierreCajaService = Program.ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Services.CierreCajaService>();
 
@@ -64,6 +66,12 @@ namespace GBPColmadoNet
 
         private void ConfigurarMenuAcordeon()
         {
+            var currentUser = SessionManager.CurrentUser;
+            var rol = currentUser?.Rol ?? "Guest";
+
+            var context = Program.ServiceProvider.GetRequiredService<ColmadoContext>();
+            var permisoService = new PermisoService(context);
+
             toolStripButton1.Visible = false;
             toolStripButtonDevoluciones.Visible = false;
             toolStripButtonListarProductos.Visible = false;
@@ -79,6 +87,42 @@ namespace GBPColmadoNet
             toolStripButtonHVentas.Visible = false;
 
             tlSConfiguraciones.Visible = false;
+
+            bool permiteAdmin = rol == "Admin";
+            bool permiteAlmacen = rol == "Almacen";
+            bool permiteCajero = rol == "Cajero";
+
+            toolStripLabelInventario.Visible = permiteAdmin || permiteAlmacen;
+            toolStripLabelVentas.Visible = permiteAdmin || permiteCajero;
+            toolStripLabelCliente.Visible = permiteAdmin || permiteAlmacen;
+
+            if (permiteAdmin || permiteAlmacen)
+            {
+                toolStripButton1.Visible = true;
+                toolStripButtonDevoluciones.Visible = true;
+                toolStripButtonListarProductos.Visible = true;
+            }
+
+            toolStripButtonVentaR.Visible = permiteAdmin || permiteCajero;
+            toolStripButtonCuadre.Visible = permiteAdmin || permiteCajero;
+
+            if (permiteAdmin || permiteAlmacen)
+            {
+                toolStripButtonCliente.Visible = true;
+                toolStripButtonCuentasPCobrar.Visible = true;
+            }
+
+            if (permiteCajero)
+            {
+                toolStripButtonCliente.Visible = true;
+                toolStripButtonCuentasPCobrar.Visible = false;
+            }
+
+            toolStripButtonHClientes.Visible = permiteAdmin || permiteAlmacen || permiteCajero;
+            toolStripButtonHProveedor.Visible = permiteAdmin || permiteAlmacen;
+            toolStripButtonHVentas.Visible = permiteAdmin || permiteAlmacen || permiteCajero;
+
+            tlSConfiguraciones.Visible = permiteAdmin;
 
             toolStripLabelInventario.Click += (s, e) =>
             {
@@ -231,6 +275,11 @@ namespace GBPColmadoNet
 
         private void toolStripButtonVentaR_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Cajero" }))
+            {
+                MessageBox.Show("No tiene permisos para realizar ventas.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var ventaRapida = Program.ServiceProvider.GetRequiredService<VentaRapidaForm>();
             ventaRapida?.ShowDialog();
 
@@ -238,24 +287,44 @@ namespace GBPColmadoNet
 
         private void ventaRapidaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Cajero" }))
+            {
+                MessageBox.Show("No tiene permisos para realizar ventas.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var ventaRapida = Program.ServiceProvider.GetRequiredService<VentaRapidaForm>();
             ventaRapida?.ShowDialog();
         }
 
         private void cuadreToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Cajero" }))
+            {
+                MessageBox.Show("No tiene permisos para cuadre de caja.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cuadre = Program.ServiceProvider.GetRequiredService<CuadreForm>();
             cuadre.ShowDialog();
         }
 
         private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para gestionar clientes.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cliente = Program.ServiceProvider.GetRequiredService<ClienteList>();
             cliente.ShowDialog();
         }
 
         private void cuentasPorCobrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para cuentas por cobrar.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cuentasPorCobrar = Program.ServiceProvider.GetRequiredService<CuentasPorCobrarList>();
             cuentasPorCobrar.ShowDialog();
         }
@@ -268,6 +337,11 @@ namespace GBPColmadoNet
 
         private void historialProveedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para ver historial de proveedores.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var historialProveedor = Program.ServiceProvider.GetRequiredService<HProveedorList>();
             historialProveedor.ShowDialog();
         }
@@ -280,6 +354,11 @@ namespace GBPColmadoNet
 
         private async void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin" }))
+            {
+                MessageBox.Show("Solo el administrador puede acceder a configuración.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
             await CargarDashboard();
@@ -287,18 +366,33 @@ namespace GBPColmadoNet
 
         private void toolStripButtonCuadre_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Cajero" }))
+            {
+                MessageBox.Show("No tiene permisos para acceder a cuadre de caja.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cuadre = Program.ServiceProvider.GetRequiredService<CuadreForm>();
             cuadre.ShowDialog();
         }
 
         private void toolStripButtonCliente_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para gestionar clientes.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cliente = Program.ServiceProvider.GetRequiredService<ClienteList>();
             cliente.ShowDialog();
         }
 
         private void toolStripButtonCuentasPCobrar_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para gestionar cuentas por cobrar.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var cuentasPorCobrar = Program.ServiceProvider.GetRequiredService<CuentasPorCobrarList>();
             cuentasPorCobrar.ShowDialog();
         }
@@ -311,6 +405,11 @@ namespace GBPColmadoNet
 
         private void toolStripButtonHProveedor_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin", "Almacen" }))
+            {
+                MessageBox.Show("No tiene permisos para ver historial de proveedores.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var historialProveedor = Program.ServiceProvider.GetRequiredService<HProveedorList>();
             historialProveedor.ShowDialog();
         }
@@ -323,6 +422,11 @@ namespace GBPColmadoNet
 
         private async void tlSConfiguraciones_Click(object sender, EventArgs e)
         {
+            if (!SessionManager.HasAccess(new[] { "Admin" }))
+            {
+                MessageBox.Show("Solo el administrador puede acceder a configuración.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
             await CargarDashboard();
