@@ -91,8 +91,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                 else
                 {
                     var resultados = await _service.GetList(d =>
-                        (d.ProductoNombre?.Contains(criterio) ?? false) ||
-                        (d.Motivo?.Contains(criterio) ?? false)
+                        (d.ProductoNombre != null && d.ProductoNombre.Contains(criterio)) ||
+                        (d.Motivo != null && d.Motivo.Contains(criterio))
                     );
 
                     var listaMostrada = resultados.Select(d => new

@@ -195,7 +195,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                     var resultados = await _service.GetList(p =>
                         ((p.Activo ?? true) == estadoBuscado) &&
                         (p.Nombre.Contains(criterio) ||
-                        (p.CodigoBarras?.Contains(criterio) ?? false) ||
+                        (p.CodigoBarras != null && p.CodigoBarras.Contains(criterio)) ||
                         (esNumero && p.ProductoId == idBusqueda))
                     );
 
