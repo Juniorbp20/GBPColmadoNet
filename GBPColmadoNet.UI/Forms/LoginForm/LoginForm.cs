@@ -18,7 +18,7 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
             InitializeComponent();
             _usuarioServices = usuarioServices;
             _configuracionService = configuracionService;
-            
+
             string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SystemLogo.png");
             if (File.Exists(logoPath))
             {
@@ -65,6 +65,8 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+
+            //Bloquea al login por 60 segundos si pierde 3 intentos
             else
             {
                 _intentosFallidos++;
@@ -77,6 +79,7 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
             }
         }
 
+        //Bloquea al login por 60 segundos
         private void BloquearLogin()
         {
             btnIngresar.Enabled = false;
@@ -90,7 +93,7 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
         private void timerBloqueo_Tick(object sender, EventArgs e)
         {
             _tiempoRestante--;
-            
+
             if (_tiempoRestante <= 0)
             {
                 timerBloqueo.Stop();
@@ -109,6 +112,11 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
         private void ActualizarMensajeBloqueo()
         {
             lblMensaje.Text = $"Demasiados intentos. Espere {_tiempoRestante} segundos.";
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

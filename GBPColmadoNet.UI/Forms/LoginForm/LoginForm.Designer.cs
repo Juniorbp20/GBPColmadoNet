@@ -155,6 +155,7 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
             Name = "LoginForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Bienvenido a ";
+            Load += LoginForm_Load;
             pnlLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
