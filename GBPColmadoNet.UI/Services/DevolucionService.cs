@@ -37,7 +37,7 @@ namespace GBPColmadoNet.UI.Services
         {
             return await context.Devoluciones
                 .Include(d => d.Venta)
-                    .ThenInclude(v => v.VentasDetalles)
+                    .ThenInclude(v => v!.VentasDetalles)
                         .ThenInclude(vd => vd.Producto)
                 .Include(d => d.Usuario)
                 .AsNoTracking()
@@ -58,7 +58,7 @@ namespace GBPColmadoNet.UI.Services
         {
             return await context.Devoluciones
                 .Include(d => d.Venta)
-                    .ThenInclude(v => v.Cliente)
+                    .ThenInclude(v => v!.Cliente)
                 .Include(d => d.Usuario)
                 .AsNoTracking()
                 .Where(criterio)

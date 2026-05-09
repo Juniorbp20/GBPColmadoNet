@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Proveedor
     public partial class ProveedorList : Form
     {
         private readonly ProveedorService _service;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
 
         public ProveedorList(ProveedorService service)
@@ -58,11 +58,11 @@ namespace GBPColmadoNet.UI.Forms.Proveedor
                 return;
             }
 
-            var entidad = (Proveedore)proveedorDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (Proveedore)proveedorDataGridView.CurrentRow.DataBoundItem!;
             var form = Program.ServiceProvider.GetRequiredService<ProveedorForm>();
 
             var formConParametro = ActivatorUtilities.CreateInstance<ProveedorForm>(
-                Program.ServiceProvider, entidad);
+                Program.ServiceProvider, entidad!);
 
             if (formConParametro.ShowDialog(this) == DialogResult.OK)
             {
@@ -79,7 +79,7 @@ namespace GBPColmadoNet.UI.Forms.Proveedor
                 return;
             }
 
-            var entidad = (Proveedore)proveedorDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (Proveedore)proveedorDataGridView.CurrentRow.DataBoundItem!;
 
             var result = MessageBox.Show(
                 $"¿Desea eliminar el proveedor '{entidad.Nombre}'?",

@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes
     public partial class ClienteList : Form
     {
         private readonly ClienteService _service;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
 
         public ClienteList(ClienteService service)
@@ -58,10 +58,10 @@ namespace GBPColmadoNet.UI.Forms.Clientes
                 return;
             }
 
-            var entidad = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem!;
 
             var form = ActivatorUtilities.CreateInstance<ClienteForm>(
-                Program.ServiceProvider, entidad);
+                Program.ServiceProvider, entidad!);
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -78,7 +78,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes
                 return;
             }
 
-            var entidad = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (Cliente)clienteDataGridView.CurrentRow.DataBoundItem!;
 
             var result = MessageBox.Show(
                 $"¿Desea eliminar el cliente '{entidad.Nombre}'?",
