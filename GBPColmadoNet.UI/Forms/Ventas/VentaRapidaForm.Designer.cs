@@ -16,6 +16,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
         private void InitializeComponent()
         {
             PanelTop = new Panel();
+            lblTipoPago = new Label();
+            cmbTipoPago = new ComboBox();
             lblCliente = new Label();
             cmbCliente = new ComboBox();
             lblProducto = new Label();
@@ -50,8 +52,6 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             btnEliminarItem = new Button();
             btnCancelarVenta = new Button();
             btnConfirmarVenta = new Button();
-            lblTipoPago = new Label();
-            cmbTipoPago = new ComboBox();
             PanelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numCantidad).BeginInit();
             PanelMiddle.SuspendLayout();
@@ -81,6 +81,27 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             PanelTop.Size = new Size(900, 100);
             PanelTop.TabIndex = 0;
             // 
+            // lblTipoPago
+            // 
+            lblTipoPago.AutoSize = true;
+            lblTipoPago.Location = new Point(295, 20);
+            lblTipoPago.Name = "lblTipoPago";
+            lblTipoPago.Size = new Size(64, 15);
+            lblTipoPago.TabIndex = 11;
+            lblTipoPago.Text = "Tipo Pago:";
+            lblTipoPago.Visible = false;
+            // 
+            // cmbTipoPago
+            // 
+            cmbTipoPago.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoPago.Items.AddRange(new object[] { "Efectivo", "Crédito" });
+            cmbTipoPago.Location = new Point(365, 17);
+            cmbTipoPago.Name = "cmbTipoPago";
+            cmbTipoPago.Size = new Size(100, 23);
+            cmbTipoPago.TabIndex = 12;
+            cmbTipoPago.Visible = false;
+            cmbTipoPago.SelectedIndexChanged += CmbTipoPago_SelectedIndexChanged;
+            // 
             // lblCliente
             // 
             lblCliente.AutoSize = true;
@@ -98,28 +119,6 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             cmbCliente.Size = new Size(200, 23);
             cmbCliente.TabIndex = 1;
             cmbCliente.SelectedIndexChanged += CmbCliente_SelectedIndexChanged;
-            // 
-            // 
-            // lblTipoPago
-            // 
-            lblTipoPago.AutoSize = true;
-            lblTipoPago.Location = new Point(295, 20);
-            lblTipoPago.Name = "lblTipoPago";
-            lblTipoPago.Size = new Size(63, 15);
-            lblTipoPago.TabIndex = 11;
-            lblTipoPago.Text = "Tipo Pago:";
-            lblTipoPago.Visible = false;
-            // 
-            // cmbTipoPago
-            // 
-            cmbTipoPago.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbTipoPago.Items.AddRange(new object[] { "Efectivo", "Crédito" });
-            cmbTipoPago.Location = new Point(365, 17);
-            cmbTipoPago.Name = "cmbTipoPago";
-            cmbTipoPago.Size = new Size(100, 23);
-            cmbTipoPago.TabIndex = 12;
-            cmbTipoPago.Visible = false;
-            cmbTipoPago.SelectedIndexChanged += CmbTipoPago_SelectedIndexChanged;
             // 
             // lblProducto
             // 
@@ -238,7 +237,6 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             dgvVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVenta.Location = new Point(20, 25);
             dgvVenta.Name = "dgvVenta";
-            dgvVenta.ReadOnly = true;
             dgvVenta.RowHeadersVisible = false;
             dgvVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvVenta.Size = new Size(860, 225);

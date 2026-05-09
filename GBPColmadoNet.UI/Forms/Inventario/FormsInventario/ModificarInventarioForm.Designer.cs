@@ -1,4 +1,4 @@
-﻿namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
+namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 {
     partial class ModificarInventarioForm
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            chkActivo = new CheckBox();
             lbGanancia = new Label();
             lbVentaFinalItbis = new Label();
             lbInfoItbis = new Label();
@@ -57,6 +58,18 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrecioVenta).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrecioCompra).BeginInit();
             SuspendLayout();
+            // 
+            // chkActivo
+            // 
+            chkActivo.AutoSize = true;
+            chkActivo.Checked = true;
+            chkActivo.CheckState = CheckState.Checked;
+            chkActivo.Location = new Point(151, 290);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(112, 19);
+            chkActivo.TabIndex = 56;
+            chkActivo.Text = "Producto Activo";
+            chkActivo.UseVisualStyleBackColor = true;
             // 
             // lbGanancia
             // 
@@ -254,13 +267,14 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.FlatStyle = FlatStyle.System;
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
             btnGuardar.Location = new Point(151, 318);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 34);
             btnGuardar.TabIndex = 34;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             // 
             // lbPrecioVenta
             // 
@@ -294,6 +308,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(chkActivo);
             Controls.Add(lbGanancia);
             Controls.Add(lbVentaFinalItbis);
             Controls.Add(lbInfoItbis);
@@ -330,6 +345,7 @@
 
         #endregion
 
+        private CheckBox chkActivo;
         private Label lbGanancia;
         private Label lbVentaFinalItbis;
         private Label lbInfoItbis;

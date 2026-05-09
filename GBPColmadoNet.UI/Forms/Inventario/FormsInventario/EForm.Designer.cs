@@ -259,13 +259,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // 
             // btnGuardar
             // 
-            btnGuardar.FlatStyle = FlatStyle.System;
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
             btnGuardar.Location = new Point(158, 314);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 34);
             btnGuardar.TabIndex = 34;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // lbPrecioVenta

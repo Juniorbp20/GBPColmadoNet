@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
     public partial class DevolucionesList : Form
     {
         private readonly DevolucionService _service;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
 
         public DevolucionesList(DevolucionService service)
@@ -30,8 +30,22 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
             try
             {
                 var devoluciones = await _service.GetList(d => true);
+                
+                var listaMostrada = devoluciones.Select(d => new
+                {
+                    DevolucionId = d.DevolucionId,
+                    Venta = $"#{d.VentaId}",
+                    Producto = d.ProductoNombre,
+                    Cantidad = d.Cantidad,
+                    Reembolso = d.MontoReembolsado,
+                    Motivo = d.Motivo,
+                    Estado = d.Estado,
+                    Fecha = d.FechaRegistro.ToString("dd/MM/yyyy HH:mm"),
+                    Usuario = d.Usuario?.Username ?? "Desconocido"
+                }).ToList();
+
                 devolucionDataGridView.DataSource = null;
-                devolucionDataGridView.DataSource = devoluciones;
+                devolucionDataGridView.DataSource = listaMostrada;
             }
             catch (Exception ex)
             {
@@ -77,13 +91,26 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                 else
                 {
                     var resultados = await _service.GetList(d =>
-                        d.ProductoNombre.Contains(criterio) ||
-                        d.Motivo.Contains(criterio)
+                        (d.ProductoNombre != null && d.ProductoNombre.Contains(criterio)) ||
+                        (d.Motivo != null && d.Motivo.Contains(criterio))
                     );
+
+                    var listaMostrada = resultados.Select(d => new
+                    {
+                        DevolucionId = d.DevolucionId,
+                        Venta = $"#{d.VentaId}",
+                        Producto = d.ProductoNombre,
+                        Cantidad = d.Cantidad,
+                        Reembolso = d.MontoReembolsado,
+                        Motivo = d.Motivo,
+                        Estado = d.Estado,
+                        Fecha = d.FechaRegistro.ToString("dd/MM/yyyy HH:mm"),
+                        Usuario = d.Usuario?.Username ?? "Desconocido"
+                    }).ToList();
 
                     if (!token.IsCancellationRequested)
                     {
-                        devolucionDataGridView.DataSource = resultados;
+                        devolucionDataGridView.DataSource = listaMostrada;
                     }
                 }
             }

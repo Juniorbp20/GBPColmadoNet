@@ -14,13 +14,28 @@ namespace GBPColmadoNet
     public partial class MainForm : Form
     {
 
+        private System.Windows.Forms.Timer _timer;
+
         public MainForm(ColmadoContext context)
         {
             InitializeComponent();
             ConfigurarMenuAcordeon();
 
+            toolStrip1.Renderer = new CustomToolStripRenderer();
+
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 1000;
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+
             cerrarSesionToolStripMenuItem.Click += CerrarSesion_Click;
             tlSCerrarSesion.Click += CerrarSesion_Click;
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            if (lblClock != null) lblClock.Text = DateTime.Now.ToString("hh:mm:ss tt");
+            if (lblDate != null) lblDate.Text = DateTime.Now.ToString("dddd, d 'de' MMMM 'de' yyyy");
         }
 
         private void CerrarSesion_Click(object? sender, EventArgs e)
@@ -35,7 +50,6 @@ namespace GBPColmadoNet
             {
                 var cierreCajaService = Program.ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Services.CierreCajaService>();
 
-                // Evitar deadlock en WinForms
                 var cajaAbierta = Task.Run(() => cierreCajaService.ObtenerCajaAbiertaAsync(currentUser.UsuarioId)).Result;
 
                 if (cajaAbierta != null)
@@ -119,7 +133,9 @@ namespace GBPColmadoNet
                 var config = await configService.ObtenerConfiguracionAsync();
                 if (config != null)
                 {
-                    lblBrandTitle.Text = string.IsNullOrEmpty(config.NombreComercial) ? "GBPColmadoNet" : config.NombreComercial;
+                    string nombreNegocio = string.IsNullOrEmpty(config.NombreComercial) ? "GBPColmadoNet" : config.NombreComercial;
+                    lblBrandTitle.Text = nombreNegocio;
+                    this.Text = $"Sistema Colmado {nombreNegocio}";
                     lblBrandSub.Text = string.IsNullOrEmpty(config.Descripcion) ? "Gestiona tu inventario, ventas y proveedores desde un solo lugar" : config.Descripcion;
                 }
 
@@ -135,9 +151,7 @@ namespace GBPColmadoNet
                 var productosActivos = context.Productos.Count(p => p.Activo == true);
                 lblProductosActivosValue.Text = productosActivos.ToString();
 
-                // Proveedores registrados
-                var proveedores = context.Proveedores.Count();
-                lblProveedoresPendientesValue.Text = proveedores.ToString();
+                // Proveedores eliminados de la vista principal
 
                 // Stock critico (<= 5)
                 var stockCritico = context.Productos.Count(p => p.Stock <= 5 && p.Activo == true);
@@ -165,7 +179,7 @@ namespace GBPColmadoNet
                 // Fiados pendientes
                 var fiadosPendientes = context.CuentasPorCobrars
                     .Where(c => c.Estado == "Pendiente")
-                    .Sum(c => (decimal?)c.BalancePendiente) ?? 0m;
+                    .Sum(c => (decimal?)c.MontoDeuda - (decimal?)(c.MontoAbonado ?? 0m)) ?? 0m;
                 lblFiadosPendientesValue.Text = fiadosPendientes.ToString("N2");
             }
             catch (Exception ex)
@@ -264,10 +278,11 @@ namespace GBPColmadoNet
             historialVentas.ShowDialog();
         }
 
-        private void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void configuracionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
+            await CargarDashboard();
         }
 
         private void toolStripButtonCuadre_Click(object sender, EventArgs e)
@@ -306,13 +321,19 @@ namespace GBPColmadoNet
             historialVentas.ShowDialog();
         }
 
-        private void tlSConfiguraciones_Click(object sender, EventArgs e)
+        private async void tlSConfiguraciones_Click(object sender, EventArgs e)
         {
             var configuracion = Program.ServiceProvider.GetRequiredService<ConfiguracionForm>();
             configuracion.ShowDialog();
+            await CargarDashboard();
         }
 
         private void tlSCerrarSesion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

@@ -17,132 +17,136 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.lblTelefono = new System.Windows.Forms.Label();
-            this.lblActivo = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.chkActivo = new System.Windows.Forms.CheckBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.errorProviderCliente = new System.Windows.Forms.ErrorProvider();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            lblTitulo = new Label();
+            lblNombre = new Label();
+            lblTelefono = new Label();
+            lblActivo = new Label();
+            txtNombre = new TextBox();
+            txtTelefono = new TextBox();
+            chkActivo = new CheckBox();
+            btnGuardar = new Button();
+            btnCancelar = new Button();
+            errorProviderCliente = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProviderCliente).BeginInit();
+            SuspendLayout();
             // 
             // lblTitulo
             // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.Location = new System.Drawing.Point(230, 20);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(121, 25);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Gestión Cliente";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitulo.Location = new Point(230, 20);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(146, 25);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Gestión Cliente";
             // 
             // lblNombre
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(50, 80);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(51, 15);
-            this.lblNombre.TabIndex = 1;
-            this.lblNombre.Text = "Nombre:";
+            lblNombre.AutoSize = true;
+            lblNombre.Location = new Point(50, 80);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(54, 15);
+            lblNombre.TabIndex = 1;
+            lblNombre.Text = "Nombre:";
             // 
             // lblTelefono
             // 
-            this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(50, 130);
-            this.lblTelefono.Name = "lblTelefono";
-            this.lblTelefono.Size = new System.Drawing.Size(56, 15);
-            this.lblTelefono.TabIndex = 2;
-            this.lblTelefono.Text = "Teléfono:";
+            lblTelefono.AutoSize = true;
+            lblTelefono.Location = new Point(50, 130);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(56, 15);
+            lblTelefono.TabIndex = 2;
+            lblTelefono.Text = "Teléfono:";
             // 
             // lblActivo
             // 
-            this.lblActivo.AutoSize = true;
-            this.lblActivo.Location = new System.Drawing.Point(50, 180);
-            this.lblActivo.Name = "lblActivo";
-            this.lblActivo.Size = new System.Drawing.Size(45, 15);
-            this.lblActivo.TabIndex = 3;
-            this.lblActivo.Text = "Activo:";
+            lblActivo.AutoSize = true;
+            lblActivo.Location = new Point(50, 180);
+            lblActivo.Name = "lblActivo";
+            lblActivo.Size = new Size(44, 15);
+            lblActivo.TabIndex = 3;
+            lblActivo.Text = "Activo:";
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(150, 77);
-            this.txtNombre.Multiline = true;
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(400, 25);
-            this.txtNombre.TabIndex = 4;
+            txtNombre.Location = new Point(150, 77);
+            txtNombre.Multiline = true;
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(400, 25);
+            txtNombre.TabIndex = 4;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(150, 127);
-            this.txtTelefono.Multiline = true;
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(400, 25);
-            this.txtTelefono.TabIndex = 5;
+            txtTelefono.Location = new Point(150, 127);
+            txtTelefono.Multiline = true;
+            txtTelefono.Name = "txtTelefono";
+            txtTelefono.Size = new Size(400, 25);
+            txtTelefono.TabIndex = 5;
             // 
             // chkActivo
             // 
-            this.chkActivo.AutoSize = true;
-            this.chkActivo.Checked = true;
-            this.chkActivo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkActivo.Location = new System.Drawing.Point(150, 178);
-            this.chkActivo.Name = "chkActivo";
-            this.chkActivo.Size = new System.Drawing.Size(55, 19);
-            this.chkActivo.TabIndex = 6;
-            this.chkActivo.Text = "Activo";
-            this.chkActivo.UseVisualStyleBackColor = true;
+            chkActivo.AutoSize = true;
+            chkActivo.Checked = true;
+            chkActivo.CheckState = CheckState.Checked;
+            chkActivo.Location = new Point(150, 178);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(60, 19);
+            chkActivo.TabIndex = 6;
+            chkActivo.Text = "Activo";
+            chkActivo.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnGuardar.Location = new System.Drawing.Point(250, 230);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(120, 35);
-            this.btnGuardar.TabIndex = 7;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(150, 230);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(120, 35);
+            btnGuardar.TabIndex = 7;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancelar.Location = new System.Drawing.Point(390, 230);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(120, 35);
-            this.btnCancelar.TabIndex = 8;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            btnCancelar.BackColor = Color.Transparent;
+            btnCancelar.ForeColor = Color.Black;
+            btnCancelar.Location = new Point(290, 230);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(120, 35);
+            btnCancelar.TabIndex = 8;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // errorProviderCliente
             // 
-            this.errorProviderCliente.ContainerControl = this;
+            errorProviderCliente.ContainerControl = this;
             // 
             // ClienteForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 300);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.chkActivo);
-            this.Controls.Add(this.txtTelefono);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.lblActivo);
-            this.Controls.Add(this.lblTelefono);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.lblTitulo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ClienteForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Gestión de Clientes";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(600, 300);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnGuardar);
+            Controls.Add(chkActivo);
+            Controls.Add(txtTelefono);
+            Controls.Add(txtNombre);
+            Controls.Add(lblActivo);
+            Controls.Add(lblTelefono);
+            Controls.Add(lblNombre);
+            Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ClienteForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Gestión de Clientes";
+            ((System.ComponentModel.ISupportInitialize)errorProviderCliente).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

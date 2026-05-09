@@ -32,13 +32,13 @@ static class Program
         ConfigureServices(services);
 
         ServiceProvider = services.BuildServiceProvider();
-        
+
         var loginForm = ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Forms.LoginForm.LoginForm>();
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
             var cierreCajaService = ServiceProvider.GetRequiredService<CierreCajaService>();
             var currentUser = SessionManager.CurrentUser;
-            
+
             // Requerir caja abierta
             if (currentUser != null)
             {
@@ -72,7 +72,7 @@ static class Program
             options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
             {
                 sqlOptions.EnableRetryOnFailure();
-            }));
+            }), ServiceLifetime.Transient);
 
         //Form y List
         services.AddTransient<LoginForm>();
@@ -83,6 +83,8 @@ static class Program
         services.AddTransient<CuentasPorCobrarList>();
         services.AddTransient<CuentasPorCobrarForm>();
         services.AddTransient<ConfiguracionForm>();
+        services.AddTransient<CrearUsuarioForm>();
+        services.AddTransient<UsuarioListForm>();
         services.AddTransient<HClienteList>();
         services.AddTransient<HProveedorList>();
         services.AddTransient<HVentasList>();

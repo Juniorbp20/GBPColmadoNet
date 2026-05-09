@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
     public partial class CuentasPorCobrarList : Form
     {
         private readonly CuentasPorCobrarService _service;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
 
         public CuentasPorCobrarList(CuentasPorCobrarService service)
@@ -21,9 +21,10 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
             cuentaDataGridView.CellFormatting += CuentaDataGridView_CellFormatting;
         }
 
-        private void CuentaDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void CuentaDataGridView_CellFormatting(object? sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0 || e.Value == null) return;
+            if (cuentaDataGridView.Columns[e.ColumnIndex] == null) return;
 
             var columnName = cuentaDataGridView.Columns[e.ColumnIndex].Name;
 
@@ -58,36 +59,36 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
                 cuentaDataGridView.DataSource = null;
                 cuentaDataGridView.DataSource = cuentas;
 
-                if (cuentaDataGridView.Columns["Cliente"] != null)
+                if (cuentaDataGridView.Columns["Cliente"] is DataGridViewTextBoxColumn colCliente)
                 {
-                    cuentaDataGridView.Columns["Cliente"].HeaderText = "Cliente";
+                    colCliente.HeaderText = "Cliente";
                 }
-                if (cuentaDataGridView.Columns["MontoDeuda"] != null)
+                if (cuentaDataGridView.Columns["MontoDeuda"] is DataGridViewTextBoxColumn colMontoDeuda)
                 {
-                    cuentaDataGridView.Columns["MontoDeuda"].DefaultCellStyle.Format = "N2";
+                    colMontoDeuda.DefaultCellStyle.Format = "N2";
                 }
-                if (cuentaDataGridView.Columns["MontoAbonado"] != null)
+                if (cuentaDataGridView.Columns["MontoAbonado"] is DataGridViewTextBoxColumn colMontoAbonado)
                 {
-                    cuentaDataGridView.Columns["MontoAbonado"].DefaultCellStyle.Format = "N2";
+                    colMontoAbonado.DefaultCellStyle.Format = "N2";
                 }
-                if (cuentaDataGridView.Columns["BalancePendiente"] != null)
+                if (cuentaDataGridView.Columns["BalancePendiente"] is DataGridViewTextBoxColumn colBalancePendiente)
                 {
-                    cuentaDataGridView.Columns["BalancePendiente"].DefaultCellStyle.Format = "N2";
+                    colBalancePendiente.DefaultCellStyle.Format = "N2";
                 }
-                if (cuentaDataGridView.Columns["FechaRegistro"] != null)
+                if (cuentaDataGridView.Columns["FechaRegistro"] is DataGridViewTextBoxColumn colFechaRegistro)
                 {
-                    cuentaDataGridView.Columns["FechaRegistro"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    colFechaRegistro.DefaultCellStyle.Format = "dd/MM/yyyy";
                 }
-                if (cuentaDataGridView.Columns["FechaVencimiento"] != null)
+                if (cuentaDataGridView.Columns["FechaVencimiento"] is DataGridViewTextBoxColumn colFechaVencimiento)
                 {
-                    cuentaDataGridView.Columns["FechaVencimiento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    colFechaVencimiento.DefaultCellStyle.Format = "dd/MM/yyyy";
                 }
 
                 string[] colsToHide = { "ClienteId", "VentaId", "FechaModificacion", "Abonos" };
                 foreach (var colName in colsToHide)
                 {
-                    if (cuentaDataGridView.Columns[colName] != null)
-                        cuentaDataGridView.Columns[colName].Visible = false;
+                    if (cuentaDataGridView.Columns[colName] is DataGridViewColumn col)
+                        col.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -115,16 +116,16 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
                 return;
             }
 
-            var cuenta = (Data.Models.CuentasPorCobrar)cuentaDataGridView.CurrentRow.DataBoundItem;
+            var cuenta = (Data.Models.CuentasPorCobrar)cuentaDataGridView.CurrentRow!.DataBoundItem!;
             AbrirFormAbono(cuenta.Id);
         }
 
-        private void cuentaDataGridView_DoubleClick(object sender, EventArgs e)
+        private void cuentaDataGridView_DoubleClick(object? sender, EventArgs e)
         {
             if (cuentaDataGridView.CurrentRow == null)
                 return;
 
-            var cuenta = (Data.Models.CuentasPorCobrar)cuentaDataGridView.CurrentRow.DataBoundItem;
+            var cuenta = (Data.Models.CuentasPorCobrar)cuentaDataGridView.CurrentRow.DataBoundItem!;
             AbrirFormAbono(cuenta.Id);
         }
 

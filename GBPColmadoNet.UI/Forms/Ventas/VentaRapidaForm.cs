@@ -21,6 +21,40 @@ namespace GBPColmadoNet.UI.Forms.Ventas
 
             _carrito = new BindingList<CarritoItem>();
             dgvVenta.DataSource = _carrito;
+
+            dgvVenta.CellValueChanged += DgvVenta_CellValueChanged;
+            dgvVenta.DataBindingComplete += DgvVenta_DataBindingComplete;
+        }
+
+        private void DgvVenta_DataBindingComplete(object? sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewColumn col in dgvVenta.Columns)
+            {
+                col.ReadOnly = col.Name != "Cantidad";
+            }
+        }
+
+        private async void DgvVenta_CellValueChanged(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvVenta.Columns[e.ColumnIndex].Name == "Cantidad")
+            {
+                var item = _carrito[e.RowIndex];
+                
+                var prod = await _productoService.Buscar(item.ProductoId);
+                if (prod != null && prod.Stock < item.Cantidad)
+                {
+                    MessageBox.Show($"Stock insuficiente. Stock disponible: {prod.Stock}", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    item.Cantidad = prod.Stock ?? 0;
+                    _carrito.ResetBindings();
+                }
+                else if (item.Cantidad <= 0)
+                {
+                    item.Cantidad = 1;
+                    _carrito.ResetBindings();
+                }
+                
+                CalcularTotales();
+            }
         }
 
         private async void VentaRapidaForm_Load(object sender, EventArgs e)
@@ -197,15 +231,55 @@ namespace GBPColmadoNet.UI.Forms.Ventas
         {
             if (dgvVenta.CurrentRow?.DataBoundItem is CarritoItem item)
             {
-                var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el producto '{item.Nombre}' de la venta actual?", 
-                                             "Confirmar Eliminación", 
-                                             MessageBoxButtons.YesNo, 
-                                             MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                if (item.Cantidad > 1)
                 {
-                    _carrito.Remove(item);
-                    CalcularTotales();
+                    using var prompt = new Form()
+                    {
+                        Width = 350,
+                        Height = 150,
+                        FormBorderStyle = FormBorderStyle.FixedDialog,
+                        Text = "Eliminar Cantidad",
+                        StartPosition = FormStartPosition.CenterParent,
+                        MaximizeBox = false,
+                        MinimizeBox = false
+                    };
+                    Label textLabel = new Label() { Left = 20, Top = 20, Width = 300, Text = $"¿Cuántas unidades de '{item.Nombre}' desea eliminar?" };
+                    NumericUpDown inputBox = new NumericUpDown() { Left = 20, Top = 50, Width = 100, Minimum = 1, Maximum = item.Cantidad, Value = 1 };
+                    Button confirmation = new Button() { Text = "Aceptar", Left = 140, Width = 80, Top = 48, DialogResult = DialogResult.OK };
+                    Button cancel = new Button() { Text = "Cancelar", Left = 230, Width = 80, Top = 48, DialogResult = DialogResult.Cancel };
+                    
+                    prompt.Controls.Add(textLabel);
+                    prompt.Controls.Add(inputBox);
+                    prompt.Controls.Add(confirmation);
+                    prompt.Controls.Add(cancel);
+                    prompt.AcceptButton = confirmation;
+
+                    if (prompt.ShowDialog() == DialogResult.OK)
+                    {
+                        if (inputBox.Value == item.Cantidad)
+                        {
+                            _carrito.Remove(item);
+                        }
+                        else
+                        {
+                            item.Cantidad -= inputBox.Value;
+                            _carrito.ResetBindings();
+                        }
+                        CalcularTotales();
+                    }
+                }
+                else
+                {
+                    var result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el producto '{item.Nombre}' de la venta actual?", 
+                                                 "Confirmar Eliminación", 
+                                                 MessageBoxButtons.YesNo, 
+                                                 MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        _carrito.Remove(item);
+                        CalcularTotales();
+                    }
                 }
             }
         }
@@ -364,6 +438,8 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                     {
                         ClienteId = clienteId.Value,
                         MontoDeuda = totalPagar - recibido,
+                        BalancePendiente = totalPagar - recibido,
+                        MontoAbonado = 0,
                         FechaRegistro = DateTime.Now,
                         Estado = "Pendiente"
                     });

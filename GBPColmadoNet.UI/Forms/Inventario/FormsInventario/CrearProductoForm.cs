@@ -88,7 +88,7 @@ namespace GBPColmadoNet.UI.Forms
             }
         }
 
-        private void NumericUpDownPrecioCompra_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownPrecioCompra_ValueChanged(object? sender, EventArgs e)
         {
             if (_precioVentaCalculadoAutomaticamente)
             {
@@ -97,12 +97,12 @@ namespace GBPColmadoNet.UI.Forms
             CalcularValores();
         }
 
-        private void NumericUpDownPrecioVenta_Enter(object sender, EventArgs e)
+        private void NumericUpDownPrecioVenta_Enter(object? sender, EventArgs e)
         {
             _precioVentaCalculadoAutomaticamente = false;
         }
 
-        private void NumericUpDownPrecioVenta_Leave(object sender, EventArgs e)
+        private void NumericUpDownPrecioVenta_Leave(object? sender, EventArgs e)
         {
             CalcularValores();
         }
@@ -205,8 +205,14 @@ namespace GBPColmadoNet.UI.Forms
             catch (Exception ex)
             {
                 var realMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (realMsg.Contains("UNIQUE KEY") || realMsg.Contains("Cannot insert duplicate key"))
+                {
+                    MessageBox.Show("El Código de Barras ingresado ya pertenece a otro producto en el sistema (incluso si está en la lista de Inactivos). \n\nPor favor, intente con un código diferente o busque el producto en 'Ver Inactivos' para reactivarlo.", "Código Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show($"Error de Base de Datos: {realMsg}", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {

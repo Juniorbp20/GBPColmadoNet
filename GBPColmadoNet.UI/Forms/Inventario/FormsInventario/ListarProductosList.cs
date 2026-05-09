@@ -11,8 +11,9 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
     {
         private readonly ProductoService _service;
         // para la barra de busqueda
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
+        private bool _viendoInactivos = false;
 
         public ListarProductosList(ProductoService service)
         {
@@ -34,7 +35,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         {
             try
             {
-                var productosParaMostrar = await _service.GetList(d => true);
+                bool estadoBuscado = !_viendoInactivos;
+                var productosParaMostrar = await _service.GetList(d => (d.Activo ?? true) == estadoBuscado);
                 productoDataGridView.DataSource = null;
                 productoDataGridView.DataSource = productosParaMostrar;
 
@@ -53,8 +55,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
             productoDataGridView.Dock = DockStyle.Fill;
 
-            if (productoDataGridView.Columns["Precio"] != null)
-                productoDataGridView.Columns["Precio"].DefaultCellStyle.Format = "N2";
+            if (productoDataGridView.Columns["Precio"] is DataGridViewTextBoxColumn colPrecio)
+                colPrecio.DefaultCellStyle.Format = "N2";
         }
 
         private async void btnEntrada_Click(object sender, EventArgs e)
@@ -80,10 +82,10 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 return;
             }
 
-            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem!;
 
             var form = ActivatorUtilities.CreateInstance<ModificarInventarioForm>(
-                Program.ServiceProvider, entidad);
+                Program.ServiceProvider, entidad!);
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -95,46 +97,67 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         {
             if (productoDataGridView.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un registro para modificar.", "Advertencia",
+                MessageBox.Show("Seleccione un registro.", "Advertencia",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem!;
 
+            string accion = _viendoInactivos ? "activar" : "desactivar";
             var result = MessageBox.Show(
-                $"¿Desea eliminar el departamento '{entidad.Nombre}'?",
-                "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                $"¿Desea {accion} el producto '{entidad.Nombre ?? "Producto"}'?",
+                $"Confirmar {accion}", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                _ = EliminarAsync(entidad.ProductoId);
+                _ = CambiarEstadoAsync(entidad);
             }
         }
 
-        private async Task EliminarAsync(int id)
+        private async Task CambiarEstadoAsync(ListarModel entidad)
         {
             try
             {
-                var success = await _service.Eliminar(id);
+                entidad.Activo = _viendoInactivos;
+                entidad.FechaModificacion = DateTime.Now;
+                var success = await _service.Modificar(entidad);
 
                 if (success)
                 {
-                    MessageBox.Show("Departamento eliminado correctamente.", "Éxito",
+                    MessageBox.Show($"Producto {(_viendoInactivos ? "activado" : "desactivado")} correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await LoadDataAsync();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo eliminar el departamento.", "Error",
+                    MessageBox.Show("No se pudo cambiar el estado del producto.", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al eliminar: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                var realMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                MessageBox.Show($"Error al cambiar estado: {realMsg}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async void btnToggleVista_Click(object sender, EventArgs e)
+        {
+            _viendoInactivos = !_viendoInactivos;
+            if (_viendoInactivos)
+            {
+                btnToggleVista.Text = "Ver Activos";
+                btnELiminar.Text = "Activar";
+                lbTituloList.Text = "Listar Productos Inactivos";
+            }
+            else
+            {
+                btnToggleVista.Text = "Ver Inactivos";
+                btnELiminar.Text = "Desactivar";
+                lbTituloList.Text = "Listar Productos";
+            }
+            await LoadDataAsync();
         }
 
         private async void txBuscarProducto_TextChanged(object sender, EventArgs e)
@@ -168,10 +191,12 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 {
                     bool esNumero = int.TryParse(criterio, out int idBusqueda);
 
+                    bool estadoBuscado = !_viendoInactivos;
                     var resultados = await _service.GetList(p =>
-                        p.Nombre.Contains(criterio) ||
-                        p.CodigoBarras.Contains(criterio) ||
-                        (esNumero && p.ProductoId == idBusqueda)
+                        ((p.Activo ?? true) == estadoBuscado) &&
+                        (p.Nombre.Contains(criterio) ||
+                        (p.CodigoBarras != null && p.CodigoBarras.Contains(criterio)) ||
+                        (esNumero && p.ProductoId == idBusqueda))
                     );
 
                     if (!token.IsCancellationRequested)

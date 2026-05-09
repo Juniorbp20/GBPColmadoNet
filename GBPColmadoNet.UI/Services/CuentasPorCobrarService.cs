@@ -10,7 +10,7 @@ namespace GBPColmadoNet.UI.Services
     {
         public async Task<bool> Guardar(CuentasPorCobrar entidad)
         {
-            if (entidad.Id == 0)
+            if (!await Existe(entidad.Id))
                 return await Insertar(entidad);
             else
                 return await Modificar(entidad);
@@ -29,7 +29,11 @@ namespace GBPColmadoNet.UI.Services
 
         public async Task<bool> Modificar(CuentasPorCobrar entidad)
         {
-            context.CuentasPorCobrars.Update(entidad);
+            var local = context.CuentasPorCobrars.Local.FirstOrDefault(entry => entry.Id == entidad.Id);
+            if (local != null)
+                context.Entry(local).State = EntityState.Detached;
+
+            context.Entry(entidad).State = EntityState.Modified;
             return await context.SaveChangesAsync() > 0;
         }
 

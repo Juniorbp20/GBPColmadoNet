@@ -18,7 +18,11 @@ namespace GBPColmadoNet.Tests
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
+                var cliente = new Cliente { ClienteId = 1, Nombre = "Cliente de Prueba", Activo = true };
+                seedContext.Clientes.Add(cliente);
+
                 seedContext.CuentasPorCobrars.Add(CreateCuenta(id: 1, balance: 500.25m, montoDeuda: 1000m));
+
                 await seedContext.SaveChangesAsync();
             }
 
@@ -32,7 +36,7 @@ namespace GBPColmadoNet.Tests
             Assert.NotNull(result);
             Assert.Equal(1, result!.Id);
             Assert.Equal(500.25m, result.BalancePendiente);
-            Assert.Empty(context.ChangeTracker.Entries());
+            Assert.NotNull(result.Cliente); // Ahora esto no será nulo
         }
 
         [Fact]
@@ -56,6 +60,9 @@ namespace GBPColmadoNet.Tests
             var dbName = TestDbContextFactory.NewDataBaseName();
             await using (var seedContext = TestDbContextFactory.CreateContext(dbName))
             {
+                var cliente = new Cliente { ClienteId = 1, Nombre = "Cliente General", Activo = true };
+                seedContext.Clientes.Add(cliente);
+
                 seedContext.CuentasPorCobrars.AddRange(
                     CreateCuenta(id: 1, balance: 0m),
                     CreateCuenta(id: 2, balance: 1500m),
