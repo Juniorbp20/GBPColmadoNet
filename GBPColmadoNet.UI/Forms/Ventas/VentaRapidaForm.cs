@@ -1,23 +1,27 @@
 using GBPColmadoNet.Data.Models;
 using GBPColmadoNet.UI.Services;
 using System.ComponentModel;
-
-namespace GBPColmadoNet.UI.Forms.Ventas
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.Diagnostics;namespace GBPColmadoNet.UI.Forms.Ventas
 {
     public partial class VentaRapidaForm : Form
     {
         private readonly ProductoService _productoService;
         private readonly VentasService _ventasService;
         private readonly ClienteService _clienteService;
+        private readonly ConfiguracionService _configuracionService;
         private BindingList<CarritoItem> _carrito;
         private List<Producto>? _productosDisponibles;
 
-        public VentaRapidaForm(ProductoService productoService, VentasService ventasService, ClienteService clienteService)
+        public VentaRapidaForm(ProductoService productoService, VentasService ventasService, ClienteService clienteService, ConfiguracionService configuracionService)
         {
             InitializeComponent();
             _productoService = productoService;
             _ventasService = ventasService;
             _clienteService = clienteService;
+            _configuracionService = configuracionService;
 
             _carrito = new BindingList<CarritoItem>();
             dgvVenta.DataSource = _carrito;
@@ -320,12 +324,12 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             {
                 // aqui se deside si el color es rojo o verde en base del monto
 
-                lblCambio.ForeColor = Color.Red;
+                lblCambio.ForeColor = System.Drawing.Color.Red;
                 lblCambio.Text = $"Faltan: RD$ {Math.Abs(cambio):N2}";
             }
             else
             {
-                lblCambio.ForeColor = Color.DarkGreen;
+                lblCambio.ForeColor = System.Drawing.Color.DarkGreen;
                 lblCambio.Text = $"RD$ {Math.Max(0, cambio):N2}";
             }
         }
@@ -426,7 +430,6 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                         prodDb.Categoria = null;
                         prodDb.Proveedor = null;
                         
-                        // Hacemos detach si ya está en local tracking para evitar choques
                         await _productoService.Modificar(prodDb);
                     }
                 }
@@ -451,7 +454,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                 {
                     MessageBox.Show("Venta guardada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LimpiarVenta();
-                    ImprimirFactura(venta.VentaId);
+                    await ImprimirFactura(venta.VentaId);
                 }
                 else
                 {
@@ -468,15 +471,102 @@ namespace GBPColmadoNet.UI.Forms.Ventas
                 btnConfirmarVenta.Enabled = true;
             }
         }
-        private void ImprimirFactura(int ventaId)
+        private async Task ImprimirFactura(int ventaId)
         {
-            // TODO: Aquí debes instanciar el formulario de tu factura (ej. FacturaForm) o el reporte
-            // y pasarle el ID de la venta para que la imprima/muestre.
-            // Ejemplo:
-            // var facturaViewer = new FacturaReporteForm(ventaId);
-            // facturaViewer.ShowDialog();
+            try
+            {
+                QuestPDF.Settings.License = LicenseType.Community;
 
-            MessageBox.Show($"Abriendo la factura para la venta #{ventaId}... (Conecta aquí tu diseño de factura)", "Imprimiendo Factura", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var config = await _configuracionService.ObtenerConfiguracionAsync();
+                var ventas = await _ventasService.GetListWithDetails(v => v.VentaId == ventaId);
+                var venta = ventas.FirstOrDefault();
+
+                if (venta == null) return;
+
+                var document = Document.Create(container =>
+                {
+                    container.Page(page =>
+                    {
+                        page.ContinuousSize(58, Unit.Millimetre);
+                        page.Margin(4, Unit.Millimetre);
+                        page.PageColor(Colors.White);
+                        page.DefaultTextStyle(x => x.FontSize(10).FontFamily(Fonts.Arial));
+
+                        page.Content().Column(col =>
+                        {
+                            // Encabezado
+                            col.Item().AlignCenter().Text(config?.NombreComercial ?? "Mi Negocio").Bold().FontSize(12);
+                            if (!string.IsNullOrEmpty(config?.Direccion))
+                                col.Item().AlignCenter().Text(config.Direccion);
+                            if (!string.IsNullOrEmpty(config?.Telefono))
+                                col.Item().AlignCenter().Text($"Tel: {config.Telefono}");
+                            if (!string.IsNullOrEmpty(config?.Rnc))
+                                col.Item().AlignCenter().Text($"RNC: {config.Rnc}");
+                            
+                            col.Item().PaddingVertical(2).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+
+                            // Info Factura
+                            col.Item().Text($"Factura #: {venta.VentaId}");
+                            col.Item().Text($"Fecha: {venta.Fecha:yyyy-MM-dd HH:mm:ss}");
+                            col.Item().Text($"Cliente: {(venta.Cliente != null ? venta.Cliente.Nombre : "Consumidor Final")}");
+
+                            col.Item().PaddingVertical(2).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+
+                            // Productos Header
+                            col.Item().Table(table =>
+                            {
+                                table.ColumnsDefinition(columns =>
+                                {
+                                    columns.RelativeColumn(3); // Producto
+                                    columns.RelativeColumn(1); // Cant
+                                    columns.RelativeColumn(2); // Total
+                                });
+
+                                table.Header(header =>
+                                {
+                                    header.Cell().Text("Producto").Bold();
+                                    header.Cell().Text("Cant.").Bold();
+                                    header.Cell().AlignRight().Text("Total").Bold();
+                                });
+
+                                foreach (var item in venta.VentasDetalles)
+                                {
+                                    table.Cell().Text(item.Producto?.Nombre ?? "Desc");
+                                    table.Cell().Text(item.Cantidad.ToString("N2"));
+                                    table.Cell().AlignRight().Text((item.Cantidad * item.PrecioUnitario).ToString("N2"));
+                                }
+                            });
+
+                            col.Item().PaddingVertical(2).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+
+                            // Totales
+                            decimal subtotal = venta.TotalNeto;
+                            col.Item().Text($"Subtotal: RD$ {subtotal:N2}");
+                            
+                            decimal totalPagado = venta.TotalNeto + venta.TotalItbis;
+                            col.Item().Text($"Total: RD$ {totalPagado:N2}").Bold();
+                            col.Item().Text($"ITBIS: RD$ {venta.TotalItbis:N2}");
+
+                            col.Item().PaddingVertical(2).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+
+                            col.Item().AlignCenter().Text(config?.MensajeTicket ?? "¡Gracias por su compra!");
+                        });
+                    });
+                });
+
+                string tempPath = Path.Combine(Path.GetTempPath(), $"Factura_{ventaId}_{DateTime.Now:yyyyMMddHHmmss}.pdf");
+                document.GeneratePdf(tempPath);
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = tempPath,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar factura: {ex.Message}");
+            }
         }
     }
 }
