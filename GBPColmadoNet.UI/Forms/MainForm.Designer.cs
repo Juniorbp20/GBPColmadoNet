@@ -97,7 +97,7 @@ namespace GBPColmadoNet
             // 
             // panelHeader
             // 
-            panelHeader.BackColor = Color.FromArgb(209, 209, 209);
+            panelHeader.BackColor = Color.Teal;
             panelHeader.Controls.Add(lblClock);
             panelHeader.Controls.Add(lblDate);
             panelHeader.Controls.Add(lblBrandTitle);
@@ -112,8 +112,9 @@ namespace GBPColmadoNet
             // lblClock
             // 
             lblClock.AutoSize = true;
+            lblClock.BackColor = Color.Transparent;
             lblClock.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
-            lblClock.ForeColor = Color.FromArgb(54, 66, 81);
+            lblClock.ForeColor = Color.White;
             lblClock.Location = new Point(797, 24);
             lblClock.Name = "lblClock";
             lblClock.Size = new Size(146, 45);
@@ -124,8 +125,9 @@ namespace GBPColmadoNet
             // lblDate
             // 
             lblDate.AutoSize = true;
+            lblDate.BackColor = Color.Transparent;
             lblDate.Font = new Font("Segoe UI", 10F);
-            lblDate.ForeColor = Color.FromArgb(96, 96, 96);
+            lblDate.ForeColor = Color.White;
             lblDate.Location = new Point(807, 66);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(118, 19);
@@ -136,8 +138,9 @@ namespace GBPColmadoNet
             // lblBrandTitle
             // 
             lblBrandTitle.AutoSize = true;
+            lblBrandTitle.BackColor = Color.Transparent;
             lblBrandTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblBrandTitle.ForeColor = Color.FromArgb(54, 66, 81);
+            lblBrandTitle.ForeColor = Color.White;
             lblBrandTitle.Location = new Point(3, 24);
             lblBrandTitle.Name = "lblBrandTitle";
             lblBrandTitle.Size = new Size(187, 30);
@@ -147,8 +150,9 @@ namespace GBPColmadoNet
             // lblBrandSub
             // 
             lblBrandSub.AutoSize = true;
+            lblBrandSub.BackColor = Color.Transparent;
             lblBrandSub.Font = new Font("Segoe UI", 10F);
-            lblBrandSub.ForeColor = Color.FromArgb(96, 96, 96);
+            lblBrandSub.ForeColor = Color.White;
             lblBrandSub.Location = new Point(3, 66);
             lblBrandSub.Name = "lblBrandSub";
             lblBrandSub.Size = new Size(407, 19);
@@ -253,21 +257,21 @@ namespace GBPColmadoNet
             // historialClienteToolStripMenuItem
             // 
             historialClienteToolStripMenuItem.Name = "historialClienteToolStripMenuItem";
-            historialClienteToolStripMenuItem.Size = new Size(180, 22);
+            historialClienteToolStripMenuItem.Size = new Size(175, 22);
             historialClienteToolStripMenuItem.Text = "Historial Cliente";
             historialClienteToolStripMenuItem.Click += historialClienteToolStripMenuItem_Click;
             // 
             // historialProveedorToolStripMenuItem
             // 
             historialProveedorToolStripMenuItem.Name = "historialProveedorToolStripMenuItem";
-            historialProveedorToolStripMenuItem.Size = new Size(180, 22);
+            historialProveedorToolStripMenuItem.Size = new Size(175, 22);
             historialProveedorToolStripMenuItem.Text = "Historial Proveedor";
             historialProveedorToolStripMenuItem.Click += historialProveedorToolStripMenuItem_Click;
             // 
             // historialVentasToolStripMenuItem
             // 
             historialVentasToolStripMenuItem.Name = "historialVentasToolStripMenuItem";
-            historialVentasToolStripMenuItem.Size = new Size(180, 22);
+            historialVentasToolStripMenuItem.Size = new Size(175, 22);
             historialVentasToolStripMenuItem.Text = "Historial  Ventas";
             historialVentasToolStripMenuItem.Click += historialVentasToolStripMenuItem_Click;
             // 
@@ -283,13 +287,13 @@ namespace GBPColmadoNet
             // configuracionesToolStripMenuItem
             // 
             configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
-            configuracionesToolStripMenuItem.Size = new Size(180, 22);
+            configuracionesToolStripMenuItem.Size = new Size(161, 22);
             configuracionesToolStripMenuItem.Text = "Configuraciones";
             // 
             // cerrarSesionToolStripMenuItem
             // 
             cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
+            cerrarSesionToolStripMenuItem.Size = new Size(161, 22);
             cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
             // 
             // ayudaToolStripMenuItem
