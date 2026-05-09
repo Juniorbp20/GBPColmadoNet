@@ -84,6 +84,7 @@ static class Program
         services.AddTransient<CuentasPorCobrarForm>();
         services.AddTransient<ConfiguracionForm>();
         services.AddTransient<CrearUsuarioForm>();
+        services.AddTransient<UsuarioListForm>();
         services.AddTransient<HClienteList>();
         services.AddTransient<HProveedorList>();
         services.AddTransient<HVentasList>();

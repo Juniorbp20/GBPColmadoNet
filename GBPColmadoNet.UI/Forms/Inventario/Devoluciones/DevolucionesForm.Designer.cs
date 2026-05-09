@@ -17,192 +17,196 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
 
         private void InitializeComponent()
         {
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblVenta = new System.Windows.Forms.Label();
-            this.cmbVenta = new System.Windows.Forms.ComboBox();
-            this.lblProducto = new System.Windows.Forms.Label();
-            this.dgvProductosVenta = new System.Windows.Forms.DataGridView();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.numericCantidad = new System.Windows.Forms.NumericUpDown();
-            this.lblMotivo = new System.Windows.Forms.Label();
-            this.txtMotivo = new System.Windows.Forms.TextBox();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.errorProviderDevolucion = new System.Windows.Forms.ErrorProvider();
-            this.lblInfoMonto = new System.Windows.Forms.Label();
-            this.lblAccion = new System.Windows.Forms.Label();
-            this.cmbAccion = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            lblTitulo = new Label();
+            lblVenta = new Label();
+            cmbVenta = new ComboBox();
+            lblProducto = new Label();
+            dgvProductosVenta = new DataGridView();
+            lblCantidad = new Label();
+            numericCantidad = new NumericUpDown();
+            lblMotivo = new Label();
+            txtMotivo = new TextBox();
+            btnGuardar = new Button();
+            btnCancelar = new Button();
+            errorProviderDevolucion = new ErrorProvider(components);
+            lblInfoMonto = new Label();
+            lblAccion = new Label();
+            cmbAccion = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)dgvProductosVenta).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericCantidad).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderDevolucion).BeginInit();
+            SuspendLayout();
             // 
             // lblTitulo
             // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.Location = new System.Drawing.Point(220, 15);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(165, 25);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "Registrar Devolución";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTitulo.Location = new Point(220, 15);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(198, 25);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Registrar Devolución";
             // 
             // lblVenta
             // 
-            this.lblVenta.AutoSize = true;
-            this.lblVenta.Location = new System.Drawing.Point(30, 60);
-            this.lblVenta.Name = "lblVenta";
-            this.lblVenta.Size = new System.Drawing.Size(40, 15);
-            this.lblVenta.TabIndex = 1;
-            this.lblVenta.Text = "Venta:";
+            lblVenta.AutoSize = true;
+            lblVenta.Location = new Point(30, 60);
+            lblVenta.Name = "lblVenta";
+            lblVenta.Size = new Size(39, 15);
+            lblVenta.TabIndex = 1;
+            lblVenta.Text = "Venta:";
             // 
             // cmbVenta
             // 
-            this.cmbVenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbVenta.FormattingEnabled = true;
-            this.cmbVenta.Location = new System.Drawing.Point(30, 78);
-            this.cmbVenta.Name = "cmbVenta";
-            this.cmbVenta.Size = new System.Drawing.Size(520, 23);
-            this.cmbVenta.TabIndex = 2;
-            this.cmbVenta.SelectedIndexChanged += new System.EventHandler(this.cmbVenta_SelectedIndexChanged);
+            cmbVenta.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbVenta.FormattingEnabled = true;
+            cmbVenta.Location = new Point(30, 78);
+            cmbVenta.Name = "cmbVenta";
+            cmbVenta.Size = new Size(520, 23);
+            cmbVenta.TabIndex = 2;
+            cmbVenta.SelectedIndexChanged += cmbVenta_SelectedIndexChanged;
             // 
             // lblProducto
             // 
-            this.lblProducto.AutoSize = true;
-            this.lblProducto.Location = new System.Drawing.Point(30, 115);
-            this.lblProducto.Name = "lblProducto";
-            this.lblProducto.Size = new System.Drawing.Size(60, 15);
-            this.lblProducto.TabIndex = 3;
-            this.lblProducto.Text = "Productos:";
+            lblProducto.AutoSize = true;
+            lblProducto.Location = new Point(30, 115);
+            lblProducto.Name = "lblProducto";
+            lblProducto.Size = new Size(64, 15);
+            lblProducto.TabIndex = 3;
+            lblProducto.Text = "Productos:";
             // 
             // dgvProductosVenta
             // 
-            this.dgvProductosVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductosVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductosVenta.Location = new System.Drawing.Point(30, 133);
-            this.dgvProductosVenta.Name = "dgvProductosVenta";
-            this.dgvProductosVenta.RowHeadersVisible = false;
-            this.dgvProductosVenta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductosVenta.Size = new System.Drawing.Size(520, 120);
-            this.dgvProductosVenta.TabIndex = 4;
+            dgvProductosVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProductosVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProductosVenta.Location = new Point(30, 133);
+            dgvProductosVenta.Name = "dgvProductosVenta";
+            dgvProductosVenta.RowHeadersVisible = false;
+            dgvProductosVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProductosVenta.Size = new Size(520, 120);
+            dgvProductosVenta.TabIndex = 4;
             // 
             // lblCantidad
             // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(30, 265);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(60, 15);
-            this.lblCantidad.TabIndex = 5;
-            this.lblCantidad.Text = "Cantidad:";
+            lblCantidad.AutoSize = true;
+            lblCantidad.Location = new Point(30, 265);
+            lblCantidad.Name = "lblCantidad";
+            lblCantidad.Size = new Size(58, 15);
+            lblCantidad.TabIndex = 5;
+            lblCantidad.Text = "Cantidad:";
             // 
             // numericCantidad
             // 
-            this.numericCantidad.Location = new System.Drawing.Point(30, 283);
-            this.numericCantidad.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
-            this.numericCantidad.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-            this.numericCantidad.Name = "numericCantidad";
-            this.numericCantidad.Size = new System.Drawing.Size(100, 23);
-            this.numericCantidad.TabIndex = 6;
-            this.numericCantidad.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericCantidad.Location = new Point(30, 283);
+            numericCantidad.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            numericCantidad.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numericCantidad.Name = "numericCantidad";
+            numericCantidad.Size = new Size(100, 23);
+            numericCantidad.TabIndex = 6;
+            numericCantidad.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lblMotivo
             // 
-            this.lblMotivo.AutoSize = true;
-            this.lblMotivo.Location = new System.Drawing.Point(30, 320);
-            this.lblMotivo.Name = "lblMotivo";
-            this.lblMotivo.Size = new System.Drawing.Size(45, 15);
-            this.lblMotivo.TabIndex = 7;
-            this.lblMotivo.Text = "Motivo:";
+            lblMotivo.AutoSize = true;
+            lblMotivo.Location = new Point(30, 320);
+            lblMotivo.Name = "lblMotivo";
+            lblMotivo.Size = new Size(48, 15);
+            lblMotivo.TabIndex = 7;
+            lblMotivo.Text = "Motivo:";
             // 
             // txtMotivo
             // 
-            this.txtMotivo.Location = new System.Drawing.Point(30, 338);
-            this.txtMotivo.Multiline = true;
-            this.txtMotivo.Name = "txtMotivo";
-            this.txtMotivo.Size = new System.Drawing.Size(520, 23);
-            this.txtMotivo.TabIndex = 8;
-            // 
-            // lblAccion
-            // 
-            this.lblAccion.AutoSize = true;
-            this.lblAccion.Location = new System.Drawing.Point(150, 265);
-            this.lblAccion.Name = "lblAccion";
-            this.lblAccion.Size = new System.Drawing.Size(125, 15);
-            this.lblAccion.TabIndex = 12;
-            this.lblAccion.Text = "Destino del Inventario:";
-            // 
-            // cmbAccion
-            // 
-            this.cmbAccion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAccion.FormattingEnabled = true;
-            this.cmbAccion.Location = new System.Drawing.Point(150, 283);
-            this.cmbAccion.Name = "cmbAccion";
-            this.cmbAccion.Size = new System.Drawing.Size(400, 23);
-            this.cmbAccion.TabIndex = 13;
+            txtMotivo.Location = new Point(30, 338);
+            txtMotivo.Multiline = true;
+            txtMotivo.Name = "txtMotivo";
+            txtMotivo.Size = new Size(520, 23);
+            txtMotivo.TabIndex = 8;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnGuardar.Location = new System.Drawing.Point(200, 385);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(120, 35);
-            this.btnGuardar.TabIndex = 9;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(200, 385);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(120, 35);
+            btnGuardar.TabIndex = 9;
+            btnGuardar.Text = "Guardar";
+            btnGuardar.UseVisualStyleBackColor = false;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCancelar.Location = new System.Drawing.Point(340, 385);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(120, 35);
-            this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            btnCancelar.FlatStyle = FlatStyle.System;
+            btnCancelar.Location = new Point(340, 385);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(120, 35);
+            btnCancelar.TabIndex = 10;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // errorProviderDevolucion
             // 
-            this.errorProviderDevolucion.ContainerControl = this;
+            errorProviderDevolucion.ContainerControl = this;
             // 
             // lblInfoMonto
             // 
-            this.lblInfoMonto.AutoSize = true;
-            this.lblInfoMonto.Location = new System.Drawing.Point(270, 375);
-            this.lblInfoMonto.Name = "lblInfoMonto";
-            this.lblInfoMonto.Size = new System.Drawing.Size(0, 15);
-            this.lblInfoMonto.TabIndex = 11;
+            lblInfoMonto.AutoSize = true;
+            lblInfoMonto.Location = new Point(270, 375);
+            lblInfoMonto.Name = "lblInfoMonto";
+            lblInfoMonto.Size = new Size(0, 15);
+            lblInfoMonto.TabIndex = 11;
+            // 
+            // lblAccion
+            // 
+            lblAccion.AutoSize = true;
+            lblAccion.Location = new Point(150, 265);
+            lblAccion.Name = "lblAccion";
+            lblAccion.Size = new Size(125, 15);
+            lblAccion.TabIndex = 12;
+            lblAccion.Text = "Destino del Inventario:";
+            // 
+            // cmbAccion
+            // 
+            cmbAccion.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbAccion.FormattingEnabled = true;
+            cmbAccion.Location = new Point(150, 283);
+            cmbAccion.Name = "cmbAccion";
+            cmbAccion.Size = new Size(400, 23);
+            cmbAccion.TabIndex = 13;
             // 
             // DevolucionesForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 450);
-            this.Controls.Add(this.cmbAccion);
-            this.Controls.Add(this.lblAccion);
-            this.Controls.Add(this.lblInfoMonto);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.txtMotivo);
-            this.Controls.Add(this.lblMotivo);
-            this.Controls.Add(this.numericCantidad);
-            this.Controls.Add(this.lblCantidad);
-            this.Controls.Add(this.dgvProductosVenta);
-            this.Controls.Add(this.lblProducto);
-            this.Controls.Add(this.cmbVenta);
-            this.Controls.Add(this.lblVenta);
-            this.Controls.Add(this.lblTitulo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "DevolucionesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Registrar Devolución";
-            this.Load += new System.EventHandler(this.DevolucionesForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductosVenta)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCantidad)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(580, 450);
+            Controls.Add(cmbAccion);
+            Controls.Add(lblAccion);
+            Controls.Add(lblInfoMonto);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnGuardar);
+            Controls.Add(txtMotivo);
+            Controls.Add(lblMotivo);
+            Controls.Add(numericCantidad);
+            Controls.Add(lblCantidad);
+            Controls.Add(dgvProductosVenta);
+            Controls.Add(lblProducto);
+            Controls.Add(cmbVenta);
+            Controls.Add(lblVenta);
+            Controls.Add(lblTitulo);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "DevolucionesForm";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Registrar Devolución";
+            Load += DevolucionesForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvProductosVenta).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericCantidad).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProviderDevolucion).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

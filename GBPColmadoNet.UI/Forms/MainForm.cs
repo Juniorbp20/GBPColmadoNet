@@ -50,7 +50,6 @@ namespace GBPColmadoNet
             {
                 var cierreCajaService = Program.ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Services.CierreCajaService>();
 
-                // Evitar deadlock en WinForms
                 var cajaAbierta = Task.Run(() => cierreCajaService.ObtenerCajaAbiertaAsync(currentUser.UsuarioId)).Result;
 
                 if (cajaAbierta != null)
@@ -333,44 +332,10 @@ namespace GBPColmadoNet
         {
 
         }
-    }
 
-    public class CustomToolStripRenderer : ToolStripProfessionalRenderer
-    {
-        public CustomToolStripRenderer() : base(new CustomColorTable()) { }
-    }
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-    public class CustomColorTable : ProfessionalColorTable
-    {
-        public override Color ToolStripDropDownBackground => Color.FromArgb(15, 35, 50);
-        public override Color ImageMarginGradientBegin => Color.FromArgb(15, 35, 50);
-        public override Color ImageMarginGradientMiddle => Color.FromArgb(15, 35, 50);
-        public override Color ImageMarginGradientEnd => Color.FromArgb(15, 35, 50);
-        public override Color MenuBorder => Color.FromArgb(15, 35, 50);
-        public override Color MenuItemBorder => Color.FromArgb(15, 35, 50);
-        public override Color MenuItemSelected => Color.FromArgb(30, 60, 85);
-        public override Color MenuStripGradientBegin => Color.FromArgb(15, 35, 50);
-        public override Color MenuStripGradientEnd => Color.FromArgb(15, 35, 50);
-        public override Color MenuItemSelectedGradientBegin => Color.FromArgb(30, 60, 85);
-        public override Color MenuItemSelectedGradientEnd => Color.FromArgb(30, 60, 85);
-        public override Color MenuItemPressedGradientBegin => Color.FromArgb(30, 60, 85);
-        public override Color MenuItemPressedGradientEnd => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedHighlight => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedHighlightBorder => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedHighlight => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedHighlightBorder => Color.FromArgb(30, 60, 85);
-        public override Color ButtonCheckedHighlight => Color.FromArgb(30, 60, 85);
-        public override Color ButtonCheckedHighlightBorder => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedBorder => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedBorder => Color.FromArgb(30, 60, 85);
-        public override Color ButtonCheckedGradientBegin => Color.FromArgb(30, 60, 85);
-        public override Color ButtonCheckedGradientMiddle => Color.FromArgb(30, 60, 85);
-        public override Color ButtonCheckedGradientEnd => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedGradientBegin => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedGradientMiddle => Color.FromArgb(30, 60, 85);
-        public override Color ButtonSelectedGradientEnd => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedGradientBegin => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedGradientMiddle => Color.FromArgb(30, 60, 85);
-        public override Color ButtonPressedGradientEnd => Color.FromArgb(30, 60, 85);
+        }
     }
 }

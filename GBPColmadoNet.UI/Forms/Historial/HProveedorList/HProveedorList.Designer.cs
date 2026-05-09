@@ -94,12 +94,12 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             // 
             // btnLimpiar
             // 
-            btnLimpiar.BackColor = Color.FromArgb(200, 200, 200);
+            btnLimpiar.BackColor = Color.Transparent;
             btnLimpiar.FlatAppearance.BorderSize = 0;
-            btnLimpiar.FlatStyle = FlatStyle.Flat;
-            btnLimpiar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLimpiar.FlatStyle = FlatStyle.System;
+            btnLimpiar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnLimpiar.ForeColor = Color.Black;
-            btnLimpiar.Location = new Point(550, 10);
+            btnLimpiar.Location = new Point(557, 12);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(100, 30);
             btnLimpiar.TabIndex = 4;
@@ -109,12 +109,12 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             // 
             // btnBuscar
             // 
-            btnBuscar.BackColor = Color.FromArgb(30, 150, 255);
+            btnBuscar.BackColor = Color.Transparent;
             btnBuscar.FlatAppearance.BorderSize = 0;
-            btnBuscar.FlatStyle = FlatStyle.Flat;
-            btnBuscar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnBuscar.FlatStyle = FlatStyle.System;
+            btnBuscar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBuscar.ForeColor = Color.White;
-            btnBuscar.Location = new Point(440, 10);
+            btnBuscar.Location = new Point(447, 12);
             btnBuscar.Name = "btnBuscar";
             btnBuscar.Size = new Size(100, 30);
             btnBuscar.TabIndex = 2;
@@ -125,7 +125,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             // txtBusquedaProveedor
             // 
             txtBusquedaProveedor.Font = new Font("Segoe UI", 10F);
-            txtBusquedaProveedor.Location = new Point(150, 12);
+            txtBusquedaProveedor.Location = new Point(157, 14);
             txtBusquedaProveedor.Name = "txtBusquedaProveedor";
             txtBusquedaProveedor.Size = new Size(280, 25);
             txtBusquedaProveedor.TabIndex = 1;
@@ -134,7 +134,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             // 
             lblBuscar.AutoSize = true;
             lblBuscar.Font = new Font("Segoe UI", 10F);
-            lblBuscar.Location = new Point(0, 15);
+            lblBuscar.Location = new Point(7, 17);
             lblBuscar.Name = "lblBuscar";
             lblBuscar.Size = new Size(144, 19);
             lblBuscar.TabIndex = 0;

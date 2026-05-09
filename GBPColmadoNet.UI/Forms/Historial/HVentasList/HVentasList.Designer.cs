@@ -102,10 +102,10 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             // btnLimpiar
             // 
-            btnLimpiar.BackColor = Color.FromArgb(200, 200, 200);
+            btnLimpiar.BackColor = Color.Transparent;
             btnLimpiar.FlatAppearance.BorderSize = 0;
-            btnLimpiar.FlatStyle = FlatStyle.Flat;
-            btnLimpiar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnLimpiar.FlatStyle = FlatStyle.System;
+            btnLimpiar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnLimpiar.ForeColor = Color.Black;
             btnLimpiar.Location = new Point(720, 10);
             btnLimpiar.Name = "btnLimpiar";
@@ -117,10 +117,10 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             // btnBuscar
             // 
-            btnBuscar.BackColor = Color.FromArgb(30, 150, 255);
+            btnBuscar.BackColor = Color.Transparent;
             btnBuscar.FlatAppearance.BorderSize = 0;
-            btnBuscar.FlatStyle = FlatStyle.Flat;
-            btnBuscar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnBuscar.FlatStyle = FlatStyle.System;
+            btnBuscar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBuscar.ForeColor = Color.White;
             btnBuscar.Location = new Point(620, 10);
             btnBuscar.Name = "btnBuscar";

@@ -1,4 +1,6 @@
 using System;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using GBPColmadoNet.UI.Services;
 
@@ -7,13 +9,39 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
     public partial class LoginForm : Form
     {
         private readonly UsuarioServices _usuarioServices;
+        private readonly ConfiguracionService _configuracionService;
         private int _intentosFallidos = 0;
         private int _tiempoRestante = 60;
 
-        public LoginForm(UsuarioServices usuarioServices)
+        public LoginForm(UsuarioServices usuarioServices, ConfiguracionService configuracionService)
         {
             InitializeComponent();
             _usuarioServices = usuarioServices;
+            _configuracionService = configuracionService;
+            
+            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SystemLogo.png");
+            if (File.Exists(logoPath))
+            {
+                try
+                {
+                    using (var fs = new FileStream(logoPath, FileMode.Open, FileAccess.Read))
+                    {
+                        picLogo.Image = Image.FromStream(fs);
+                    }
+                }
+                catch { /* Ignorar si no se puede cargar */ }
+            }
+        }
+
+        protected override async void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            var config = await _configuracionService.ObtenerConfiguracionAsync();
+            if (config != null && !string.IsNullOrWhiteSpace(config.NombreComercial))
+            {
+                lblTitulo.Text = config.NombreComercial;
+                this.Text = $"Bienvenido a {config.NombreComercial}";
+            }
         }
 
         private async void btnIngresar_Click(object sender, EventArgs e)
@@ -81,12 +109,6 @@ namespace GBPColmadoNet.UI.Forms.LoginForm
         private void ActualizarMensajeBloqueo()
         {
             lblMensaje.Text = $"Demasiados intentos. Espere {_tiempoRestante} segundos.";
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 }

@@ -17,128 +17,128 @@
 
         private void InitializeComponent()
         {
-            this.lbTituloList = new System.Windows.Forms.Label();
-            this.proveedorDataGridView = new System.Windows.Forms.DataGridView();
-            this.btnCrearProveedor = new System.Windows.Forms.Button();
-            this.panelContent = new System.Windows.Forms.Panel();
-            this.panelHeader = new System.Windows.Forms.Panel();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.txBuscarProveedor = new System.Windows.Forms.TextBox();
-            this.lbBuscar = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.proveedorDataGridView)).BeginInit();
-            this.panelContent.SuspendLayout();
-            this.panelHeader.SuspendLayout();
-            this.SuspendLayout();
+            lbTituloList = new Label();
+            proveedorDataGridView = new DataGridView();
+            btnCrearProveedor = new Button();
+            panelContent = new Panel();
+            panelHeader = new Panel();
+            btnEliminar = new Button();
+            btnModificar = new Button();
+            txBuscarProveedor = new TextBox();
+            lbBuscar = new Label();
+            ((System.ComponentModel.ISupportInitialize)proveedorDataGridView).BeginInit();
+            panelContent.SuspendLayout();
+            panelHeader.SuspendLayout();
+            SuspendLayout();
             // 
             // lbTituloList
             // 
-            this.lbTituloList.AutoSize = true;
-            this.lbTituloList.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
-            this.lbTituloList.Location = new System.Drawing.Point(12, 19);
-            this.lbTituloList.Name = "lbTituloList";
-            this.lbTituloList.Size = new System.Drawing.Size(168, 32);
-            this.lbTituloList.TabIndex = 0;
-            this.lbTituloList.Text = "Listar Proveedores";
+            lbTituloList.AutoSize = true;
+            lbTituloList.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lbTituloList.Location = new Point(12, 19);
+            lbTituloList.Name = "lbTituloList";
+            lbTituloList.Size = new Size(226, 32);
+            lbTituloList.TabIndex = 0;
+            lbTituloList.Text = "Listar Proveedores";
             // 
             // proveedorDataGridView
             // 
-            this.proveedorDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.proveedorDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.proveedorDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.proveedorDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.proveedorDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.proveedorDataGridView.Name = "proveedorDataGridView";
-            this.proveedorDataGridView.Size = new System.Drawing.Size(800, 317);
-            this.proveedorDataGridView.TabIndex = 1;
+            proveedorDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            proveedorDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            proveedorDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            proveedorDataGridView.Dock = DockStyle.Fill;
+            proveedorDataGridView.Location = new Point(0, 0);
+            proveedorDataGridView.Name = "proveedorDataGridView";
+            proveedorDataGridView.Size = new Size(800, 317);
+            proveedorDataGridView.TabIndex = 1;
             // 
             // btnCrearProveedor
             // 
-            this.btnCrearProveedor.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCrearProveedor.Location = new System.Drawing.Point(12, 62);
-            this.btnCrearProveedor.Name = "btnCrearProveedor";
-            this.btnCrearProveedor.Size = new System.Drawing.Size(110, 23);
-            this.btnCrearProveedor.TabIndex = 2;
-            this.btnCrearProveedor.Text = "Crear Proveedor";
-            this.btnCrearProveedor.UseVisualStyleBackColor = true;
-            this.btnCrearProveedor.Click += new System.EventHandler(this.btnCrearProveedor_Click);
+            btnCrearProveedor.FlatStyle = FlatStyle.System;
+            btnCrearProveedor.Location = new Point(12, 62);
+            btnCrearProveedor.Name = "btnCrearProveedor";
+            btnCrearProveedor.Size = new Size(110, 23);
+            btnCrearProveedor.TabIndex = 2;
+            btnCrearProveedor.Text = "Crear Proveedor";
+            btnCrearProveedor.UseVisualStyleBackColor = true;
+            btnCrearProveedor.Click += btnCrearProveedor_Click;
             // 
             // panelContent
             // 
-            this.panelContent.Controls.Add(this.proveedorDataGridView);
-            this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(0, 133);
-            this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(800, 317);
-            this.panelContent.TabIndex = 4;
+            panelContent.Controls.Add(proveedorDataGridView);
+            panelContent.Dock = DockStyle.Fill;
+            panelContent.Location = new Point(0, 133);
+            panelContent.Name = "panelContent";
+            panelContent.Size = new Size(800, 317);
+            panelContent.TabIndex = 4;
             // 
             // panelHeader
             // 
-            this.panelHeader.Controls.Add(this.btnEliminar);
-            this.panelHeader.Controls.Add(this.btnModificar);
-            this.panelHeader.Controls.Add(this.btnCrearProveedor);
-            this.panelHeader.Controls.Add(this.txBuscarProveedor);
-            this.panelHeader.Controls.Add(this.lbBuscar);
-            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelHeader.Location = new System.Drawing.Point(0, 0);
-            this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(800, 133);
-            this.panelHeader.TabIndex = 5;
+            panelHeader.Controls.Add(btnEliminar);
+            panelHeader.Controls.Add(btnModificar);
+            panelHeader.Controls.Add(btnCrearProveedor);
+            panelHeader.Controls.Add(txBuscarProveedor);
+            panelHeader.Controls.Add(lbBuscar);
+            panelHeader.Dock = DockStyle.Top;
+            panelHeader.Location = new Point(0, 0);
+            panelHeader.Name = "panelHeader";
+            panelHeader.Size = new Size(800, 133);
+            panelHeader.TabIndex = 5;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(218, 62);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 1;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            btnEliminar.Location = new Point(232, 62);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(75, 23);
+            btnEliminar.TabIndex = 1;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(114, 62);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(98, 23);
-            this.btnModificar.TabIndex = 0;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            btnModificar.Location = new Point(128, 62);
+            btnModificar.Name = "btnModificar";
+            btnModificar.Size = new Size(98, 23);
+            btnModificar.TabIndex = 0;
+            btnModificar.Text = "Modificar";
+            btnModificar.UseVisualStyleBackColor = true;
+            btnModificar.Click += btnModificar_Click;
             // 
             // txBuscarProveedor
             // 
-            this.txBuscarProveedor.Location = new System.Drawing.Point(625, 62);
-            this.txBuscarProveedor.Name = "txBuscarProveedor";
-            this.txBuscarProveedor.Size = new System.Drawing.Size(163, 23);
-            this.txBuscarProveedor.TabIndex = 2;
-            this.txBuscarProveedor.TextChanged += new System.EventHandler(this.txBuscarProveedor_TextChanged);
+            txBuscarProveedor.Location = new Point(625, 62);
+            txBuscarProveedor.Name = "txBuscarProveedor";
+            txBuscarProveedor.Size = new Size(163, 23);
+            txBuscarProveedor.TabIndex = 2;
+            txBuscarProveedor.TextChanged += txBuscarProveedor_TextChanged;
             // 
             // lbBuscar
             // 
-            this.lbBuscar.AutoSize = true;
-            this.lbBuscar.Location = new System.Drawing.Point(625, 44);
-            this.lbBuscar.Name = "lbBuscar";
-            this.lbBuscar.Size = new System.Drawing.Size(101, 15);
-            this.lbBuscar.TabIndex = 3;
-            this.lbBuscar.Text = "Buscar Proveedor";
+            lbBuscar.AutoSize = true;
+            lbBuscar.Location = new Point(625, 44);
+            lbBuscar.Name = "lbBuscar";
+            lbBuscar.Size = new Size(99, 15);
+            lbBuscar.TabIndex = 3;
+            lbBuscar.Text = "Buscar Proveedor";
             // 
             // ProveedorList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lbTituloList);
-            this.Controls.Add(this.panelContent);
-            this.Controls.Add(this.panelHeader);
-            this.Name = "ProveedorList";
-            this.Text = "Proveedores";
-            this.Load += new System.EventHandler(this.ProveedorList_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.proveedorDataGridView)).EndInit();
-            this.panelContent.ResumeLayout(false);
-            this.panelHeader.ResumeLayout(false);
-            this.panelHeader.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(lbTituloList);
+            Controls.Add(panelContent);
+            Controls.Add(panelHeader);
+            Name = "ProveedorList";
+            Text = "Proveedores";
+            Load += ProveedorList_Load;
+            ((System.ComponentModel.ISupportInitialize)proveedorDataGridView).EndInit();
+            panelContent.ResumeLayout(false);
+            panelHeader.ResumeLayout(false);
+            panelHeader.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

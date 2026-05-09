@@ -117,9 +117,8 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // btnGuardar
             // 
             btnGuardar.BackColor = Color.Teal;
-            btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(180, 280);
+            btnGuardar.Location = new Point(150, 278);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 30);
             btnGuardar.TabIndex = 9;
@@ -130,8 +129,8 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.White;
-            btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.Location = new Point(70, 280);
+            btnCancelar.FlatStyle = FlatStyle.System;
+            btnCancelar.Location = new Point(40, 278);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 30);
             btnCancelar.TabIndex = 10;
