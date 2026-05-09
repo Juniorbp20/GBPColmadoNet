@@ -11,28 +11,29 @@ La estructura del proyecto sigue un patrón de Arquitectura Multinivel (N-Tier),
 GBPColmadoNet/
 ├── GBPColmadoNet.Data/           (Acceso a Datos / Entidades)
 │   ├── Context/                  <-- Configuración de EF Core
-│   ├── InitialData/              <-- Scripts SQL y Datos Semilla
-│   └── Models/                   <-- Entidades Scaffolding
+│   ├── Migrations/              <-- Historial de Migraciones
+│   └── Models/                   <-- Entidades del Dominio
 ├── GBPColmadoNet.UI/             (Capa de Presentación - WinForms)
 │   ├── Services/                 <-- Lógica de Reglas de Negocio
 │   ├── Forms/                    (Módulos Administrativos)
+│   │   ├── LoginForm/            <-- Autenticación de Usuarios
 │   │   ├── Clientes/             
 │   │   │   ├── Cliente/          <-- Gestión de Perfiles
 │   │   │   └── CuentasPorCobrar/ <-- Control de Créditos y Fíaos
-│   │   ├── Configuracion/        <-- Ajustes Globales y Roles
+│   │   ├── Configuracion/        <-- Usuarios, Roles y Ajustes
 │   │   ├── Historial/            
 │   │   │   ├── HClienteList/     <-- Auditoría de Clientes
 │   │   │   ├── HProveedorList/   <-- Auditoría de Proveedores
 │   │   │   └── HVentasList/      <-- Registro Histórico de Ventas
 │   │   ├── Inventario/           
-│   │   │   ├── Devoluciones/     <-- Gestión de Mercancía Devuelta
-│   │   │   └── ESForm/           <-- Entradas y Salidas de Almacén
+│   │   │   ├── FormsInventario/  <-- Productos y Categorías
+│   │   │   └── Devoluciones/     <-- Gestión de Mercancía Devuelta
 │   │   ├── Proveedor/            <-- Registro de Suplidores
-│   │   ├── Ventas/               <-- Facturación y Cuadre de Caja
+│   │   ├── Ventas/               <-- Facturación, Apertura y Cuadre de Caja
 │   │   └── MainForm.cs           <-- Panel Principal Categorizado
 │   └── Program.cs                <-- Inyección de Dependencias
 └── GBPColmadoNet.Tests/          (Capa de Pruebas Unitarias)
-    └── VentaServiceTests.cs      <-- Pruebas de Integridad de Negocio
+    └── *.cs                     <-- Pruebas de Servicios
 ```
 
 # Tecnologías y Herramientas
@@ -42,13 +43,23 @@ GBPColmadoNet/
 
 **Persistencia:** Entity Framework Core con SQL Server Express.
 
-**Pruebas:** xUnit para asegurar que los cálculos de facturación sean precisos.
+**Pruebas:** xUnit para pruebas unitarias de todos los servicios.
 
 # Funcionalidades Clave
-**Gestión de Inventario:** Control total sobre entradas y salidas de productos con soporte para códigos de barras.
+**Gestión de Autenticación:** Sistema de login con control de usuarios y roles (Administrador, Empleado).
 
-**Módulo de Ventas:** Interfaz optimizada para el despacho rápido de clientes.
+**Gestión de Inventario:** Control total sobre entradas y salidas de productos con soporte para códigos de barras, categorías y unidades de medida.
 
-**Control de Créditos (Fíaos):** Seguimiento automatizado de saldos pendientes por cliente con alertas de límite excedido.
+**Módulo de Ventas:** Interfaz optimizada para el despacho rápido de clientes con gestión de carrito de compras.
 
-**Reportes de Cierre:** Generación de resúmenes diarios de efectivo y ventas a crédito.
+**Control de Caja:** Apertura y cuadre de caja diaria con generación de reportes de cierre.
+
+**Control de Créditos (Fíaos):** Seguimiento automatizado de saldos pendientes por cliente con alertas de límite excedido y sistema de abonos.
+
+**Gestión de Proveedores:** Registro y seguimiento de proveedores con historial de compras.
+
+**Devoluciones:** Control de mercancía devuelta por clientes o proveedores.
+
+**Bitácora:** Registro de auditoría de todas las operaciones del sistema.
+
+**Configuración:** Ajustes globales del negocio incluyendo límites de crédito, moneda y datos de la empresa.

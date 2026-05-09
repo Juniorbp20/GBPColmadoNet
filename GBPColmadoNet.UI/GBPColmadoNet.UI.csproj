@@ -25,6 +25,7 @@
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.7" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.7" />
 	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.7" />
+	  <PackageReference Include="QuestPDF" Version="2026.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -44,6 +45,10 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Forms\Ayuda\" />
 	</ItemGroup>
 
 </Project>
