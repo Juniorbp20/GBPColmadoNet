@@ -7,8 +7,8 @@ namespace GBPColmadoNet.Data.Models
         public int Id { get; set; }
         public int? UsuarioId { get; set; }
         public int ProductoId { get; set; }
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
+        public required string Codigo { get; set; }
+        public required string Nombre { get; set; }
         public decimal Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
         public decimal TasaItbis { get; set; }

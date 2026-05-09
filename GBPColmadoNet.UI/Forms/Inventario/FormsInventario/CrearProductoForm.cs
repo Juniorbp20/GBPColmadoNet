@@ -88,7 +88,7 @@ namespace GBPColmadoNet.UI.Forms
             }
         }
 
-        private void NumericUpDownPrecioCompra_ValueChanged(object sender, EventArgs e)
+        private void NumericUpDownPrecioCompra_ValueChanged(object? sender, EventArgs e)
         {
             if (_precioVentaCalculadoAutomaticamente)
             {
@@ -97,12 +97,12 @@ namespace GBPColmadoNet.UI.Forms
             CalcularValores();
         }
 
-        private void NumericUpDownPrecioVenta_Enter(object sender, EventArgs e)
+        private void NumericUpDownPrecioVenta_Enter(object? sender, EventArgs e)
         {
             _precioVentaCalculadoAutomaticamente = false;
         }
 
-        private void NumericUpDownPrecioVenta_Leave(object sender, EventArgs e)
+        private void NumericUpDownPrecioVenta_Leave(object? sender, EventArgs e)
         {
             CalcularValores();
         }

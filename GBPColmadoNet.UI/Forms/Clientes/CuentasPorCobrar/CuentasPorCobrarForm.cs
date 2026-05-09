@@ -6,7 +6,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
     public partial class CuentasPorCobrarForm : Form
     {
         private readonly CuentasPorCobrarService _service;
-        private List<Cliente> _clientes;
+        private List<Cliente>? _clientes;
         private Data.Models.CuentasPorCobrar? _cuentaActual;
         private bool _esModoEditar;
         private bool _cambiosRealizados = false;
@@ -27,7 +27,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
             lblTitulo.Text = "Cuenta por Cobrar";
         }
 
-        private async void CuentasPorCobrarForm_Load(object sender, EventArgs e)
+        private async void CuentasPorCobrarForm_Load(object? sender, EventArgs e)
         {
             if (_esModoEditar && _cuentaActual != null)
             {
@@ -124,10 +124,10 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
 
             dgvAbonos.DataSource = abonosMostrar;
 
-            if (dgvAbonos.Columns["Fecha"] != null)
-                dgvAbonos.Columns["Fecha"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
-            if (dgvAbonos.Columns["Monto"] != null)
-                dgvAbonos.Columns["Monto"].DefaultCellStyle.Format = "N2";
+            if (dgvAbonos.Columns["Fecha"] is DataGridViewTextBoxColumn colFecha)
+                colFecha.DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
+            if (dgvAbonos.Columns["Monto"] is DataGridViewTextBoxColumn colMonto)
+                colMonto.DefaultCellStyle.Format = "N2";
         }
 
         private void ActualizarBalance()
@@ -172,7 +172,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
             return valid;
         }
 
-        private async void btnGuardar_Click(object sender, EventArgs e)
+        private async void btnGuardar_Click(object? sender, EventArgs e)
         {
             if (!ValidateForm()) return;
 
@@ -220,7 +220,7 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
             }
         }
 
-        private async void btnRegistrarAbono_Click(object sender, EventArgs e)
+        private async void btnRegistrarAbono_Click(object? sender, EventArgs e)
         {
             if (_cuentaActual == null)
             {
@@ -294,12 +294,12 @@ namespace GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar
             }
         }
 
-        private void btnCerrar_Click(object sender, EventArgs e)
+        private void btnCerrar_Click(object? sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click(object? sender, EventArgs e)
         {
             this.Close();
         }

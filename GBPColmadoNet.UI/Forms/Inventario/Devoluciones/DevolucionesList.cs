@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
     public partial class DevolucionesList : Form
     {
         private readonly DevolucionService _service;
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
 
         public DevolucionesList(DevolucionService service)
@@ -91,8 +91,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
                 else
                 {
                     var resultados = await _service.GetList(d =>
-                        d.ProductoNombre.Contains(criterio) ||
-                        d.Motivo.Contains(criterio)
+                        (d.ProductoNombre?.Contains(criterio) ?? false) ||
+                        (d.Motivo?.Contains(criterio) ?? false)
                     );
 
                     var listaMostrada = resultados.Select(d => new

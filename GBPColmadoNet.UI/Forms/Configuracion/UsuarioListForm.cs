@@ -85,7 +85,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             }
 
             int usuarioId = Convert.ToInt32(dgvUsuarios.SelectedRows[0].Cells["UsuarioId"].Value);
-            string username = dgvUsuarios.SelectedRows[0].Cells["Username"].Value.ToString();
+            string username = dgvUsuarios.SelectedRows[0].Cells["Username"].Value?.ToString() ?? string.Empty;
 
             // No permitir eliminar al usuario actual
             var currentUser = SessionManager.CurrentUser;

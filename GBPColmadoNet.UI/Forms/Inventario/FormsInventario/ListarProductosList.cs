@@ -11,7 +11,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
     {
         private readonly ProductoService _service;
         // para la barra de busqueda
-        private CancellationTokenSource _cancellationTokenSource;
+        private CancellationTokenSource? _cancellationTokenSource;
         private bool _isSearching = false;
         private bool _viendoInactivos = false;
 
@@ -55,8 +55,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
 
             productoDataGridView.Dock = DockStyle.Fill;
 
-            if (productoDataGridView.Columns["Precio"] != null)
-                productoDataGridView.Columns["Precio"].DefaultCellStyle.Format = "N2";
+            if (productoDataGridView.Columns["Precio"] is DataGridViewTextBoxColumn colPrecio)
+                colPrecio.DefaultCellStyle.Format = "N2";
         }
 
         private async void btnEntrada_Click(object sender, EventArgs e)
@@ -82,10 +82,10 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 return;
             }
 
-            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem!;
 
             var form = ActivatorUtilities.CreateInstance<ModificarInventarioForm>(
-                Program.ServiceProvider, entidad);
+                Program.ServiceProvider, entidad!);
 
             if (form.ShowDialog(this) == DialogResult.OK)
             {
@@ -102,11 +102,11 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                 return;
             }
 
-            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem;
+            var entidad = (ListarModel)productoDataGridView.CurrentRow.DataBoundItem!;
 
             string accion = _viendoInactivos ? "activar" : "desactivar";
             var result = MessageBox.Show(
-                $"¿Desea {accion} el producto '{entidad.Nombre}'?",
+                $"¿Desea {accion} el producto '{entidad.Nombre ?? "Producto"}'?",
                 $"Confirmar {accion}", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
@@ -195,7 +195,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
                     var resultados = await _service.GetList(p =>
                         ((p.Activo ?? true) == estadoBuscado) &&
                         (p.Nombre.Contains(criterio) ||
-                        p.CodigoBarras.Contains(criterio) ||
+                        (p.CodigoBarras?.Contains(criterio) ?? false) ||
                         (esNumero && p.ProductoId == idBusqueda))
                     );
 

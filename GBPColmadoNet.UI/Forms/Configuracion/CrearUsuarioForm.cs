@@ -145,7 +145,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             this.Close();
         }
 
-        private async void CrearUsuarioForm_Load(object sender, EventArgs e)
+        private async void CrearUsuarioForm_Load(object? sender, EventArgs e)
         {
             try
             {
