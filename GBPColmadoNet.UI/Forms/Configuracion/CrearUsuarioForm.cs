@@ -12,6 +12,10 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
     {
         private readonly UsuarioServices _usuarioServices;
         private readonly RoleService _roleService;
+        
+        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public int? UsuarioIdAEditar { get; set; }
+        private Usuario? _usuarioEditando;
 
         public CrearUsuarioForm(UsuarioServices usuarioServices, RoleService roleService)
         {
@@ -31,38 +35,66 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                 using var scope = Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.CreateScope(Program.ServiceProvider);
                 var usuarioServices = Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<UsuarioServices>(scope.ServiceProvider);
 
-                // Verificar si el usuario ya existe
-                var usuariosExistentes = await usuarioServices.GetList(u => u.Username.ToLower() == txtUsername.Text.Trim().ToLower());
-                if (usuariosExistentes.Any())
+                bool exito = false;
+
+                if (UsuarioIdAEditar.HasValue && _usuarioEditando != null)
                 {
-                    errorProvider.SetError(txtUsername, "Este nombre de usuario ya existe.");
-                    btnGuardar.Enabled = true;
-                    return;
+                    // Validación de nombre de usuario en edición
+                    if (_usuarioEditando.Username.ToLower() != txtUsername.Text.Trim().ToLower())
+                    {
+                        var usuariosExistentes = await usuarioServices.GetList(u => u.Username.ToLower() == txtUsername.Text.Trim().ToLower());
+                        if (usuariosExistentes.Any())
+                        {
+                            errorProvider.SetError(txtUsername, "Este nombre de usuario ya existe.");
+                            btnGuardar.Enabled = true;
+                            return;
+                        }
+                    }
+
+                    _usuarioEditando.Username = txtUsername.Text.Trim();
+                    _usuarioEditando.Rol = cmbRol.Text;
+                    
+                    if (!string.IsNullOrWhiteSpace(txtPassword.Text))
+                    {
+                        _usuarioEditando.PasswordHash = BCrypt.Net.BCrypt.HashPassword(txtPassword.Text);
+                    }
+
+                    exito = await usuarioServices.Guardar(_usuarioEditando);
                 }
-
-                // Hashear password
-                string hash = BCrypt.Net.BCrypt.HashPassword(txtPassword.Text);
-
-                var nuevoUsuario = new Usuario
+                else
                 {
-                    Username = txtUsername.Text.Trim(),
-                    PasswordHash = hash,
-                    Rol = cmbRol.Text,
-                    Activo = true,
-                    FechaRegistro = DateTime.Now
-                };
+                    // Inserción
+                    var usuariosExistentes = await usuarioServices.GetList(u => u.Username.ToLower() == txtUsername.Text.Trim().ToLower());
+                    if (usuariosExistentes.Any())
+                    {
+                        errorProvider.SetError(txtUsername, "Este nombre de usuario ya existe.");
+                        btnGuardar.Enabled = true;
+                        return;
+                    }
 
-                bool exito = await usuarioServices.Guardar(nuevoUsuario);
+                    string hash = BCrypt.Net.BCrypt.HashPassword(txtPassword.Text);
+
+                    var nuevoUsuario = new Usuario
+                    {
+                        Username = txtUsername.Text.Trim(),
+                        PasswordHash = hash,
+                        Rol = cmbRol.Text,
+                        Activo = true,
+                        FechaRegistro = DateTime.Now
+                    };
+
+                    exito = await usuarioServices.Guardar(nuevoUsuario);
+                }
 
                 if (exito)
                 {
-                    MessageBox.Show("Usuario creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(UsuarioIdAEditar.HasValue ? "Usuario actualizado exitosamente." : "Usuario creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Hubo un problema al crear el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Hubo un problema al guardar el usuario.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -85,17 +117,20 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                 errorProvider.SetError(txtUsername, "El nombre de usuario es obligatorio.");
                 valido = false;
             }
-            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+
+            if (!UsuarioIdAEditar.HasValue && string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                errorProvider.SetError(txtPassword, "La contraseña es obligatoria.");
+                errorProvider.SetError(txtPassword, "La contraseña es obligatoria para nuevos usuarios.");
                 valido = false;
             }
-            if (txtPassword.Text != txtConfirmPassword.Text)
+
+            if (!string.IsNullOrWhiteSpace(txtPassword.Text) && txtPassword.Text != txtConfirmPassword.Text)
             {
                 errorProvider.SetError(txtConfirmPassword, "Las contraseñas no coinciden.");
                 valido = false;
             }
-            if (cmbRol.SelectedIndex == -1)
+
+            if (cmbRol.SelectedIndex == -1 && string.IsNullOrWhiteSpace(cmbRol.Text))
             {
                 errorProvider.SetError(cmbRol, "Debe seleccionar un rol.");
                 valido = false;
@@ -122,7 +157,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                 {
                     cmbRol.DataSource = roles;
                     cmbRol.DisplayMember = "Nombre";
-                    cmbRol.ValueMember = "RolId";
+                    cmbRol.ValueMember = "Nombre";
                     cmbRol.SelectedIndex = -1; // Deseleccionar por defecto
                 }
                 else
@@ -131,10 +166,26 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
                     cmbRol.Items.Clear();
                     cmbRol.Items.AddRange(new string[] { "Admin", "Cajero" });
                 }
+
+                if (UsuarioIdAEditar.HasValue)
+                {
+                    this.Text = "Modificar Usuario";
+                    btnGuardar.Text = "Actualizar";
+                    
+                    using var innerScope = Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.CreateScope(Program.ServiceProvider);
+                    var userSrv = Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<UsuarioServices>(innerScope.ServiceProvider);
+                    
+                    _usuarioEditando = await userSrv.Buscar(UsuarioIdAEditar.Value);
+                    if (_usuarioEditando != null)
+                    {
+                        txtUsername.Text = _usuarioEditando.Username;
+                        cmbRol.Text = _usuarioEditando.Rol;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cargar roles: {ex.Message}");
+                MessageBox.Show($"Error al inicializar formulario: {ex.Message}");
             }
         }
     }

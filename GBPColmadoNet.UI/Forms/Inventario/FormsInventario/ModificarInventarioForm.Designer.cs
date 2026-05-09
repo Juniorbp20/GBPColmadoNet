@@ -59,6 +59,18 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrecioCompra).BeginInit();
             SuspendLayout();
             // 
+            // chkActivo
+            // 
+            chkActivo.AutoSize = true;
+            chkActivo.Checked = true;
+            chkActivo.CheckState = CheckState.Checked;
+            chkActivo.Location = new Point(151, 290);
+            chkActivo.Name = "chkActivo";
+            chkActivo.Size = new Size(112, 19);
+            chkActivo.TabIndex = 56;
+            chkActivo.Text = "Producto Activo";
+            chkActivo.UseVisualStyleBackColor = true;
+            // 
             // lbGanancia
             // 
             lbGanancia.AutoSize = true;
@@ -114,17 +126,6 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             lbProveedor.Size = new Size(67, 15);
             lbProveedor.TabIndex = 50;
             lbProveedor.Text = "Proveedor: ";
-            // 
-            // chkActivo
-            // 
-            chkActivo.AutoSize = true;
-            chkActivo.Location = new Point(151, 290);
-            chkActivo.Name = "chkActivo";
-            chkActivo.Size = new Size(111, 19);
-            chkActivo.TabIndex = 56;
-            chkActivo.Text = "Producto Activo";
-            chkActivo.UseVisualStyleBackColor = true;
-            chkActivo.Checked = true;
             // 
             // lbCategoria
             // 
@@ -266,13 +267,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // 
             // btnGuardar
             // 
-            btnGuardar.FlatStyle = FlatStyle.System;
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
             btnGuardar.Location = new Point(151, 318);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 34);
             btnGuardar.TabIndex = 34;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             // 
             // lbPrecioVenta
             // 

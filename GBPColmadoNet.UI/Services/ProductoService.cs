@@ -55,6 +55,16 @@ namespace GBPColmadoNet.UI.Services
                 .ToListAsync();
         }
 
+        public async Task<List<Producto>> GetListWithDetails(Expression<Func<Producto, bool>> criterio)
+        {
+            return await context.Productos
+                .Include(p => p.Proveedor)
+                .Include(p => p.Categoria)
+                .AsNoTracking()
+                .Where(criterio)
+                .ToListAsync();
+        }
+
         public async Task<bool> Existe(int id)
         {
             return await context.Productos.AnyAsync(a => a.ProductoId == id);

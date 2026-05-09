@@ -45,6 +45,7 @@ namespace GBPColmadoNet
             configuracionToolStripMenuItem = new ToolStripMenuItem();
             configuracionesToolStripMenuItem = new ToolStripMenuItem();
             cerrarSesionToolStripMenuItem = new ToolStripMenuItem();
+            ayudaToolStripMenuItem = new ToolStripMenuItem();
             panelContent = new Panel();
             toolStrip1 = new ToolStrip();
             toolStripLabelMenuOp = new ToolStripLabel();
@@ -156,8 +157,8 @@ namespace GBPColmadoNet
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = Color.FromArgb(205, 234, 236);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, ventasToolStripMenuItem, clientresToolStripMenuItem, historialToolStripMenuItem, configuracionToolStripMenuItem });
+            menuStrip1.BackColor = Color.Teal;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, ventasToolStripMenuItem, clientresToolStripMenuItem, historialToolStripMenuItem, configuracionToolStripMenuItem, ayudaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1023, 24);
@@ -166,14 +167,16 @@ namespace GBPColmadoNet
             // 
             // inventarioToolStripMenuItem
             // 
+            inventarioToolStripMenuItem.BackColor = Color.Transparent;
             inventarioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { eSToolStripMenuItem, devolucionesToolStripMenuItem, listarProductosToolStripMenuItem });
+            inventarioToolStripMenuItem.ForeColor = Color.White;
             inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
             inventarioToolStripMenuItem.Size = new Size(72, 20);
             inventarioToolStripMenuItem.Text = "Inventario";
             // 
             // eSToolStripMenuItem
             // 
-            eSToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            eSToolStripMenuItem.BackColor = Color.Transparent;
             eSToolStripMenuItem.Name = "eSToolStripMenuItem";
             eSToolStripMenuItem.Size = new Size(159, 22);
             eSToolStripMenuItem.Text = "E/S";
@@ -181,7 +184,7 @@ namespace GBPColmadoNet
             // 
             // devolucionesToolStripMenuItem
             // 
-            devolucionesToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            devolucionesToolStripMenuItem.BackColor = Color.Transparent;
             devolucionesToolStripMenuItem.Name = "devolucionesToolStripMenuItem";
             devolucionesToolStripMenuItem.Size = new Size(159, 22);
             devolucionesToolStripMenuItem.Text = "Devoluciones";
@@ -189,7 +192,7 @@ namespace GBPColmadoNet
             // 
             // listarProductosToolStripMenuItem
             // 
-            listarProductosToolStripMenuItem.BackColor = Color.FromArgb(209, 209, 209);
+            listarProductosToolStripMenuItem.BackColor = Color.Transparent;
             listarProductosToolStripMenuItem.Name = "listarProductosToolStripMenuItem";
             listarProductosToolStripMenuItem.Size = new Size(159, 22);
             listarProductosToolStripMenuItem.Text = "Listar Productos";
@@ -198,6 +201,7 @@ namespace GBPColmadoNet
             // ventasToolStripMenuItem
             // 
             ventasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ventaRapidaToolStripMenuItem, cuadreToolStripMenuItem });
+            ventasToolStripMenuItem.ForeColor = Color.White;
             ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
             ventasToolStripMenuItem.Size = new Size(53, 20);
             ventasToolStripMenuItem.Text = "Ventas";
@@ -219,6 +223,7 @@ namespace GBPColmadoNet
             // clientresToolStripMenuItem
             // 
             clientresToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, cuentasPorCobrarToolStripMenuItem });
+            clientresToolStripMenuItem.ForeColor = Color.White;
             clientresToolStripMenuItem.Name = "clientresToolStripMenuItem";
             clientresToolStripMenuItem.Size = new Size(65, 20);
             clientresToolStripMenuItem.Text = "Clientres";
@@ -240,6 +245,7 @@ namespace GBPColmadoNet
             // historialToolStripMenuItem
             // 
             historialToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { historialClienteToolStripMenuItem, historialProveedorToolStripMenuItem, historialVentasToolStripMenuItem });
+            historialToolStripMenuItem.ForeColor = Color.White;
             historialToolStripMenuItem.Name = "historialToolStripMenuItem";
             historialToolStripMenuItem.Size = new Size(63, 20);
             historialToolStripMenuItem.Text = "Historial";
@@ -247,27 +253,28 @@ namespace GBPColmadoNet
             // historialClienteToolStripMenuItem
             // 
             historialClienteToolStripMenuItem.Name = "historialClienteToolStripMenuItem";
-            historialClienteToolStripMenuItem.Size = new Size(175, 22);
+            historialClienteToolStripMenuItem.Size = new Size(180, 22);
             historialClienteToolStripMenuItem.Text = "Historial Cliente";
             historialClienteToolStripMenuItem.Click += historialClienteToolStripMenuItem_Click;
             // 
             // historialProveedorToolStripMenuItem
             // 
             historialProveedorToolStripMenuItem.Name = "historialProveedorToolStripMenuItem";
-            historialProveedorToolStripMenuItem.Size = new Size(175, 22);
+            historialProveedorToolStripMenuItem.Size = new Size(180, 22);
             historialProveedorToolStripMenuItem.Text = "Historial Proveedor";
             historialProveedorToolStripMenuItem.Click += historialProveedorToolStripMenuItem_Click;
             // 
             // historialVentasToolStripMenuItem
             // 
             historialVentasToolStripMenuItem.Name = "historialVentasToolStripMenuItem";
-            historialVentasToolStripMenuItem.Size = new Size(175, 22);
+            historialVentasToolStripMenuItem.Size = new Size(180, 22);
             historialVentasToolStripMenuItem.Text = "Historial  Ventas";
             historialVentasToolStripMenuItem.Click += historialVentasToolStripMenuItem_Click;
             // 
             // configuracionToolStripMenuItem
             // 
             configuracionToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configuracionesToolStripMenuItem, cerrarSesionToolStripMenuItem });
+            configuracionToolStripMenuItem.ForeColor = Color.White;
             configuracionToolStripMenuItem.Name = "configuracionToolStripMenuItem";
             configuracionToolStripMenuItem.Size = new Size(95, 20);
             configuracionToolStripMenuItem.Text = "Configuracion";
@@ -276,14 +283,22 @@ namespace GBPColmadoNet
             // configuracionesToolStripMenuItem
             // 
             configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
-            configuracionesToolStripMenuItem.Size = new Size(161, 22);
+            configuracionesToolStripMenuItem.Size = new Size(180, 22);
             configuracionesToolStripMenuItem.Text = "Configuraciones";
             // 
             // cerrarSesionToolStripMenuItem
             // 
             cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            cerrarSesionToolStripMenuItem.Size = new Size(161, 22);
+            cerrarSesionToolStripMenuItem.Size = new Size(180, 22);
             cerrarSesionToolStripMenuItem.Text = "Cerrar Sesion";
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            ayudaToolStripMenuItem.ForeColor = Color.White;
+            ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            ayudaToolStripMenuItem.Size = new Size(53, 20);
+            ayudaToolStripMenuItem.Text = "Ayuda";
+            ayudaToolStripMenuItem.Click += ayudaToolStripMenuItem_Click;
             // 
             // panelContent
             // 
@@ -302,7 +317,7 @@ namespace GBPColmadoNet
             // toolStrip1
             // 
             toolStrip1.AutoSize = false;
-            toolStrip1.BackColor = Color.FromArgb(15, 35, 50);
+            toolStrip1.BackColor = Color.Teal;
             toolStrip1.Dock = DockStyle.Left;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripLabelMenuOp, toolStripSeparator6, toolStripLabelInventario, toolStripButton1, toolStripButtonDevoluciones, toolStripButtonListarProductos, toolStripSeparator5, toolStripLabelVentas, toolStripButtonVentaR, toolStripButtonCuadre, toolStripSeparator4, toolStripLabelCliente, toolStripButtonCliente, toolStripButtonCuentasPCobrar, toolStripSeparator1, toolStripLabelHistorial, toolStripButtonHClientes, toolStripButtonHProveedor, toolStripButtonHVentas, toolStripSeparator2, toolStripButton2, toolStripButtonConfiguracion, tlSConfiguraciones, toolStripSeparator3, tlSCerrarSesion, toolStripSeparator7 });
@@ -577,7 +592,7 @@ namespace GBPColmadoNet
             // 
             // tlSCerrarSesion
             // 
-            tlSCerrarSesion.BackColor = Color.FromArgb(15, 35, 50);
+            tlSCerrarSesion.BackColor = Color.Teal;
             tlSCerrarSesion.DisplayStyle = ToolStripItemDisplayStyle.Text;
             tlSCerrarSesion.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tlSCerrarSesion.ForeColor = Color.White;
@@ -845,5 +860,45 @@ namespace GBPColmadoNet
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton tlSCerrarSesion;
         private ToolStripSeparator toolStripSeparator7;
+        private ToolStripMenuItem ayudaToolStripMenuItem;
+
+        public class CustomToolStripRenderer : ToolStripProfessionalRenderer
+        {
+            public CustomToolStripRenderer() : base(new MainForm.CustomColorTable()) { }
+        }
+
+        public class CustomColorTable : ProfessionalColorTable
+        {
+            public override Color ToolStripDropDownBackground => Color.FromArgb(15, 35, 50);
+            public override Color ImageMarginGradientBegin => Color.FromArgb(15, 35, 50);
+            public override Color ImageMarginGradientMiddle => Color.FromArgb(15, 35, 50);
+            public override Color ImageMarginGradientEnd => Color.FromArgb(15, 35, 50);
+            public override Color MenuBorder => Color.FromArgb(15, 35, 50);
+            public override Color MenuItemBorder => Color.FromArgb(15, 35, 50);
+            public override Color MenuItemSelected => Color.FromArgb(30, 60, 85);
+            public override Color MenuStripGradientBegin => Color.FromArgb(15, 35, 50);
+            public override Color MenuStripGradientEnd => Color.FromArgb(15, 35, 50);
+            public override Color MenuItemSelectedGradientBegin => Color.FromArgb(30, 60, 85);
+            public override Color MenuItemSelectedGradientEnd => Color.FromArgb(30, 60, 85);
+            public override Color MenuItemPressedGradientBegin => Color.FromArgb(30, 60, 85);
+            public override Color MenuItemPressedGradientEnd => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedHighlight => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedHighlightBorder => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedHighlight => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedHighlightBorder => Color.FromArgb(30, 60, 85);
+            public override Color ButtonCheckedHighlight => Color.FromArgb(30, 60, 85);
+            public override Color ButtonCheckedHighlightBorder => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedBorder => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedBorder => Color.FromArgb(30, 60, 85);
+            public override Color ButtonCheckedGradientBegin => Color.FromArgb(30, 60, 85);
+            public override Color ButtonCheckedGradientMiddle => Color.FromArgb(30, 60, 85);
+            public override Color ButtonCheckedGradientEnd => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedGradientBegin => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedGradientMiddle => Color.FromArgb(30, 60, 85);
+            public override Color ButtonSelectedGradientEnd => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedGradientBegin => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedGradientMiddle => Color.FromArgb(30, 60, 85);
+            public override Color ButtonPressedGradientEnd => Color.FromArgb(30, 60, 85);
+        }
     }
 }

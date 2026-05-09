@@ -39,12 +39,18 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             numMargenGanancia = new NumericUpDown();
             grpUsuarios = new GroupBox();
             btnCrearUsuario = new Button();
+            btnVerUsuarios = new Button();
             btnGuardar = new Button();
             btnCancelar = new Button();
+            grpLogo = new GroupBox();
+            picLogoPreview = new PictureBox();
+            btnSeleccionarLogo = new Button();
             grpDatosNegocio.SuspendLayout();
             grpParametros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numMargenGanancia).BeginInit();
             grpUsuarios.SuspendLayout();
+            grpLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogoPreview).BeginInit();
             SuspendLayout();
             // 
             // grpDatosNegocio
@@ -252,6 +258,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // grpUsuarios
             // 
             grpUsuarios.Controls.Add(btnCrearUsuario);
+            grpUsuarios.Controls.Add(btnVerUsuarios);
             grpUsuarios.Location = new Point(20, 470);
             grpUsuarios.Name = "grpUsuarios";
             grpUsuarios.Size = new Size(600, 65);
@@ -269,11 +276,21 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnCrearUsuario.UseVisualStyleBackColor = true;
             btnCrearUsuario.Click += btnCrearUsuario_Click_1;
             // 
+            // btnVerUsuarios
+            // 
+            btnVerUsuarios.Location = new Point(240, 25);
+            btnVerUsuarios.Name = "btnVerUsuarios";
+            btnVerUsuarios.Size = new Size(200, 30);
+            btnVerUsuarios.TabIndex = 1;
+            btnVerUsuarios.Text = "Ver / Gestionar Usuarios";
+            btnVerUsuarios.UseVisualStyleBackColor = true;
+            btnVerUsuarios.Click += btnVerUsuarios_Click;
+            // 
             // btnGuardar
             // 
             btnGuardar.BackColor = Color.Teal;
             btnGuardar.ForeColor = Color.White;
-            btnGuardar.Location = new Point(500, 550);
+            btnGuardar.Location = new Point(700, 550);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(120, 35);
             btnGuardar.TabIndex = 3;
@@ -284,7 +301,8 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.Silver;
-            btnCancelar.Location = new Point(360, 550);
+            btnCancelar.FlatStyle = FlatStyle.System;
+            btnCancelar.Location = new Point(560, 550);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(120, 35);
             btnCancelar.TabIndex = 4;
@@ -292,11 +310,43 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
+            // grpLogo
+            // 
+            grpLogo.Controls.Add(picLogoPreview);
+            grpLogo.Controls.Add(btnSeleccionarLogo);
+            grpLogo.Location = new Point(640, 20);
+            grpLogo.Name = "grpLogo";
+            grpLogo.Size = new Size(180, 280);
+            grpLogo.TabIndex = 5;
+            grpLogo.TabStop = false;
+            grpLogo.Text = "Logo del Sistema";
+            // 
+            // picLogoPreview
+            // 
+            picLogoPreview.BorderStyle = BorderStyle.FixedSingle;
+            picLogoPreview.Location = new Point(20, 30);
+            picLogoPreview.Name = "picLogoPreview";
+            picLogoPreview.Size = new Size(140, 140);
+            picLogoPreview.SizeMode = PictureBoxSizeMode.Zoom;
+            picLogoPreview.TabIndex = 0;
+            picLogoPreview.TabStop = false;
+            // 
+            // btnSeleccionarLogo
+            // 
+            btnSeleccionarLogo.Location = new Point(20, 190);
+            btnSeleccionarLogo.Name = "btnSeleccionarLogo";
+            btnSeleccionarLogo.Size = new Size(140, 30);
+            btnSeleccionarLogo.TabIndex = 1;
+            btnSeleccionarLogo.Text = "Cambiar Logo";
+            btnSeleccionarLogo.UseVisualStyleBackColor = true;
+            btnSeleccionarLogo.Click += btnSeleccionarLogo_Click;
+            // 
             // ConfiguracionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(650, 600);
+            ClientSize = new Size(850, 600);
+            Controls.Add(grpLogo);
             Controls.Add(btnCancelar);
             Controls.Add(btnGuardar);
             Controls.Add(grpUsuarios);
@@ -312,6 +362,8 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             grpParametros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numMargenGanancia).EndInit();
             grpUsuarios.ResumeLayout(false);
+            grpLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picLogoPreview).EndInit();
             ResumeLayout(false);
         }
 
@@ -339,7 +391,11 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
         private System.Windows.Forms.NumericUpDown numMargenGanancia;
         private System.Windows.Forms.GroupBox grpUsuarios;
         private System.Windows.Forms.Button btnCrearUsuario;
+        private System.Windows.Forms.Button btnVerUsuarios;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.GroupBox grpLogo;
+        private System.Windows.Forms.PictureBox picLogoPreview;
+        private System.Windows.Forms.Button btnSeleccionarLogo;
     }
 }

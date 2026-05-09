@@ -60,11 +60,6 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrecioVenta).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrecioCompra).BeginInit();
             SuspendLayout();
-
-
-            txCodigoBarras.KeyDown += txCodigoBarras_KeyDown;
-            btnLimpiarFormulario.Click += btnLimpiarFormulario_Click;
-
             // 
             // numericUpDownStockIngresado
             // 
@@ -119,6 +114,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             btnLimpiarFormulario.TabIndex = 79;
             btnLimpiarFormulario.Text = "Limpiar Formulario";
             btnLimpiarFormulario.UseVisualStyleBackColor = true;
+            btnLimpiarFormulario.Click += btnLimpiarFormulario_Click;
             // 
             // CboxProveedor
             // 
@@ -244,6 +240,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             txCodigoBarras.Name = "txCodigoBarras";
             txCodigoBarras.Size = new Size(170, 23);
             txCodigoBarras.TabIndex = 66;
+            txCodigoBarras.KeyDown += txCodigoBarras_KeyDown;
             // 
             // lbCodigoBarra
             // 
@@ -279,13 +276,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // 
             // btnGuardar
             // 
-            btnGuardar.FlatStyle = FlatStyle.System;
+            btnGuardar.BackColor = Color.Teal;
+            btnGuardar.ForeColor = Color.White;
             btnGuardar.Location = new Point(147, 307);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(100, 34);
             btnGuardar.TabIndex = 61;
             btnGuardar.Text = "Guardar";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // lbPrecioVenta

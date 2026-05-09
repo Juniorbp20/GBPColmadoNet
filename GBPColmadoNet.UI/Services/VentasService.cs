@@ -1,4 +1,4 @@
-﻿using Aplicada1.Core;
+using Aplicada1.Core;
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +59,17 @@ namespace GBPColmadoNet.UI.Services
         public async Task<List<Venta>> GetList(Expression<Func<Venta, bool>> criterio)
         {
             return await context.Ventas
+                .AsNoTracking()
+                .Where(criterio)
+                .ToListAsync();
+        }
+
+        public async Task<List<Venta>> GetListWithDetails(Expression<Func<Venta, bool>> criterio)
+        {
+            return await context.Ventas
+                .Include(v => v.Cliente)
+                .Include(v => v.VentasDetalles)
+                    .ThenInclude(vd => vd.Producto)
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();
