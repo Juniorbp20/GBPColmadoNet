@@ -62,6 +62,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // 
             // PanelTop
             // 
+            PanelTop.BackColor = Color.GhostWhite;
             PanelTop.Controls.Add(lblTipoPago);
             PanelTop.Controls.Add(cmbTipoPago);
             PanelTop.Controls.Add(lblCliente);
@@ -84,6 +85,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblTipoPago
             // 
             lblTipoPago.AutoSize = true;
+            lblTipoPago.ForeColor = Color.Black;
             lblTipoPago.Location = new Point(295, 20);
             lblTipoPago.Name = "lblTipoPago";
             lblTipoPago.Size = new Size(64, 15);
@@ -105,6 +107,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblCliente
             // 
             lblCliente.AutoSize = true;
+            lblCliente.ForeColor = Color.Black;
             lblCliente.Location = new Point(20, 20);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(47, 15);
@@ -123,6 +126,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblProducto
             // 
             lblProducto.AutoSize = true;
+            lblProducto.ForeColor = Color.Black;
             lblProducto.Location = new Point(475, 20);
             lblProducto.Name = "lblProducto";
             lblProducto.Size = new Size(59, 15);
@@ -144,6 +148,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblStockLabel
             // 
             lblStockLabel.AutoSize = true;
+            lblStockLabel.ForeColor = Color.Black;
             lblStockLabel.Location = new Point(20, 60);
             lblStockLabel.Name = "lblStockLabel";
             lblStockLabel.Size = new Size(65, 15);
@@ -153,6 +158,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblStockDisp
             // 
             lblStockDisp.AutoSize = true;
+            lblStockDisp.ForeColor = Color.Black;
             lblStockDisp.Location = new Point(90, 60);
             lblStockDisp.Name = "lblStockDisp";
             lblStockDisp.Size = new Size(12, 15);
@@ -162,6 +168,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblPrecioLabel
             // 
             lblPrecioLabel.AutoSize = true;
+            lblPrecioLabel.ForeColor = Color.Black;
             lblPrecioLabel.Location = new Point(200, 60);
             lblPrecioLabel.Name = "lblPrecioLabel";
             lblPrecioLabel.Size = new Size(54, 15);
@@ -171,6 +178,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblPrecioU
             // 
             lblPrecioU.AutoSize = true;
+            lblPrecioU.ForeColor = Color.Black;
             lblPrecioU.Location = new Point(260, 60);
             lblPrecioU.Name = "lblPrecioU";
             lblPrecioU.Size = new Size(12, 15);
@@ -180,6 +188,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // lblCantidad
             // 
             lblCantidad.AutoSize = true;
+            lblCantidad.ForeColor = Color.Black;
             lblCantidad.Location = new Point(345, 60);
             lblCantidad.Name = "lblCantidad";
             lblCantidad.Size = new Size(58, 15);
@@ -268,6 +277,7 @@ namespace GBPColmadoNet.UI.Forms.Ventas
             // PanelResumen
             // 
             PanelResumen.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PanelResumen.BackColor = Color.GhostWhite;
             PanelResumen.BorderStyle = BorderStyle.FixedSingle;
             PanelResumen.Controls.Add(lblSubtotalLabel);
             PanelResumen.Controls.Add(lblSubtotal);

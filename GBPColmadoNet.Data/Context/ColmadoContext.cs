@@ -385,6 +385,7 @@ public partial class ColmadoContext : DbContext
 
             entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
             entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TasaItbis).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.VentasDetalles)
                 .HasForeignKey(d => d.ProductoId)

@@ -1,5 +1,6 @@
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.UI.Forms;
+using GBPColmadoNet.UI.Forms.Ayuda;
 using GBPColmadoNet.UI.Forms.Clientes;
 using GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar;
 using GBPColmadoNet.UI.Forms.Configuracion;
@@ -100,6 +101,7 @@ static class Program
         services.AddTransient<EForm>();
         services.AddTransient<ModificarInventarioForm>();
         services.AddTransient<SForm>();
+        services.AddTransient<InfoForm>();
 
         //Services 
         services.AddTransient<ProductoService>();

@@ -415,11 +415,13 @@ using System.Diagnostics;namespace GBPColmadoNet.UI.Forms.Ventas
 
                 foreach (var item in _carrito)
                 {
+                    decimal itbisItem = item.Subtotal * (item.TasaItbis / 100);
                     venta.VentasDetalles.Add(new VentasDetalle
                     {
                         ProductoId = item.ProductoId,
                         Cantidad = item.Cantidad,
-                        PrecioUnitario = item.PrecioUnitario
+                        PrecioUnitario = item.PrecioUnitario,
+                        TasaItbis = item.TasaItbis
                     });
 
                     // Descontar inventario
@@ -471,6 +473,7 @@ using System.Diagnostics;namespace GBPColmadoNet.UI.Forms.Ventas
                 btnConfirmarVenta.Enabled = true;
             }
         }
+
         private async Task ImprimirFactura(int ventaId)
         {
             try
@@ -487,7 +490,7 @@ using System.Diagnostics;namespace GBPColmadoNet.UI.Forms.Ventas
                 {
                     container.Page(page =>
                     {
-                        page.ContinuousSize(58, Unit.Millimetre);
+                        page.ContinuousSize(75, Unit.Millimetre);
                         page.Margin(4, Unit.Millimetre);
                         page.PageColor(Colors.White);
                         page.DefaultTextStyle(x => x.FontSize(10).FontFamily(Fonts.Arial));
@@ -519,20 +522,24 @@ using System.Diagnostics;namespace GBPColmadoNet.UI.Forms.Ventas
                                 {
                                     columns.RelativeColumn(3); // Producto
                                     columns.RelativeColumn(1); // Cant
+                                    columns.RelativeColumn(2); //itbis
                                     columns.RelativeColumn(2); // Total
                                 });
 
                                 table.Header(header =>
                                 {
                                     header.Cell().Text("Producto").Bold();
-                                    header.Cell().Text("Cant.").Bold();
+                                    header.Cell().AlignCenter().Text("Cant.").Bold();
+                                    header.Cell().AlignCenter().Text("ITBIS").Bold();
                                     header.Cell().AlignRight().Text("Total").Bold();
                                 });
 
                                 foreach (var item in venta.VentasDetalles)
                                 {
+                                    decimal itbisItem = (item.Cantidad * item.PrecioUnitario) * (item.TasaItbis / 100);
                                     table.Cell().Text(item.Producto?.Nombre ?? "Desc");
-                                    table.Cell().Text(item.Cantidad.ToString("N2"));
+                                    table.Cell().AlignCenter().Text(item.Cantidad.ToString("N2"));
+                                    table.Cell().AlignCenter().Text(itbisItem.ToString("N2"));
                                     table.Cell().AlignRight().Text((item.Cantidad * item.PrecioUnitario).ToString("N2"));
                                 }
                             });

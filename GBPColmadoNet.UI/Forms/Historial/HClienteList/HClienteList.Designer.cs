@@ -34,7 +34,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             // 
             // panelTop
             // 
-            panelTop.BackColor = Color.FromArgb(224, 224, 224);
+            panelTop.BackColor = Color.Teal;
             panelTop.Controls.Add(lblTitulo);
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
@@ -47,7 +47,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HProveedorList
             lblTitulo.AutoSize = true;
             lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitulo.ForeColor = Color.Black;
+            lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(20, 15);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(221, 30);

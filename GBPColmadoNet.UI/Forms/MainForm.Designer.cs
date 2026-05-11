@@ -143,9 +143,9 @@ namespace GBPColmadoNet
             lblBrandTitle.ForeColor = Color.White;
             lblBrandTitle.Location = new Point(3, 24);
             lblBrandTitle.Name = "lblBrandTitle";
-            lblBrandTitle.Size = new Size(187, 30);
+            lblBrandTitle.Size = new Size(138, 30);
             lblBrandTitle.TabIndex = 0;
-            lblBrandTitle.Text = "GBPColmadoNet";
+            lblBrandTitle.Text = "JB Solutions";
             // 
             // lblBrandSub
             // 
@@ -161,7 +161,7 @@ namespace GBPColmadoNet
             // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = Color.Teal;
+            menuStrip1.BackColor = Color.DarkCyan;
             menuStrip1.Items.AddRange(new ToolStripItem[] { inventarioToolStripMenuItem, ventasToolStripMenuItem, clientresToolStripMenuItem, historialToolStripMenuItem, configuracionToolStripMenuItem, ayudaToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -300,8 +300,8 @@ namespace GBPColmadoNet
             // 
             ayudaToolStripMenuItem.ForeColor = Color.White;
             ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            ayudaToolStripMenuItem.Size = new Size(53, 20);
-            ayudaToolStripMenuItem.Text = "Ayuda";
+            ayudaToolStripMenuItem.Size = new Size(84, 20);
+            ayudaToolStripMenuItem.Text = "Informacion";
             ayudaToolStripMenuItem.Click += ayudaToolStripMenuItem_Click;
             // 
             // panelContent
@@ -649,11 +649,12 @@ namespace GBPColmadoNet
             // lblStockCriticoTitle
             // 
             lblStockCriticoTitle.AutoSize = true;
-            lblStockCriticoTitle.Location = new Point(350, 12);
+            lblStockCriticoTitle.Location = new Point(352, 12);
             lblStockCriticoTitle.Name = "lblStockCriticoTitle";
             lblStockCriticoTitle.Size = new Size(72, 15);
             lblStockCriticoTitle.TabIndex = 2;
             lblStockCriticoTitle.Text = "Stock crítico";
+            lblStockCriticoTitle.Click += lblStockCriticoTitle_Click;
             // 
             // lblProductosActivosValue
             // 
@@ -734,7 +735,7 @@ namespace GBPColmadoNet
             lblGananciaEstimadaValue.AutoSize = true;
             lblGananciaEstimadaValue.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Pixel);
             lblGananciaEstimadaValue.ForeColor = Color.FromArgb(0, 153, 94);
-            lblGananciaEstimadaValue.Location = new Point(288, 42);
+            lblGananciaEstimadaValue.Location = new Point(286, 42);
             lblGananciaEstimadaValue.Name = "lblGananciaEstimadaValue";
             lblGananciaEstimadaValue.Size = new Size(41, 48);
             lblGananciaEstimadaValue.TabIndex = 4;
@@ -745,7 +746,7 @@ namespace GBPColmadoNet
             lblFiadosPendientesValue.AutoSize = true;
             lblFiadosPendientesValue.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Pixel);
             lblFiadosPendientesValue.ForeColor = Color.FromArgb(53, 70, 90);
-            lblFiadosPendientesValue.Location = new Point(538, 42);
+            lblFiadosPendientesValue.Location = new Point(536, 42);
             lblFiadosPendientesValue.Name = "lblFiadosPendientesValue";
             lblFiadosPendientesValue.Size = new Size(41, 48);
             lblFiadosPendientesValue.TabIndex = 5;

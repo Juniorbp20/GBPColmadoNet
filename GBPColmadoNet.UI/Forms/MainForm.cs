@@ -1,5 +1,6 @@
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.Data.Models;
+using GBPColmadoNet.UI.Forms.Ayuda;
 using GBPColmadoNet.UI.Forms.Clientes;
 using GBPColmadoNet.UI.Services;
 using GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar;
@@ -438,6 +439,12 @@ namespace GBPColmadoNet
         }
 
         private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var infoSistem =Program.ServiceProvider.GetRequiredService<InfoForm>();
+            infoSistem.ShowDialog();
+        }
+
+        private void lblStockCriticoTitle_Click(object sender, EventArgs e)
         {
 
         }
