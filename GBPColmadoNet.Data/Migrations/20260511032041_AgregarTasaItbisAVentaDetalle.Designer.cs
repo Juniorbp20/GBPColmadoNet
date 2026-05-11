@@ -4,6 +4,7 @@ using GBPColmadoNet.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GBPColmadoNet.Data.Migrations
 {
     [DbContext(typeof(ColmadoContext))]
-    partial class ColmadoContextModelSnapshot : ModelSnapshot
+    [Migration("20260511032041_AgregarTasaItbisAVentaDetalle")]
+    partial class AgregarTasaItbisAVentaDetalle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -749,7 +752,7 @@ namespace GBPColmadoNet.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TasaItbis")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("VentaId")
                         .HasColumnType("int");
@@ -761,7 +764,7 @@ namespace GBPColmadoNet.Data.Migrations
 
                     b.HasIndex("VentaId");
 
-                    b.ToTable("DetalleVenta", (string)null);
+                    b.ToTable("VentasDetalle", (string)null);
                 });
 
             modelBuilder.Entity("UsuarioRole", b =>

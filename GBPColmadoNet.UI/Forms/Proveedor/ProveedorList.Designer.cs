@@ -34,7 +34,9 @@
             // lbTituloList
             // 
             lbTituloList.AutoSize = true;
+            lbTituloList.BackColor = SystemColors.Control;
             lbTituloList.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            lbTituloList.ForeColor = Color.Black;
             lbTituloList.Location = new Point(12, 19);
             lbTituloList.Name = "lbTituloList";
             lbTituloList.Size = new Size(226, 32);
@@ -49,7 +51,7 @@
             proveedorDataGridView.Dock = DockStyle.Fill;
             proveedorDataGridView.Location = new Point(0, 0);
             proveedorDataGridView.Name = "proveedorDataGridView";
-            proveedorDataGridView.Size = new Size(800, 317);
+            proveedorDataGridView.Size = new Size(800, 344);
             proveedorDataGridView.TabIndex = 1;
             // 
             // btnCrearProveedor
@@ -67,13 +69,14 @@
             // 
             panelContent.Controls.Add(proveedorDataGridView);
             panelContent.Dock = DockStyle.Fill;
-            panelContent.Location = new Point(0, 133);
+            panelContent.Location = new Point(0, 106);
             panelContent.Name = "panelContent";
-            panelContent.Size = new Size(800, 317);
+            panelContent.Size = new Size(800, 344);
             panelContent.TabIndex = 4;
             // 
             // panelHeader
             // 
+            panelHeader.BackColor = SystemColors.Control;
             panelHeader.Controls.Add(btnEliminar);
             panelHeader.Controls.Add(btnModificar);
             panelHeader.Controls.Add(btnCrearProveedor);
@@ -82,7 +85,7 @@
             panelHeader.Dock = DockStyle.Top;
             panelHeader.Location = new Point(0, 0);
             panelHeader.Name = "panelHeader";
-            panelHeader.Size = new Size(800, 133);
+            panelHeader.Size = new Size(800, 106);
             panelHeader.TabIndex = 5;
             // 
             // btnEliminar
@@ -116,6 +119,7 @@
             // lbBuscar
             // 
             lbBuscar.AutoSize = true;
+            lbBuscar.ForeColor = Color.Black;
             lbBuscar.Location = new Point(625, 44);
             lbBuscar.Name = "lbBuscar";
             lbBuscar.Size = new Size(99, 15);

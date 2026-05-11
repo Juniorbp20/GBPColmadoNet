@@ -180,6 +180,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.Devoluciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(580, 450);
             Controls.Add(cmbAccion);
             Controls.Add(lblAccion);

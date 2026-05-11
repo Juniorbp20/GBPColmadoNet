@@ -50,6 +50,8 @@ public partial class ColmadoContext : DbContext
 
     public virtual DbSet<Devolucion> Devoluciones { get; set; }
 
+    public virtual DbSet<Permiso> Permisos { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=GBPColmadoDB;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -306,6 +308,20 @@ public partial class ColmadoContext : DbContext
             entity.HasIndex(e => e.Nombre, "UQ__Roles__75E3EFCF25872476").IsUnique();
 
             entity.Property(e => e.Nombre).HasMaxLength(50);
+
+            entity.HasMany(r => r.Permisos).WithOne(p => p.Rol)
+                .HasForeignKey(p => p.RolId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<Permiso>(entity =>
+        {
+            entity.HasKey(e => e.PermisoId).HasName("PK__Permisos__A16D1EC041379BA5");
+
+            entity.Property(e => e.Modulo).HasMaxLength(50);
+            entity.Property(e => e.Accion).HasMaxLength(50);
+
+            entity.HasIndex(e => new { e.RolId, e.Modulo, e.Accion }, "IX_Permiso_rol_modulo_accion").IsUnique();
         });
 
         modelBuilder.Entity<Usuario>(entity =>
@@ -369,6 +385,7 @@ public partial class ColmadoContext : DbContext
 
             entity.Property(e => e.Cantidad).HasColumnType("decimal(18, 3)");
             entity.Property(e => e.PrecioUnitario).HasColumnType("decimal(18, 2)");
+            entity.Property(e => e.TasaItbis).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.Producto).WithMany(p => p.VentasDetalles)
                 .HasForeignKey(d => d.ProductoId)

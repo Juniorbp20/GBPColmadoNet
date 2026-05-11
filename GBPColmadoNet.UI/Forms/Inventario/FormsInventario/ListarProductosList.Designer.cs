@@ -28,7 +28,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             lbTituloList = new Label();
             productoDataGridView = new DataGridView();
             btnCreaProductos = new Button();
@@ -39,8 +39,8 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             lbBuscar = new Label();
             txBuscarProducto = new TextBox();
             btnELiminar = new Button();
-            btnModificar = new Button();
             btnToggleVista = new Button();
+            btnModificar = new Button();
             ((System.ComponentModel.ISupportInitialize)productoDataGridView).BeginInit();
             panelContent.SuspendLayout();
             PanelHeder.SuspendLayout();
@@ -49,7 +49,9 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // lbTituloList
             // 
             lbTituloList.AutoSize = true;
+            lbTituloList.BackColor = SystemColors.Control;
             lbTituloList.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbTituloList.ForeColor = Color.Black;
             lbTituloList.Location = new Point(12, 19);
             lbTituloList.Name = "lbTituloList";
             lbTituloList.Size = new Size(200, 32);
@@ -62,14 +64,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             productoDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             productoDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             productoDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            productoDataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            productoDataGridView.DefaultCellStyle = dataGridViewCellStyle1;
             productoDataGridView.Dock = DockStyle.Fill;
             productoDataGridView.Location = new Point(0, 0);
             productoDataGridView.Name = "productoDataGridView";
@@ -78,13 +80,14 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // 
             // btnCreaProductos
             // 
+            btnCreaProductos.BackColor = Color.Teal;
             btnCreaProductos.FlatStyle = FlatStyle.System;
             btnCreaProductos.Location = new Point(12, 62);
             btnCreaProductos.Name = "btnCreaProductos";
             btnCreaProductos.Size = new Size(98, 23);
             btnCreaProductos.TabIndex = 2;
             btnCreaProductos.Text = "Crear Productos";
-            btnCreaProductos.UseVisualStyleBackColor = true;
+            btnCreaProductos.UseVisualStyleBackColor = false;
             btnCreaProductos.Click += btnEntrada_Click;
             // 
             // btnEntradaProductos
@@ -108,6 +111,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // 
             // PanelHeder
             // 
+            PanelHeder.BackColor = SystemColors.Control;
             PanelHeder.Controls.Add(lbSalidaProductoss);
             PanelHeder.Controls.Add(lbBuscar);
             PanelHeder.Controls.Add(btnEntradaProductos);
@@ -134,6 +138,7 @@ namespace GBPColmadoNet.UI.Forms.Inventario.ESForm
             // lbBuscar
             // 
             lbBuscar.AutoSize = true;
+            lbBuscar.ForeColor = Color.Black;
             lbBuscar.Location = new Point(625, 44);
             lbBuscar.Name = "lbBuscar";
             lbBuscar.Size = new Size(94, 15);

@@ -32,9 +32,10 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // 
             // panelTop
             // 
-            panelTop.BackColor = Color.FromArgb(224, 224, 224);
+            panelTop.BackColor = Color.Teal;
             panelTop.Controls.Add(lblTitulo);
             panelTop.Dock = DockStyle.Top;
+            panelTop.ForeColor = Color.White;
             panelTop.Location = new Point(0, 0);
             panelTop.Name = "panelTop";
             panelTop.Size = new Size(784, 60);
@@ -44,7 +45,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // 
             lblTitulo.AutoSize = true;
             lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitulo.ForeColor = Color.Black;
+            lblTitulo.ForeColor = Color.Transparent;
             lblTitulo.Location = new Point(20, 15);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(219, 30);
@@ -81,6 +82,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             // 
             // panelBotones
             // 
+            panelBotones.BackColor = SystemColors.Control;
             panelBotones.Controls.Add(btnVolver);
             panelBotones.Controls.Add(btnActualizar);
             panelBotones.Controls.Add(btnEliminar);
@@ -97,7 +99,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnVolver.FlatAppearance.BorderSize = 0;
             btnVolver.FlatStyle = FlatStyle.System;
             btnVolver.ForeColor = Color.Black;
-            btnVolver.Location = new Point(644, 15);
+            btnVolver.Location = new Point(630, 15);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(100, 35);
             btnVolver.TabIndex = 3;
@@ -111,7 +113,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnActualizar.FlatAppearance.BorderSize = 0;
             btnActualizar.FlatStyle = FlatStyle.System;
             btnActualizar.ForeColor = Color.White;
-            btnActualizar.Location = new Point(220, 15);
+            btnActualizar.Location = new Point(233, 15);
             btnActualizar.Name = "btnActualizar";
             btnActualizar.Size = new Size(100, 35);
             btnActualizar.TabIndex = 2;
@@ -124,7 +126,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnEliminar.BackColor = Color.IndianRed;
             btnEliminar.FlatAppearance.BorderSize = 0;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Location = new Point(110, 15);
+            btnEliminar.Location = new Point(123, 15);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(100, 35);
             btnEliminar.TabIndex = 1;
@@ -138,7 +140,7 @@ namespace GBPColmadoNet.UI.Forms.Configuracion
             btnModificar.FlatAppearance.BorderSize = 0;
             btnModificar.FlatStyle = FlatStyle.System;
             btnModificar.ForeColor = Color.Black;
-            btnModificar.Location = new Point(0, 15);
+            btnModificar.Location = new Point(13, 15);
             btnModificar.Name = "btnModificar";
             btnModificar.Size = new Size(100, 35);
             btnModificar.TabIndex = 0;
