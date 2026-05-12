@@ -1,5 +1,6 @@
 using GBPColmadoNet.Data.Context;
 using GBPColmadoNet.UI.Forms;
+using GBPColmadoNet.UI.Forms.Ayuda;
 using GBPColmadoNet.UI.Forms.Clientes;
 using GBPColmadoNet.UI.Forms.Clientes.CuentasPorCobrar;
 using GBPColmadoNet.UI.Forms.Configuracion;
@@ -36,11 +37,12 @@ static class Program
         var loginForm = ServiceProvider.GetRequiredService<GBPColmadoNet.UI.Forms.LoginForm.LoginForm>();
         if (loginForm.ShowDialog() == DialogResult.OK)
         {
+            InitializePermissions();
+
             var cierreCajaService = ServiceProvider.GetRequiredService<CierreCajaService>();
             var currentUser = SessionManager.CurrentUser;
 
-            // Requerir caja abierta
-            if (currentUser != null)
+            if (currentUser != null && (currentUser.Rol == "Admin" || currentUser.Rol == "Cajero"))
             {
                 var cajaAbierta = cierreCajaService.ObtenerCajaAbiertaAsync(currentUser.UsuarioId).Result;
                 if (cajaAbierta == null)
@@ -99,6 +101,7 @@ static class Program
         services.AddTransient<EForm>();
         services.AddTransient<ModificarInventarioForm>();
         services.AddTransient<SForm>();
+        services.AddTransient<InfoForm>();
 
         //Services 
         services.AddTransient<ProductoService>();
@@ -116,7 +119,20 @@ static class Program
         services.AddTransient<CarritoItemService>();
         services.AddTransient<ConfiguracionService>();
         services.AddTransient<DevolucionService>();
+        services.AddTransient<PermisoService>();
 
 
+    }
+
+    private static void InitializePermissions()
+    {
+        using var scope = ServiceProvider.CreateScope();
+        var contexto = scope.ServiceProvider.GetRequiredService<ColmadoContext>();
+        var permisoService = new PermisoService(contexto);
+        try
+        {
+            Task.Run(() => permisoService.InicializarPermisos()).Wait();
+        }
+        catch { }
     }
 }

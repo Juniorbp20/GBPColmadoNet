@@ -17,5 +17,13 @@ namespace GBPColmadoNet.UI.Services
         }
 
         public static bool IsAuthenticated => CurrentUser != null;
+
+        public static bool HasAccess(string[] allowedRoles)
+        {
+            if (CurrentUser == null) return false;
+            return allowedRoles.Contains(CurrentUser.Rol);
+        }
+
+        public static string? CurrentRole => CurrentUser?.Rol;
     }
 }

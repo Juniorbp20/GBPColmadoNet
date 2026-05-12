@@ -15,6 +15,8 @@ public partial class VentasDetalle
 
     public decimal PrecioUnitario { get; set; }
 
+    public decimal TasaItbis { get; set; }
+
     public virtual Producto? Producto { get; set; }
 
     public virtual Venta? Venta { get; set; }

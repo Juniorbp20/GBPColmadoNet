@@ -30,6 +30,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             lblHasta = new Label();
             dtpDesde = new DateTimePicker();
             lblDesde = new Label();
+            btnReimprimir = new Button();
             panelTop.SuspendLayout();
             panelCentral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVentas).BeginInit();
@@ -38,7 +39,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             // panelTop
             // 
-            panelTop.BackColor = Color.FromArgb(224, 224, 224);
+            panelTop.BackColor = Color.Teal;
             panelTop.Controls.Add(lblTitulo);
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(0, 0);
@@ -49,8 +50,9 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
+            lblTitulo.BackColor = Color.Transparent;
             lblTitulo.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            lblTitulo.ForeColor = Color.Black;
+            lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(20, 15);
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(209, 30);
@@ -86,6 +88,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             // panelFiltros
             // 
+            panelFiltros.Controls.Add(btnReimprimir);
             panelFiltros.Controls.Add(btnLimpiar);
             panelFiltros.Controls.Add(btnBuscar);
             panelFiltros.Controls.Add(txtCliente);
@@ -107,9 +110,9 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             btnLimpiar.FlatStyle = FlatStyle.System;
             btnLimpiar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnLimpiar.ForeColor = Color.Black;
-            btnLimpiar.Location = new Point(720, 10);
+            btnLimpiar.Location = new Point(689, 15);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(90, 30);
+            btnLimpiar.Size = new Size(69, 30);
             btnLimpiar.TabIndex = 7;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = false;
@@ -122,9 +125,9 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             btnBuscar.FlatStyle = FlatStyle.System;
             btnBuscar.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnBuscar.ForeColor = Color.White;
-            btnBuscar.Location = new Point(620, 10);
+            btnBuscar.Location = new Point(597, 16);
             btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(90, 30);
+            btnBuscar.Size = new Size(74, 30);
             btnBuscar.TabIndex = 6;
             btnBuscar.Text = "Buscar";
             btnBuscar.UseVisualStyleBackColor = false;
@@ -133,7 +136,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // txtCliente
             // 
             txtCliente.Font = new Font("Segoe UI", 10F);
-            txtCliente.Location = new Point(420, 12);
+            txtCliente.Location = new Point(402, 16);
             txtCliente.Name = "txtCliente";
             txtCliente.Size = new Size(180, 25);
             txtCliente.TabIndex = 5;
@@ -142,7 +145,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             lblCliente.AutoSize = true;
             lblCliente.Font = new Font("Segoe UI", 10F);
-            lblCliente.Location = new Point(360, 15);
+            lblCliente.Location = new Point(342, 17);
             lblCliente.Name = "lblCliente";
             lblCliente.Size = new Size(54, 19);
             lblCliente.TabIndex = 4;
@@ -152,7 +155,7 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             dtpHasta.Font = new Font("Segoe UI", 10F);
             dtpHasta.Format = DateTimePickerFormat.Short;
-            dtpHasta.Location = new Point(230, 12);
+            dtpHasta.Location = new Point(226, 14);
             dtpHasta.Name = "dtpHasta";
             dtpHasta.Size = new Size(110, 25);
             dtpHasta.TabIndex = 3;
@@ -161,17 +164,18 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             lblHasta.AutoSize = true;
             lblHasta.Font = new Font("Segoe UI", 10F);
-            lblHasta.Location = new Point(180, 15);
+            lblHasta.Location = new Point(173, 17);
             lblHasta.Name = "lblHasta";
             lblHasta.Size = new Size(47, 19);
             lblHasta.TabIndex = 2;
             lblHasta.Text = "Hasta:";
+            lblHasta.Click += lblHasta_Click;
             // 
             // dtpDesde
             // 
             dtpDesde.Font = new Font("Segoe UI", 10F);
             dtpDesde.Format = DateTimePickerFormat.Short;
-            dtpDesde.Location = new Point(55, 12);
+            dtpDesde.Location = new Point(57, 14);
             dtpDesde.Name = "dtpDesde";
             dtpDesde.Size = new Size(110, 25);
             dtpDesde.TabIndex = 1;
@@ -180,11 +184,21 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
             // 
             lblDesde.AutoSize = true;
             lblDesde.Font = new Font("Segoe UI", 10F);
-            lblDesde.Location = new Point(0, 15);
+            lblDesde.Location = new Point(1, 17);
             lblDesde.Name = "lblDesde";
             lblDesde.Size = new Size(50, 19);
             lblDesde.TabIndex = 0;
             lblDesde.Text = "Desde:";
+            // 
+            // btnReimprimir
+            // 
+            btnReimprimir.Location = new Point(775, 17);
+            btnReimprimir.Name = "btnReimprimir";
+            btnReimprimir.Size = new Size(132, 29);
+            btnReimprimir.TabIndex = 8;
+            btnReimprimir.Text = "Reimprimir Factura";
+            btnReimprimir.UseVisualStyleBackColor = true;
+            btnReimprimir.Click += btnReimprimir_Click;
             // 
             // HVentasList
             // 
@@ -223,5 +237,6 @@ namespace GBPColmadoNet.UI.Forms.Historial.HVentasForm
         private System.Windows.Forms.TextBox txtCliente;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnLimpiar;
+        private Button btnReimprimir;
     }
 }
