@@ -66,3 +66,9 @@ GBPColmadoNet/
 **Bitácora:** Registro de auditoría de todas las operaciones del sistema.
 
 **Configuración:** Ajustes globales del negocio incluyendo límites de crédito, moneda y datos de la empresa.
+
+# Resultados de los test
+
+<img width="532" height="564" alt="image" src="https://github.com/user-attachments/assets/08f84df4-d193-4761-beb4-8f4b15687eec" />
+
+
