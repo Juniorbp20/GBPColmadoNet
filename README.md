@@ -3,6 +3,9 @@ Sistema de Gestión Integral para Colmados y Pequeños Negocios.
 
 Este sistema ha sido diseñado para centralizar la operación de ventas, inventario y gestión de créditos (fíaos) en negocios de venta al detalle. Utiliza una arquitectura desacoplada para garantizar que la lógica de negocio sea independiente de la interfaz de usuario.
 
+<img width="1023" height="674" alt="WhatsApp Image 2026-05-19 at 9 56 47 AM" src="https://github.com/user-attachments/assets/f5cbfb91-65cd-4d1a-bf52-86ad5c39238c" />
+
+
 # Arquitectura del Software
 La estructura del proyecto sigue un patrón de Arquitectura Multinivel (N-Tier), facilitando el mantenimiento y la escalabilidad del sistema:
 
