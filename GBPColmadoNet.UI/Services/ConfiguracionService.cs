@@ -36,8 +36,15 @@ namespace GBPColmadoNet.UI.Services
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+               
+                string errorReal = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+
+                
+               MessageBox.Show("Fallo en la base de datos:\n\n" + errorReal,
+                    "Depuración Técnica", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
         }

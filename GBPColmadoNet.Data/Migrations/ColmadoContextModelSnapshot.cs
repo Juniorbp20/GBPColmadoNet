@@ -761,7 +761,7 @@ namespace GBPColmadoNet.Data.Migrations
 
                     b.HasIndex("VentaId");
 
-                    b.ToTable("DetalleVenta", (string)null);
+                    b.ToTable("VentasDetalle", (string)null);
                 });
 
             modelBuilder.Entity("UsuarioRole", b =>

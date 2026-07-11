@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GBPColmadoNet.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AgregarDevolucion : Migration
+    public partial class InicializacionBaseDatos : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -163,6 +163,28 @@ namespace GBPColmadoNet.Data.Migrations
                         column: x => x.ProveedorId,
                         principalTable: "Proveedores",
                         principalColumn: "ProveedorId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permisos",
+                columns: table => new
+                {
+                    PermisoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Modulo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Accion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Permite = table.Column<bool>(type: "bit", nullable: false),
+                    RolId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK__Permisos__A16D1EC041379BA5", x => x.PermisoId);
+                    table.ForeignKey(
+                        name: "FK_Permisos_Roles_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Roles",
+                        principalColumn: "RolId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -391,7 +413,8 @@ namespace GBPColmadoNet.Data.Migrations
                     VentaId = table.Column<int>(type: "int", nullable: true),
                     ProductoId = table.Column<int>(type: "int", nullable: true),
                     Cantidad = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
-                    PrecioUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    PrecioUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TasaItbis = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -496,6 +519,13 @@ namespace GBPColmadoNet.Data.Migrations
                 column: "VentaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Permiso_rol_modulo_accion",
+                table: "Permisos",
+                columns: new[] { "RolId", "Modulo", "Accion" },
+                unique: true,
+                filter: "[RolId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Productos_CategoriaId",
                 table: "Productos",
                 column: "CategoriaId");
@@ -573,6 +603,9 @@ namespace GBPColmadoNet.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Devoluciones");
+
+            migrationBuilder.DropTable(
+                name: "Permisos");
 
             migrationBuilder.DropTable(
                 name: "UsuarioRoles");
