@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GBPColmadoNet.Data.Migrations
 {
     [DbContext(typeof(ColmadoContext))]
-    [Migration("20260506213346_AgregarDevolucion")]
-    partial class AgregarDevolucion
+    [Migration("20260711074624_InicializacionBaseDatos")]
+    partial class InicializacionBaseDatos
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -495,6 +495,40 @@ namespace GBPColmadoNet.Data.Migrations
                     b.ToTable("Devoluciones");
                 });
 
+            modelBuilder.Entity("GBPColmadoNet.Data.Models.Permiso", b =>
+                {
+                    b.Property<int>("PermisoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PermisoId"));
+
+                    b.Property<string>("Accion")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Modulo")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Permite")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("RolId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PermisoId")
+                        .HasName("PK__Permisos__A16D1EC041379BA5");
+
+                    b.HasIndex(new[] { "RolId", "Modulo", "Accion" }, "IX_Permiso_rol_modulo_accion")
+                        .IsUnique()
+                        .HasFilter("[RolId] IS NOT NULL");
+
+                    b.ToTable("Permisos");
+                });
+
             modelBuilder.Entity("GBPColmadoNet.Data.Models.Producto", b =>
                 {
                     b.Property<int>("ProductoId")
@@ -717,6 +751,9 @@ namespace GBPColmadoNet.Data.Migrations
                     b.Property<int?>("ProductoId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("TasaItbis")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<int?>("VentaId")
                         .HasColumnType("int");
 
@@ -862,6 +899,16 @@ namespace GBPColmadoNet.Data.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("GBPColmadoNet.Data.Models.Permiso", b =>
+                {
+                    b.HasOne("GBPColmadoNet.Data.Models.Role", "Rol")
+                        .WithMany("Permisos")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Rol");
+                });
+
             modelBuilder.Entity("GBPColmadoNet.Data.Models.Producto", b =>
                 {
                     b.HasOne("GBPColmadoNet.Data.Models.Categoria", "Categoria")
@@ -962,6 +1009,11 @@ namespace GBPColmadoNet.Data.Migrations
                     b.Navigation("Compras");
 
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("GBPColmadoNet.Data.Models.Role", b =>
+                {
+                    b.Navigation("Permisos");
                 });
 
             modelBuilder.Entity("GBPColmadoNet.Data.Models.Usuario", b =>
